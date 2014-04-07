@@ -19,16 +19,17 @@
     <%= f.password_field :last_name, autocomplete: "off" %></div>
 
          <div><%= f.label :industry_1 %><br />
-    <%= f.password_field :industry_1, autocomplete: "off" %></div>
+    <%= f.select :industry_1, industry_choices %></div>
 
          <div><%= f.label :industry_2 %><br />
-    <%= f.password_field :industry_2, autocomplete: "off" %></div>
+    <%= f.select :industry_2, industry_choices %></div>
 
          <div><%= f.label :speciality_1 %><br />
-    <%= f.password_field :speciality_1, autocomplete: "off" %></div>
+         	  <%= f.select :speciality_1, speciality_choices %></div>
+   
 
          <div><%= f.label :speciality_2 %><br />
-    <%= f.password_field :speciality_2, autocomplete: "off" %></div>
+      <%= f.select :speciality_2, speciality_choices %></div>
 
   <div><%= f.submit "Sign up" %></div>
 <% end %>

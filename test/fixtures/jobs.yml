@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyString
+  recruiter_id: 1
+  speciality_1: MyString
+  speciality_2: MyString
+  referral_fee: 1
+
+two:
+  name: MyString
+  description: MyString
+  recruiter_id: 1
+  speciality_1: MyString
+  speciality_2: MyString
+  referral_fee: 1
