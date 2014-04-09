@@ -1,1 +1,18 @@
-alfhalf
+<h1>Job Postings</h1>
+ <%= link_to 'New Job', new_job_path %>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Referral Fee</th>
+  </tr>
+ 
+  <% @jobs.each do |job| %>
+    <tr>
+      <td><%= link_to job.name %></td>
+      <td><%= job.description %></td>
+      <td><%= job.referral_fee %></td>
+
+    </tr>
+  <% end %>
+</table>

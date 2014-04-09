@@ -1,0 +1,22 @@
+<%= form_for :job, url: jobs_path do |f| %>
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+ 
+  <p>
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </p>
+
+      <%= f.label :recruiter_id %><br>
+    <%= f.text_area :recruiter_id %>
+  <p>
+     <%= f.label :referral_fee %><br>
+    <%= f.text_area :referral_fee %>
+     </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
