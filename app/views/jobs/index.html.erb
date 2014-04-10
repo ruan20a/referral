@@ -3,14 +3,12 @@
 <table>
   <tr>
     <th>Name</th>
-    <th>Description</th>
     <th>Referral Fee</th>
   </tr>
  
   <% @jobs.each do |job| %>
     <tr>
-      <td><%= link_to job.name %></td>
-      <td><%= job.description %></td>
+      <td><%= link_to job.name, "/jobs/#{job.id}" %></td>
       <td><%= job.referral_fee %></td>
 
     </tr>

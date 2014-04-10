@@ -7,7 +7,6 @@ class JobsController < ApplicationController
 	end
 	def show
     @job = Job.find_by_id(params[:id])
-    @job = Job.new
   	end
 	def create
   	@job = Job.new(job_params)
