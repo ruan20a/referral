@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140407174823) do
+ActiveRecord::Schema.define(version: 20140417202143) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -38,6 +38,17 @@ ActiveRecord::Schema.define(version: 20140407174823) do
     t.string   "speciality_1"
     t.string   "speciality_2"
     t.integer  "referral_fee"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "referrals", force: true do |t|
+    t.string   "name"
+    t.string   "referral_name"
+    t.string   "relationship"
+    t.string   "referral_email"
+    t.string   "additional_details"
+    t.string   "linked_profile_url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
