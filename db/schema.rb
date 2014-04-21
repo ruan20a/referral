@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140417202143) do
+ActiveRecord::Schema.define(version: 20140421184036) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -26,10 +29,22 @@ ActiveRecord::Schema.define(version: 20140417202143) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "job_id"
+    t.integer  "profile_id"
   end
 
-  add_index "admins", ["email"], name: "index_admins_on_email", unique: true
-  add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
+  add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
+
+  create_table "admins_jobs", id: false, force: true do |t|
+    t.integer "admin_id", null: false
+    t.integer "job_id",   null: false
+  end
+
+  create_table "admins_referrals", id: false, force: true do |t|
+    t.integer "admin_id",    null: false
+    t.integer "referral_id", null: false
+  end
 
   create_table "jobs", force: true do |t|
     t.string   "name"
@@ -38,6 +53,17 @@ ActiveRecord::Schema.define(version: 20140417202143) do
     t.string   "speciality_1"
     t.string   "speciality_2"
     t.integer  "referral_fee"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "admin_id"
+    t.integer  "referral_id"
+    t.string   "city"
+    t.string   "state"
+  end
+
+  create_table "profiles", force: true do |t|
+    t.integer  "admin_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -51,6 +77,9 @@ ActiveRecord::Schema.define(version: 20140417202143) do
     t.string   "linked_profile_url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status"
+    t.integer  "job_id"
+    t.integer  "user_id"
   end
 
   create_table "users", force: true do |t|
@@ -72,9 +101,11 @@ ActiveRecord::Schema.define(version: 20140417202143) do
     t.string   "industry_2"
     t.string   "speciality_1"
     t.string   "speciality_2"
+    t.integer  "profile_id"
+    t.integer  "referral_id"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

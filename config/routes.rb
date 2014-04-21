@@ -4,6 +4,7 @@ Wekrut::Application.routes.draw do
   resources :jobs
   resources :users
   resources :referrals
+  resources :admins
   root "home#index"
 
   get '/referrals/new' => 'referrals#new'

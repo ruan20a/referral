@@ -1,0 +1,21 @@
+<%= link_to 'New Job', new_job_path %>
+
+
+<table>
+  <tr>
+    <th>Referral</th>
+     <th>Job</th>
+  </tr>
+ 
+  <% @referrals.each do |referral| %>
+    <tr>
+      <td><%= link_to referral.referral_name, "/referrals/#{referral.id}" %></td>
+      <% end %>
+   <% @jobs.each do |job| %>
+ 
+      <td><%= link_to job.name, "/jobs/#{job.id}" %></td>
+     
+     </tr>
+          
+<% end %>
+</table>
