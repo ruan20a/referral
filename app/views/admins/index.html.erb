@@ -3,13 +3,20 @@
 <table>
   <tr>
     <th>Company Name</th>
+
     <th>Referral Fee</th>
   </tr>
  
-  <% @jobs.each do |job| %>
+  <% @referrals.each do |referral| %>
+  
     <tr>
+      <td><%= link_to referral.referral_name, "/referrals/#{referral.id}" %></td>
+      <% end %>
+   <% @jobs.each do |job| %>
+ 
       <td><%= link_to job.name, "/jobs/#{job.id}" %></td>
-      <td><%= job.referral_fee %></td>
+     
+     </tr>
 
     </tr>
   <% end %>

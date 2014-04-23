@@ -11,7 +11,7 @@ Referral.delete_all
 
 
 
-Job.create(name: "Hearsay Social: Customer Success Executive", description: "This is the job", speciality_1: "web development", speciality_2: "financial services", referral_fee: 1000  )
-Job.create(name: "Etsy:Product Marketing", description: "This is the job", speciality_1: "product marketing", speciality_2: "e-commerce", referral_fee: 2000  )
-Referral.create(name: "Lori Tiernan", referral_name: "Deaglan McEachern", relationship: "friend", referral_email: "deaglan1@gmail.com", additional_details: "Deaglan is awesome", linked_profile_url: "http://www.linkedin.com/profile/view?id=62134001&locale=en_US&trk=tyah&trkInfo=tarId%3A1397934136810%2Ctas%3Adea%2Cidx%3A2-1-2" )
-Referral.create(name: "Deaglan McEachern", referral_name: "Lori Tiernan", relationship: "coworker", referral_email: "loritiernan@gmail.com", additional_details: "Lori is the best", linked_profile_url: "http://www.linkedin.com/profile/view?id=19416736&trk=nav_responsive_tab_profile" status: "pending" )
+Job.create(name: "Hearsay Social", job_name: "Account Executive", description: "This is the job", speciality_1: "Sales", speciality_2: "financial services", referral_fee: 1000, city: "New York", state: "New York", referral_id: 3  )
+Job.create(name: "Etsy:Product Marketing", description: "This is the job", speciality_1: "product marketing", speciality_2: "e-commerce", referral_fee: 2000, city: "New York", state: "New York", referral_id: 4 )
+Referral.create(name: "Lori Tiernan", referral_name: "Deaglan McEachern", relationship: "friend", referral_email: "deaglan1@gmail.com", additional_details: "Deaglan is awesome", linked_profile_url: "http://www.linkedin.com/profile/view?id=62134001&locale=en_US&trk=tyah&trkInfo=tarId%3A1397934136810%2Ctas%3Adea%2Cidx%3A2-1-2", job_id: 8 )
+Referral.create(name: "Deaglan McEachern", referral_name: "Lori Tiernan", relationship: "coworker", referral_email: "loritiernan@gmail.com", additional_details: "Lori is the best", linked_profile_url: "http://www.linkedin.com/profile/view?id=19416736&trk=nav_responsive_tab_profile" job_id: 9 )

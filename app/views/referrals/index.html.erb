@@ -8,6 +8,7 @@
   </tr>
  
   <% @referrals.each do |referral| %>
+  
     <tr>
       <td><%= link_to referral.referral_name, "/referrals/#{referral.id}" %></td>
       <% end %>

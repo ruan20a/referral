@@ -1,17 +1,27 @@
 <h1>Job Postings</h1>
- <%= link_to 'New Job', new_job_path %>
-  <%= link_to 'Refer', new_referral_path %>
 <table>
   <tr>
     <th>Company Name</th>
+    <th>Job Name</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Skills</th>
     <th>Referral Fee</th>
   </tr>
  
   <% @jobs.each do |job| %>
     <tr>
       <td><%= link_to job.name, "/jobs/#{job.id}" %></td>
+      
+      <td><%= link_to job.job_name, "/jobs/#{job.id}" %></td>
+       
+      <td><%= job.city %></td>
+      
+      <td><%= job.state %></td>
+      
+      <td><%= job.speciality_1 %></td>
+      
       <td><%= job.referral_fee %></td>
-
     </tr>
   <% end %>
 </table>
