@@ -10,14 +10,13 @@
   <% @referrals.each do |referral| %>
   
     <tr>
-      <td><%= link_to referral.referral_name, "/referrals/#{referral.id}" %></td>
-      <% end %>
-   <% @jobs.each do |job| %>
+      <td><%= link_to referral.referral_name, "/referrals/#{referral.id}" %></td> 
  
-      <td><%= link_to job.name, "/jobs/#{job.id}" %></td>
+      <td><%= link_to referral.job.name, "/jobs/#{referral.job.id}" %></td>
      
      </tr>
 
     </tr>
   <% end %>
+
 </table>
