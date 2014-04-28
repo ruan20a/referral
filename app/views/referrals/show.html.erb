@@ -1,12 +1,17 @@
+<%= form_for :referral , url: referral_path do |f| %>
 <p>
   <strong>Referral Name:</strong>
   <%= @referral.referral_name %>
 </p>
  
 <p>
-  <strong>Status:</strong>
-  <%= @referral.status %>
+   <%= f.label :status %><br>
+  <%= f.select :status, status_choices %>
 </p>
+<p>
+    <%= f.submit "Update Status" %>
+  </p>
+<% end %>
 
 
 <%= link_to 'Back', jobs_path %>
