@@ -8,6 +8,8 @@ gem 'pg'
 
 gem 'cancan'
 
+gem "devise_invitable"
+
 gem 'devise'
 
 # Use SCSS for stylesheets
