@@ -1,5 +1,14 @@
-<h1>Job Postings</h1>
-<table>
+<%= render 'layouts/header' %> 
+
+ 
+<section class="jobs">
+<div class="container">
+
+<div class="page page-table">
+
+    <div class="panel panel-default">
+        <div class="panel-heading"><strong><span class="fa fa-th"></span> Job Postings</strong></div>
+        <table class="table">
   <tr>
     <th>Company Name</th>
     <th>Job Name</th>
@@ -25,3 +34,9 @@
     </tr>
   <% end %>
 </table>
+</div>
+</div>
+</div>
+</div>
+</section>
+<%= render 'layouts/footer' %> 

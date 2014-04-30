@@ -1,6 +1,16 @@
-<%= link_to 'New Job', new_job_path %>
 
-<table>
+
+ <%= render 'layouts/header' %> 
+
+ 
+<section class="jobs">
+<div class="container">
+
+<div class="page page-table">
+
+    <div class="panel panel-default">
+        <div class="panel-heading"><strong><span class="fa fa-th"></span> Job Postings</strong></div>
+        <table class="table">
   <tr>
     <th>Job Name</th>
 
@@ -28,3 +38,11 @@
   <% end %>
 
 </table>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<%= link_to 'New Job', new_job_path %>
+ <%= render 'layouts/footer' %> 

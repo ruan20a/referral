@@ -1,1 +1,71 @@
-Wekrut
+   <%= render 'layouts/header' %>
+ <section class="intro">
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                      
+
+                        <h2 class="brand-heading">Empower Your Network</h2>
+                        <p class="intro-text"><div id="user_nav">
+
+
+<% if user_signed_in? %>
+    Signed in as <%= current_user.email %>. Not you?
+    <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+  <% else %>
+    <%= link_to "Sign up", new_user_registration_path, class: "btn btn-default btn-lg" %> <%= link_to "sign in", new_user_session_path, class: "btn btn-default btn-lg" %>
+  <% end %>
+
+                        <div class="page-scroll">
+                            <a href="#about" class="btn btn-circle">
+                                <i class="fa fa-angle-double-down animated"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="content-section text-center">
+
+     
+        <div class="container">
+            <div class="col-lg-5">
+                <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                        <h2 class="section-heading">Empower your network
+                        <br>Get Paid</h2>
+                        <p class="lead">You have a talented network. Connect them to jobs and recieve the referal bonus.</p>
+            </div>
+            <div class="col-lg-2">
+            </div>
+            <div class="col-lg-5">
+                <img class="img-responsive" <%= image_tag("LI.jpg", :alt => "") %>>
+            </div>
+        </div>
+         <div class="container">
+                <div class="col-md-4">
+                    <i class="fa fa-pencil-square-o fa-3x"></i>
+                    <p></p>
+                    <p>Sign up and we'll ask you a few background questions. We'll show you jobs based on your expierence.</p>
+                </div>
+
+                <div class="col-md-4">
+                    <i class="fa fa-sort-amount-desc fa-3x"></i>
+                    <p></p>
+                    <p>Search jobs by date and referal fee. Know someone who fits and Krute them. The more qualified candidates you refer the better you look to hiring managers.</p>
+                </div>
+            
+                <div class="col-md-4">
+                    <i class="fa fa-money fa-3x"></i>
+                    <p></p>
+                    <p>When prospective applicatants are interested we route their application to the hiring manager. If they're hired you get the referal fee listed on the posting.</p>
+                </div>
+        </div>
+        <!-- /.container -->
+    </section>
+     <%= render 'layouts/footer' %> 
+
+
