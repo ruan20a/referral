@@ -1,8 +1,11 @@
 source 'https://rubygems.org'
-
+ruby "2.1.1"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.3'
 
+gem "unicorn"
+
+gem "rails_12factor", group: :production
 # Use sqlite3 as the database for Active Record
 gem 'pg'
 
