@@ -5,10 +5,21 @@
 </p>
 
 <p>
+  <strong>Referral Email:</strong>
+  <%= @referral.referral_email %>
+</p>
+
+ <p>
+ 	<%= link_to "Linked", @referral.linked_profile_url %>
+</p>
+
+<p>
   <strong>Referred by:</strong>
   <%= @referral.name %>
+  <%= @referral.relationship %>
 </p>
  
+
 <p>
    <%= f.label :status %><br>
   <%= f.select :status, status_choices %>

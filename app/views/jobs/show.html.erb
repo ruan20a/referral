@@ -2,6 +2,32 @@
   <strong>Company Name:</strong>
   <%= @job.name %>
 </p>
+
+<p>
+  <strong>Job:</strong>
+  <%= @job.job_name %>
+</p>
+
+<p>
+  <strong>Referral Fee:</strong>
+  <%= @job.referral_fee %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @job.city %>
+  <%= @job.state %>
+</p>
+
+<p>
+  <strong>Speciality 1:</strong>
+  <%= @job.speciality_1 %>
+</p>
+
+<p>
+  <strong>Speciality 2:</strong>
+  <%= @job.speciality_2 %>
+</p>
  
 <p>
   <strong>Description:</strong>
@@ -9,4 +35,7 @@
 </p>
 
  <%= link_to 'Refer', new_referral_path %>
+ 
+ <%= link_to 'Ask to be Referred', new_referral_path %> 
+
 <%= link_to 'Back', jobs_path %>

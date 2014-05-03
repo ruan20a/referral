@@ -12,7 +12,9 @@
         <div class="panel-heading"><strong><span class="fa fa-th"></span> Job Postings</strong></div>
         <table class="table">
   <tr>
-    <th>Job Name</th>
+    <th>Company</th>
+
+    <th>Job</th>
 
     <th>Referral Fee</th>
 
@@ -24,6 +26,8 @@
   
     <tr>
       <td><%= link_to referral.job.name, "/jobs/#{referral.job.id}" %></td>
+
+      <td><%= link_to referral.job.job_name, "/jobs/#{referral.job.id}" %></td>
 
       <td><%= referral.job.referral_fee %></td>
 
