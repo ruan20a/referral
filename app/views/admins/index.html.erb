@@ -1,16 +1,17 @@
 
-
  <%= render 'layouts/header' %> 
 
  
 <section class="jobs">
 <div class="container">
-
 <div class="page page-table">
 
     <div class="panel panel-default">
-        <div class="panel-heading"><strong><span class="fa fa-th"></span> Job Postings</strong></div>
+        <div class="panel-heading"><strong><span class="fa fa-th"></span> 
+          <%= current_admin.email %> </strong></div>
         <table class="table">
+
+          
   <tr>
     <th>Company</th>
 
@@ -21,9 +22,8 @@
     <th>Candidates</th>
 
   </tr>
- 
+
   <% @referrals.each do |referral| %>
-  
     <tr>
       <td><%= link_to referral.job.name, "/jobs/#{referral.job.id}" %></td>
 
@@ -48,5 +48,6 @@
 </div>
 </section>
 
+<%= current_admin.id %>
 <%= link_to 'New Job', new_job_path %>
  <%= render 'layouts/footer' %> 

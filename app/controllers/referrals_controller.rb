@@ -3,6 +3,12 @@ class ReferralsController < ApplicationController
 		@referrals = Referral.all
 		@jobs = Job.all
 	end
+
+	def update
+		@referral = Referral.find_by_id(params[:id])
+		@referral.update_attributes
+	end
+
 	def new
 	@referral = Referral.find_by_id(params[:id])
 	end
@@ -18,6 +24,6 @@ class ReferralsController < ApplicationController
  
 	private
   	def referral_params
-      params.permit(:name, :referral_name, :relationship, :additional_details, :linked_profile_url, :referral_ids => [])
+      params.permit(:name, :referral_name, :relationship, :additional_details, :linked_profile_url, :status, :referral_ids => [])
     end
 end

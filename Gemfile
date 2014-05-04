@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 ruby "2.1.1"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rake', '10.2.2'
+
 gem 'rails', '4.0.3'
 
 gem "unicorn"
