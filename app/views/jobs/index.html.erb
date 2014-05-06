@@ -3,7 +3,12 @@
  
 <section class="jobs">
 <div class="container">
-
+  <% if user_signed_in? %>
+    Signed in as <%= current_user.email %>. Not you?
+    <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+  <% else %>
+    <%= link_to "Sign up", new_user_registration_path, class: "btn btn-default btn-lg" %> <%= link_to "sign in", new_user_session_path, class: "btn btn-default btn-lg" %>
+    <% end %>
 <div class="page page-table">
 
     <div class="panel panel-default">
