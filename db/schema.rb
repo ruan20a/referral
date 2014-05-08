@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140506132312) do
+ActiveRecord::Schema.define(version: 20140508133018) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,9 @@ ActiveRecord::Schema.define(version: 20140506132312) do
     t.integer  "job_id"
     t.integer  "user_id"
     t.integer  "admin_id"
+    t.string   "github_profile_url"
+    t.boolean  "relevant"
+    t.string   "relevance"
   end
 
   create_table "user_whitelists", force: true do |t|

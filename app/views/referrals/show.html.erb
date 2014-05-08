@@ -2,6 +2,8 @@
 <p>
   <strong>Referral Name:</strong>
   <%= @referral.referral_name %>
+  <strong>Referred By:</strong>
+  <%= @referral.relationship %>
 </p>
 
 <p>
@@ -10,19 +12,20 @@
 </p>
 
  <p>
- 	<%= link_to "Linked", @referral.linked_profile_url %>
+ 	<%= link_to "LinkedIn", @referral.linked_profile_url %>
 </p>
 
-<p>
-  <strong>Referred by:</strong>
-  <%= @referral.name %>
-  <%= @referral.relationship %>
+ <p>
+  <%= link_to "GitHub", @referral.github_profile_url %>
 </p>
- 
 
 <p>
    <%= f.label :status %><br>
   <%= f.select :status, status_choices %>
+</p>
+<p>
+   <%= f.label "Is this Candidate Relevant?" %><br>
+  <%= f.select :relevance, relevance_choices %>
 </p>
 <p>
     <%= f.submit "Update Status" %>
@@ -30,4 +33,4 @@
 <% end %>
 
 
-<%= link_to 'Back', jobs_path %>
+<%= link_to 'Back', admins_path %>
