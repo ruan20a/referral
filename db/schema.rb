@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140508133018) do
+ActiveRecord::Schema.define(version: 20140508220743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 20140508133018) do
     t.string   "city"
     t.string   "state"
     t.string   "job_name"
+    t.string   "logo_url"
   end
 
   create_table "profiles", force: true do |t|

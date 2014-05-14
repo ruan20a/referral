@@ -3,28 +3,35 @@
  
 <section class="jobs">
 <div class="container">
-  <% if user_signed_in? %>
+
+
+  <div class="page page-table" data-ng-controller="tableCtrl">
+
+    <section class="panel panel-default table-dynamic">
+        <div class="panel-heading"><% if user_signed_in? %>
     Signed in as <%= current_user.email %>. Not you?
     <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
   <% else %>
     <%= link_to "Sign up", new_user_registration_path, class: "btn btn-default btn-lg" %> <%= link_to "sign in", new_user_session_path, class: "btn btn-default btn-lg" %>
-    <% end %>
-<div class="page page-table">
+    <% end %></div>
 
-    <div class="panel panel-default">
+
+         <div class="panel panel-default">
         <div class="panel-heading"><strong><span class="fa fa-th"></span> Job Postings</strong></div>
         <table class="table">
   <tr>
-    <th>Company Name</th>
-    <th>Job Name</th>
-    <th>City</th>
-    <th>State</th>
-    <th>Skills</th>
-    <th>Referral Fee</th>
+    <th><%= sort_link @search, :name, "Company Name" %></th>
+    <th><%= sort_link @search, :job_name, "Position" %></th>
+    <th><%= sort_link @search, :city, "City" %></th>
+    <th><%= sort_link @search, :state, "State" %></th>
+    <th><%= sort_link @search, :speciality_1, "Skills" %></th>
+    <th><%= sort_link @search, :referral_fee, "Referral Fee" %></th>
   </tr>
- 
-  <% @jobs.each do |job| %>
-    <tr>
+                   
+                   <% @jobs.each do |job| %>
+
+                  <tr>
+
       <td><%= link_to job.name, "/jobs/#{job.id}" %></td>
       
       <td><%= link_to job.job_name, "/jobs/#{job.id}" %></td>
@@ -35,13 +42,23 @@
       
       <td><%= job.speciality_1 %></td>
       
-      <td><%= job.referral_fee %></td>
+      <td><%= job.referral_fee/2 %></td>
     </tr>
-  <% end %>
-</table>
+                </tr>
+            </tbody>
+            <% end %>
+        </table>
+
+        <footer class="table-footer">
+            <div class="row">
+                
+                </div>
+            </div>
+        </footer>
+    </section>
+
 </div>
-</div>
-</div>
-</div>
-</section>
+
+
 <%= render 'layouts/footer' %> 
+

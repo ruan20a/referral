@@ -1,4 +1,15 @@
-<h2>Sign in</h2>
+
+
+<%= render 'layouts/header' %> 
+ <div class="container">
+            <div class="col-md-4 col-md-offset-4">
+              <div class="form-container">
+               
+                  <div class="login-form">
+
+          
+
+           <h2>Sign in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div><%= f.label :email %><br />
@@ -15,3 +26,4 @@
 <% end %>
 
 <%= render "admins/shared/links" %>
+</div></div></div></div>

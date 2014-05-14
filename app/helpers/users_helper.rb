@@ -6,5 +6,6 @@ module UsersHelper
 	def speciality_choices
 		[:Marketing, "Web Development", :Design]
 	end
+	
 
 end

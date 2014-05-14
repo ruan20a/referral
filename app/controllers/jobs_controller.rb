@@ -6,7 +6,11 @@ class JobsController < ApplicationController
 	end
 	
 	def index
-	@jobs = Job.all
+	def index
+  	@search = Job.search(params[:q])
+  	@jobs = @search.result
+	end
+
 	end
 	def new
 	@job = Job.find_by_id(params[:id])

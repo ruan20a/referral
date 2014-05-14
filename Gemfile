@@ -7,6 +7,8 @@ gem 'rails', '4.0.3'
 
 gem "unicorn"
 
+gem "ransack"
+
 gem "rails_12factor", group: :production
 # Use sqlite3 as the database for Active Record
 gem 'pg'

@@ -4355,10 +4355,17 @@ body.vjs-full-window {
   -webkit-animation: sharp 2s ease infinite;
   animation: sharp 2s ease infinite;
 }
+
+
+.referal-screen {
+  background-color: #ecf0f1  ;
+  min-height: 473px;
+  padding: 123px 150px 33px 150px;
+  }
 .login {
-  background-color: #1abc9c;
+  background-color: #ecf0f1;
   background-size: 940px 778px;
-  color: #ffffff;
+  color: #000;
   margin-bottom: 77px;
   padding: 38px 38px 267px;
   position: relative;

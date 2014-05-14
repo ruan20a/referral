@@ -3,10 +3,10 @@
  
 <section class="jobs">
 <div class="container">
-  
+
 <div>
  <% if admin_signed_in? %>
-    Signed in as <%= current_admin.company %>. Not you?
+    Signed in as <%= "Hearsay Social" %>. Not you?
     <%= link_to "Sign out", destroy_admin_session_path, :method => :delete %>
   <% else %>
     <%= link_to "Sign up", new_admin_registration_path, class: "btn btn-default btn-lg" %> <%= link_to "sign in", new_admin_session_path, class: "btn btn-default btn-lg" %>
@@ -19,7 +19,7 @@
 
     <div class="panel panel-default">
         <div class="panel-heading"><strong><span class="fa fa-th"></span> 
-          <%= current_admin.company %> </strong></div>
+          <%= "Hearsay Social" %> </strong></div>
         <table class="table">
 
           
@@ -44,8 +44,7 @@
 
       <td><%= link_to referral.referral_name, "/referrals/#{referral.id}" %></td> 
  
-      <td><%= referral.status %>
-      </td>
+      <td><%= referral.status %></td>
 
      </tr>
 

@@ -1,36 +1,68 @@
-<%= form_for :referral , url: referral_path do |f| %>
+<div class="login">
+ 
+        <div class="referal-screen">
+           <div class="login-form">
+
+            <div class="form-group">
+              <%= form_for :referral , url: referral_path do |f| %>
 <p>
   <strong>Referral Name:</strong>
   <%= @referral.referral_name %>
+  </p>
+  <p>
   <strong>Referred By:</strong>
   <%= @referral.relationship %>
 </p>
+
 
 <p>
   <strong>Referral Email:</strong>
   <%= @referral.referral_email %>
 </p>
 
+<p>
+  <strong>Social Accounts:</strong>
+</p>
+ 
+<a class="btn btn-block btn-social btn-linkedin">
+    <i class="fa fa-linkedin"></i> <%= @referral.referral_name %>
+  </a>
  <p>
- 	<%= link_to "LinkedIn", @referral.linked_profile_url %>
+
+<a class="btn btn-block btn-social btn-github">
+    <i class="fa fa-github"></i> <%= @referral.referral_name %>
+  </a>
+
+
+
+</p>
+<p>
+  
+  <select name="Industry" class="dropdown-menu">
+              <option value=""class="highlighted">Status</option>
+              <option value="Interview Stage">Interview Stage</option>
+              <option value="Offer Stage">Offer Stage Services</option>
+              <option value="No Offer">No Offer</option>
+              <option value="Successful Placement">Successful Placement</option>
+            
+          </select>
+
+<select name="industry" class="select-block mbl">
+              <option value=""class="highlighted">Relevant?</option>
+              <option value="Relevant">Yes</option>
+              <option value="Not Relevant">No</option>
+          </select>
 </p>
 
- <p>
-  <%= link_to "GitHub", @referral.github_profile_url %>
-</p>
-
-<p>
-   <%= f.label :status %><br>
-  <%= f.select :status, status_choices %>
-</p>
-<p>
-   <%= f.label "Is this Candidate Relevant?" %><br>
-  <%= f.select :relevance, relevance_choices %>
-</p>
-<p>
-    <%= f.submit "Update Status" %>
+    <center><%= f.submit "Update Status" %></center>
   </p>
 <% end %>
 
 
 <%= link_to 'Back', admins_path %>
+          
+
+           
+
+          </div>
+        </div>
