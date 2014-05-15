@@ -1,7 +1,7 @@
 class ReferralsController < ApplicationController
 	def index
-		@referrals = Referral.all
-		@jobs = Job.all
+	@search = Referral.search(params[:q])
+  	@referrals = @search.result
 	end
 
 	def update
