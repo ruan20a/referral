@@ -5,6 +5,8 @@ def new
 end
 
 def index
+	@jobs = Job.all
+	@referrals = Referral.all
 	@search = Referral.search(params[:q])
   	@referrals = @search.result
 	@search = Job.search(params[:q])

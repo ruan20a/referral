@@ -1,65 +1,13 @@
+<div>
+<strong>Name:</strong>
+<%= @referral.name %>
+</p>
 
+<p>
+  <strong>Referral Name:</strong>
+  <%= @referral.referral_name %>
+</p>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
-       <div class="well profile">
-            <div class="col-sm-12">
-                <div class="col-xs-12">
-                  <%= form_for :referral , url: referral_path do |f| %>
-                    <h2><%= @referral.referral_name %></h2>
-                    <p><strong>Referred By:</strong><%= @referral.relationship %> </p>
-                    <p><strong>Referral Email:</strong>
-                    <%= @referral.referral_email %>
-                  </p>
-                    <p><strong>Skills: </strong>
-                        <span class="tags">html5</span> 
-                        <span class="tags">css3</span>
-                        <span class="tags">jquery</span>
-                        <span class="tags">bootstrap3</span>
-                    </p>
-                </div>  
-                
- <p></p>
-
-
-  </a>           
-                
-            </div>            
-            <div class="col-xs-12">
-                <div class="col-xs-12 col-sm-6">
-                   <a class="btn btn-block btn-social btn-linkedin">
-    <i class="fa fa-linkedin"></i> <%= @referral.referral_name %>
-  </a>
-                </div>
-                <div class="col-xs-12 col-sm-6">
-                    <a class="btn btn-block btn-social btn-github">
-    <i class="fa fa-github"></i> <%= @referral.referral_name %>
-    </a>
-                </div>
-<div class="col-xs-12">
-                <div class="col-xs-12 col-sm-6">
-                <select name="industry" class="select-block mbl">
-              <option value=""class="highlighted">Relevant?</option>
-              <option value="Relevant">Yes</option>
-              <option value="Not Relevant">No</option>
-          </select>
-              </div>
-              <div class="col-xs-12 col-sm-6">
-                <select name="industry" class="dropdown-menu">
-              <option value=""class="highlighted">Status</option>
-              <option value="Interview Stage">Interview Stage</option>
-              <option value="Offer Stage">Offer Stage Services</option>
-              <option value="No Offer">No Offer</option>
-              <option value="Successful Placement">Successful Placement</option>
-            
-          </select>
-
-            </div>
-
-            <center><%= f.submit "Update Status" %></center>
-            <% end %>
-          </div></div></div><p><strong><%= link_to 'Back', admins_path %></strong></p></div>
-                
-           
+<%= link_to 'Back', jobs_path %>
+</div>
      

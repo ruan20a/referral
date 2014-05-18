@@ -1,10 +1,11 @@
 Wekrut::Application.routes.draw do
+  devise_for :views
   devise_for :admins, controllers: { registrations: "registrations" }
   devise_for :users, controllers: { registrations: "registrations" }
-  resources :jobs
-  resources :users
-  resources :referrals
+  resources :user
   resources :admins
+  resources :jobs 
+  resources :referrals
   root "home#index"
 
   
