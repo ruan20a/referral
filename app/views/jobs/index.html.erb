@@ -7,9 +7,13 @@
     <div class="page page-table" data-ng-controller="tableCtrl">
 
       <section class="panel panel-default table-dynamic">
-        <div class="panel-heading"><% if signed_in?  %>
-          Signed in as <%= current_user.email %>. Not you?
-          <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+        <div class="panel-heading">
+          <% if user_signed_in?  %>
+            Signed in as <%= current_user.email %>. Not you?
+            <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+          <% elsif admin_signed_in? %>
+            Signed in as <%= current_admin.email %>. Not you?
+            <%= link_to "Sign out", destroy_admin_session_path, :method => :delete %>
           <% else %>
           <%= link_to "Sign up", new_user_registration_path, class: "btn btn-default btn-lg" %>
           <%= link_to "sign in", new_user_session_path, class: "btn btn-default btn-lg" %>
@@ -17,7 +21,12 @@
         </div>
 
         <div class="panel panel-default">
-          <div class="panel-heading"><strong><span class="fa fa-th"></span> Job Postings</strong></div>
+            <div class="panel-heading">
+              <row>
+                <strong><span class="fa fa-th"></span> Job Postings
+                <%=link_to 'Create New Job', new_job_path %></strong>
+              </row>
+          </div>
           <table class="table">
             <tr>
               <th><%= sort_link @search, :name, "Company Name" %></th>
