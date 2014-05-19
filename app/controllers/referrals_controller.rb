@@ -9,6 +9,7 @@ class ReferralsController < ApplicationController
 	end
 
 	def create
+	@job = Job.new	
   	@referral = Referral.new(referral_params)
 
   	@referral.save

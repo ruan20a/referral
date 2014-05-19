@@ -15,6 +15,10 @@ gem 'pg'
 
 gem 'cancan'
 
+gem 'rmagick', :require => 'RMagick'
+
+gem "carrierwave"
+
 gem "devise_invitable"
 
 gem 'devise'

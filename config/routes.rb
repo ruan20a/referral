@@ -2,7 +2,7 @@ Wekrut::Application.routes.draw do
   devise_for :views
   devise_for :admins, controllers: { registrations: "registrations" }
   devise_for :users, controllers: { registrations: "registrations" }
-  resources :user
+  resources :users
   resources :admins
   resources :jobs 
   resources :referrals

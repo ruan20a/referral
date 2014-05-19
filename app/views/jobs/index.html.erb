@@ -21,6 +21,7 @@
         <div class="panel-heading"><strong><span class="fa fa-th"></span> Job Postings</strong></div>
         <table class="table">
   <tr>
+    <th><%= sort_link @search, :image, "Company Name" %></th>
     <th><%= sort_link @search, :name, "Company Name" %></th>
     <th><%= sort_link @search, :job_name, "Position" %></th>
     <th><%= sort_link @search, :city, "City" %></th>
@@ -32,7 +33,7 @@
                    <% @jobs.each do |job| %>
 
                   <tr>
-
+      <td><%= image_tag "#{job.image_url(:thumb)}"  %></td>            
       <td><%= link_to job.name, "/jobs/#{job.id}" %></td>
       
       <td><%= link_to job.job_name, "/jobs/#{job.id}" %></td>
@@ -43,7 +44,7 @@
       
       <td><%= job.speciality_1 %></td>
       
-      <td><%= job.referral_fee %></td>
+      <td><%= job.referral_fee   %></td>
     </tr>
                 </tr>
             </tbody>
