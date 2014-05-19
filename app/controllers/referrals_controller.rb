@@ -9,12 +9,12 @@ class ReferralsController < ApplicationController
 	end
 
 	def create
-	@job = Job.new	
+	@job = Job.new
   	@referral = Referral.new(referral_params)
 
   	@referral.save
   	redirect_to @referral
- 
+
 	end
 
 	def edit
@@ -34,9 +34,9 @@ class ReferralsController < ApplicationController
   			render 'edit'
 		end
 		end
-	
+
 	private
   	def referral_params
-      params.require(:referral).permit(:name, :referral_name, :relationship, :additional_details, :linked_profile_url, :status, :github_profile_url)
+      params.require(:referral).permit(:name, :job_id, :referral_name, :relationship, :additional_details, :linked_profile_url, :status, :github_profile_url)
     end
 end

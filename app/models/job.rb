@@ -26,5 +26,4 @@ class Job < ActiveRecord::Base
 	has_many :users, :through => :referrals
 
 	mount_uploader :image, ImageUploader
-
 end

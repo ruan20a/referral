@@ -1,5 +1,6 @@
 class JobsController < ApplicationController
-	before_filter :authenticate_user!
+	before_action :signed_in?
+  before_action :set_admin_id
 
 	def invite_user
 		@user = User.invite!(:email => params[:user][:email], :name => params[:user][:name])
@@ -14,12 +15,12 @@ class JobsController < ApplicationController
 
 
 	def new
-	@job = Job.find_by_id(params[:id])
+	 @job = Job.new
 	end
 
 
   def show
-    @job = Job.find_by_id(params[:id])
+    @job = Job.find(params[:id])
   end
 
 
@@ -31,6 +32,9 @@ class JobsController < ApplicationController
 
 	private
   	def job_params
-    params.require(:job).permit(:name, :job_name, :description, :city, :state, :admin_id, :referral_fee, :image, :speciality_1, :speciality_2, referrals_attributes: [:id])
+      params.require(:job).permit(:name, :job_name, :description, :city, :state, :admin_id, :referral_fee, :image, :speciality_1, :speciality_2, referrals_attributes: [:id])
   	end
+
+
+
 end
