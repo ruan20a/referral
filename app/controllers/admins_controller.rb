@@ -17,12 +17,6 @@ before_action :correct_admin, only: [:show, :update, :edit, :destroy]
     @referrals = @admin.referrals
   end
 
-  def edit
-  end
-
-  def update
-  end
-
   def destroy
     @admin.destroy
     redirect_to new_admin_registration_path, notice: "You successfully deleted your account. We hope you will sign-up with us again"

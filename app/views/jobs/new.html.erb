@@ -1,45 +1,45 @@
 <%= form_for :job, url: jobs_path, :html => {:multipart => true} do |f| %>
-  <p>
+  <div>
     <%= f.label :company_name %><br>
     <%= f.text_field :name %>
-  </p>
+  </div>
 
-   <p>
+   <div>
     <%= f.label :job_name %><br>
     <%= f.text_field :job_name %>
-  </p>
+  </div>
 
-   <p>
+   <div>
     <%= f.label :city %><br>
     <%= f.text_area :city %>
-  </p>
+  </div>
 
-   <p>
+   <div>
     <%= f.label :state %><br>
     <%= f.text_area :state %>
-  </p>
- 
-  <p>
+  </div>
+
+  <div>
     <%= f.label :description %><br>
     <%= f.text_area :description %>
-  </p>
+  </div>
 
-    <p>
+  <div>
     <%= f.label :speciality_1 %><br>
-    <%= f.text_area :speciality_1 %>
-  </p>
+    <%= f.select :speciality_1, speciality_choices %>
+  </div>
 
-   <p>
-    <%= f.label :referral_fee %><br>
-    <%= f.text_area :referral_fee %>
-  </p>
- 
- <p>
+  <div>
+    <%= f.label :speciality_2 %><br>
+    <%= f.select :speciality_2, speciality_choices %>
+  </div>
+
+ <div>
   <%= f.file_field :image  %>
-</p>
+</div>
 
-  <p>
+  <div>
     <%= f.submit "Submit to Wekrut" %>
-  </p>
+  </div>
 <% end %>
 <%= link_to 'Back', jobs_path %>
