@@ -1,6 +1,6 @@
 <div class="col-md-4 col-md-offset-4">
               <div class="form-container">
-               
+
                   <div class="login-form">
 <p>
   <strong>Company Name:</strong>
@@ -32,15 +32,15 @@
   <strong>Speciality 2:</strong>
   <%= @job.speciality_2 %>
 </p>
- 
+
 <p>
   <strong>Description:</strong>
   <%= @job.description %>
 </p>
 
- <%= link_to "Refer", new_referral_path %>
- 
- <%= link_to 'Ask to be Referred', new_referral_path %> 
+ <%= link_to "Refer", new_referral_path(:job_id => @job.id) %>
+
+ <%= link_to 'Ask to be Referred', new_referral_path(:job_id => @job.id)%>
 
 <%= link_to 'Back', jobs_path %>
 </div>

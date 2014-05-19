@@ -14,7 +14,7 @@
     <div class="panel panel-default">
       <div class="panel-heading"><strong><span class="fa fa-th"></span>
         <%= current_admin.email %> </strong>
-        <%= link_to 'C  reate New Job', new_job_path %>
+        <%= link_to 'Create New Job', new_job_path %>
       </div>
       <table class="table">
 
@@ -29,10 +29,9 @@
           <th>Candidates</th>
 
         </tr>
-
-        <% if @referrals.count == 0 %>
-        <% @referrals.each do |referral| %>
+          <% @referrals.each do |referral| %>
         <tr>
+          <!-- TODO fix up links -->
           <td><%= link_to referral.job.name, job_path(referral.job.id) %></td>
 
           <td><%= link_to referral.job.job_name, "/jobs/#{referral.job.id}" %></td>
@@ -43,12 +42,10 @@
 
           <td><%= referral.status %>
           </td>
-
         </tr>
-
+          <%end%>
       </tr>
-      <% end %>
-      <%end%>
+
     </table>
   </div>
 </div>
