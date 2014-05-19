@@ -1,0 +1,62 @@
+
+ <%= render 'layouts/header' %>
+
+<section class="jobs">
+<div class="container">
+
+ <% if admin_signed_in? %>
+    Signed in as <%= current_admin.email %>. Not you?
+    <%= link_to "Sign out", destroy_admin_session_path, :method => :delete %>
+  <% else %>
+    <%= link_to "Sign up", new_admin_registration_path, class: "btn btn-default btn-lg" %> <%= link_to "sign in", new_admin_session_path, class: "btn btn-default btn-lg" %>
+    <% end %>
+<div class="page page-table">
+
+    <div class="panel panel-default">
+        <div class="panel-heading"><strong><span class="fa fa-th"></span>
+          <%= current_admin.email %> </strong></div>
+        <table class="table">
+
+
+  <tr>
+    <th>Company</th>
+
+    <th>Job</th>
+
+    <th>Referral Fee</th>
+
+    <th>Candidates</th>
+
+  </tr>
+
+  <% if @referrals.count == 0 %>
+    <% @referrals.each do |referral| %>
+      <tr>
+        <td><%= link_to referral.job.name, job_path(referral.job.id) %></td>
+
+        <td><%= link_to referral.job.job_name, "/jobs/#{referral.job.id}" %></td>
+
+        <td><%= referral.job.referral_fee %></td>
+
+        <td><%= link_to referral.referral_name, "/referrals/#{referral.id}" %></td>
+
+        <td><%= referral.status %>
+        </td>
+
+       </tr>
+
+      </tr>
+    <% end %>
+  <%end%>
+</table>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+
+
+<%= current_admin.id %>
+<%= link_to 'New Job', new_job_path %>
+ <%= render 'layouts/footer' %>

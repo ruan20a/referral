@@ -5,6 +5,10 @@ gem 'rake', '10.2.2'
 
 gem 'rails', '4.0.3'
 
+gem 'annotate'
+
+gem "rails-erd"
+
 gem "unicorn"
 
 gem "ransack"
@@ -48,6 +52,17 @@ group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
+
+group :test, :development do
+  gem "awesome_print"
+  gem 'dotenv-rails', :groups => [:development, :test]
+  gem "pry-rails", :groups => [:development, :test]
+  gem "pry-debugger"
+  gem "pry-stack_explorer"
+  gem 'debugger'
+end
+
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
