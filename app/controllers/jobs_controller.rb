@@ -28,8 +28,10 @@ class JobsController < ApplicationController
 
 
   def create
-    if @job.save
-      redirect_to @job, notice: 'Job was successfully created'
+    job = Job.new(job_params)
+    job.admin_id = current_admin.id
+    if job.save
+      redirect_to job, notice: 'Job was successfully created'
     else
       render action: 'new'
     end

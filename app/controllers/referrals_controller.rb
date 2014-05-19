@@ -1,20 +1,22 @@
 class ReferralsController < ApplicationController
 	def index
-	@search = Referral.search(params[:q])
+	  @search = Referral.search(params[:q])
   	@referrals = @search.result
 	end
 
 	def new
-	@referral = Referral.new
+	 @referral = Referral.new
 	end
 
 	def create
-	@job = Job.new
+    @job = Job.new
   	@referral = Referral.new(referral_params)
 
-  	@referral.save
-  	redirect_to @referral
-
+  	if @referral.save
+  	 redirect_to @referral
+    else
+      redirect_to new_referral_path
+    end
 	end
 
 	def edit
