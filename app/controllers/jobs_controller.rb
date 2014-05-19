@@ -7,6 +7,7 @@ class JobsController < ApplicationController
 	end
 
 	def index
+    # binding.pry
   	@search = Job.search(params[:q])
   	@jobs = @search.result
 	end
