@@ -1,10 +1,10 @@
 <%= render 'layouts/header' %>
 <div class="container">
-  <div class="col-md-4 col-md-offset-4">
+  <div class="col-md-8 col-md-offset-2">
     <div class="form-container">
       <div class="login-form">
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-        <%= devise_error_messages! %>
+        <%= render 'layouts/flash' %>
 
         <div class="form-group">
           <%= f.email_field :email, autofocus: true, :placeholder => 'Email address', :class => 'form-control login-field' %>
@@ -29,23 +29,23 @@
         <div class="form-group">
           <label> Industry Choice &nbsp;  &nbsp;</label>
 
-          <row class="col-md-4"> <%= f.select :industry_1, industry_choices %> </row>
+          <row> <%= f.select :industry_1, industry_choices %> </row>
         </div>
 
         <div class="form-group">
           <label> Speciality Choice </label>
-          <row class="col-md-4"> <%= f.select :speciality_1, speciality_choices %></row>
+          <row> <%= f.select :speciality_1, speciality_choices %></row>
         </div>
 
         <div class="form-group">
           <label> Industry Choice &nbsp;  &nbsp;</label>
-          <row class="col-md-4"> <%= f.select :industry_2, industry_choices %> </row>
+          <row> <%= f.select :industry_2, industry_choices %> </row>
         </div>
 
 
         <div class="form-group">
           <label> Speciality Choice </label>
-          <row class="col-md-4"> <%= f.select :speciality_2, speciality_choices %></row>
+          <row> <%= f.select :speciality_2, speciality_choices %></row>
         </div>
 
         <div>

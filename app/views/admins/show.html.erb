@@ -29,7 +29,7 @@
           <th>Candidates</th>
 
         </tr>
-          <% @referrals.each do |referral| %>
+        <% @referrals.each do |referral| %>
         <tr>
           <!-- TODO fix up links -->
           <td><%= link_to referral.job.name, job_path(referral.job.id) %></td>
@@ -43,7 +43,7 @@
           <td><%= referral.status %>
           </td>
         </tr>
-          <%end%>
+        <%end%>
       </tr>
 
     </table>
