@@ -1,7 +1,7 @@
 Wekrut::Application.routes.draw do
   devise_for :views
-  devise_for :admins, controllers: { registrations: "admins/registrations", sessions: "admins/sessions" }
-  devise_for :users, controllers: { registrations: "users/registrations", sessions: "users/sessions" }
+  devise_for :admins, controllers: { registrations: "admins/registrations", sessions: "admins/sessions", passwords: "admins/passwords" }
+  devise_for :users, controllers: { registrations: "users/registrations", sessions: "users/sessions", passwords: "users/passwords" }
   resources :users
   resources :admins
   resources :jobs

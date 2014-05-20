@@ -11,6 +11,8 @@ class ReferralsController < ApplicationController
 	def new
    @referral = Referral.new
    @job = Job.find(params[:job_id])
+   @ref_type = params[:ref_type]
+   # @your_name = current_user.first_name && current_user.last_name || ""
 	end
 
 	def create
@@ -25,17 +27,19 @@ class ReferralsController < ApplicationController
   	if @referral.save
   	  redirect_to @referral
     else
-      redirect_to new_referral_path
+      flash[:error] = "Please fill in all the required fields"
+      redirect_to new_referral_path(:job_id => @referral.job_id, :ref_type => @referral.ref_type)
     end
-
 	end
 
 	def edit
-		@referral = Referral.find(params[:id])
-	end
+	 @referral = Referral.find(params[:id])
+	 @job = Job.find(@referral.job_id)
+   @ref_type = @referral.ref_type
+  end
 
 	def show
-    @referral = Referral.find_by_id(params[:id])
+    @referral = Referral.find(params[:id])
   end
 
 	def update
@@ -49,6 +53,6 @@ class ReferralsController < ApplicationController
 
 	private
   	def referral_params
-      params.require(:referral).permit(:name, :job_id, :referral_name, :relationship, :additional_details, :linked_profile_url, :status, :github_profile_url, :relevance, :user_id, :admin_id)
+      params.require(:referral).permit(:name, :job_id, :referral_name, :referral_email, :relationship, :additional_details, :linked_profile_url, :status, :github_profile_url, :relevance, :user_id, :admin_id, :ref_type)
     end
 end

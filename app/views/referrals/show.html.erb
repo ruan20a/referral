@@ -1,13 +1,19 @@
+<%= render 'layouts/flash' %>
+
 <div>
 <strong>Name:</strong>
 <%= @referral.name %>
-</p>
+</div>
 
-<p>
+<div>
   <strong>Referral Name:</strong>
   <%= @referral.referral_name %>
-</p>
+</div>
+
+<div>
+  <strong>Referral Email:</strong>
+  <%= @referral.referral_email %>
+</div>
 
 <%= link_to 'Back', jobs_path %>
 </div>
-     

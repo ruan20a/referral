@@ -22,7 +22,7 @@
 
 class Referral < ActiveRecord::Base
 	belongs_to :job
-	
 	belongs_to :user
+  validates_presence_of :referral_name, :referral_email, :job_id, :ref_type
 
 end
