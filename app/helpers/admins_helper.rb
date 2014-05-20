@@ -30,7 +30,7 @@ module AdminsHelper
   end
 
   def devise_error_messages!
-    flash[:error] = resource.errors.full_messages.first
+    resource.errors.full_messages.map { |msg| content_tag(:p, msg) }.join
   end
 
 end

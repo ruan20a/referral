@@ -1,5 +1,7 @@
 class Admins::RegistrationsController < Devise::RegistrationsController
 
+before_validation :downcase_email
+
 include AdminsHelper
 
   def create
@@ -25,5 +27,12 @@ include AdminsHelper
     #   super
     # end
   end
+
+private
+
+def downcase_email
+  resource.email = resource.email.downcase if self.email.present?
+end
+
 
 end
