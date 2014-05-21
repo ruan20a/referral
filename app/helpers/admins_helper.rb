@@ -5,11 +5,11 @@ module AdminsHelper
 	end
 
 	def status_choices
-	["Accepted", "Pending", "Approved"]
+  	["Accepted", "Pending", "Approved"]
 	end
 
 	def relevance_choices
-	["Relevant", "Not Relevant" ]
+  	["Relevant", "Not Relevant" ]
 	end
 
 #DEVISE

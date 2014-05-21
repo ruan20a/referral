@@ -1,5 +1,5 @@
 class JobsController < ApplicationController
-	before_action :signed_in?
+	# before_action :signed_in? only:[:new, :edit, :update]
   before_action :authenticate_admin!, only: [:new, :edit, :update, :delete]
   before_action :check_admin, only: [:edit, :update, :delete]
   before_action :set_job, only: [:show, :update, :edit, :destroy]

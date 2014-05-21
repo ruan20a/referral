@@ -9,12 +9,12 @@ before_action :correct_admin, only: [:show, :update, :edit, :destroy]
 
   def index
     @jobs = Job.all
-    @referrals = Referral.all
+    @referrals = Referral.select{|x| x.ref_type = "refer"}
   end
 
   def show
     @jobs = @admin.jobs
-    @referrals = @admin.referrals
+    @referrals = @admin.referrals.select{|x| x.ref_type = "refer"}
   end
 
   def destroy
