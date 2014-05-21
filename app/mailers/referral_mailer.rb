@@ -27,6 +27,6 @@ class ReferralMailer < ActionMailer::Base
     binding.pry
     @requester = requester
 
-    mail(to: @referral_email, subject: "Referral Request from #{@requester.first_name.titleize}").deliver
+    mail(to: @referral_email, subject: "Referral Request from #{@requester.first_name.titleize} #{@requester.last_name.titleize} ").deliver
   end
 end

@@ -4,10 +4,14 @@
   <%=@sender_first_name.titleize%> <%=@sender_last_name.titleize%> provided a referral for <%=@job_name%>.
 </div>
 
+<br>
+
 <div>
   Please take a look at the referral information
   <%=link_to 'Referral Link', url_for(controller: 'referrals', action: 'show', id: @referral_id, only_path: false)%>
 </div>
+
+<br>
 
 <div>
   Thank You,
