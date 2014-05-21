@@ -1,0 +1,21 @@
+<div>Hello <%=@referral_name.titleize%>, </div>
+
+<div>
+  <%=(@requester.first_name + ' ' + @requester.last_name).titleize%> would like to your referral for <%= @job.name.titleize%>.
+</div>
+<div>
+  If your candidate is selected for this role, you will receive a referral fee of <%=number_to_currency(@job.referral_fee)%> dollars.
+</div>
+
+<div>
+  Please follow the link to view the job description and you can refer this candidate from there.
+  <%=link_to 'Job Link', url_for(controller: 'jobs', action: 'show', id: @job.id, only_path: false)%>
+</div>
+
+<div>
+  Thank You,
+</div>
+
+<div>
+  WeKrüt Team!
+</div>
