@@ -1,5 +1,5 @@
 hello <%=@user.email%>
 
 <% if !current_user.nil? && current_user.id == @user.id%>
-  <%= link_to 'Sign Out', destroy_user_session(@user.id) %>
+  <%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %>
 <% end %>
