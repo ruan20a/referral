@@ -5,11 +5,11 @@ module AdminsHelper
 	end
 
 	def status_choices
-	["Accepted", "Pending", "Approved"]
+  	["Accepted", "Pending", "Approved"]
 	end
 
 	def relevance_choices
-	["Relevant", "Not Relevant" ]
+  	["Relevant", "Not Relevant" ]
 	end
 
 #DEVISE
@@ -30,7 +30,7 @@ module AdminsHelper
   end
 
   def devise_error_messages!
-    flash[:error] = resource.errors.full_messages.first
+    resource.errors.full_messages.map { |msg| content_tag(:p, msg) }.join
   end
 
 end

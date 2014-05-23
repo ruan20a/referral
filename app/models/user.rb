@@ -43,5 +43,5 @@ class User < ActiveRecord::Base
     has_many :referrals
     has_many :jobs, :through => :referrals
     validates :first_name, :last_name, :email, presence: true
-    validates :email, uniqueness: true
+    validates :email, :uniqueness => { :case_sensitive => false }
 end

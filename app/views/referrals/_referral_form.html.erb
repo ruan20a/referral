@@ -1,0 +1,25 @@
+<div> REFERRAL FORM </div>
+
+<%= render 'layouts/flash' %>
+
+<%= form_for :referral, url: referrals_path do |f| %>
+
+  <div>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :relationship %><br>
+    <%= f.text_field :relationship %>
+  </div>
+
+   <div>
+    <%= f.hidden_field :job_id, :value => @job.id%>
+    <%= f.hidden_field :ref_type, value: @ref_type %>
+  </div>
+
+  <div>
+    <%= f.submit "Submit to Wekrut" %>
+  </div>
+<% end %>

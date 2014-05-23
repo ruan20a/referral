@@ -1,48 +1,48 @@
 <div class="col-md-4 col-md-offset-4">
-              <div class="form-container">
+  <div class="form-container">
 
-                  <div class="login-form">
-<p>
-  <strong>Company Name:</strong>
-  <%= @job.name %>
-</p>
+    <div class="login-form">
+      <div>
+        <strong>Company Name:</strong>
+        <%= @job.name %>
+      </div>
 
-<p>
-  <strong>Job:</strong>
-  <%= @job.job_name %>
-</p>
+      <div>
+        <strong>Job:</strong>
+        <%= @job.job_name %>
+      </div>
 
-<p>
-  <strong>Referral Fee:</strong>
-  <%= @job.referral_fee %>
-</p>
+      <div>
+        <strong>Referral Fee:</strong>
+        <%= @job.referral_fee %>
+      </div>
 
-<p>
-  <strong>Location:</strong>
-  <%= @job.city %>
-  <%= @job.state %>
-</p>
+      <div>
+        <strong>Location:</strong>
+        <%= @job.city %>
+        <%= @job.state %>
+      </div>
 
-<p>
-  <strong>Speciality 1:</strong>
-  <%= @job.speciality_1 %>
-</p>
+      <div>
+        <strong>Speciality 1:</strong>
+        <%= @job.speciality_1 %>
+      </div>
 
-<p>
-  <strong>Speciality 2:</strong>
-  <%= @job.speciality_2 %>
-</p>
+      <div>
+        <strong>Speciality 2:</strong>
+        <%= @job.speciality_2 %>
+      </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @job.description %>
-</p>
+      <div>
+        <strong>Description:</strong>
+        <%= @job.description %>
+      </div>
 
- <%= link_to "Refer", new_referral_path(:job_id => @job.id) %>
+      <%= link_to "Refer", new_referral_path(job_id: @job.id, ref_type: "refer" ) %>
 
- <%= link_to 'Ask to be Referred', new_referral_path(:job_id => @job.id)%>
+      <%= link_to 'Ask to be Referred', new_referral_path(job_id: @job.id, ref_type: "ask_ref")%>
 
-<%= link_to 'Back', jobs_path %>
-</div>
-</div>
+      <%= link_to 'Back', jobs_path %>
+    </div>
+  </div>
 </div>

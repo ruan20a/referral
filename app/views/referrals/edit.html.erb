@@ -1,12 +1,6 @@
-<%= form_for :referral, url: referrals_path do |f| %>
- 
-  <%= f.label :name %>:
-  <%= f.text_field :name %><br />
-
-  <%= f.label :referrl_name %>:
-  <%= f.text_field :referrl_name %><br />
-
-  <%= f.submit %>
-
+<% if @ref_type == "refer" %>
+  <%= render 'referral_form' %>
+<% else %>
+  <%= render 'ask_referral_form' %>
 <% end %>
 

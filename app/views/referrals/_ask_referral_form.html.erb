@@ -1,0 +1,35 @@
+<div>Ask To Be Referred!</div>
+
+<%= render 'layouts/flash' %>
+
+<%= form_for :referral, url: referrals_path do |f| %>
+
+  <div>
+    <%= f.label :name %><br>
+    <%= f.text_field :name, value: @your_name %>
+  </div>
+
+   <div>
+    <%= f.label :referral_name %><br>
+    <%= f.text_field :referral_name, required: "required" %>
+  </div>
+
+   <div>
+    <%= f.label :referral_email %><br>
+    <%= f.text_field :referral_email %>
+  </div>
+
+  <div>
+    <%= f.label :relationship %><br>
+    <%= f.text_field :relationship %>
+  </div>
+
+   <div>
+    <%= f.hidden_field :ref_type, value: @ref_type %>
+    <%= f.hidden_field :job_id, :value => @job.id%>
+  </div>
+
+  <div>
+    <%= f.submit "Submit to Wekrut" %>
+  </div>
+<% end %>

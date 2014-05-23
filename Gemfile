@@ -5,9 +5,7 @@ gem 'rake', '10.2.2'
 
 gem 'rails', '4.0.3'
 
-gem 'annotate'
-
-gem "rails-erd"
+gem 'will_paginate', '~> 3.0.5'
 
 gem "unicorn"
 
@@ -55,11 +53,13 @@ end
 
 group :test, :development do
   gem "awesome_print"
-  gem 'dotenv-rails', :groups => [:development, :test]
-  gem "pry-rails", :groups => [:development, :test]
+  gem 'dotenv-rails'
+  gem "pry-rails"
   gem "pry-debugger"
   gem "pry-stack_explorer"
   gem 'debugger'
+  gem 'annotate'
+  gem "rails-erd"
 end
 
 
