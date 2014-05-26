@@ -4,11 +4,10 @@
   <%= render 'layouts/flash' %>
 
   <div><%= f.label :first_name %><br />
-  <%= f.email_field :first_name, autofocus: true %></div>
+  <%= f.text_field :first_name, autofocus: true %></div>
 
   <div><%= f.label :last_name %><br />
-  <%= f.email_field :last_name, autofocus: true %></div>
-
+  <%= f.text_field :last_name, autofocus: true %></div>
 
   <div><%= f.label :email %><br />
   <%= f.email_field :email, autofocus: true %></div>
