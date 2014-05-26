@@ -1,4 +1,3 @@
-
 // Some general UI pack related JS
 // Extend JS String with repeat method
 String.prototype.repeat = function(num) {
@@ -8,25 +7,25 @@ String.prototype.repeat = function(num) {
 (function($) {
 
   // Add segments to a slider
-  $.fn.addSliderSegments = function (amount, orientation) {    
+  $.fn.addSliderSegments = function (amount, orientation) {
     return this.each(function () {
       if (orientation == "vertical") {
         var output = ''
-          , i;
+        , i;
         for (i = 1; i <= amount - 2; i++) {
           output += '<div class="ui-slider-segment" style="top:' + 100 / (amount - 1) * i + '%;"></div>';
         };
         $(this).prepend(output);
       } else {
         var segmentGap = 100 / (amount - 1) + "%"
-          , segment = '<div class="ui-slider-segment" style="margin-left: ' + segmentGap + ';"></div>';
+        , segment = '<div class="ui-slider-segment" style="margin-left: ' + segmentGap + ';"></div>';
         $(this).prepend(segment.repeat(amount - 2));
       }
     });
   };
 
   $(function() {
-  
+
     // Todo list
     $(".todo").on('click', 'li', function() {
       $(this).toggleClass("todo-done");
@@ -94,26 +93,26 @@ String.prototype.repeat = function(num) {
     $("[data-toggle='switch']").wrap('<div class="switch" />').parent().bootstrapSwitch();
 
         // Typeahead
-    if($('#typeahead-demo-01').length) {
-      $('#typeahead-demo-01').typeahead({
-        name: 'states',
-        limit: 4,
-        local: ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut",
-        "Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky",
-        "Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri",
-        "Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota",
-        "North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina",
-        "South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]
-      });
-    }  
+        if($('#typeahead-demo-01').length) {
+          $('#typeahead-demo-01').typeahead({
+            name: 'states',
+            limit: 4,
+            local: ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut",
+            "Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky",
+            "Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri",
+            "Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota",
+            "North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina",
+            "South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]
+          });
+        }
 
     // make code pretty
     window.prettyPrint && prettyPrint();
-    
+
   });
 
 jQuery(function($) {
-$("tr[data-link]").click(function() {
-window.location = this.dataset.link
-});
+  $("tr[data-link]").click(function() {
+    window.location = this.dataset.link
+  });
 })
