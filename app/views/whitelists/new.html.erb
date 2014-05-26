@@ -1,0 +1,13 @@
+<%= form_for @whitelist do |f| %>
+  <div>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+
+  <br>
+
+  <div>
+    <%=f.submit 'Add Email'%>
+  </div>
+
+<% end %>

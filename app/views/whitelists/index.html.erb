@@ -1,0 +1,10 @@
+Email
+
+<% @whitelist.each do |whitelist| %>
+  <li> <%=whitelist.email%> </li>
+<% end %>
+
+
+<div>
+<%= link_to 'Add New Email', new_whitelist_path %>
+</div>

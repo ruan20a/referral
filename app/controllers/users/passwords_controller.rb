@@ -3,6 +3,7 @@ class Users::PasswordsController < Devise::PasswordsController
   include UsersHelper
 
   def create
+    binding.pry
     resource = warden.authenticate!(auth_options)
     set_flash_message(:notice, :signed_in) if is_flashing_format?
     sign_in(resource_name, resource)
