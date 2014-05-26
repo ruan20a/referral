@@ -18,8 +18,6 @@ $(function() {
     });
 });
 
-
-
 //Google Map Skin - Get more at http://snazzymaps.com/
 var myOptions = {
     zoom: 15,

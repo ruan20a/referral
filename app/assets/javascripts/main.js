@@ -4,7 +4,7 @@ String.prototype.repeat = function(num) {
   return new Array(num + 1).join(this);
 };
 
-(function($) {
+(function($){
 
   // Add segments to a slider
   $.fn.addSliderSegments = function (amount, orientation) {
@@ -24,7 +24,7 @@ String.prototype.repeat = function(num) {
     });
   };
 
-  $(function() {
+  $(function(){
 
     // Todo list
     $(".todo").on('click', 'li', function() {
@@ -108,11 +108,12 @@ String.prototype.repeat = function(num) {
 
     // make code pretty
     window.prettyPrint && prettyPrint();
-
   });
 
-jQuery(function($) {
+jQuery(function($){
   $("tr[data-link]").click(function() {
     window.location = this.dataset.link
   });
 })
+
+});
