@@ -24,6 +24,7 @@ class JobsController < ApplicationController
 
   def show
     @job = Job.find(params[:id])
+
   end
 
 
@@ -39,6 +40,14 @@ class JobsController < ApplicationController
 
   def edit
     @job.admin_id = current_admin.id
+  end
+
+  def update
+    if @job.update(job_params)
+      redirect_to @job, notice: 'Item was successfully updated.'
+    else
+      render action: 'edit'
+    end
   end
 
 	private

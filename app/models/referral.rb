@@ -18,6 +18,7 @@
 #  github_profile_url :string(255)
 #  relevant           :boolean
 #  relevance          :string(255)
+#  ref_type           :string(255)
 #
 
 class Referral < ActiveRecord::Base

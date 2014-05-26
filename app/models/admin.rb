@@ -26,6 +26,11 @@
 #  invited_by_id          :integer
 #  invited_by_type        :string(255)
 #  invitations_count      :integer          default(0)
+#  confirmation_token     :string(255)
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
+#  first_name             :string(255)
+#  last_name              :string(255)
 #
 
 class Admin < ActiveRecord::Base
