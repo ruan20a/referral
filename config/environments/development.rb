@@ -35,6 +35,8 @@ Wekrut::Application.configure do
 
   config.action_mailer.default_url_options = { host: '127.0.0.1', port: 3000 }
 
+  #run to see where precompile is failing.
+  config.assets.raise_production_errors = true
 
 
   # Debug mode disables concatenation and preprocessing of assets.
