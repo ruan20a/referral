@@ -32,7 +32,7 @@ Wekrut::Application.configure do
   # Raise an error on page load if there are pending migrations
   config.active_record.migration_error = :page_load
 
-  config.action_mailer.default_url_options = { host: '127.0.0.1', port: 3000 }
+  config.action_mailer.default_url_options = { host: 'localhost:3000', port: 3000 }
 
   #run to see where precompile is failing.
   config.assets.raise_production_errors = true
