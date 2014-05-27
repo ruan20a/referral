@@ -3,7 +3,7 @@ class Admins::RegistrationsController < Devise::RegistrationsController
 include AdminsHelper
 
   def create
-    unless Whitelist.exists?(:email => params[:admin][:email])
+    unless Whitelist.exists?(:email => params[:admin][:email], :is_admin => true)
       email = params[:admin][:email]
       flash[:alert] = "#{email} is currently not on our beta list yet. Sign up #{view_context.link_to('here', root_path)} for our beta version.".html_safe
       redirect_to new_admin_registration_path
