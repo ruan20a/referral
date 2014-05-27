@@ -20,16 +20,11 @@
     <div class="panel panel-default">
         <div class="panel-heading"><strong><span class="fa fa-th"></span>
           <%= "Indiegogo" %> </strong></div>
+
         <table class="table">
-
-
   <tr>
-    <th>Company</th>
 
     <th><%= sort_link @search, :job_name, "Position" %></th>
-
-    <th>Referral Fee</th>
-
     <th><%= sort_link @search, :referral_name, "Candidates" %></th>
     <th><%= sort_link @search, :status, "Status" %></th>
     <th><%= sort_link @search, :created_at, "Date Submitted" %></th>
