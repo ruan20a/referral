@@ -9,6 +9,7 @@
 #
 
 class Whitelist < ActiveRecord::Base
-	has_many :users
-	has_many :admins
+	# has_many :users
+	# has_many :admins
+  validates :email, :uniqueness => {:case_sensitive => false}
 end

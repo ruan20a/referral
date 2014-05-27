@@ -4,7 +4,7 @@
 #
 #  id           :integer          not null, primary key
 #  name         :string(255)
-#  description  :string(255)
+#  description  :text
 #  recruiter_id :integer
 #  speciality_1 :string(255)
 #  speciality_2 :string(255)

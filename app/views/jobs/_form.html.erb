@@ -1,0 +1,45 @@
+<%= form_for @job do |f| %>
+  <div>
+    <%= f.label :company_name %><br>
+    <%= f.text_field :name %>
+  </div>
+
+   <div>
+    <%= f.label :job_name %><br>
+    <%= f.text_field :job_name %>
+  </div>
+
+   <div>
+    <%= f.label :city %><br>
+    <%= f.text_field :city %>
+  </div>
+
+   <div>
+    <%= f.label :state %><br>
+    <%= f.text_field :state %>
+  </div>
+
+  <div>
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+
+  <div>
+    <%= f.label :speciality_1 %><br>
+    <%= f.select :speciality_1, speciality_choices %>
+  </div>
+
+  <div>
+    <%= f.label :speciality_2 %><br>
+    <%= f.select :speciality_2, speciality_choices %>
+  </div>
+
+ <div>
+  <%= f.file_field :image  %>
+</div>
+
+  <div>
+    <%= f.submit "Submit to Wekrut" %>
+  </div>
+<% end %>
+<%= link_to 'Back', jobs_path %>

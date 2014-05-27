@@ -1,0 +1,10 @@
+<div> Hello! </div>
+
+<div>Your email <%=@email%> is approved to sign-up for WeKrüt.</div>
+
+<div>Please follow the link to sign up</div>
+<% if @status %>
+  <%= link_to 'Sign Up', url_for(controller: 'admins/registrations', action: 'new', only_path: false)%>
+<% else %>
+  <%= link_to 'Sign Up', url_for(controller: 'users/registrations', action: 'new', only_path: false)%>
+<% end %>

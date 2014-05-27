@@ -1,0 +1,15 @@
+<%= form_for @whitelist do |f| %>
+  <div>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+
+    <%= f.label 'Check if Admin' %>
+    <%= f.check_box :is_admin, {}, true  %>
+  <br>
+
+  <div>
+    <%=f.submit 'Update'%>
+  </div>
+
+<% end %>

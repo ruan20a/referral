@@ -1,6 +1,6 @@
 
- <%= render 'layouts/header' %> 
- 
+ <%= render 'layouts/header' %>
+
 <section class="jobs">
 <div class="container">
 
@@ -18,11 +18,11 @@
 <div class="page page-table">
 
     <div class="panel panel-default">
-        <div class="panel-heading"><strong><span class="fa fa-th"></span> 
+        <div class="panel-heading"><strong><span class="fa fa-th"></span>
           <%= "Indiegogo" %> </strong></div>
         <table class="table">
 
-          
+
   <tr>
     <th>Company</th>
 
@@ -44,8 +44,8 @@
 
       <td><%= referral.job.referral_fee %></td>
 
-      <td><%= link_to referral.referral_name, "/referrals/#{referral.id}" %></td> 
- 
+      <td><%= link_to referral.referral_name, "/referrals/#{referral.id}" %></td>
+
       <td><%= referral.status %></td>
 
       <td><%= referral.created_at %></td>
@@ -66,4 +66,4 @@
 
 <%= current_admin.id %>
 <%= link_to 'New Job', new_job_path %>
- <%= render 'layouts/footer' %> 
+ <%= render 'layouts/footer' %>

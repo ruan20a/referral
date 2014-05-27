@@ -11,6 +11,8 @@ gem "unicorn"
 
 gem "ransack"
 
+gem 'sprockets_better_errors'
+
 gem "rails_12factor", group: :production
 # Use sqlite3 as the database for Active Record
 gem 'pg'

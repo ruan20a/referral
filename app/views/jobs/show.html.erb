@@ -43,6 +43,10 @@
       <%= link_to 'Ask to be Referred', new_referral_path(job_id: @job.id, ref_type: "ask_ref")%>
 
       <%= link_to 'Back', jobs_path %>
+
+      <% if current_admin.id == @job.admin_id %>
+        <%= link_to 'Edit', edit_job_path%>
+      <% end %>
     </div>
   </div>
 </div>

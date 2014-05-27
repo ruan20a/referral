@@ -4,6 +4,7 @@ class JobsController < ApplicationController
   before_action :check_admin, only: [:edit, :update, :delete]
   before_action :set_job, only: [:show, :update, :edit, :destroy]
 
+
 	def invite_user
 		@user = User.invite!(:email => params[:user][:email], :name => params[:user][:name])
 		render :json => @user
@@ -21,11 +22,9 @@ class JobsController < ApplicationController
    @job.admin_id = current_admin.id
 	end
 
-
   def show
-    @job = Job.find(params[:id])
+    @job
   end
-
 
   def create
     job = Job.new(job_params)
@@ -39,6 +38,22 @@ class JobsController < ApplicationController
 
   def edit
     @job.admin_id = current_admin.id
+  end
+
+  def update
+    if @job.update(job_params)
+      redirect_to @job, notice: 'Item was successfully updated.'
+    else
+      render action: 'edit'
+    end
+  end
+
+  def destroy
+    if @job.destroy
+      redirect_to jobs_path, notice: 'Job successfully destroyed'
+    else
+      render action: 'edit'
+    end
   end
 
 	private
