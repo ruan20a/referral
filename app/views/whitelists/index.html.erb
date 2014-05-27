@@ -1,10 +1,28 @@
-Email
+<%= render 'layouts/flash' %>
+<br>
+<table class="table">
+  <tr>
+    <th>Email </th>
+    <th>Admin </th>
+    <th>Options</th>
+  </tr>
 
 <% @whitelist.each do |whitelist| %>
-  <li> <%=whitelist.email%> </li>
+  <tr>
+    <td>
+    <%=whitelist.email%>
+    </td>
+    <td>
+      <%=whitelist.is_admin?%>
+    </td>
+    <td>
+    <%=link_to 'Edit', edit_whitelist_path(whitelist.id), class: "btn btn-primary btn-sm"%>
+    <%=link_to 'Delete', url_for(action: :destroy, id: whitelist.id), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-warning btn-sm"%>
+    </td>
+  </tr>
 <% end %>
-
+</table>
 
 <div>
-<%= link_to 'Add New Email', new_whitelist_path %>
+  <%= link_to 'Add New Email', new_whitelist_path, class: "btn btn-primary btn-sm" %>
 </div>

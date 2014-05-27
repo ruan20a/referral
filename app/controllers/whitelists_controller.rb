@@ -16,6 +16,7 @@ class WhitelistsController < ApplicationController
     whitelist = Whitelist.new(whitelist_params)
     if whitelist.save
       redirect_to whitelists_path, notice: 'Email successfully added to whitelist'
+      WhitelistMailer.deliver_confirmation(whitelist.email, whitelist.is_admin)
     else
       render action: 'new'
     end
@@ -60,7 +61,7 @@ class WhitelistsController < ApplicationController
   end
 
   def whitelist_params
-    params.require(:whitelist).permit(:email)
+    params.require(:whitelist).permit(:email, :is_admin)
   end
 
 end
