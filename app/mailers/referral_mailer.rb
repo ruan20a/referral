@@ -26,13 +26,15 @@ class ReferralMailer < ActionMailer::Base
   end
 
   def deliver_ask_email(referral, requester)
-    @referral_email = referral.referral_email
-    @referral_name = referral.referral_name
 
+    @referee_email = referral.referee_email
+    @referee_name = referral.referee_name
     @job = Job.find(referral.job_id)
     binding.pry
-    @requester = requester
+    @requester_FN = requester.first_name
+    @requester_LN = requester.last_name
+    @requester_email = requester.email
 
-    mail(to: @referral_email, subject: "Referral Request from #{@requester.first_name.titleize} #{@requester.last_name.titleize} ").deliver
+    mail(to: @referee_email, subject: "Referral Request from #{@requester_FN.titleize} #{@requester_LN.titleize}").deliver
   end
 end

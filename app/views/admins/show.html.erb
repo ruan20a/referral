@@ -13,6 +13,7 @@
       <div class="panel-heading"><strong><span class="fa fa-th"></span>
         <%= current_admin.email %> </strong>
         <%= link_to 'Create New Job', new_job_path %>
+        <%= "#{@pending_referrals} Pending Review"%>
       </div>
         <table class="table">
           <tr>

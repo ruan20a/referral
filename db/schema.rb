@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140528023910) do
+ActiveRecord::Schema.define(version: 20140528135900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,10 +59,16 @@ ActiveRecord::Schema.define(version: 20140528023910) do
     t.integer "job_id",   null: false
   end
 
+  add_index "admins_jobs", ["admin_id", "job_id"], name: "index_admins_jobs_on_admin_id_and_job_id", using: :btree
+  add_index "admins_jobs", ["job_id", "admin_id"], name: "index_admins_jobs_on_job_id_and_admin_id", using: :btree
+
   create_table "admins_referrals", id: false, force: true do |t|
     t.integer "admin_id",    null: false
     t.integer "referral_id", null: false
   end
+
+  add_index "admins_referrals", ["admin_id", "referral_id"], name: "index_admins_referrals_on_admin_id_and_referral_id", using: :btree
+  add_index "admins_referrals", ["referral_id", "admin_id"], name: "index_admins_referrals_on_referral_id_and_admin_id", using: :btree
 
   create_table "jobs", force: true do |t|
     t.string   "name"
@@ -80,6 +86,7 @@ ActiveRecord::Schema.define(version: 20140528023910) do
     t.string   "job_name"
     t.string   "logo_url"
     t.string   "image"
+    t.string   "industry_1"
   end
 
   create_table "profiles", force: true do |t|
@@ -98,7 +105,7 @@ ActiveRecord::Schema.define(version: 20140528023910) do
     t.string   "linked_profile_url"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status"
+    t.string   "status",             default: "pending"
     t.integer  "job_id"
     t.integer  "user_id"
     t.integer  "admin_id"
@@ -108,12 +115,8 @@ ActiveRecord::Schema.define(version: 20140528023910) do
     t.string   "ref_type"
     t.string   "referee_email"
     t.text     "personal_note"
-  end
-
-  create_table "user_whitelists", force: true do |t|
-    t.string   "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string   "referee_name"
+    t.boolean  "is_interested",      default: false
   end
 
   create_table "users", force: true do |t|

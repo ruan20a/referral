@@ -12,13 +12,12 @@ class WhitelistsController < ApplicationController
   end
 
   def create
-    binding.pry
     whitelist = Whitelist.new(whitelist_params)
     if whitelist.save
       redirect_to whitelists_path, notice: 'Email successfully added to whitelist'
       WhitelistMailer.deliver_confirmation(whitelist.email, whitelist.is_admin)
     else
-      render action: 'new'
+      redirect_to whitelists_path, notice: "Email #{whitelist.email} could not be added because it already exists"
     end
   end
 
@@ -52,8 +51,8 @@ class WhitelistsController < ApplicationController
   def check_main_admin
     #need to update this
     main_admins = [1,2,3,4,5]
-    status = main_admins.fetch(current_admin.id, false)
-    redirect_to new_admin_session_path, notice: "You are not an approved admin whitelister" unless status != false
+    status = main_admins.select{|id| id == current_admin.id}
+    redirect_to new_admin_session_path, notice: "You are not an approved admin whitelister" if status.empty?
   end
 
   def set_whitelist

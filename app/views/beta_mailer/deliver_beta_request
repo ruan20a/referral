@@ -1,0 +1,11 @@
+<div> Hello! </div>
+
+<div>Please review the following beta request </div>
+<div>Email: <%=@email%> </div>
+<div>Name: <%=@name%> </div>
+<div>Linked_In: <%=@linked_in%> </div>
+
+Please follow the link to add this person for review
+<%= link_to 'Add to Whitelist', url_for(controller: 'whitelists', action: 'new', only_path: false)%>
+
+Thanks!

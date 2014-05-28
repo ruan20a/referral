@@ -1,9 +1,9 @@
 <div>Ask To Be Krüted </div>
 
-<%= render 'layouts/flash' %>
+<%= content_tag(:div, flash.now[:error], :id => "flash_error") if flash.now[:error] %>
 
 <%= form_for :referral, url: referrals_path do |f| %>
-
+  <!-- add logic for referral_name and referral_email -->
   <div>
     <%= f.label "Your Name" %><br>
     <%= f.text_field :referral_name, value: @your_name %>
@@ -27,7 +27,7 @@
 
    <div>
     <%= f.label "Who would you like to ask for a referral?" %><br>
-    <%= f.text_field :name, required: "required" %>
+    <%= f.text_field :referee_name, required: "required" %>
   </div>
 
    <div>

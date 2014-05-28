@@ -18,7 +18,6 @@ include AdminsHelper
         else
           set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_flashing_format?
           expire_data_after_sign_in!
-          binding.pry
           redirect_to new_admin_session_path
         end
       else
