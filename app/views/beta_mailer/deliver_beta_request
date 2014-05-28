@@ -1,0 +1,13 @@
+<div> Hello! </div>
+
+<div>Please review the following beta request </div>
+<div>Email: <%=@email%> </div>
+<div>Name: <%=@name%> </div>
+<div>Linked_In: <%=@linked_in%> </div>
+
+<div>Please follow the link to sign up</div>
+<% if @status %>
+  <%= link_to 'Sign Up', url_for(controller: 'admins/registrations', action: 'new', only_path: false)%>
+<% else %>
+  <%= link_to 'Sign Up', url_for(controller: 'users/registrations', action: 'new', only_path: false)%>
+<% end %>

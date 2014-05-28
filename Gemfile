@@ -11,6 +11,8 @@ gem "unicorn"
 
 gem "ransack"
 
+gem "annotate"
+
 gem 'sprockets_better_errors'
 
 gem "rails_12factor", group: :production

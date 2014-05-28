@@ -10,6 +10,8 @@ Wekrut::Application.routes.draw do
 
   root "home#index"
   get '/referrals/new' => 'referrals#new'
+  #beta request only on post
+  match '/send_request', to: 'home#send_request', via: 'post'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

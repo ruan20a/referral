@@ -61,8 +61,15 @@ class ReferralsController < ApplicationController
   end
 
   def destroy
-    @referral.destroy
+    if @referral.destroy
+      flash[:notice] = "You successfully removed the referral"
+      redirect_to referrals_path
+    else
+      flash[:notice] = "Referral could not be deleted."
+      render action: 'edit'
+    end
   end
+
 
   protected
 

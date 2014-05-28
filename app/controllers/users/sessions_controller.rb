@@ -10,7 +10,6 @@ def create
   respond_with resource, location: after_sign_in_path_for(resource)
 end
 
-
 protected
 
   def after_sign_in_path_for(user)
