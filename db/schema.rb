@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140528132644) do
+ActiveRecord::Schema.define(version: 20140528135900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(version: 20140528132644) do
     t.string   "linked_profile_url"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status"
+    t.string   "status",             default: "pending"
     t.integer  "job_id"
     t.integer  "user_id"
     t.integer  "admin_id"
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 20140528132644) do
     t.string   "referee_email"
     t.text     "personal_note"
     t.string   "referee_name"
+    t.boolean  "is_interested",      default: false
   end
 
   create_table "users", force: true do |t|
