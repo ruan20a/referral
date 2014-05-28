@@ -57,6 +57,7 @@ class JobsController < ApplicationController
   end
 
 	private
+
   def set_job
     @job = Job.find(params[:id])
   end
@@ -68,7 +69,7 @@ class JobsController < ApplicationController
   def check_admin
     job = Job.find(params[:id])
     admin = Admin.find(job.admin_id)
-    redirect_to job_path unless admin = current_admin
+    redirect_to job_path unless admin == current_admin
   end
 
 end

@@ -19,6 +19,8 @@
 #  relevant           :boolean
 #  relevance          :string(255)
 #  ref_type           :string(255)
+#  referee_email      :string(255)
+#  personal_note      :text
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

@@ -1,8 +1,10 @@
+<%= content_tag(:div, flash.now[:notice], :id => "flash_notice") if flash.now[:notice] %>
+
 <div>
   Beta Sign Up
 </div>
 
-<%= render 'layouts/flash' %>
+<%= content_tag(:div, flash.now[:error], :id => "flash_error") if flash.now[:error] %>
 
 <%= form_tag(send_request_path) do %>
   <div class="form-group">

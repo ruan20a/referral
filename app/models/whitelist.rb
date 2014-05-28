@@ -6,6 +6,7 @@
 #  email      :string(255)
 #  created_at :datetime
 #  updated_at :datetime
+#  is_admin   :boolean          default(FALSE)
 #
 
 class Whitelist < ActiveRecord::Base

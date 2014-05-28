@@ -12,7 +12,7 @@ class HomeController < ApplicationController
       BetaMailer.deliver_beta_request(name,email,linked_in)
       redirect_to root_path, notice: 'Your request has been sent!'
     else
-      redirect_to root_path, notice: 'Request was not sent because there were missing fields. Please fill in all fields'
+      redirect_to root_path, error: 'Request was not sent because there were missing fields. Please fill in all fields'
     end
   end
 
