@@ -1,6 +1,6 @@
 class JobsController < ApplicationController
 	# before_action :signed_in? only:[:new, :edit, :update]
-  before_action :authenticate_admin!, only: [:new, :edit, :update, :delete]
+  before_action :authenticate_admin!, only: [:new, :edit, :update, :create, :delete]
   before_action :check_admin, only: [:edit, :update, :delete]
   before_action :set_job, only: [:show, :update, :edit, :destroy]
 
@@ -12,7 +12,7 @@ class JobsController < ApplicationController
 
 	def index
     # binding.pry
-  	@search = Job.search(params[:id])
+  	@search = Job.search(params[:q])
   	@jobs = @search.result
 	end
 
@@ -62,7 +62,7 @@ class JobsController < ApplicationController
   end
 
 	def job_params
-    params.require(:job).permit(:name, :job_name, :description, :city, :state, :admin_id, :referral_fee, :image, :speciality_1, :speciality_2, referrals_attributes: [:id])
+    params.require(:job).permit(:name, :job_name, :description, :city, :state, :admin_id, :referral_fee, :image, :speciality_1, :speciality_2, :industry_1, referrals_attributes: [:id])
 	end
 
   def check_admin

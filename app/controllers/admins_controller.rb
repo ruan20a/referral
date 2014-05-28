@@ -10,7 +10,8 @@ before_action :correct_admin, only: [:show, :update, :edit, :destroy]
   def index
     @jobs = Job.all
     @referrals = Referral.select{|x| x.ref_type = "refer"}.paginate(page: params[:page], per_page: 10)
-    @search = Referral.search(params[:id])
+    @search = Referral.search(params[:q])
+    #@referrals = @search.result
     @admins = Admin.new
   end
 

@@ -23,11 +23,10 @@ class ReferralsController < ApplicationController
     @referral = Referral.new(referral_params)
     @admin = @referral.job.admin
 
-    #logic for admin/user
-    if admin_signed_in?
-      @referral.admin_id = current_admin.id
-    else
+    if current_admin.nil?
       @referral.user_id = current_user.id
+    else 
+      @referral.admin_id = current_admin.id
     end
 
     if @referral.save

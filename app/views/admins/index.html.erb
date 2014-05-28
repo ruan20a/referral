@@ -6,7 +6,7 @@
 
 <div>
  <% if admin_signed_in? %>
-    Signed in as <%= "Indiegogo" %>. Not you?
+    Signed in as <%= current_admin.company %>. Not you?
     <%= link_to "Sign out", destroy_admin_session_path, :method => :delete %>
   <% else %>
     <%= link_to "Sign up", new_admin_registration_path, class: "btn btn-default btn-lg" %> <%= link_to "sign in", new_admin_session_path, class: "btn btn-default btn-lg" %>
@@ -25,6 +25,7 @@
   <tr>
 
     <th><%= sort_link @search, :job_name, "Position" %></th>
+    <th><%= sort_link @search, :referral_fee, "Referral Fee" %></th>
     <th><%= sort_link @search, :referral_name, "Candidates" %></th>
     <th><%= sort_link @search, :status, "Status" %></th>
     <th><%= sort_link @search, :created_at, "Date Submitted" %></th>
@@ -33,8 +34,7 @@
 
   <% @referrals.each do |referral| %>
     <tr>
-      <td><%= link_to referral.job.name, "/jobs/#{referral.job.id}" %></td>
-
+      
       <td><%= link_to referral.job.job_name, "/jobs/#{referral.job.id}" %></td>
 
       <td><%= referral.job.referral_fee %></td>

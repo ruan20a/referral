@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140526232430) do
+ActiveRecord::Schema.define(version: 20140528023910) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,6 +106,8 @@ ActiveRecord::Schema.define(version: 20140526232430) do
     t.boolean  "relevant"
     t.string   "relevance"
     t.string   "ref_type"
+    t.string   "referee_email"
+    t.text     "personal_note"
   end
 
   create_table "user_whitelists", force: true do |t|
@@ -146,6 +148,7 @@ ActiveRecord::Schema.define(version: 20140526232430) do
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.string   "tagline"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
