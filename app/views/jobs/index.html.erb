@@ -24,7 +24,7 @@
             <div class="panel-heading">
               <row>
                 <strong><span class="fa fa-th"></span> Job Postings
-            
+
               </row>
           </div>
           <table class="table">
@@ -40,7 +40,13 @@
             <% @jobs.each do |job| %>
 
             <tr>
-              <td><%= image_tag "#{job.image_url(:thumb)}"  %></td>
+              <td>
+                <% if job.image_url.nil? %>
+                  <%= job.name %>
+                <% else %>
+                  <%= image_tag "#{job.image_url(:thumb)}"  %>
+                <% end %>
+              </td>
 
               <td><%= link_to job.job_name, "/jobs/#{job.id}" %></td>
 
