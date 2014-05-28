@@ -17,9 +17,9 @@ before_action :correct_admin, only: [:show, :update, :edit, :destroy]
 
   def show
     @jobs = @admin.jobs
-    @referrals = @admin.referrals.select{|x| x.ref_type == "refer"}.paginate(page: params[:page], per_page: 10)
+    @referrals = @admin.referrals.select{|x| x.ref_type == "refer" && x.is_interested == true}.paginate(page: params[:page], per_page: 10)
     #is_interested & pending status check
-    @referrals_count = @admin.referrals.select{|x| x.status == "pending" && x.is_interested == true}.count
+    @pending_referrals = @admin.referrals.select{|x| x.status == "pending" && x.is_interested == true}.count
   end
 
   def destroy
