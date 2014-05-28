@@ -6,7 +6,7 @@ include UsersHelper
     email = params[:user][:email]
     unless Whitelist.exists?(:email => email)
       flash[:alert] = "#{email} is currently not on our beta list yet. Sign up #{view_context.link_to('here', root_path)} for our beta version.".html_safe
-      redirect_to new_admin_registration_path
+      redirect_to new_user_registration_path
     else
       resource = build_resource(sign_up_params)
       # binding.pry

@@ -7,7 +7,6 @@ class HomeController < ApplicationController
     name = params[:name]
     email = params[:email]
     linked_in = params[:linked_in]
-    binding.pry
 
     if [name, email, linked_in].select{|x| x==""}.empty?
       BetaMailer.deliver_beta_request(name,email,linked_in)
