@@ -9,6 +9,7 @@ class HomeController < ApplicationController
     linked_in = params[:linked_in]
 
     if [name, email, linked_in].select{|x| x==""}.empty?
+      binding.pry
       BetaMailer.deliver_beta_request(name,email,linked_in)
       redirect_to root_path, notice: 'Your request has been sent!'
     else

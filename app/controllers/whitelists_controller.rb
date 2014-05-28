@@ -17,7 +17,7 @@ class WhitelistsController < ApplicationController
       redirect_to whitelists_path, notice: 'Email successfully added to whitelist'
       WhitelistMailer.deliver_confirmation(whitelist.email, whitelist.is_admin)
     else
-      render action: 'new'
+      redirect_to whitelists_path, notice: "Email #{whitelist.email} could not be added because it already exists"
     end
   end
 

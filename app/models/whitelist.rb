@@ -12,5 +12,5 @@
 class Whitelist < ActiveRecord::Base
 	# has_many :users
 	# has_many :admins
-  validates :email, :uniqueness => {:case_sensitive => false}
+  validates :email, :uniqueness => {:case_sensitive => false, :scope => :is_admin}
 end
