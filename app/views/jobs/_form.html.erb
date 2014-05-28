@@ -1,11 +1,11 @@
 <%= form_for @job do |f| %>
   <div>
-    <%= f.label :company_name %><br>
+    <%= f.label "Company Name" %><br>
     <%= f.text_field :name %>
   </div>
 
    <div>
-    <%= f.label :job_name %><br>
+    <%= f.label "Position Title" %><br>
     <%= f.text_field :job_name %>
   </div>
 
@@ -20,21 +20,22 @@
   </div>
 
   <div>
-    <%= f.label :description %><br>
+    <%= f.label "Job Description" %><br>
     <%= f.text_area :description %>
   </div>
 
   <div>
-    <%= f.label :speciality_1 %><br>
-    <%= f.select :speciality_1, speciality_choices %>
+    <%= f.label "What skills are you looking for?" %><br>
+    <%= f.text_field :speciality_1 %>
   </div>
 
-  <div>
-    <%= f.label :speciality_2 %><br>
-    <%= f.select :speciality_2, speciality_choices %>
+   <div>
+    <%= f.label :industry_1 %><br>
+    <%= f.select :industry_1, industry_choices %>
   </div>
 
  <div>
+  <%= f.label "Upload Logo File" %><br>
   <%= f.file_field :image  %>
 </div>
 

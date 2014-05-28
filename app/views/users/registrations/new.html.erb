@@ -26,6 +26,9 @@
         </div>
 
         <div class="form-group">
+          <%= f.text_field :tagline, autocomplete: "off", :placeholder => 'Tagline. Example: Full Stack Developer', :class => 'form-control login-field' %>
+        </div>
+        <div class="form-group">
           <label> Industry Choice &nbsp;  &nbsp;</label>
 
           <row> <%= f.select :industry_1, industry_choices %> </row>
@@ -36,16 +39,7 @@
           <row> <%= f.select :speciality_1, speciality_choices %></row>
         </div>
 
-        <div class="form-group">
-          <label> Industry Choice &nbsp;  &nbsp;</label>
-          <row> <%= f.select :industry_2, industry_choices %> </row>
-        </div>
-
-
-        <div class="form-group">
-          <label> Speciality Choice </label>
-          <row> <%= f.select :speciality_2, speciality_choices %></row>
-        </div>
+      
 
         <div>
           <%= f.submit "Sign up", :class => 'btn btn-primary btn-lg btn-block'%>

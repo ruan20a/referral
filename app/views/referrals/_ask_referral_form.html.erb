@@ -1,28 +1,50 @@
-<div>Ask To Be Referred!</div>
+<div>Ask To Be Krüted </div>
 
 <%= render 'layouts/flash' %>
 
 <%= form_for :referral, url: referrals_path do |f| %>
 
   <div>
-    <%= f.label :name %><br>
-    <%= f.text_field :name, value: @your_name %>
+    <%= f.label "Your Name" %><br>
+    <%= f.text_field :referral_name, value: @your_name %>
   </div>
 
    <div>
-    <%= f.label :referral_name %><br>
-    <%= f.text_field :referral_name, required: "required" %>
-  </div>
-
-   <div>
-    <%= f.label :referral_email %><br>
+    <%= f.label "Your Email" %><br>
     <%= f.text_field :referral_email %>
   </div>
 
-  <div>
-    <%= f.label :relationship %><br>
-    <%= f.text_field :relationship %>
+   <div>
+    <%= f.label "Your LinkedIn Profile URL" %><br>
+    <%= f.text_field :linked_profile_url %>
   </div>
+
+   <div>
+    <%= f.label "Your GitHub Profile URL" %><br>
+    <%= f.text_field :github_profile_url %>
+  </div>
+
+
+   <div>
+    <%= f.label "Who would you like to ask for a referral?" %><br>
+    <%= f.text_field :name, required: "required" %>
+  </div>
+
+   <div>
+    <%= f.label "What is their email?" %><br>
+    <%= f.text_field :referee_email %>
+  </div>
+
+  <div>
+    <%= f.label "Send a personal note" %><br>
+    <%= f.text_field :personal_note %>
+  </div>
+
+<div class="form-group">
+          <label> Relationship? </label>
+          <row> <%= f.select :relationship, relationship_choices %></row>
+        </div>
+
 
    <div>
     <%= f.hidden_field :ref_type, value: @ref_type %>

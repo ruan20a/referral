@@ -1,10 +1,10 @@
 module UsersHelper
 	def industry_choices
-		[:Technology , "Financial Services", :Fashion, "Professional Services"]
+		["Financial Services", "Fashion", "Consumer", "Non-profit", "Advertising", "Professional Services", "Other"]
 	end
 
 	def speciality_choices
-		[:Marketing, "Web Development", :Design]
+		["Marketing", "Web Development", "Design", "Administrative", "Operations", "Finance", "Business Development", "Account Management", "Other"]
 	end
 
   def resource_name

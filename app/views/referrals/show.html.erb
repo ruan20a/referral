@@ -1,19 +1,31 @@
 <%= render 'layouts/flash' %>
 
 <div>
-<strong>Name:</strong>
-<%= @referral.name %>
+  <strong>Referral Name:</strong>
+  <%= @referral.referral_name %>
 </div>
 
 <div>
-  <strong>Referral Name:</strong>
-  <%= @referral.referral_name %>
+  <strong>Referred by:</strong>
+  <%= @referral.relationship %> 
 </div>
 
 <div>
   <strong>Referral Email:</strong>
   <%= @referral.referral_email %>
 </div>
+
+<div>
+  <strong>LinkedIn Profile:</strong>
+  <%= @referral.linked_profile_url %>
+</div>
+
+<div>
+  <strong>GitHub Profile:</strong>
+  <%= @referral.github_profile_url %>
+</div>
+
+
 
 <%= link_to 'Back', jobs_path %>
 </div>

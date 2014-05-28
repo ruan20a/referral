@@ -5,8 +5,14 @@ class ReferralMailer < ActionMailer::Base
     #TODO logic needs upgrade for admin
     @referral = referral
     @referral_id = referral.id
+    binding.pry
 
-    sender = User.find(referral.user_id)
+    if referral.user_id.nil?
+      sender = Admin.find(referral.admin_id)
+    else
+      sender = User.find(referral.user_id)
+    end
+
     @sender_first_name = sender.first_name
     @sender_last_name = sender.last_name
 
