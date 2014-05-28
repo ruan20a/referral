@@ -25,7 +25,7 @@ class ReferralsController < ApplicationController
 
     if current_admin.nil?
       @referral.user_id = current_user.id
-    else 
+    else
       @referral.admin_id = current_admin.id
     end
 
@@ -77,7 +77,7 @@ class ReferralsController < ApplicationController
   end
 
   def referral_params
-    params.require(:referral).permit(:name, :job_id, :referral_name, :referral_email, :relationship, :additional_details, :linked_profile_url, :status, :github_profile_url, :relevance, :user_id, :admin_id, :ref_type, :status)
+    params.require(:referral).permit(:name, :job_id, :referral_name, :referral_email, :relationship, :additional_details, :linked_profile_url, :status, :github_profile_url, :relevance, :user_id, :admin_id, :ref_type, :status, :referee_name, :referee_email)
   end
 
   #logic works for user/admin right now

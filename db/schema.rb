@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140528124040) do
+ActiveRecord::Schema.define(version: 20140528132644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(version: 20140528124040) do
     t.string   "ref_type"
     t.string   "referee_email"
     t.text     "personal_note"
+    t.string   "referee_name"
   end
 
   create_table "users", force: true do |t|
