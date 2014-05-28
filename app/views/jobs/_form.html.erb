@@ -1,9 +1,9 @@
 <%= form_for @job do |f| %>
-  <div>
+<div>
     <%= f.label "Company Name" %><br>
     <%= f.text_field :name %>
   </div>
-
+  
    <div>
     <%= f.label "Position Title" %><br>
     <%= f.text_field :job_name %>
@@ -43,4 +43,5 @@
     <%= f.submit "Submit to Wekrut" %>
   </div>
 <% end %>
+
 <%= link_to 'Back', jobs_path %>

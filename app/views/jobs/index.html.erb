@@ -1,6 +1,7 @@
 <%= render 'layouts/header' %>
 
 
+
 <section class="jobs">
   <div class="container">
 
@@ -19,6 +20,15 @@
           <%= link_to "sign in", new_user_session_path, class: "btn btn-default btn-lg" %>
           <% end %>
         </div>
+<div class="panel panel-default">
+            <div class="panel-heading">
+        <%= search_form_for @search do |f| %>
+<div class="field">
+  <%= f.label :name_cont, "Search by Company Name" %>
+  <%= f.text_field :name_cont %>
+  </div>
+  <div class="action"><%= f.submit "Search" %></div>
+  <% end %>
 
         <div class="panel panel-default">
             <div class="panel-heading">
