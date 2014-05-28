@@ -5,9 +5,7 @@
 <div>Name: <%=@name%> </div>
 <div>Linked_In: <%=@linked_in%> </div>
 
-<div>Please follow the link to sign up</div>
-<% if @status %>
-  <%= link_to 'Sign Up', url_for(controller: 'admins/registrations', action: 'new', only_path: false)%>
-<% else %>
-  <%= link_to 'Sign Up', url_for(controller: 'users/registrations', action: 'new', only_path: false)%>
-<% end %>
+Please follow the link to add this person for review
+<%= link_to 'Add to Whitelist', url_for(controller: 'whitelists', action: 'new', only_path: false)%>
+
+Thanks!

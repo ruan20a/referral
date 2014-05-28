@@ -12,7 +12,6 @@ class WhitelistsController < ApplicationController
   end
 
   def create
-    binding.pry
     whitelist = Whitelist.new(whitelist_params)
     if whitelist.save
       redirect_to whitelists_path, notice: 'Email successfully added to whitelist'
