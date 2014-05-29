@@ -3,7 +3,7 @@
 <section class="jobs">
   <div class="container">
    <% if admin_signed_in? %>
-   Signed in as <%= current_admin.email %>. Not you?
+   Signed in as <%= current_admin.company %>. Not you?
    <%= link_to "Sign out", destroy_admin_session_path, :method => :delete %>
    <% else %>
    <%= link_to "Sign up", new_admin_registration_path, class: "btn btn-default btn-lg" %> <%= link_to "sign in", new_admin_session_path, class: "btn btn-default btn-lg" %>
@@ -11,7 +11,7 @@
     <div class="page page-table">
       <div class="panel panel-default">
       <div class="panel-heading"><strong><span class="fa fa-th"></span>
-        <%= current_admin.email %> </strong>
+        <%= current_admin.company %> </strong>
         <%= link_to 'Create New Job', new_job_path %>
         <%= "#{@pending_referrals} Pending Review"%>
       </div>
