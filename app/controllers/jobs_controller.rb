@@ -4,7 +4,6 @@ class JobsController < ApplicationController
   before_action :check_admin, only: [:edit, :update, :delete]
   before_action :set_job, only: [:show, :update, :edit, :destroy]
 
-
 	def invite_user
 		@user = User.invite!(:email => params[:user][:email], :name => params[:user][:name])
 		render :json => @user

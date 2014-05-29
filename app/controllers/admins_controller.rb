@@ -2,7 +2,7 @@ class AdminsController < ApplicationController
 before_action :authenticate_admin!, only: [:show, :index]
 before_action :set_admin, only: [:show, :update, :destroy]
 before_action :correct_admin, only: [:show, :update, :edit, :destroy]
-
+before_action :check_main_admin, only: [:index]
   def new
     @admin = Admin.new
   end
@@ -40,8 +40,15 @@ private
 
   def correct_admin
     admin = Admin.find(params[:id])
-    redirect_to new_admin_session_path, :flash => { :error => "You cannot view that account because you're not the correct admin. Please login to the correct account." } unless admin == current_admin
+    redirect_to new_admin_session_path, :error => "You cannot view that account because you're not the correct admin. Please login to the correct account." unless admin == current_admin
   end
+
+    def check_main_admin
+    #need to update this
+      main_admins
+      status = main_admins.select{|id| id == current_admin.email}
+      redirect_to new_admin_session_path, error: "You are not an approved admin whitelister" if status.empty?
+    end
 
 
 end
