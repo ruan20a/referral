@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 
     #my referrrals
     select_sent = @user.referrals.select{|referral| referral.ref_type == "refer"}
-    @sent_referrals = select_sent.paginate(page: params[:page], per_page: 10) if !select_received.nil?
+    @sent_referrals = select_sent.paginate(page: params[:page], per_page: 10)
     #
 
 
