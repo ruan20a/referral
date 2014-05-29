@@ -5670,6 +5670,11 @@ button.close {
 .affix {
   position: fixed;
 }
+
+.nil-stat{
+  font-weight: bold;
+}
+
 @-ms-viewport {
   width: device-width;
 }

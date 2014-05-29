@@ -39,14 +39,14 @@ private
 
   def correct_admin
     admin = Admin.find(params[:id])
-    redirect_to new_admin_session_path, :flash => { :error => "You cannot view that account because you're not the correct admin. Please login to the correct account." } unless admin == current_admin
+    redirect_to new_admin_session_path, :error => "You cannot view that account because you're not the correct admin. Please login to the correct account." unless admin == current_admin
   end
 
     def check_main_admin
     #need to update this
       main_admins
       status = main_admins.select{|id| id == current_admin.email}
-      redirect_to new_admin_session_path, notice: "You are not an approved admin whitelister" if status.empty?
+      redirect_to new_admin_session_path, error: "You are not an approved admin whitelister" if status.empty?
     end
 
 

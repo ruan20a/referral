@@ -1,5 +1,47 @@
 hello <%=@user.email%>
 
-<% if !current_user.nil? && current_user.id == @user.id%>
-  <%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %>
-<% end %>
+<section class="jobs">
+  <div class="container">
+   <% if admin_signed_in? %>
+   Signed in as <%= current_user.email %>. Not you?
+   <%= button_to "Sign out", destroy_user_session_path, :method => :delete %>
+   <% end %>
+    <div class="page page-table">
+      <div class="panel panel-default">
+      <div class="panel-heading"><strong><span class="fa fa-th"></span>
+        <%= current_user.email %> </strong>
+        <%= link_to 'View Jobs', jobs_path %>
+        <%= "#{@unreviewed_count} Reviews Pending Update"%>
+      </div>
+        <table class="table">
+          <tr>
+            <th>Company</th>
+            <th>Job</th>
+            <th>Status</th>
+            <th>Date Created</th>
+            <th>Date Updated</th>
+            <th>Interest</th>
+
+          </tr>
+          <% @received_referrals.each do |referral| %>
+          <tr>
+            <td><%= link_to referral.job.name, job_path(referral.job.id), class: "#{referral.is_interested}-stat" %></td>
+            <td><%= link_to referral.job.job_name, job_path(referral.job.id), class: "#{referral.is_interested}-stat" %></td>
+            <!-- need to change the way class is entered -->
+            <td class="#{referral.is_interested}-stat"><%= referral.status.titleize%></td>
+            <td class="#{referral.is_interested}-stat"><%= referral.created_at.strftime("%m/%d/%y %I:%M") %></td>
+            <td class="#{referral.is_interested}-stat"><%= referral.updated_at.strftime("%m/%d/%y %I:%M") %></td>
+            <td><%= link_to "#{referral.is_interested}", referral_path{referral.id}, class: "#{referral.is_interested}-stat" %></td>
+          </tr>
+          <%end%>
+        </table>
+      </div>
+      <%= will_paginate @received_referrals%>
+    </div>
+  </div>
+<%= render 'layouts/footer' %>
+
+</section>
+
+</br>
+
