@@ -808,3 +808,136 @@ span.tags
     margin-left: -10px;
     z-index: 10;
     }
+
+    .wrapper {
+   height: 80px;
+  
+   top: 50%;
+   margin-top: -40px;
+   width: 100%;
+}
+
+.sign-up {
+ border: 2px solid white;
+ height: 80px;
+ margin: 0 auto;
+ overflow: hidden;
+ padding: 15px;
+ position: relative;
+ width: 250px;
+ -webkit-backface-visibility: hidden;
+ -moz-border-radius: 6px;
+ -webkit-border-radius: 6px;
+ border-radius: 6px;
+ -moz-transition: all 0.3s ease;
+ -o-transition: all 0.3s ease;
+ -webkit-transition: all 0.3s ease;
+ transition: all 0.3s ease;
+}
+
+.sign-up.open {
+width: 450px;
+}
+
+.sign-up .sign-up-button {
+   background: transparent;
+   color: #fff;
+   height: 100%;
+   font-size: 1.3em;
+   font-weight: 600;
+   left: 0;
+   line-height: 80px;
+   position: absolute;
+   text-align: center;
+   text-decoration: none;
+   top: 0;
+   width: 100%;
+   z-index: 999;
+   -moz-transition: display 0.3s ease;
+   -o-transition: display 0.3s ease;
+   -webkit-transition: display 0.3s ease;
+   transition: display 0.3s ease;
+}   
+.sign-up .sign-up-button:hover {
+   color: #1abc9c;
+}
+.sign-up .input-group {
+   display: none;
+}
+.sign-up label {
+   color: white;
+   position: absolute;
+   top: 18px;
+   left: 10px;
+   pointer-events: none;
+   -moz-transition: all 0.2s ease;
+   -o-transition: all 0.2s ease;
+   -webkit-transition: all 0.2s ease;
+   transition: all 0.2s ease;
+}
+
+.sign-up input {
+ background: none;
+ border: 0;
+ color: white;
+ height: 45px;
+ width: -moz-calc(100% - 125px);
+ width: -o-calc(100% - 125px);
+ width: -webkit-calc(100% - 125px);
+ width: calc(100% - 125px);
+}
+
+.sign-up input:focus {
+ outline: 0;
+ -moz-box-shadow: 0 0 0;
+ -webkit-box-shadow: 0 0 0;
+ box-shadow: 0 0 0;
+}
+
+.candidate_section {
+   padding: 20px 10px 10px 10px;}
+
+.person_header {
+position: relative;
+min-height: 80px;
+padding: 20px 10px 10px 20px;
+background-color: #f8f8f8;
+font-size: 1.5em;
+border-bottom: dotted 1px #aaa;
+}
+
+
+.details-section {
+position: relative;
+position: relative;
+border-bottom: dotted 1px #aaa;
+border-bottom-width: 1px;
+border-bottom-style: dotted;
+border-bottom-color: rgb(170, 170, 170);
+margin-bottom: 10px;
+padding: 20px;
+font-size: 16px;
+min-height: 60px;
+}
+
+.details-section_end {
+position: relative;
+position: relative;
+
+border-bottom-color: rgb(170, 170, 170);
+margin-bottom: 10px;
+padding-bottom: 20px;
+padding-left: 20px;
+font-size: 16px;
+}
+
+.candidate {
+   border:1px solid;
+border-color: #bdc3c7;}
+
+.bg-wekrut {
+   color: #fff;
+   background-color: #1abc9c; 
+   padding: 10px 10px 10px 170px;
+   font-size: 20px;
+}

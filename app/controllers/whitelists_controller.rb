@@ -50,7 +50,7 @@ class WhitelistsController < ApplicationController
 
   def check_main_admin
     #need to update this
-    main_admins = [1,2,3,4,5]
+    main_admins = [1,2,3,4,5,18]
     status = main_admins.select{|id| id == current_admin.id}
     redirect_to new_admin_session_path, notice: "You are not an approved admin whitelister" if status.empty?
   end

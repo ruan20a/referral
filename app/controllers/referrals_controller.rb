@@ -16,6 +16,7 @@ class ReferralsController < ApplicationController
    @referral = Referral.new
    @job = Job.find(params[:job_id])
    @ref_type = params[:ref_type]
+
    # @your_name = current_user.first_name && current_user.last_name || ""
  end
 
@@ -28,7 +29,7 @@ class ReferralsController < ApplicationController
     else
       @referral.admin_id = current_admin.id
     end
-
+    # binding.pry
     if @referral.save
       if @referral.ref_type == "refer"
         ReferralMailer.deliver_ref_email(@referral, @admin)

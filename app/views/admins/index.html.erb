@@ -32,7 +32,7 @@
 
   </tr>
 
-  <% @referrals.each do |referral| %>
+  <% @sorted_referrals.each do |referral| %>
     <tr>
       
       <td><%= link_to referral.job.job_name, "/jobs/#{referral.job.id}" %></td>
@@ -52,6 +52,7 @@
 
 </table>
 </div>
+<%= will_paginate @sorted_referrals%>
 </div>
 </div>
 </div>
