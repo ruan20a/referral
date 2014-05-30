@@ -941,3 +941,12 @@ border-color: #bdc3c7;}
    padding: 10px 10px 10px 170px;
    font-size: 20px;
 }
+
+
+.Close_Button {
+    color: #fff;
+    padding: 5px;
+    border: 1px solid #fff ;
+    font-size: 16px;
+}
+

@@ -33,11 +33,12 @@
            </div>
            <!-- /.navbar-collapse -->
        </div>
-<div class="bg-wekrut">
-   <div class="row">
-       <div class="col-md-6"><%= @job.job_name %> - <%= @job.name %>
- </div><div class="col-md-6">
-<%= link_to 'Close', jobs_path %>
+ <div class="bg-wekrut">
+    <div class="row">
+        <div class="col-md-12">
+        <div class="col-md-6"><%= @job.job_name %> - <%= @job.name %>
+  </div><div class="col-md-6">
+<%= link_to 'Close', jobs_path, :class => "Close_Button"%>
 
 </div>
 </div>

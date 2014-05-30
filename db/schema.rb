@@ -59,10 +59,16 @@ ActiveRecord::Schema.define(version: 20140528135900) do
     t.integer "job_id",   null: false
   end
 
+  add_index "admins_jobs", ["admin_id", "job_id"], name: "index_admins_jobs_on_admin_id_and_job_id", using: :btree
+  add_index "admins_jobs", ["job_id", "admin_id"], name: "index_admins_jobs_on_job_id_and_admin_id", using: :btree
+
   create_table "admins_referrals", id: false, force: true do |t|
     t.integer "admin_id",    null: false
     t.integer "referral_id", null: false
   end
+
+  add_index "admins_referrals", ["admin_id", "referral_id"], name: "index_admins_referrals_on_admin_id_and_referral_id", using: :btree
+  add_index "admins_referrals", ["referral_id", "admin_id"], name: "index_admins_referrals_on_referral_id_and_admin_id", using: :btree
 
   create_table "jobs", force: true do |t|
     t.string   "name"

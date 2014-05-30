@@ -1,31 +1,38 @@
 <%= render 'layouts/flash' %>
+<%= render 'layouts/headerjob' %>
 
-<div>
-  <strong>Referral Name:</strong>
-  <%= @referral.referral_name %>
+
+<div class="container" style="margin:140px">
+  <div class="row"><div class="col-lg-12">
+    <div class="col-md-8 col-md-offset-1">
+      <div class="candidate">
+      
+        <div class="person_header">
+          <strong>Referral Name:</strong>
+          <%= @referral.referral_name %>
+        </div>
+        <div class="details-section">
+          <strong>Referred by:</strong>
+          <%= @referral.relationship %>        
+        </div>
+        <div class="details-section">
+          <strong>Referral Email:</strong>
+          <%= @referral.referral_email %>
+        </div>
+        <div class="details-section">
+          <strong>LinkedIn Profile:</strong>
+          <%= @referral.linked_profile_url %>
+        </div>
+        <div class="details-section_end">
+          <strong>GitHub Profile:</strong>
+          <%= @referral.github_profile_url %>
+        </div>
+         <div>
+           <%= f.hidden_field :job_id, :value => @job.id%>
+           <%= f.hidden_field :ref_type, value: @ref_type %>
+         </div>
+
+  </div>
 </div>
 
-<div>
-  <strong>Referred by:</strong>
-  <%= @referral.relationship %> 
-</div>
 
-<div>
-  <strong>Referral Email:</strong>
-  <%= @referral.referral_email %>
-</div>
-
-<div>
-  <strong>LinkedIn Profile:</strong>
-  <%= @referral.linked_profile_url %>
-</div>
-
-<div>
-  <strong>GitHub Profile:</strong>
-  <%= @referral.github_profile_url %>
-</div>
-
-
-
-<%= link_to 'Back', jobs_path %>
-</div>
