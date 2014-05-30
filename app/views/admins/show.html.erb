@@ -2,26 +2,29 @@
 
 <section class="jobs">
   <div class="container">
-   <% if admin_signed_in? %>
-   Signed in as <%= current_admin.email %>. Not you?
-   <%= link_to "Sign out", destroy_admin_session_path, :method => :delete %>
-   <% else %>
-   <%= link_to "Sign up", new_admin_registration_path, class: "btn btn-default btn-lg" %> <%= link_to "sign in", new_admin_session_path, class: "btn btn-default btn-lg" %>
-   <% end %>
     <div class="page page-table">
       <div class="panel panel-default">
-      <div class="panel-heading"><strong><span class="fa fa-th"></span>
-        <%= current_admin.email %> </strong>
+   <div class="panel-heading"><strong><span class="fa fa-th"></span>
+        <%= current_admin.company %> </strong>
         <%= link_to 'Create New Job', new_job_path %>
         <%= "#{@pending_referrals} Pending Review"%>
       </div>
+         <div class="panel-heading"><strong><span class="fa fa-th"></span>
+        <%= search_form_for @search do |f| %>
+<div class="field">
+ <%= f.text_field :job_name_or_referral_name_cont, :placeholder => 'Search' %>
+ </div>
+  <div class="action"><%= f.submit "Search" %></div>
+  <% end %>
         <table class="table">
           <tr>
-            <th>Company</th>
-            <th>Job</th>
-            <th>Referral Fee</th>
-            <th>Candidates</th>
-            <th>Status</th>
+
+    <th><%= sort_link @search, :job_name, "Position" %></th>
+    <th><%= sort_link @search, :referral_fee, "Referral Fee" %></th>
+    <th><%= sort_link @search, :referral_name, "Candidates" %></th>
+    <th><%= sort_link @search, :status, "Status" %></th>
+    <th><%= sort_link @search, :created_at, "Date Submitted" %></th>
+
           </tr>
           <% @referrals.each do |referral| %>
           <tr>
@@ -35,10 +38,17 @@
           <%end%>
         </table>
       </div>
-      <%= will_paginate @referrals%>
+      <%= will_paginate @sorted_referrals %>
     </div>
   </div>
 </section>
 </br>
+  <div class="container">
+   <% if admin_signed_in? %>
+   Signed in as <%= current_admin.company %>. Not you?
+   <%= link_to "Sign out", destroy_admin_session_path, :method => :delete %>
+   <% else %>
+   <%= link_to "Sign up", new_admin_registration_path, class: "btn btn-default btn-lg" %> <%= link_to "sign in", new_admin_session_path, class: "btn btn-default btn-lg" %>
+   <% end %>
 <%= link_to 'New Job', new_job_path %>
 <%= render 'layouts/footer' %>

@@ -9,7 +9,6 @@ before_action :check_main_admin, only: [:index]
 
   def index
     @jobs = Job.all
-    # @referrals = Referral.select{|x| x.ref_type = "refer"}.paginate(page: params[:page], per_page: 10)
     @search = Referral.search(params[:q])
     @referrals = @search.result
     @sorted_referrals = @referrals.select{|x| x.ref_type = "refer"}.paginate(page: params[:page], per_page: 10)
@@ -18,7 +17,9 @@ before_action :check_main_admin, only: [:index]
 
   def show
     @jobs = @admin.jobs
-    @referrals = @admin.referrals.select{|x| x.ref_type == "refer" && x.is_interested == true}.paginate(page: params[:page], per_page: 10)
+    @search = Referral.search(params[:q])
+    @referrals = @search.result
+    @sorted_referrals = @admin.referrals.select{|x| x.ref_type == "refer" && x.is_interested == true}.paginate(page: params[:page], per_page: 10)
     #is_interested & pending status check
     @pending_referrals = @admin.referrals.select{|x| x.status == "pending" && x.is_interested == true}.count
   end

@@ -4,12 +4,23 @@ module ReferralsHelper
 	end
 
 	def status_choices
-		["Interview Stage", "Offer Stage", "No Offer", "Successful Placement", "Pending" ]
+		["Interview", "Interview - Offer", "Interview - No Offer", "Declined", "Accepted", "Offer Declined", "Succesful Placement" "Pending" ]
 	end
 
 	def relevance_choices
-	["Relevant", "Not Relevant" ]
+	  ["Relevant", "Not Relevant" ]
 	end
+
+  def translate_boolean(status)
+    case status
+    when true
+      "Yes"
+    when false
+      "No"
+    when nil
+      "N/A"
+    end
+  end
 
 
 end
