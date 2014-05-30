@@ -1,0 +1,46 @@
+
+SENDER EDIT FORM
+<div> Krüt Someone you Know </div>
+
+<%= render 'layouts/flash' %>
+
+<%= form_for :referral, url: referrals_path do |f| %>
+
+  <div>
+    <%= f.label "Who would you like to refer?" %><br>
+    <%= f.text_field :referral_name %>
+  </div>
+
+  <div>
+
+    <%= f.label "What is their email?" %><br>
+    <%= f.text_field :referral_email %>
+  </div>
+
+
+<div>
+
+    <%= f.label "What is their LinkedIn Profile URL" %><br>
+    <%= f.text_field :linked_profile_url %>
+  </div>
+
+   <div>
+
+    <%= f.label "What is their GitHub Profile URL" %><br>
+    <%= f.text_field :github_profile_url %>
+  </div>
+
+   <div class="form-group">
+          <label> Relationship? </label>
+          <row> <%= f.select :relationship, relationship_choices %></row>
+  </div>
+
+   <div>
+    <%= f.hidden_field :job_id, :value => @job.id%>
+    <%= f.hidden_field :ref_type, value: @ref_type %>
+  </div>
+
+  <div>
+    <%= f.submit "Submit to Wekrut" %>
+  </div>
+<% end %>

@@ -19,10 +19,9 @@ class ReferralMailer < ActionMailer::Base
     @admin_email = admin.email
     @admin_name = admin.first_name
 
-    job = Job.find(referral.job_id)
-    @job_name = job.name.titleize
-
-    mail(to: @admin_email, subject: "New Referral for Job #{@job_name}").deliver
+    @job = Job.find(referral.job_id)
+    binding.pry
+    mail(to: @admin_email, subject: "New Referral for Job #{@job.name}").deliver
   end
 
   def deliver_ask_email(referral, requester)
@@ -36,5 +35,6 @@ class ReferralMailer < ActionMailer::Base
     @requester_email = requester.email
 
     mail(to: @referee_email, subject: "Referral Request from #{@requester_FN.titleize} #{@requester_LN.titleize}").deliver
+    mail(to: @requester_email, subject: "Copy of your referral request to #{@referee_name.titleize}").deliver
   end
 end

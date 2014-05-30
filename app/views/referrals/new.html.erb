@@ -5,7 +5,7 @@
 </div>
 
 <% if @ref_type == "refer" %>
-  <%= render 'referral_form' %>
+  <%= render 'referrals/shared/referral_form' %>
 <% else %>
-  <%= render 'ask_referral_form' %>
+  <%= render 'referrals/shared/ask_referral_form' %>
 <% end %>

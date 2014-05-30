@@ -11,7 +11,7 @@ gem "unicorn"
 
 gem "ransack"
 
-gem "annotate"
+gem "sendgrid"
 
 gem "titleize"
 
