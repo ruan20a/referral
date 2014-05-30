@@ -24,8 +24,7 @@
             <div class="panel-heading">
         <%= search_form_for @search do |f| %>
 <div class="field">
-  <%= f.label :name_cont, "Search by Company Name" %>
-  <%= f.text_field :name_cont %>
+ <%= f.text_field :name_or_job_name_or_city_or_state_cont, :placeholder => 'Search' %>
   </div>
   <div class="action"><%= f.submit "Search" %></div>
   <% end %>
@@ -43,7 +42,7 @@
               <th><%= sort_link @search, :job_name, "Position" %></th>
               <th><%= sort_link @search, :city, "City" %></th>
               <th><%= sort_link @search, :state, "State" %></th>
-              <th><%= sort_link @search, :speciality_1, "Skills" %></th>
+              <th><%= sort_link @search, :industry_1, "Industry" %></th>
               <th><%= sort_link @search, :referral_fee, "Referral Fee" %></th>
             </tr>
 
@@ -64,7 +63,7 @@
 
               <td><%= job.state %></td>
 
-              <td><%= job.speciality_1 %></td>
+              <td><%= job.industry_1 %></td>
 
               <td><%= job.referral_fee   %></td>
             </tr>
