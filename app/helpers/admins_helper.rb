@@ -12,6 +12,7 @@ module AdminsHelper
   	["Relevant", "Not Relevant" ]
 	end
 
+
 #DEVISE
   def resource_name
     :admin

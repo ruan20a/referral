@@ -1,7 +1,8 @@
 class ReferralsController < ApplicationController
   before_action :check_session
   before_action :set_referral, only: [:update, :edit, :destroy, :show]
-  before_action :check_owner, only: [:update, :edit, :destroy]
+  before_action :select_edit_layout, only: [:update, :edit]
+  before_action :check_owners, only: [:destroy]
 
   #TODO figure out if admin can make referrals as well
 
@@ -13,10 +14,13 @@ class ReferralsController < ApplicationController
   end
 
   def new
-   @referral = Referral.new
-   @job = Job.find(params[:job_id])
-   @ref_type = params[:ref_type]
-
+    @referral = Referral.new
+    if !params[:ref_type].nil?
+      @job = Job.find(params[:job_id])
+      @ref_type = params[:ref_type]
+    else
+      redirect_to jobs_path, notice: "Please select a job to create a referral"
+    end
    # @your_name = current_user.first_name && current_user.last_name || ""
  end
 
@@ -81,14 +85,10 @@ class ReferralsController < ApplicationController
     params.require(:referral).permit(:name, :job_id, :referral_name, :referral_email, :relationship, :additional_details, :linked_profile_url, :status, :github_profile_url, :relevance, :user_id, :admin_id, :ref_type, :status, :referee_name, :referee_email)
   end
 
-  #logic works for user/admin right now
-  def check_owner
-    referral = Referral.find(params[:id])
-    if referral.user_id.nil?
-      redirect_to(request.env["HTTP_REFERER"], notice: "You cannot modify this referral because you are not the owner") unless current_admin.id = referral.admin_id
-    else
-      redirect_to(request.env["HTTP_REFERER"], notice: "You cannot modify this referral because you are not the owner") unless current_user.id = referral.user_id
-    end
+
+  #only correct user and admin can destroy
+  def check_owners
+
   end
 
   def check_session
