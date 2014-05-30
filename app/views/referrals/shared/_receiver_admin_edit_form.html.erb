@@ -1,0 +1,50 @@
+RECEIVED ADMIN FORM
+<div> Referral from <%= @referrer_FN.titleize %> <%= @referrer_LN %>
+</div>
+
+<%= render 'layouts/flash' %>
+
+<%= form_for :referral do |f| %>
+
+  <div>
+    <%= f.label "Referral Name" %><br>
+    <%= f.text_field :referral_name %>
+  </div>
+
+  <div>
+    <%= f.label "Referral Email" %><br>
+    <%= f.text_field :referral_email %>
+  </div>
+
+  <div>
+    <%= f.label "Referral LinkedIn" %><br>
+    <%= f.text_field :linked_profile_url %>
+  </div>
+
+   <div>
+    <%= f.label "Referral Github" %><br>
+    <%= f.text_field :github_profile_url %>
+  </div>
+
+  <div>
+    <%= f.label "Relationship" %> <br>
+    <%= f.select :relationship, relationship_choices %>
+  </div>
+
+  <!-- #TODO NEED LOGIC TO SHOW THE CORRECT AVAILABLE CHOICES-->
+  <div>
+    <%= f.label "Status" %><br>
+    <%= f.select :status, status_choices %>
+  </div>
+
+
+   <div>
+    <%= f.hidden_field :job_id, :value => @job.id%>
+    <%= f.hidden_field :ref_type, value: @ref_type %>
+  </div>
+
+  <div>
+    <%= f.submit "Submit to Wekrut" %>
+  </div>
+
+<% end %>

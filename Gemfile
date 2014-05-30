@@ -11,11 +11,7 @@ gem "unicorn"
 
 gem "ransack"
 
-gem 'protected_attributes'
-
 gem "titleize"
-
-gem 'activerecord-reputation-system'
 
 gem 'sprockets_better_errors'
 

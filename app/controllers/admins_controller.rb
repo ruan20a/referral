@@ -6,10 +6,6 @@ before_action :check_main_admin, only: [:index]
 
   include ApplicationHelper
 
-  def new
-    @admin = Admin.new
-  end
-
   def index
     @jobs = Job.all
     @search = Referral.search(params[:q])

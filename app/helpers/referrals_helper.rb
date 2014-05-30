@@ -4,7 +4,7 @@ module ReferralsHelper
 	end
 
 	def status_choices
-		["Interview", "Interview - Offer", "Interview - No Offer", "Declined", "Accepted", "Offer Declined", "Succesful Placement" "Pending" ]
+		["Pending","Pass","Interview", "Interview - No Offer", "Interview - Offer" , "Offer Declined", "Succesful Placement"]
 	end
 
 	def relevance_choices

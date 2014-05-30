@@ -48,20 +48,20 @@ class WhitelistsController < ApplicationController
 
   protected
 
-  def check_main_admin
-  #need to update this
-    main_admins = ["loritiernan@gmail.com", "info@wekrut.com", "nyc.amy@gmail.com","deaglan1@gmail.com"]
-    status = main_admins.select{|id| id == current_admin.email}
-    redirect_to new_admin_session_path, error: "You are not an approved admin whitelister" if status.empty?
+  def whitelist_params
+    params.require(:whitelist).permit(:email, :is_admin)
   end
-
 
   def set_whitelist
     @whitelist = Whitelist.find(params[:id])
   end
 
-  def whitelist_params
-    params.require(:whitelist).permit(:email, :is_admin)
+
+  def check_main_admin
+  #need to update this
+    main_admins = ["loritiernan@gmail.com", "info@wekrut.com", "nyc.amy@gmail.com","deaglan1@gmail.com"]
+    status = main_admins.select{|email| email == current_admin.email}
+    redirect_to new_admin_session_path, error: "You are not an approved admin whitelister" if status.empty?
   end
 
 end

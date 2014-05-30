@@ -9,4 +9,10 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:email, :password, :remember_me, :first_name, :last_name, :speciality_1, :speciality_2, :industry_1, :industry_2) }
   end
 
+  private
+
+  def store_location
+    session[:return_to] = request.env['HTTP_REFERER']
+  end
+
 end

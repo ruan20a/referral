@@ -1,7 +1,12 @@
 <% if @ref_type == "refer" %>
-  <%= render 'referral_form' %>
-
+  <% if @status == "Receiver-U" %>
+    <%= render 'referrals/shared/receiver_user_edit_form' %>
+  <% elsif @status == "Sender" %>
+    <%= render 'referrals/shared/sender_edit_form' %>
+  <% else %>
+    <%= render 'referrals/shared/receiver_admin_edit_form' %>
+  <% end %>
 <% else %>
-  <%= render 'ask_referral_form' %>
+  <%= render 'referrals/shared/ask_referral_form' %>
 <% end %>
 
