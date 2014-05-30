@@ -19,7 +19,22 @@
 
     <div class="panel panel-default">
         <div class="panel-heading"><strong><span class="fa fa-th"></span>
-          <%= "Indiegogo" %> </strong></div>
+          All Referrals </strong>
+    </div>
+        <div class="panel-heading">
+          <div class="form-inline" role="form">
+            <%= search_form_for @search, url: admins_path do |f| %>
+              <div class="form-group">
+                <%= f.text_field :job_name_or_referral_name_cont, :placeholder => 'Search' %>
+              </div>
+              <div class="form-group">
+                <%= f.submit "Search" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+
 
         <table class="table">
   <tr>
@@ -34,16 +49,16 @@
 
   <% @sorted_referrals.each do |referral| %>
     <tr>
-      
+
       <td><%= link_to referral.job.job_name, "/jobs/#{referral.job.id}" %></td>
 
       <td><%= referral.job.referral_fee %></td>
 
       <td><%= link_to referral.referral_name, "/referrals/#{referral.id}" %></td>
 
-      <td><%= referral.status %></td>
+      <td><%= referral.status.titleize %></td>
 
-      <td><%= referral.created_at %></td>
+      <td><%= time_ago_in_words(referral.updated_at) %></td>
 
      </tr>
 

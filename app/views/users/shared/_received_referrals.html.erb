@@ -1,4 +1,3 @@
-
     <div class="page page-table">
       <div class="panel panel-default">
       <div class="panel-heading"><strong><span class="fa fa-th"></span>
@@ -11,10 +10,8 @@
             <th>Company</th>
             <th>Job</th>
             <th>Status</th>
-            <th>Date Created</th>
-            <th>Date Updated</th>
-            <th>Interest</th>
-
+            <th>Last Update</th>
+            <th>Interested?</th>
           </tr>
           <% @received_referrals.each do |referral| %>
           <tr>
@@ -22,11 +19,12 @@
             <td><%= link_to referral.job.job_name, job_path(referral.job.id), class: "#{referral.is_interested}-stat" %></td>
             <!-- need to change the way class is entered -->
             <td class="#{referral.is_interested}-stat"><%= referral.status.titleize%></td>
-            <td class="#{referral.is_interested}-stat"><%= referral.created_at.strftime("%m/%d/%y %I:%M") %></td>
-            <td class="#{referral.is_interested}-stat"><%= referral.updated_at.strftime("%m/%d/%y %I:%M") %></td>
-            <td><%= link_to "#{referral.is_interested}", referral_path{referral.id}, class: "#{referral.is_interested}-stat" %></td>
+            <td class="#{referral.is_interested}-stat"><%= time_ago_in_words(referral.updated_at) %></td>
+            <td><%= link_to "#{translate_boolean(referral.is_interested)}", referral_path(referral.id), class: "#{referral.is_interested}-stat" %></td>
+            <td><%= link_to "Update", edit_referral_path(referral.id), class: "btn btn-primary"%> </td>
           </tr>
           <%end%>
         </table>
       </div>
       <%= will_paginate @received_referrals%>
+    </div>

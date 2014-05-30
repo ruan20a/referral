@@ -35,5 +35,6 @@ class ReferralMailer < ActionMailer::Base
     @requester_email = requester.email
 
     mail(to: @referee_email, subject: "Referral Request from #{@requester_FN.titleize} #{@requester_LN.titleize}").deliver
+    mail(to: @requester_email, subject: "Copy of your referral request to #{@referee_name.titleize}").deliver
   end
 end

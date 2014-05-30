@@ -7,7 +7,7 @@
 
 <div>
   <strong>Referred by:</strong>
-  <%= @referral.relationship %> 
+  <%= @referral.relationship %>
 </div>
 
 <div>
@@ -25,7 +25,11 @@
   <%= @referral.github_profile_url %>
 </div>
 
+<div>
+  <strong>Status:</strong>
+  <%= @referral.status %>
+</div>
 
-
-<%= link_to 'Back', jobs_path %>
+<%= link_to 'Back', session[:return_to] %>
+<%= link_to 'Edit', edit_referral_path %>
 </div>

@@ -13,15 +13,12 @@ class UsersController < ApplicationController
     @unreviewed_referrals = @received_referrals.select{|referral| referral.is_interested == nil}
     @unreviewed_count = @unreviewed_referrals.count
 
-
     #my referrrals
     select_sent = @user.referrals.select{|referral| referral.ref_type == "refer"}
     @sent_referrals = select_sent.paginate(page: params[:page], per_page: 10)
     #
 
 
-    # @sent_referrals =
-    # @my_referrals =
   end
 
   def destroy
