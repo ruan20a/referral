@@ -4,7 +4,7 @@
   <div class="row"><div class="col-lg-12">
     <div class="col-md-8 col-md-offset-1">
       <div class="candidate">
-      
+
         <div class="person_header">
            <strong>Referral Fee:</strong>
            <%= @job.referral_fee %>
@@ -14,7 +14,7 @@
        </div>
        <div class="details-section">
         <strong>Location:</strong>
-        <%= @job.city %> 
+        <%= @job.city %>
         <%= @job.state %>
       </div>
        <div class="details-section">
@@ -25,19 +25,16 @@
         <strong>Skills</strong>
          <%= @job.speciality_1 %>
       </div>
-
-         
-
       <div class="details-section_end">
         <nav>
-       
+
 
       <div class="col-lg-6"><%= link_to "Refer", new_referral_path(job_id: @job.id, ref_type: "refer" ) %></div>
 
       <div class="col-lg-6"><%= link_to 'Ask to be Referred', new_referral_path(job_id: @job.id, ref_type: "ask_ref")%></div>
 
 
-      
+
       <% if !current_admin.nil? %>
         <% if current_admin.id == @job.admin_id %>
           <%= link_to 'Edit', edit_job_path%>

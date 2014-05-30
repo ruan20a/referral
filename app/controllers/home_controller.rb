@@ -4,7 +4,6 @@ class HomeController < ApplicationController
 
   #beta request email
   def send_request
-    name = params[:name]
     email = params[:email]
     linked_in = params[:linked_in]
 

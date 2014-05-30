@@ -1,3 +1,15 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$(document).ready(function(){
+
+  $('a[href="#received-referrals"]').on("click", function(){
+    $('#sent-referrals').removeClass("active in")
+  });
+
+
+  $('a[href="#sent-referrals"]').on("click", function(){
+    $('#received-referrals').removeClass("active in")
+    $('#sent-referrals').addClass("active in")
+  });
+
+
+})
+
