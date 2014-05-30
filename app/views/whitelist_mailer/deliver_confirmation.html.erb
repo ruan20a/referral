@@ -1,10 +1,12 @@
 <div> Hello! </div>
 
-<div>Your email <%=@email%> is approved to sign-up for WeKrüt.</div>
+<div>Your email <%=@email%> is approved to sign-up for the private WeKrüt beta test. WeKrüt is a referral marketplace where users can earn fees by successfully placing candidates from their network into jobs. Check us out, and keep checking in, new jobs will be added over the next month. </div>
 
 <div>Please follow the link to sign up</div>
 <% if @status %>
-  <%= link_to 'Sign Up', url_for(controller: 'admins/registrations', action: 'new', only_path: false)%>
+  <%= link_to 'Sign Up', url_for(controller: 'home', action: 'index', only_path: false)%>
 <% else %>
   <%= link_to 'Sign Up', url_for(controller: 'users/registrations', action: 'new', only_path: false)%>
 <% end %>
+<div>Empower your network!</div>
+<div>WeKrüt Team</div>

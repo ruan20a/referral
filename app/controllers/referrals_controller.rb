@@ -21,6 +21,7 @@ class ReferralsController < ApplicationController
  end
 
   def create
+    binding.pry
     @referral = Referral.new(referral_params)
     @admin = @referral.job.admin
 
@@ -78,7 +79,7 @@ class ReferralsController < ApplicationController
   end
 
   def referral_params
-    params.require(:referral).permit(:name, :job_id, :referral_name, :referral_email, :relationship, :additional_details, :linked_profile_url, :status, :github_profile_url, :relevance, :user_id, :admin_id, :ref_type, :status, :referee_name, :referee_email)
+    params.require(:referral).permit(:name, :job_id, :referral_name, :referral_email, :relationship, :additional_details, :linked_profile_url, :status, :github_profile_url, :relevance, :user_id, :admin_id, :ref_type, :status, :referee_name, :referee_email, :personal_note)
   end
 
   #logic works for user/admin right now

@@ -1,5 +1,6 @@
 Wekrut::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+   config.action_mailer.default_url_options = { host: 'localhost:3000', port: 3000 }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
   :address => "smtp.gmail.com",
@@ -16,6 +17,7 @@ Wekrut::Application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
+
   # Do not eager load code on boot.
   config.eager_load = false
 
@@ -25,6 +27,7 @@ Wekrut::Application.configure do
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -32,7 +35,6 @@ Wekrut::Application.configure do
   # Raise an error on page load if there are pending migrations
   config.active_record.migration_error = :page_load
 
-  config.action_mailer.default_url_options = { host: 'localhost:3000', port: 3000 }
 
   #run to see where precompile is failing.
   config.assets.raise_production_errors = true
