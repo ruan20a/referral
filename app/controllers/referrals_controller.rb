@@ -4,6 +4,7 @@ class ReferralsController < ApplicationController
   before_action :determine_status, only: [:update, :edit, :show]
   before_action :check_correct_owners, only: [:show, :edit, :update, :destroy]
   before_action :store_location #enables linking back
+  # after_update :check_interest
 
   #TODO set up params to align with the right owner****
   def index
@@ -22,34 +23,37 @@ class ReferralsController < ApplicationController
       redirect_to jobs_path, notice: "Please select a job to create a referral"
     end
    # @your_name = current_user.first_name && current_user.last_name || ""
- end
+  end
 
   def create
-    binding.pry
-    @referral = Referral.new(referral_params)
-    @admin = @referral.job.admin
+    referral = Referral.new(referral_params)
+    admin = referral.job.admin
 
     if current_admin.nil?
-      @referral.user_id = current_user.id
+      referral.user_id = current_user.id
+      requester = User.find(current_user.id)
     else
-      @referral.admin_id = current_admin.id
+      referral.admin_id = current_admin.id
+      requester = Admin.find(current_admin.id)
     end
-    # binding.pry
+
+
+
     if check_email #protected method to check if there is a self-referral.
-      if @referral.save
-        if @referral.ref_type == "refer"
-          ReferralMailer.deliver_ref_email(@referral, @admin)
+      if referral.save
+        if referral.ref_type == "refer"
+          ReferralMailer.deliver_ref_email(referral, admin)
         else
-          ReferralMailer.deliver_ask_email(@referral, current_user)
+          ReferralMailer.deliver_ask_email(referral, requester)
         end
-        redirect_to @referral
+        redirect_to referral
       else
         flash[:error] = "Please fill in all the required fields"
-        redirect_to new_referral_path(:job_id => @referral.job_id, :ref_type => @referral.ref_type)
+        redirect_to new_referral_path(:job_id => referral.job_id, :ref_type => referral.ref_type)
       end
     else
       flash[:error] = "Sorry, you cannot refer yourself."
-      redirect_to new_referral_path(:job_id => @referral.job_id, :ref_type => @referral.ref_type)
+      redirect_to new_referral_path(:job_id => referral.job_id, :ref_type => referral.ref_type)
     end
   end
 
@@ -79,8 +83,8 @@ class ReferralsController < ApplicationController
   def update
     @referral
     if check_email
-      binding.pry
       if @referral.update(referral_params)
+        #logic?
         redirect_to @referral
       else
         flash[:error] = "There was an issue with your update. Please review your updates."
@@ -113,7 +117,7 @@ class ReferralsController < ApplicationController
   end
 
   def referral_params
-    params.require(:referral).permit(:name, :job_id, :referral_name, :referral_email, :relationship, :additional_details, :linked_profile_url, :status, :github_profile_url, :relevance, :user_id, :admin_id, :ref_type, :status, :referee_name, :referee_email, :personal_note, :is_interested)
+    params.require(:referral).permit(:name, :job_id, :referral_name, :referral_email, :relationship, :additional_details, :linked_profile_url, :status, :github_profile_url, :relevance, :user_id, :admin_id, :ref_type, :status, :referee_name, :referee_email, :personal_note, :is_interested, :is_admin_notified)
   end
 
   #only correct user and admin can destroy
@@ -159,7 +163,23 @@ class ReferralsController < ApplicationController
     else
       @referral_email == current_user.email ? false:true
     end
-
   end
+
+  # def check_interest(referral)
+  #   admin = @referral.job.admin
+  #   b = a.changed
+  #   c = b.select{|x| x=="is_interested"}.count
+
+  #   if c == 1
+  #     if a.is_interested == true && a.is_admin_notified == false
+  #       a.is_admin_notified == true
+  #       if a.save
+  #         ReferralMailer.deliver_admin_notification(@referral, )
+  #       else
+  #         render 'edit', error: "We had an issue with your referral request. Please try again."
+  #       end
+  #     end
+  #   end
+  # end
 
 end

@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :check_session
   before_action :set_user, only: [:show, :destroy]
   before_action :correct_user, only: [:show, :edit, :update, :destroy]
+  before_action :store_location #enables linking back
 
   def show
     @user_email = @user.email
