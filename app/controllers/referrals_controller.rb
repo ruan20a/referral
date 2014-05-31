@@ -51,6 +51,7 @@ class ReferralsController < ApplicationController
 
   def show
     @referral
+    @job = Job.find(@referral.job_id)
   end
 
   def edit

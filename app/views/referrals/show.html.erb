@@ -23,51 +23,26 @@
           <strong>LinkedIn Profile:</strong>
           <%= @referral.linked_profile_url %>
         </div>
-        <div class="details-section_end">
+        <div class="details-section">
           <strong>GitHub Profile:</strong>
           <%= @referral.github_profile_url %>
         </div>
-         <div>
-           <%= f.hidden_field :job_id, :value => @job.id%>
-           <%= f.hidden_field :ref_type, value: @ref_type %>
-         </div>
+
+        <div class="details-section">
+          <strong>Status:</strong>
+          <%= @referral.status %>
+        </div>
+
+          <div class="details-section_end">
+
+<%= link_to 'Back', session[:return_to] %>
+<%= link_to 'Edit', edit_referral_path %>
+</div>
+
 
   </div>
 </div>
 
 
-=======
 
-<div>
-  <strong>Referral Name:</strong>
-  <%= @referral.referral_name %>
-</div>
 
-<div>
-  <strong>Referred by:</strong>
-  <%= @referral.relationship %>
-</div>
-
-<div>
-  <strong>Referral Email:</strong>
-  <%= @referral.referral_email %>
-</div>
-
-<div>
-  <strong>LinkedIn Profile:</strong>
-  <%= @referral.linked_profile_url %>
-</div>
-
-<div>
-  <strong>GitHub Profile:</strong>
-  <%= @referral.github_profile_url %>
-</div>
-
-<div>
-  <strong>Status:</strong>
-  <%= @referral.status %>
-</div>
-
-<%= link_to 'Back', session[:return_to] %>
-<%= link_to 'Edit', edit_referral_path %>
-</div>
