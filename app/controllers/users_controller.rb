@@ -17,9 +17,8 @@ class UsersController < ApplicationController
     #my referrrals
     select_sent = @user.referrals.select{|referral| referral.ref_type == "refer"}
     @sent_referrals = select_sent.paginate(page: params[:page], per_page: 10)
-    #
 
-
+    @hav_ref = has_any(@unreviewed_count)    #
   end
 
   def destroy
@@ -52,4 +51,7 @@ class UsersController < ApplicationController
     redirect_to new_user_session_path, :error => "You cannot view that account because you're not the correct admin. Please login to the correct account."  unless user == current_user
   end
 
+  def has_any(var)
+    var > 0 ? true : false
+  end
 end

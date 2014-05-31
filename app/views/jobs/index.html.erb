@@ -15,7 +15,11 @@
               <% end %>
 
             <th>
-              <%=@unreviewed_requests %> Requests Pending Review
+              <% if current_admin.nil? %>
+                <%= link_to "#{@unreviewed_requests} Requests Pending Review", user_path(current_user.id) %>
+              <% else %>
+                <%= link_to "#{@unreviewed_requests} Requests Pending Review", admin_path(current_admin.id) %>
+              <% end %>
             </th>
           </table>
         </div>
