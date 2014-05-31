@@ -1,5 +1,3 @@
-<%= render 'layouts/flash' %>
-
 <div>
   <strong>Referral Name:</strong>
   <%= @referral.referral_name %>
@@ -33,8 +31,4 @@
 <div>
   <strong>Status:</strong>
   <%= @referral.status %>
-</div>
-
-<%= link_to 'Back', session[:return_to] %>
-<%= link_to 'Edit', edit_referral_path %>
 </div>

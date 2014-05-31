@@ -5,27 +5,19 @@ RECEIVER USER EDIT FORM
 
 <%= render 'layouts/flash' %>
 
-<%= form_for :referral do |f| %>
+<%= form_for :referral, url: {action:"update"}, method: :put do |f| %>
   <div>
     <%= f.label "Your Name" %><br>
     <%= f.text_field :referral_name %>
   </div>
 
   <div>
-
-    <%= f.label "Your Email" %><br>
-    <%= f.text_field :referral_email %>
-  </div>
-
-
-<div>
-
-    <%= f.label "What is their LinkedIn Profile URL" %><br>
+    <%= f.label "Your LinkedIn Profile URL" %><br>
     <%= f.text_field :linked_profile_url %>
   </div>
 
    <div>
-    <%= f.label "What is their GitHub Profile URL" %><br>
+    <%= f.label "Your GitHub Profile URL" %><br>
     <%= f.text_field :github_profile_url %>
   </div>
 
@@ -37,12 +29,8 @@ RECEIVER USER EDIT FORM
   </div>
 
   <div class="form-group">
-
-    <%= f.label "Are you interested?" %><br>
-    <row>
-      <%= f.check_box :is_interested, value: true%> Yes
-      <%= f.check_box :is_interested, value: false%> No
-    </row>
+    <%= f.label "I'm interested in this job", class:"interested" %>
+    <%= f.check_box :is_interested, value: 'true'%>
   </div>
 
    <div>
@@ -51,6 +39,11 @@ RECEIVER USER EDIT FORM
   </div>
 
   <div>
-    <%= f.submit "Submit to Wekrut" %>
+    <%= f.submit "Update Referral" %>
   </div>
 <% end %>
+
+JOB AREA
+
+<%= render 'jobs/show' %>
+

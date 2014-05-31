@@ -21,7 +21,7 @@ RECEIVED ADMIN FORM
     <%= f.text_field :linked_profile_url %>
   </div>
 
-   <div>
+  <div>
     <%= f.label "Referral Github" %><br>
     <%= f.text_field :github_profile_url %>
   </div>
@@ -36,7 +36,6 @@ RECEIVED ADMIN FORM
     <%= f.label "Status" %><br>
     <%= f.select :status, status_choices %>
   </div>
-
 
    <div>
     <%= f.hidden_field :job_id, :value => @job.id%>
