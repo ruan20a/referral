@@ -1,0 +1,49 @@
+RECEIVER USER EDIT FORM
+
+<div> Referral from <%= @referrer_FN.titleize %> <%= @referrer_LN %>
+</div>
+
+<%= render 'layouts/flash' %>
+
+<%= form_for :referral, url: {action:"update"}, method: :put do |f| %>
+  <div>
+    <%= f.label "Your Name" %><br>
+    <%= f.text_field :referral_name %>
+  </div>
+
+  <div>
+    <%= f.label "Your LinkedIn Profile URL" %><br>
+    <%= f.text_field :linked_profile_url %>
+  </div>
+
+   <div>
+    <%= f.label "Your GitHub Profile URL" %><br>
+    <%= f.text_field :github_profile_url %>
+  </div>
+
+  <div class="form-group">
+    <label> Relationship? </label>
+    <row>
+      <%= f.select :relationship, relationship_choices %>
+    </row>
+  </div>
+
+  <div class="form-group">
+    <%= f.label "I'm interested in this job", class:"interested" %>
+    <%= f.check_box :is_interested, value: 'true'%>
+  </div>
+
+   <div>
+    <%= f.hidden_field :job_id, :value => @job.id%>
+    <%= f.hidden_field :ref_type, value: @ref_type %>
+  </div>
+
+  <div>
+    <%= f.submit "Update Referral" %>
+  </div>
+<% end %>
+
+JOB AREA
+
+<%= render 'jobs/show' %>
+

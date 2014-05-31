@@ -1,39 +1,12 @@
 <%= render 'layouts/flash' %>
 
-<div>
-  <strong>Referral Name:</strong>
-  <%= @referral.referral_name %>
-</div>
-
-<div>
-  <strong>Referred by:</strong>
-  <%= @referral.relationship %>
-</div>
-
-<div>
-  <strong>Referral Email:</strong>
-  <%= @referral.referral_email %>
-</div>
-
-<div>
-  <strong>LinkedIn Profile:</strong>
-  <%= @referral.linked_profile_url %>
-</div>
-
-<div>
-  <strong>GitHub Profile:</strong>
-  <%= @referral.github_profile_url %>
-</div>
-
-<div>
-  <strong>Interest:</strong>
-  <%= translate_boolean(@referral.is_interested) %>
-</div>
-
-<div>
-  <strong>Status:</strong>
-  <%= @referral.status %>
-</div>
+<% if @my_status == "Receiver-A" %>
+  <%= render 'referrals/shared/show_receiver_admin' %>
+<% elsif @my_status == "Receiver-U" %>
+  <%= render 'referrals/shared/show_receiver_user' %>
+<% else %>
+  <%= render 'referrals/shared/show_sender' %>
+<% end %>
 
 <%= link_to 'Back', session[:return_to] %>
 <%= link_to 'Edit', edit_referral_path %>

@@ -1,12 +1,11 @@
 class ReferralsController < ApplicationController
   before_action :check_session
   before_action :set_referral, only: [:update, :edit, :destroy, :show]
-  before_action :determine_status, only: [:update, :edit]
+  before_action :determine_status, only: [:update, :edit, :show]
   before_action :check_correct_owners, only: [:show, :edit, :update, :destroy]
   before_action :store_location, :only => [:show] #enables linking back
 
   #TODO set up params to align with the right owner****
-
   def index
 	  # @search = Referral.search(params[:q])
   	# @referrals = @search.result
@@ -56,12 +55,14 @@ class ReferralsController < ApplicationController
 
   def show
     @referral
+    @job = Job.find(@referral.job_id)
+    @my_status
   end
 
   def edit
     @job = Job.find(@referral.job_id)
     @ref_type = @referral.ref_type
-    @status
+    @my_status
     #name logic
     if @referral.admin_id.nil?
       @user = User.find(@referral.user_id)
@@ -75,16 +76,21 @@ class ReferralsController < ApplicationController
   end
 
   def update
+    @referral
     if check_email
+      binding.pry
       if @referral.update(referral_params)
         redirect_to @referral
       else
-        flash[:error] = "There was an issue with your update. Please <r></r>eview your updates."
+        flash[:error] = "There was an issue with your update. Please review your updates."
+        #TODO FIX ERROR
         render 'edit'
       end
     else
+      binding.pry
       flash[:error] = "Sorry, you can't change the referral to yourself"
-      render 'edit'
+      #TODO FIX ERROR
+      redirect_to referral_path
     end
   end
 
@@ -125,15 +131,15 @@ class ReferralsController < ApplicationController
   def determine_status
     if current_admin.nil? #user logic checks
       if @referral.user == current_user
-        @status = "Sender"
+        @my_status = "Sender"
       else
-        @status = "Receiver-U"
+        @my_status = "Receiver-U"
       end
     else #admin logic checks
       if @referral.admin_id == current_admin.id
-        @status = "Sender"
+        @my_status = "Sender"
       else
-        @status = "Receiver-A"
+        @my_status = "Receiver-A"
       end
     end
   end
