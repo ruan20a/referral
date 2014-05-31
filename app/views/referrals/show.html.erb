@@ -1,7 +1,6 @@
 <%= render 'layouts/flash' %>
 <%= render 'layouts/headerjob' %>
 
-
 <div class="container" style="margin:140px">
   <div class="row"><div class="col-lg-12">
     <div class="col-md-8 col-md-offset-1">
@@ -42,6 +41,14 @@
 
   </div>
 </div>
+
+<% if @my_status == "Receiver-A" %>
+  <%= render 'referrals/shared/show_receiver_admin' %>
+<% elsif @my_status == "Receiver-U" %>
+  <%= render 'referrals/shared/show_receiver_user' %>
+<% else %>
+  <%= render 'referrals/shared/show_sender' %>
+<% end %>
 
 
 
