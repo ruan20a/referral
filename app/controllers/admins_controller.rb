@@ -20,7 +20,9 @@ before_action :check_main_admin, only: [:index]
     @referrals = @search.result.select{|x| x.job.admin == @admin}
     @sorted_referrals = @referrals.select{|x| x.ref_type == "refer" && x.is_interested == true}.paginate(page: params[:page], per_page: 10)
     #is_interested & pending status check
-    @pending_referrals = @admin.referrals.select{|x| x.status == "pending" && x.is_interested == true}.count
+    @pending_referrals = @admin.referrals.select{|x| x.status == "pending" && x.is_interested == true}
+
+    @pending_count = @pending_referrals.count
   end
 
   def destroy
@@ -28,7 +30,7 @@ before_action :check_main_admin, only: [:index]
     redirect_to new_admin_registration_path, notice: "You successfully deleted your account. We hope you will sign-up with us again"
   end
 
-private
+  protected
 
   def set_admin
       @admin = Admin.find(params[:id])

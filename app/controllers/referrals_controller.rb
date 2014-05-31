@@ -3,7 +3,7 @@ class ReferralsController < ApplicationController
   before_action :set_referral, only: [:update, :edit, :destroy, :show]
   before_action :determine_status, only: [:update, :edit, :show]
   before_action :check_correct_owners, only: [:show, :edit, :update, :destroy]
-  before_action :store_location, :only => [:show] #enables linking back
+  before_action :store_location #enables linking back
 
   #TODO set up params to align with the right owner****
   def index

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140529030913) do
+ActiveRecord::Schema.define(version: 20140531140818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,12 +117,7 @@ ActiveRecord::Schema.define(version: 20140529030913) do
     t.text     "personal_note"
     t.string   "referee_name"
     t.boolean  "is_interested"
-  end
-
-  create_table "user_whitelists", force: true do |t|
-    t.string   "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.boolean  "is_admin_notified",  default: false
   end
 
   create_table "users", force: true do |t|
