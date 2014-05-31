@@ -1,0 +1,22 @@
+    <div class="col-md-8 col-md-offset-1">
+      <div class="candidate">
+        <div class="person_header">
+           <strong>Referral Fee:</strong>
+           <%= @job.referral_fee %>
+        </div>
+       <div class="details-section">
+         <strong>About <%= @job.name %></strong>
+       </div>
+       <div class="details-section">
+        <strong>Location:</strong>
+        <%= @job.city %>
+        <%= @job.state %>
+      </div>
+       <div class="details-section">
+      <strong>Description:</strong>
+        <%= @job.description %>
+      </div>
+        <div class="details-section">
+        <strong>Skills</strong>
+         <%= @job.speciality_1 %>
+      </div>

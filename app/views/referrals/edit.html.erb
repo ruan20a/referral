@@ -1,10 +1,10 @@
 <% if @ref_type == "refer" %>
-  <% if @status == "Receiver-U" %>
-    <%= render 'referrals/shared/receiver_user_edit_form' %>
-  <% elsif @status == "Sender" %>
-    <%= render 'referrals/shared/sender_edit_form' %>
+  <% if @my_status == "Receiver-A" %>
+    <%= render 'referrals/shared/edit_receiver_admin' %>
+  <% elsif @my_status == "Receiver-U" %>
+    <%= render 'referrals/shared/edit_receiver_user' %>
   <% else %>
-    <%= render 'referrals/shared/receiver_admin_edit_form' %>
+    <%= render 'referrals/shared/edit_sender' %>
   <% end %>
 <% else %>
   <%= render 'referrals/shared/ask_referral_form' %>

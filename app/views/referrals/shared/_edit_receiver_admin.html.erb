@@ -4,7 +4,7 @@ RECEIVED ADMIN FORM
 
 <%= render 'layouts/flash' %>
 
-<%= form_for :referral do |f| %>
+<%= form_for :referral, url: {action:"update"}, method: :put do |f| %>
 
   <div>
     <%= f.label "Referral Name" %><br>

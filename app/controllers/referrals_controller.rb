@@ -1,11 +1,11 @@
 class ReferralsController < ApplicationController
   before_action :check_session
   before_action :set_referral, only: [:update, :edit, :destroy, :show]
-  before_action :determine_status, only: [:update, :edit]
+  before_action :determine_status, only: [:update, :edit, :show]
   before_action :check_correct_owners, only: [:show, :edit, :update, :destroy]
   before_action :store_location, :only => [:show] #enables linking back
-  #TODO set up params to align with the right owner****
 
+  #TODO set up params to align with the right owner****
   def index
 	  # @search = Referral.search(params[:q])
   	# @referrals = @search.result
@@ -35,15 +35,20 @@ class ReferralsController < ApplicationController
       @referral.admin_id = current_admin.id
     end
     # binding.pry
-    if @referral.save
-      if @referral.ref_type == "refer"
-        ReferralMailer.deliver_ref_email(@referral, @admin)
+    if check_email #protected method to check if there is a self-referral.
+      if @referral.save
+        if @referral.ref_type == "refer"
+          ReferralMailer.deliver_ref_email(@referral, @admin)
+        else
+          ReferralMailer.deliver_ask_email(@referral, current_user)
+        end
+        redirect_to @referral
       else
-        ReferralMailer.deliver_ask_email(@referral, current_user)
+        flash[:error] = "Please fill in all the required fields"
+        redirect_to new_referral_path(:job_id => @referral.job_id, :ref_type => @referral.ref_type)
       end
-      redirect_to @referral
     else
-      flash[:error] = "Please fill in all the required fields"
+      flash[:error] = "Sorry, you cannot refer yourself."
       redirect_to new_referral_path(:job_id => @referral.job_id, :ref_type => @referral.ref_type)
     end
   end
@@ -51,12 +56,14 @@ class ReferralsController < ApplicationController
 
   def show
     @referral
+    @job = Job.find(@referral.job_id)
+    @my_status
   end
 
   def edit
     @job = Job.find(@referral.job_id)
     @ref_type = @referral.ref_type
-    @status
+    @my_status
     #name logic
     if @referral.admin_id.nil?
       @user = User.find(@referral.user_id)
@@ -67,15 +74,24 @@ class ReferralsController < ApplicationController
       @referrer_FN = @admin.first_name
       @referrer_LN = @admin.last_name
     end
-
   end
 
   def update
-    @binding.pry
-    if @referral.update(referral.params)
-      redirect_to @referral
+    @referral
+    if check_email
+      binding.pry
+      if @referral.update(referral_params)
+        redirect_to @referral
+      else
+        flash[:error] = "There was an issue with your update. Please review your updates."
+        #TODO FIX ERROR
+        render 'edit'
+      end
     else
-      render 'edit'
+      binding.pry
+      flash[:error] = "Sorry, you can't change the referral to yourself"
+      #TODO FIX ERROR
+      redirect_to referral_path
     end
   end
 
@@ -97,9 +113,8 @@ class ReferralsController < ApplicationController
   end
 
   def referral_params
-    params.require(:referral).permit(:name, :job_id, :referral_name, :referral_email, :relationship, :additional_details, :linked_profile_url, :status, :github_profile_url, :relevance, :user_id, :admin_id, :ref_type, :status, :referee_name, :referee_email, :personal_note)
+    params.require(:referral).permit(:name, :job_id, :referral_name, :referral_email, :relationship, :additional_details, :linked_profile_url, :status, :github_profile_url, :relevance, :user_id, :admin_id, :ref_type, :status, :referee_name, :referee_email, :personal_note, :is_interested)
   end
-
 
   #only correct user and admin can destroy
   def check_correct_owners
@@ -117,23 +132,34 @@ class ReferralsController < ApplicationController
   def determine_status
     if current_admin.nil? #user logic checks
       if @referral.user == current_user
-        @status = "Sender"
+        @my_status = "Sender"
       else
-        @status = "Receiver-U"
+        @my_status = "Receiver-U"
       end
     else #admin logic checks
       if @referral.admin_id == current_admin.id
-        @status = "Sender"
+        @my_status = "Sender"
       else
-        @status = "Receiver-A"
+        @my_status = "Receiver-A"
       end
     end
   end
-
 
   def check_session
     if current_user.nil? && current_admin.nil?
       redirect_to(new_user_session_path, notice: "Please sign-in to make referrals")
     end
   end
+
+  def check_email
+    @referral_email = @referral.referral_email
+
+    if current_user.nil?
+      @referral_email == current_admin.email ? false:true
+    else
+      @referral_email == current_user.email ? false:true
+    end
+
+  end
+
 end
