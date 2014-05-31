@@ -6,7 +6,7 @@
 <% if @status %>
   <%= link_to 'Sign Up', url_for(controller: 'home', action: 'index', only_path: false)%>
 <% else %>
-  <%= link_to 'Sign Up', url_for(controller: 'users/registrations', action: 'new', only_path: false)%>
+  <%= link_to 'Sign Up', url_for(controller: 'home', action: 'index', only_path: false)%>
 <% end %>
 <div>Empower your network!</div>
 <div>WeKrüt Team</div>

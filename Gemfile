@@ -32,7 +32,7 @@ gem "devise_invitable"
 
 gem 'devise'
 
-gem 'fog'
+gem 'fog', '~> 1.22.1'
 
 gem 'mini_magick'
 

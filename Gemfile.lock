@@ -235,7 +235,7 @@ DEPENDENCIES
   devise
   devise_invitable
   dotenv-rails
-  fog
+  fog (~> 1.22.1)
   jbuilder (~> 1.2)
   jquery-rails
   mini_magick
