@@ -27,7 +27,7 @@ ActionMailer::Base.smtp_settings = {
   #}
 
   #default is heroku app name
-  config.action_mailer.default_url_options = { :host => 'wekrut1.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'wekrut.herokuapp.com' }
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both thread web servers
