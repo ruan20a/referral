@@ -15,6 +15,7 @@ gem "sendgrid"
 
 gem "titleize"
 
+
 gem 'sprockets_better_errors'
 
 gem "rails_12factor", group: :production
@@ -30,6 +31,10 @@ gem "carrierwave"
 gem "devise_invitable"
 
 gem 'devise'
+
+gem 'fog'
+
+gem 'mini_magick'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
