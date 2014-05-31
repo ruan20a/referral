@@ -4,7 +4,7 @@ Wekrut::Application.configure do
   # Code is not reloaded between requests.
   config.cache_classes = true
   config.action_mailer.delivery_method = :smtp
-config.action_mailer.smtp_settings = {
+#config.action_mailer.smtp_settings = {
 ActionMailer::Base.smtp_settings = {
 :address        => 'smtp.sendgrid.net',
 :port           => '587',
