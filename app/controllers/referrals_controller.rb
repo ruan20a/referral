@@ -78,7 +78,7 @@ def create
 
   def update
     set_requester(@referral)
-    binding.pry
+    #binding.pry
     if @referral.check_email(@requester)
       if @referral.update(referral_params)
         #logic?
