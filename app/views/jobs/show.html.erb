@@ -6,7 +6,7 @@
   <div class="col-md-8 col-md-offset-2">
    <div class="panel panel-default">
      <div class="panel-heading"><h2 class="panel-referal"><strong>Referral Fee:</strong>
-       <%= @job.referral_fee/2 %></h2></div>
+       <%= @job.referral_fee %></h2></div>
        <div class="panel-body">
         <div class="login-form">
           <div class="details-section">  
@@ -16,6 +16,7 @@
           <strong>Location:</strong>
           <%= @job.city %>
           <%= @job.state %>
+
         </div>
         <div class="details-section">
           <strong>Description:</strong>
@@ -42,8 +43,12 @@
 
 
 
+
+
           </div>
         </div>
       </div></div>
       </div>
+    </div>
+      <%= render "layouts/footer" %>
 
