@@ -14,6 +14,8 @@ before_action :check_main_admin, only: [:index]
     @admins = Admin.new
   end
 
+   
+
   def show
     @jobs = @admin.jobs
     @search = Referral.search(params[:q])

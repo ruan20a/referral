@@ -4,30 +4,30 @@ Wekrut::Application.configure do
   # Code is not reloaded between requests.
   config.cache_classes = true
   config.action_mailer.delivery_method = :smtp
-#   config.action_mailer.smtp_settings = {
-# #ActionMailer::Base.smtp_settings = {
-#   :address        => 'smtp.sendgrid.net',
-#   :port           => '587',
-#   :authentication => :plain,
-#   :user_name      => ENV['SENDGRID_USERNAME'],
-#   :password       => ENV['SENDGRID_PASSWORD'],
-#   :domain         => 'heroku.com',
-#   :enable_starttls_auto => true
-# }
+#config.action_mailer.smtp_settings = {
+ActionMailer::Base.smtp_settings = {
+:address        => 'smtp.sendgrid.net',
+:port           => '587',
+:authentication => :plain,
+:user_name      => ENV['SENDGRID_USERNAME'],
+:password       => ENV['SENDGRID_PASSWORD'],
+:domain         => 'heroku.com',
+:enable_starttls_auto => true
+}
 
 
-  config.action_mailer.smtp_settings = {
-  :address => "smtp.gmail.com",
-  :port => 587,
-  :domain => "www.gmail.com",
-  :user_name => ENV['GMAIL'],
-  :password => ENV['GPASSWORD'],
-  :authentication => "plain",
-  :enable_starttls_auto => true
-  }
+  #config.action_mailer.smtp_settings = {
+  #:address => "smtp.gmail.com",
+  #:port => 587,
+  #:domain => "www.gmail.com",
+  #:user_name => ENV['GMAIL'],
+  #:password => ENV['GPASSWORD'],
+  #:authentication => "plain",
+  #:enable_starttls_auto => true
+  #}
 
   #default is heroku app name
-  config.action_mailer.default_url_options = { :host => 'wekrut1.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'wekrut.herokuapp.com' }
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both thread web servers
