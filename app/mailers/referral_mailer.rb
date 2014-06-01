@@ -8,10 +8,10 @@ class ReferralMailer < ActionMailer::Base
     # binding.pry
 
     if referral.user_id.nil?
-      binding.pry
+      #binding.pry
       sender = Admin.find(referral.admin_id)
     else
-      binding.pry
+      #binding.pry
       sender = User.find(referral.user_id)
     end
 
@@ -48,7 +48,7 @@ class ReferralMailer < ActionMailer::Base
   end
 
   def deliver_admin_notification(referral, admin)
-    binding.pry
+    #binding.pry
 
     @referral = referral
 
