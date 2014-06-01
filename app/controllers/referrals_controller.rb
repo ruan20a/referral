@@ -39,7 +39,7 @@ class ReferralsController < ApplicationController
     end
 
 
-    if requester.email != referral.referral_email #protected method to check if there is a self-referral.
+    if referral.check_email(requester) 
       if referral.save
         if referral.ref_type == "refer"
           ReferralMailer.deliver_ref_email(referral)
@@ -90,20 +90,13 @@ class ReferralsController < ApplicationController
       requester = Admin.find(current_admin.id)
     end
 
-    if @referral.check_email(requester)
-      if @referral.update(referral_params)
-        #logic?
-        redirect_to @referral
-      else
-        flash[:error] = "There was an issue with your update. Please review your updates."
-        #TODO FIX ERROR
-        render 'edit'
-      end
+    if @referral.update(referral_params)
+      #logic?
+      redirect_to @referral
     else
-      binding.pry
-      flash[:error] = "Sorry, you can't change the referral to yourself"
+      flash[:error] = "There was an issue with your update. Please review your updates."
       #TODO FIX ERROR
-      redirect_to referral_path
+      render 'edit'
     end
   end
 

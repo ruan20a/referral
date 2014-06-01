@@ -30,7 +30,7 @@ class Referral < ActiveRecord::Base
   #different logic for ask_refer types lambda substitute for method logic
   validates_presence_of :referral_email, :referral_name, :unless => lambda{ self.ref_type == "refer" }
   before_save :check_notification, :if => :is_interested_changed?
-  before_save :check_email, :if => :referral_email_changed?
+  # before_save :check_email, :if => :referral_email_changed?
 
 
     def check_notification
