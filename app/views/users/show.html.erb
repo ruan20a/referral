@@ -3,7 +3,12 @@
 <section class="jobs">
   <div class="container">
     <ul class="nav nav-tabs nav-justified">
-      <li class="active"><a href="#received-referrals" data-toggle="tab">Received Referrals</a></li>
+      <li class="active"><a href="#received-referrals" data-toggle="tab"> <strong> Received Referrals </strong>
+        <% if @hav_ref %>
+          <%= " - #{@unreviewed_count} Requests Pending Review"%>
+        <% end %>
+
+      </a></li>
       <li class=""><a href="#sent-referrals" data-toggle="tab">Sent Referrals</a></li>
     </ul>
     <div class="tab-content">

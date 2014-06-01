@@ -1,75 +1,75 @@
 <%= render 'layouts/header' %>
-
-
-
+<%= render 'layouts/flash' %>
 <section class="jobs">
   <div class="container">
-
     <div class="page page-table" data-ng-controller="tableCtrl">
 
-      
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <table>
+             <th><strong><span class="fa fa-th"></span> Job Postings  <%= search_form_for @search do |f| %>
+            </th>
+            <th>
+              <%= f.text_field :name_or_job_name_or_city_or_state_cont, :placeholder => 'Search' %>
+            </th>
+            <th class="col-md-2 action"><%= f.submit "Search" %>
+            </th>
+          <% end %>
 
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <table>
+          <th><%= link_to "Clear Search", request.path, class:"cancel-button" %></th>
 
-                 <th><strong><span class="fa fa-th"></span> Job Postings  <%= search_form_for @search do |f| %> 
-                </th>
-                <th>
-                  &nbsp&nbsp<%= f.text_field :name_or_job_name_or_city_or_state_cont, :placeholder => 'Search' %>
-               
-                <%= f.submit "Search" %>
-                </th>
-                  <% end %>
-              </table>
-            </div>
+            <th>
+              <% if @has_ref %>
+                <% if current_admin.nil? %>
+                  <%= link_to " #{@unreviewed_requests} Requests Pending Review", user_path(current_user.id) %>
+                <% else %>
+                  <%= link_to "#{@unreviewed_requests} Requests Pending Review", admin_path(current_admin.id) %>
+                <% end %>
 
-            <table class="table table-hover">
-             <thead>
-              <tr>
-                <th><%= sort_link @search, :name, "Company Name" %></th>
-                <th><%= sort_link @search, :job_name, "Position" %></th>
-                <th><%= sort_link @search, :city, "City" %></th>
-                <th><%= sort_link @search, :state, "State" %></th>
-                <th><%= sort_link @search, :industry_1, "Industry" %></th>
-                <th><%= sort_link @search, :referral_fee, "Referral Fee" %></th>
-              </tr>
-            </thead> 
-
-            <tbody>
-              <% @jobs.each do |job| %>
-
-              <tr>
-                <td>
-                  <% if job.image_url.nil? %>
-                    <%= job.name %>
-                  <% else %>
-                    <%= image_tag "#{job.image_url(:thumb)}"  %>
-                  <% end %>
-                </td>
-
-                <td><%= link_to job.job_name, "/jobs/#{job.id}" %></td>
-
-                <td><%= job.city %></td>
-
-                <td><%= job.state %></td>
-
-                <td><%= job.industry_1 %></td>
-
-                <td><%= job.referral_fee   %></td>
-              </tr>
-            
-         
               <% end %>
-              </tbody>
-            </table>
+            </th>
+          </table>
         </div>
-   
+
+        <table class="table table-hover">
+         <thead>
+          <tr>
+            <th><%= sort_link @search, :name, "Company Name" %></th>
+            <th><%= sort_link @search, :job_name, "Position" %></th>
+            <th><%= sort_link @search, :city, "City" %></th>
+            <th><%= sort_link @search, :state, "State" %></th>
+            <th><%= sort_link @search, :industry_1, "Industry" %></th>
+            <th><%= sort_link @search, :referral_fee, "Referral Fee" %></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @jobs.each do |job| %>
+          <tr>
+            <td>
+              <% if job.image_url.nil? %>
+                <%= job.name %>
+              <% else %>
+                <%= image_tag "#{job.image_url(:thumb)}"  %>
+              <% end %>
+            </td>
+
+            <td><%= link_to job.job_name, "/jobs/#{job.id}" %></td>
+            <td><%= job.city %></td>
+            <td><%= job.state %></td>
+            <td><%= job.industry_1 %></td>
+            <td><%= job.referral_fee   %></td>
+          </tr>
+          <% end %>
+          </tbody>
+        </table>
+    </div>
   </div>
 </div>
 </section>
+
      
 <%= render "layouts/footer" %>
-      
+
 
 

@@ -1,0 +1,21 @@
+        <table class="table">
+          <tr>
+            <th><%= sort_link @search, :job_name, "Position" %></th>
+            <th><%= sort_link @search, :referral_fee, "Referral Fee" %></th>
+            <th><%= sort_link @search, :referral_name, "Candidates" %></th>
+            <th><%= sort_link @search, :status, "Status" %></th>
+            <th><%= sort_link @search, :updated_at, "Last Updated" %></th>
+          </tr>
+          <% @sorted_referrals.each do |referral| %>
+          <tr>
+          <!-- TODO fix up links -->
+
+            <td><%= link_to referral.job.job_name, job_path(referral.job.id) %></td>
+            <td><%= referral.job.referral_fee %></td>
+            <td><%= link_to referral.referral_name, edit_referral_path(referral.id) %></td>
+            <td><%= referral.status.titleize %></td>
+            <td><%= time_ago_in_words(referral.updated_at) %></td>
+          </tr>
+          <%end%>
+        </table>
+        <%= will_paginate @sorted_referrals %>

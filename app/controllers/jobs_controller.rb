@@ -3,6 +3,10 @@ class JobsController < ApplicationController
   before_action :authenticate_admin!, only: [:new, :edit, :update, :create, :delete]
   before_action :check_admin, only: [:edit, :update, :delete]
   before_action :set_job, only: [:show, :update, :edit, :destroy]
+  before_action :store_location #enables linking back
+  before_action :user_pending_received_requests, only: [:index]
+
+  include ApplicationHelper
 
 	def invite_user
 		@user = User.invite!(:email => params[:user][:email], :name => params[:user][:name])
@@ -13,6 +17,8 @@ class JobsController < ApplicationController
     # binding.pry
   	@search = Job.search(params[:q])
   	@jobs = @search.result
+    @unreviewed_requests
+    @has_ref = has_any(@unreviewed_requests)
 	end
 
 
@@ -69,6 +75,21 @@ class JobsController < ApplicationController
     job = Job.find(params[:id])
     admin = Admin.find(job.admin_id)
     redirect_to job_path unless admin == current_admin
+  end
+
+  def user_pending_received_requests
+    #TODO need to refactor code!!
+    if !current_user.nil?
+      user_email = current_user.email
+      @unreviewed_requests = Referral.all.select{|referral| referral.referral_email == user_email && referral.ref_type == "refer" && referral.is_interested == nil}.count
+    elsif !current_admin.nil?
+      #admin referrals - is_interested = true & ref_type = refer.
+      admin_referrals = current_admin.referrals.select{|referral| referral.ref_type == "refer" && referral.is_interested == true}
+      @unreviewed_requests = admin_referrals.select{|referral| referral.status == "pending"}.count
+    else
+      @unreviewed_requests = 0
+    end
+    @unreviewed_requests
   end
 
 end

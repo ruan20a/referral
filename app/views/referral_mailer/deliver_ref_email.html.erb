@@ -1,7 +1,11 @@
-<div>Hello <%=@referral.referral_name.titleize%>, </div>
+<div>Hello <%=@receiver_name.titleize%>, </div>
 
 <div>
   <%=@sender_first_name%> <%=@sender_last_name%>, copied here, has referred you for a <%=@referral.job.job_name%> position at <%=@referral.job.name%>.
+</div>
+
+<div>
+  If you indicate that you are interested in the position, the referral will be reviewed by the recruiter.
 </div>
 
 <br>
@@ -9,7 +13,7 @@
 <div>
   Follow the link to sign up and complete your referral profile to be submitted. Please find the job description below.
   <br>
-  <%=link_to 'Referral Link', url_for(controller: 'home', action: 'index', only_path: false)%>
+  <%=link_to 'Sign Up', url_for(controller: 'users/registrations', action: 'new', only_path: false)%>
 </div>
 
 <br>
@@ -27,6 +31,7 @@ Job Description
 </div>
 <br>
 <div>
-<%=@referral.job.description%>
-</div>	
+<%=@job.description%>
+</div>
+
 

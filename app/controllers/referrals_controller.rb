@@ -3,7 +3,10 @@ class ReferralsController < ApplicationController
   before_action :set_referral, only: [:update, :edit, :destroy, :show]
   before_action :determine_status, only: [:update, :edit, :show]
   before_action :check_correct_owners, only: [:show, :edit, :update, :destroy]
-  before_action :store_location, :only => [:show] #enables linking back
+  before_action :store_location #enables linking back
+  before_action :check_main_admin, only: [:index]
+  # before_action :set_requester, only: [:update, :create]
+  # after_update :check_interest
 
   #TODO set up params to align with the right owner****
   def index
@@ -23,36 +26,31 @@ class ReferralsController < ApplicationController
     end
    # @your_name = current_user.first_name && current_user.last_name || ""
  end
-
   def create
-    #binding.pry
-    @referral = Referral.new(referral_params)
-    @admin = @referral.job.admin
-
-    if current_admin.nil?
-      @referral.user_id = current_user.id
-    else
-      @referral.admin_id = current_admin.id
-    end
-    # binding.pry
-    if check_email #protected method to check if there is a self-referral.
-      if @referral.save
-        if @referral.ref_type == "refer"
-          ReferralMailer.deliver_ref_email(@referral, @admin)
-        else
-          ReferralMailer.deliver_ask_email(@referral, current_user)
-        end
-        redirect_to @referral
-      else
-        flash[:error] = "Please fill in all the required fields"
-        redirect_to new_referral_path(:job_id => @referral.job_id, :ref_type => @referral.ref_type)
-      end
-    else
-      flash[:error] = "Sorry, you cannot refer yourself."
-      redirect_to new_referral_path(:job_id => @referral.job_id, :ref_type => @referral.ref_type)
-    end
-  end
-
+   referral = Referral.new(referral_params)
+   admin = referral.job.admin
+   set_requester(referral)
+   if referral.check_email(@requester) #protected method to check if there is a self-referral.
+     if referral.save
+       # binding.pry
+       if referral.ref_type == "refer"
+         ReferralMailer.deliver_ref_email(referral)
+         check_whitelist(referral)
+         redirect_to jobs_path, notice: "Success. Your referral has been created. An email has been sent to confirm interest. "
+       else
+         ReferralMailer.deliver_ask_email(referral, @requester)
+         redirect_to jobs_path, notice: "Success. Your referral request has been sent."
+       end
+     else
+       binding.pry
+       flash[:error] = "Please fill in all the required fields"
+       redirect_to new_referral_path(:job_id => referral.job_id, :ref_type => referral.ref_type)
+     end
+   else
+     flash[:error] = "Sorry, you cannot refer yourself."
+     redirect_to new_referral_path(:job_id => referral.job_id, :ref_type => referral.ref_type)
+   end
+ end
 
   def show
     @referral
@@ -77,10 +75,10 @@ class ReferralsController < ApplicationController
   end
 
   def update
-    @referral
-    if check_email
-      binding.pry
+    set_requester(@referral)
+    if @referral.check_email(@requester)
       if @referral.update(referral_params)
+        #logic?
         redirect_to @referral
       else
         flash[:error] = "There was an issue with your update. Please review your updates."
@@ -88,10 +86,9 @@ class ReferralsController < ApplicationController
         render 'edit'
       end
     else
-      binding.pry
-      flash[:error] = "Sorry, you can't change the referral to yourself"
+      flash[:error] = "There was an issue with your update. Please review your updates."
       #TODO FIX ERROR
-      redirect_to referral_path
+      render 'edit'
     end
   end
 
@@ -112,8 +109,18 @@ class ReferralsController < ApplicationController
     @referral = Referral.find(params[:id])
   end
 
+  def set_requester(referral)
+    if current_admin.nil?
+      @requester = User.find(current_user.id)
+      referral.user_id = @requester.id
+    else
+      @requester = Admin.find(current_admin.id)
+      referral.admin_id = @requester.id
+    end
+  end
+
   def referral_params
-    params.require(:referral).permit(:name, :job_id, :referral_name, :referral_email, :relationship, :additional_details, :linked_profile_url, :status, :github_profile_url, :relevance, :user_id, :admin_id, :ref_type, :status, :referee_name, :referee_email, :personal_note, :is_interested)
+    params.require(:referral).permit(:name, :job_id, :referral_name, :referral_email, :relationship, :additional_details, :linked_profile_url, :status, :github_profile_url, :relevance, :user_id, :admin_id, :ref_type, :status, :referee_name, :referee_email, :personal_note, :is_interested, :is_admin_notified)
   end
 
   #only correct user and admin can destroy
@@ -151,15 +158,26 @@ class ReferralsController < ApplicationController
     end
   end
 
-  def check_email
-    @referral_email = @referral.referral_email
-
-    if current_user.nil?
-      @referral_email == current_admin.email ? false:true
+  def check_whitelist(referral)
+    if referral.ref_type == "refer"
+      unless Whitelist.exists?(:email => params[:referral][:referral_email])
+        Whitelist.create(:email => params[:referral][:referral_email], :is_admin => false)
+      end
     else
-      @referral_email == current_user.email ? false:true
+      unless Whitelist.exists?(:email => params[:referral][:referee_email])
+        Whitelist.create(:email => params[:referral][:referee_email], :is_admin => false)
+      end
     end
-
   end
+  #NEED TO MOVE THIS METHOD TO THE MODEL
 
+  def check_main_admin
+  #need to update this
+    main_admins = ["loritiernan@gmail.com", "info@wekrut.com", "nyc.amy@gmail.com","deaglan1@gmail.com"]
+    status = main_admins.select{|email| email == current_admin.email}
+    redirect_to new_admin_session_path, notice: "You are not an approved admin." if status.empty?
+  end
 end
+
+
+

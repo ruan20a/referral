@@ -8,22 +8,35 @@
      <div class="panel-body">
        <div class="form-group">
              <%= form_for :referral, url: referrals_path do |f| %>
-            
+
+<div class="col-md-6">
+          <div class="form-group">
+
+            <%= f.label "Who would you like to ask for a referral?" %><br>
+    <%= f.text_field :referee_name, :class => 'form-control login-field', :placeholder => 'Their Name' %>
+  </div>
+     <div class="form-group">
+            <%= f.label "What is their email?" %><br>
+    <%= f.text_field :referee_email, :placeholder => 'Their Email', :class => 'form-control login-field' %>
+
+           </div>
 
               <div class="form-group">
                <label> Relationship? </label><br>
                <row> <%= f.select :relationship, relationship_choices %></row>
              </div>
-           </div>
 
-           <div class="col-md-4">
+         </div>
+
+<div class="col-md-6">
+
             <div class="form-group">
               <%= f.label "Your LinkedIn Profile URL
-              Hint: This is found in Contact Info" %><br>
+             " %><br>
               <div class="input-group">
                <span class="input-group-addon"><span class="fa fa-linkedin"></span>
              </span>
-             <%= f.text_field :linked_profile_url, :required => true, :class => 'form-control login-field' %></div>
+             <%= f.text_field :linked_profile_url, :placeholder =>  'Hint: This is found in Contact Info', :class => 'form-control login-field' %></div>
            </div>
            <div class="form-group">
              <%= f.label "Your GitHub Profile URL" %><br>
@@ -34,20 +47,9 @@
             </div>
            </div>
 
-        
-         </div>
 
-         <div class="col-md-4">
-          <div class="form-group">
 
-            <%= f.label "Who would you like to ask for a referral?" %><br>
-    <%= f.text_field :referee_name, :required => true, :class => 'form-control login-field', :placeholder => 'Their Name' %>
-  </div>
-     <div class="form-group">
-            <%= f.label "What is their email?" %><br>
-    <%= f.text_field :referee_email, :required => true, :placeholder => 'Their Email', :class => 'form-control login-field' %>
-             
-           </div>
+
 
          <div>
            <%= f.hidden_field :job_id, :value => @job.id%>
@@ -58,7 +60,6 @@
           <%= f.submit "Submit to Wekrut", :class => "btn btn-primary pull-right" %>
         </div>
       </div>
-    </form>
   </div>
 </div>
 </div>

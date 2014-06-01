@@ -1,9 +1,8 @@
     <div class="page page-table">
       <div class="panel panel-default">
       <div class="panel-heading"><strong><span class="fa fa-th"></span>
-        <% current_user.email %> Received Referrals</strong>
+        Received Referrals</strong>
         <%= link_to 'View Jobs', jobs_path %>
-        <%= "#{@unreviewed_count} Reviews Pending Update"%>
       </div>
         <table class="table">
           <tr>
@@ -18,7 +17,7 @@
             <td><%= link_to referral.job.name, job_path(referral.job.id), class: "#{referral.is_interested}-stat" %></td>
             <td><%= link_to referral.job.job_name, job_path(referral.job.id), class: "#{referral.is_interested}-stat" %></td>
             <!-- need to change the way class is entered -->
-            <td class="#{referral.is_interested}-stat"><%= referral.status.titleize%></td>
+            <td class="#{referral.is_interested}-stat"><%= referral.status %></td>
             <td class="#{referral.is_interested}-stat"><%= time_ago_in_words(referral.updated_at) %></td>
             <td><%= link_to "#{translate_boolean(referral.is_interested)}", referral_path(referral.id), class: "#{referral.is_interested}-stat" %></td>
             <td><%= link_to "Update", edit_referral_path(referral.id), class: "btn btn-primary"%> </td>

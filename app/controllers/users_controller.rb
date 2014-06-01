@@ -2,6 +2,9 @@ class UsersController < ApplicationController
   before_action :check_session
   before_action :set_user, only: [:show, :destroy]
   before_action :correct_user, only: [:show, :edit, :update, :destroy]
+  before_action :store_location #enables linking back
+
+  include ApplicationHelper
 
   def show
     @user_email = @user.email
@@ -16,9 +19,8 @@ class UsersController < ApplicationController
     #my referrrals
     select_sent = @user.referrals.select{|referral| referral.ref_type == "refer"}
     @sent_referrals = select_sent.paginate(page: params[:page], per_page: 10)
-    #
 
-
+    @hav_ref = has_any(@unreviewed_count)    #
   end
 
   def destroy
