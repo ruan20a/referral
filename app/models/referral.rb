@@ -50,9 +50,12 @@ class Referral < ActiveRecord::Base
 
   #TODO RETHINK LOGIC.
   def check_email(requester)
+    # binding.pry
     referral = self
     if referral.referral_email_changed?
+      # binding.pry
       if !referral.referral_email.nil?
+        # binding.pry
         referral_email = referral.referral_email
         referral_email == requester.email ? false:true
       else
