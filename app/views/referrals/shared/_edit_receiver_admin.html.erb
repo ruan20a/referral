@@ -1,38 +1,68 @@
-RECEIVED ADMIN FORM
 <div> Referral from <%= @referrer_FN.titleize %> <%= @referrer_LN %>
 </div>
-
 <%= render 'layouts/flash' %>
+<%= render 'layouts/headercandidate' %>
 
-<%= form_for :referral, url: {action:"update"}, method: :put do |f| %>
+<div class="container" style="margin-top:160px">
+  <div class="col-md-8 col-md-offset-2">
+   <div class="panel panel-default">
+     <div class="panel-heading"><h3 class="panel-title"><strong>Ask To Be Krüted</strong></h3></div>
+     <div class="panel-body">
+      <form role="form">
+       <div class="form-group">
+        <div class="row">
+         <div class="col-md-12">
+           <div class="row">
+             <%= form_for :referral, url: {action:"update"}, method: :put do |f| %>
+             <div class="col-md-4">
+               <div class="form-group">
+                   <%= f.label "Referral Name" %><br>
+                  <%= f.text_field :referral_name, :placeholder => 'Enter Your name', :class => 'form-control login-field' %>
+               </div>
 
-  <div>
-    <%= f.label "Referral Name" %><br>
-    <%= f.text_field :referral_name %>
+               <div class="form-group">
+                    <%= f.label "Referral Email" %><br>
+                    <%= f.text_field :referral_email, :placeholder => 'Referral Email', :class => 'form-control login-field' %>
+              </div>
+
+              <div class="form-group">
+               
+               <%= f.label "Relationship" %> <br>
+              <%= f.select :relationship, relationship_choices %>
+           
+           </div>
+
   </div>
 
-  <div>
-    <%= f.label "Referral Email" %><br>
-    <%= f.text_field :referral_email %>
-  </div>
+           <div class="col-md-4">
+            <div class="form-group">
+              <%= f.label "Referral LinkedIn Profile URL" %><br>
+              <div class="input-group">
+               <span class="input-group-addon"><span class="fa fa-linkedin"></span>
+             </span>
+      
+    <%= f.text_field :linked_profile_url, :class => 'form-control login-field' %></div>
+           </div>
+           <div class="form-group">
+             <%= f.label "Referral GitHub Profile URL" %><br>
+             <div class="input-group">
+               <span class="input-group-addon"><span class="fa fa-github"></span>
+             </span>
+             <%= f.text_field :github_profile_url, :class => 'form-control login-field'%>
+            </div>
+           </div>
 
-  <div>
-    <%= f.label "Referral LinkedIn" %><br>
-    <%= f.text_field :linked_profile_url %>
-  </div>
 
-  <div>
-    <%= f.label "Referral Github" %><br>
-    <%= f.text_field :github_profile_url %>
-  </div>
+        
+         </div>
 
-  <div>
-    <%= f.label "Relationship" %> <br>
-    <%= f.select :relationship, relationship_choices %>
-  </div>
+         <div class="col-md-4">
+          <div class="form-group">
 
+            <div>
+
+              
   <!-- #TODO NEED LOGIC TO SHOW THE CORRECT AVAILABLE CHOICES-->
-  <div>
     <%= f.label "Status" %><br>
     <%= f.select :status, status_choices %>
   </div>
@@ -43,7 +73,29 @@ RECEIVED ADMIN FORM
   </div>
 
   <div>
-    <%= f.submit "Submit to Wekrut" %>
+    <%= f.submit "Submit to Wekrut", :class => "btn btn-primary pull-right" %>
   </div>
 
+<% end %> 
 <% end %>
+
+
+
+
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<%= render 'layouts/footer_sticky' %>
+
+
+
+
+
+
+
+ 

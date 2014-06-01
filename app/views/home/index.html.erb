@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <h2 class="brand-heading">Empower Your Network</h2>
-                        <%= render 'beta_form' %>
+                        
                         <div class="page-scroll">
                             <a href="#about" class="btn btn-circle">
                                 <i class="fa fa-angle-double-down animated"></i>
@@ -16,43 +16,91 @@
             </div>
         </div>
     </section>
-<section id="about" class="content-section text-center">
-     <div class="container">
-           <div class="col-lg-6 col-lg-offset-3">
-               <hr class="section-heading-spacer">
-                   <div class="clearfix"></div>
-                       <h2 class="section-heading">Empower your network
-                       <br>Get Paid</h2>
-                       <p class="lead">We incentivize altruism. Connect your network to jobs and recieve the referral fee.</p>
+<section id="about">
 
-       </div>
-   </div>
-   <p></p>
+
+  <div class="about-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5 col-sm-6">
+          <hr class="section-heading-spacer">
+          <div class="clearfix"></div>
+          <h2 class="section-heading">Empower your network
+              <br>Get Paid</h2>
+          <p class="lead">We incentivize altruism. Connect your network to jobs and recieve the referral fee. 
+        </div>
+        <div class="col-lg-5 col-lg-offset-2 col-sm-6"><div class = "fa_img">
+          <i class="fa fa-building-o fa-5x"></i> <i class="fa fa-long-arrow-right fa-5x"></i> <i class="fa fa-user fa-5x"></i> <i class="fa fa-long-arrow-left fa-5x"></i> <i class="fa fa-group fa-5x"></i> </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+
+  <div class="white-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+          <hr class="section-heading-spacer">
+          <div class="clearfix">
+          </div>
+            <h2 class="section-heading">We Show You the Jobs</h4>
+            <p class="lead"> Search available jobs. Know someone that would be a good fit? Krüt them.</p>
+        </div>
+        <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+                   <%= image_tag "imac_jobs.png", :class => "img-responsive" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="about-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5 col-sm-6">
+            <hr class="section-heading-spacer">
+            <div class="clearfix"></div>
+            <h2 class="section-heading">Incentivize Altruism</h2>
+            <p class="lead">
+           Receive a fee if your referral is hired. </p>
+        </div>
+        <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+            <div class = "fa_img"><i class="fa fa-money fa-5x"></i> </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <div class="banner">
 
         <div class="container">
-               <div class="col-md-4">
-                   <i class="fa fa-pencil-square-o fa-5x"></i>
-                   <p></p>
-                   <h4 class="section-heading">Your Network is Talented</h4>
-                   <p>Approved to join WeKrüt? Sign up!</p>
-               </div>
 
-               <div class="col-md-4">
-                   <i class="fa fa-suitcase fa-5x"></i>
-                   <p></p>
-                   <h4 class="section-heading">We Show You the Jobs</h4>
-                   <p>Search available jobs. Know someone that would be a good fit? Krüt them.</p>
-               </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <h2>Connect to WeKrüt</h2>
+                </div>
+                <div class="col-lg-6">
+                    <ul class="list-inline banner-social-buttons">
+                        <li><a href="https://twitter.com/SBootstrap" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
+                        </li>
+                        <li><a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
+                        </li>
+                        <li><a href="#" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Linkedin</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
-               <div class="col-md-4">
-                   <i class="fa fa-money fa-5x"></i>
-                   <p></p>
-                   <h4 class="section-heading">Incentivize Altruism</h4>
-                   <p>Receive a fee if your referral is hired.</p>
-               </div>
-       </div>
-       <!-- /.container -->
-   </section>
+        </div>
+       
+
+        <!-- /.container -->
+
+    </div>
+
         <%= render 'layouts/footer' %>
 
 

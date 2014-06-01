@@ -266,7 +266,7 @@ a:focus {
     -o-background-size: cover;
 }
 
-.about-section {background: #1abc9c;
+.about-section {background: #000;
    color: #fff;
     width: 100%;
     padding: 50px;
@@ -449,7 +449,7 @@ a:focus {
 
     .top-nav-collapse {
         padding: 0;
-        background-color: #000;
+        background-color: #fff;
     }
 
     .navbar-custom.top-nav-collapse {
@@ -604,10 +604,19 @@ a:focus {
     -o-background-size: cover;
 }
 
-.about-section {background: #1abc9c;
+.about-section {background: #141414;
    color: #fff;
     width: 100%;
-    padding: 50px;
+    padding: 25px;
+    min-height: 275px;
+
+}
+
+.white-section {background: #fff;
+   color: #000;
+    width: 100%;
+    padding: 25px;
+    min-height: 275px;
 
 }
 
@@ -938,7 +947,7 @@ border-color: #bdc3c7;}
 .bg-wekrut {
    color: #fff;
    background-color: #1abc9c; 
-   padding: 10px 10px 10px 170px;
+   padding: 10px;
    font-size: 20px;
 }
 
@@ -948,5 +957,32 @@ border-color: #bdc3c7;}
     padding: 5px;
     border: 1px solid #fff ;
     font-size: 16px;
+}
+
+.Refer_Button {
+    color: #1abc9c;
+    padding: 5px;
+    border: 2px solid #1abc9c ;
+    font-size: 20px;
+
+}
+
+.panel-referal {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 20px;
+  color: inherit;
+}
+
+.banner {
+background-color: #1abc9c;
+color: #fff;
+min-height: 250px;
+padding: 50px;
+
+}
+
+.fa_img {
+    padding: 50px;
 }
 

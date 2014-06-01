@@ -34,11 +34,15 @@
             <!-- /.navbar-collapse -->
         </div>
  <div class="bg-wekrut">
+
     <div class="row">
-        <div class="col-md-12">
-        <div class="col-md-6"><%= @job.job_name %> - <%= @job.name %>
-  </div><div class="col-md-6">
-<%= link_to 'Close', jobs_path, :class => "Close_Button"%>
+      <div class="col-md-6 col-md-offset-3">
+        
+        <div class="navbar-left"><%= @job.job_name %> - <%= @job.name %> </div>
+        <%= link_to 'Close', jobs_path, :class => "Close_Button navbar-right"%>
+        <span class="fa fa-chevron-right fa-lg navbar-right"></span>
+  <span class="fa fa-chevron-left fa-lg navbar-right"></span>
+
 </div>
 </div>
 
