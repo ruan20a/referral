@@ -5,7 +5,9 @@ gem 'rake', '10.2.2'
 
 gem 'rails', '4.0.3'
 
-gem 'will_paginate', '~> 3.0.5'
+# gem 'will_paginate', '~> 3.0.5'
+
+gem 'kaminari'
 
 gem "unicorn"
 

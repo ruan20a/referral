@@ -85,7 +85,7 @@ class JobsController < ApplicationController
     elsif !current_admin.nil?
       #admin referrals - is_interested = true & ref_type = refer.
       admin_referrals = current_admin.referrals.select{|referral| referral.ref_type == "refer" && referral.is_interested == true}
-      @unreviewed_requests = admin_referrals.select{|referral|referral.status == "pending"}.count
+      @unreviewed_requests = admin_referrals.select{|referral| referral.status == "pending"}.count
     else
       @unreviewed_requests = 0
     end

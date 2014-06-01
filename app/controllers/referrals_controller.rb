@@ -41,7 +41,7 @@ class ReferralsController < ApplicationController
           redirect_to referral, notice: "Your referral has been created"
         else
           ReferralMailer.deliver_ask_email(referral, @requester)
-          redirect_to requester, notice: "Referral Request Sent"
+          redirect_to jobs_path, notice: "Referral Request Sent"
         end
       else
         binding.pry
