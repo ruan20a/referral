@@ -12,5 +12,7 @@
 class Whitelist < ActiveRecord::Base
 	# has_many :users
 	# has_many :admins
-  validates_presence_of :email, :uniqueness => {:case_sensitive => false, :scope => :is_admin}
+
+  #TODO to test.
+  validates_presence_of :email, :uniqueness => {:case_sensitive => false}
 end

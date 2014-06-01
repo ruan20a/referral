@@ -27,6 +27,7 @@ class ReferralsController < ApplicationController
   end
 
   def create
+    #
     referral = Referral.new(referral_params)
     admin = referral.job.admin
 
@@ -39,13 +40,14 @@ class ReferralsController < ApplicationController
     end
 
 
-    if requester.email != referral.referral_email #protected method to check if there is a self-referral.
+    if referral.check_email(requester) #protected method to check if there is a self-referral.
       if referral.save
         if referral.ref_type == "refer"
           ReferralMailer.deliver_ref_email(referral)
         else
           ReferralMailer.deliver_ask_email(referral, requester)
         end
+        check_whitelist(referral)
         redirect_to referral
       else
         flash[:error] = "Please fill in all the required fields"
@@ -163,6 +165,17 @@ class ReferralsController < ApplicationController
     end
   end
 
+  def check_whitelist(referral)
+    if referral.ref_type == "refer"
+      unless Whitelist.exists?(:email => params[:referral][:referral_email])
+        Whitelist.create(:email => params[:referral][:referral_email], :is_admin => false)
+      end
+    else
+      unless Whitelist.exists?(:email => params[:referral][:referee_email])
+        Whitelist.create(:email => params[:referral][:referee_email], :is_admin => false)
+      end
+    end
+  end
   #NEED TO MOVE THIS METHOD TO THE MODEL
 
 
