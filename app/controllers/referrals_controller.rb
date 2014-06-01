@@ -26,44 +26,20 @@ class ReferralsController < ApplicationController
     end
    # @your_name = current_user.first_name && current_user.last_name || ""
   end
-
-  def create
-    #
+def create
     referral = Referral.new(referral_params)
     admin = referral.job.admin
-<<<<<<< HEAD
     set_requester(referral)
     if referral.check_email(@requester) #protected method to check if there is a self-referral.
-=======
-
-    if current_admin.nil?
-      referral.user_id = current_user.id
-      requester = User.find(current_user.id)
-    else
-      referral.admin_id = current_admin.id
-      requester = Admin.find(current_admin.id)
-    end
-
-
-
-    if referral.check_email(requester) #protected method to check if there is a self-referral.
->>>>>>> 9ab6422d3f3f4504e372e36c28abbe6b843ccbd0
       if referral.save
-        binding.pry
+        # binding.pry
         if referral.ref_type == "refer"
           ReferralMailer.deliver_ref_email(referral)
           check_whitelist(referral)
-<<<<<<< HEAD
-          redirect_to referral, notice: "Your referral has been created"
-        else
-          ReferralMailer.deliver_ask_email(referral, @requester)
-          redirect_to jobs_path, notice: "Referral Request Sent"
-=======
           redirect_to jobs_path, notice: "Success. Your referral has been created. An email has been sent to confirm interest. "
         else
-          ReferralMailer.deliver_ask_email(referral, requester)
+          ReferralMailer.deliver_ask_email(referral, @requester)
           redirect_to jobs_path, notice: "Success. Your referral request has been sent."
->>>>>>> 9ab6422d3f3f4504e372e36c28abbe6b843ccbd0
         end
       else
         binding.pry
@@ -202,7 +178,7 @@ class ReferralsController < ApplicationController
     status = main_admins.select{|email| email == current_admin.email}
     redirect_to new_admin_session_path, notice: "You are not an approved admin." if status.empty?
   end
-
-
-
 end
+
+
+

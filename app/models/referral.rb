@@ -28,9 +28,9 @@ class Referral < ActiveRecord::Base
 	belongs_to :user
   validates_presence_of :job_id, :ref_type
   #different logic for ask_refer types lambda substitute for method logic
-  validates_presence_of :referee_email, :referee_name, :unless => lambda{ self.ref_type == "refer" }
+  # validates_presence_of :referee_email, :referee_name, :unless => lambda{ self.ref_type == "refer" }
   #different logic for refer types lambda substitute for method logic
-  validates_presence_of :referral_email, :referral_name, :unless => lambda{ self.ref_type == "ask_refer" }
+  # validates_presence_of :referral_email, :referral_name, :unless => lambda{ self.ref_type == "ask_refer" }
   before_save :check_notification, :if => :is_interested_changed?
   # before_save :check_email, :if => :referral_email_changed?
 
