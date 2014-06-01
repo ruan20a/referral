@@ -45,11 +45,12 @@ class ReferralsController < ApplicationController
       if referral.save
         if referral.ref_type == "refer"
           ReferralMailer.deliver_ref_email(referral)
+          check_whitelist(referral)
+          redirect_to jobs_path, notice: "Success. Your referral has been created. An email has been sent to confirm interest. "
         else
           ReferralMailer.deliver_ask_email(referral, requester)
+          redirect_to jobs_path, notice: "Success. Your referral request has been sent."
         end
-        check_whitelist(referral)
-        redirect_to referral
       else
         flash[:error] = "Please fill in all the required fields"
         redirect_to new_referral_path(:job_id => referral.job_id, :ref_type => referral.ref_type)

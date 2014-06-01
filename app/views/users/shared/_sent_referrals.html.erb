@@ -26,8 +26,9 @@
         <td><%= link_to "Update", edit_referral_path(referral.id), class: "btn btn-primary"%> </td>
       </tr>
       <%end%>
+      <%= will_paginate @sent_referrals%>
     </table>
   </div>
-  <%= will_paginate @sent_referrals%>
+
 </div>
 
