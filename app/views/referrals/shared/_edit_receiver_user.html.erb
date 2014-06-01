@@ -1,47 +1,68 @@
-<%= render 'layouts/flash' %>
-<%= render 'layouts/headercandidate' %>
-
-<div class="container" style="margin-top:160px">
-  <div class="col-md-8 col-md-offset-2">
-   <div class="panel panel-default">
-     <div class="panel-heading"><h3 class="panel-title"><strong>Krüt Someone you Know</strong></h3></div>
-     <div class="panel-body">
-      <form role="form">
-       <div class="form-group">
-        <div class="row">
-         <div class="col-md-12">
-           <div class="row">
-
-            RECEIVER USER EDIT FORM
-
-<div> Referral from <%= @referrer_FN.titleize %> <%= @referrer_LN %>
-</div>
-
+<%= render 'layouts/header' %>
 <%= render 'layouts/flash' %>
 
-<%= form_for :referral, url: {action:"update"}, method: :put do |f| %>
+<section class="jobs">
+  <div class="container" style="margin-top:40px">
+    <div class="col-md-12">
+      <div class="col-md-8">
+        <div class="panel panel-default">
+          <div class="panel-heading"><h2 class="panel-referal"><%= @referrer_FN %> <%= @referrer_LN %> Thought You'd Like This Job
+             </h2>
+          </div>
+          <div class="panel-body">
+            <div class="login-form">
+              <div class="details-section">  
+                 <strong><%= @job.job_name %> - <%= @job.name %></strong>
+              </div>
+              <div class="details-section">
+                <strong>Location:</strong>
+                <%= @job.city %>
+                <%= @job.state %>
+              </div>
+              <div class="details-section">
+                <strong>Description:</strong>
+                <%= @job.description %>
+              </div>
+              <div class="details-section_end">
+                <strong>Skills</strong>
+                <%= @job.speciality_1 %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+
+
+        <div class="panel panel-default">
+          <div class="panel-heading"><h2 class="panel-referal">
+             Interested?</h2>
+          </div>
+          <div class="panel-body">
+            <div class="login-form">
+             <%= form_for :referral, url: {action:"update"}, method: :put do |f| %>
   <div>
     <%= f.label "Your Name" %><br>
-    <%= f.text_field :referral_name %>
+    <%= f.text_field :referral_name, :class => 'form-control login-field' %>
   </div>
-
+<br>
   <div>
     <%= f.label "Your LinkedIn Profile URL" %><br>
-    <%= f.text_field :linked_profile_url %>
+    <%= f.text_field :linked_profile_url, :class => 'form-control login-field' %>
   </div>
-
+<br>
    <div>
     <%= f.label "Your GitHub Profile URL" %><br>
-    <%= f.text_field :github_profile_url %>
+    <%= f.text_field :github_profile_url, :class => 'form-control login-field' %>
   </div>
-
+<br>
   <div class="form-group">
     <label> Relationship? </label>
     <row>
       <%= f.select :relationship, relationship_choices %>
     </row>
   </div>
-
+<br>
   <div class="form-group">
     <%= f.label "I'm interested in this job", class:"interested" %>
     <%= f.check_box :is_interested, value: 'true'%>
@@ -53,11 +74,10 @@
   </div>
 
   <div>
-    <%= f.submit "Update Referral" %>
+    <%= f.submit "Update Referral", :class => 'btn btn-primary btn-md btn-block'%>
   </div>
 <% end %>
-
-JOB AREA
-
-<%= render 'jobs/show' %>
+              
+</section>
+      <%= render "layouts/footer" %>
 
