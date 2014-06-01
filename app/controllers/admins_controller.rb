@@ -23,6 +23,8 @@ before_action :check_main_admin, only: [:index]
     @pending_referrals = @admin.referrals.select{|x| x.status == "pending" && x.is_interested == true}
 
     @pending_count = @pending_referrals.count
+
+    @hav_ref = has_any(@pending_count)
   end
 
   def destroy
@@ -52,5 +54,9 @@ before_action :check_main_admin, only: [:index]
     redirect_to new_admin_session_path, error: "You are not an approved admin whitelister" if status.empty?
   end
 
+  #TODO move this method
+  def has_any(var)
+    var > 0 ? true : false
+  end
 
 end

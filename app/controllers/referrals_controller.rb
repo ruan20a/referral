@@ -4,6 +4,7 @@ class ReferralsController < ApplicationController
   before_action :determine_status, only: [:update, :edit, :show]
   before_action :check_correct_owners, only: [:show, :edit, :update, :destroy]
   before_action :store_location #enables linking back
+
   # after_update :check_interest
 
   #TODO set up params to align with the right owner****
@@ -38,11 +39,10 @@ class ReferralsController < ApplicationController
     end
 
 
-
-    if check_email #protected method to check if there is a self-referral.
+    if requester.email != referral.referral_email #protected method to check if there is a self-referral.
       if referral.save
         if referral.ref_type == "refer"
-          ReferralMailer.deliver_ref_email(referral, admin)
+          ReferralMailer.deliver_ref_email(referral)
         else
           ReferralMailer.deliver_ask_email(referral, requester)
         end
@@ -82,7 +82,15 @@ class ReferralsController < ApplicationController
 
   def update
     @referral
-    if check_email
+
+    #TODO REFACTOR IT OUT
+    if current_admin.nil?
+      requester = User.find(current_user.id)
+    else
+      requester = Admin.find(current_admin.id)
+    end
+
+    if @referral.check_email(requester)
       if @referral.update(referral_params)
         #logic?
         redirect_to @referral
@@ -155,31 +163,8 @@ class ReferralsController < ApplicationController
     end
   end
 
-  def check_email
-    @referral_email = @referral.referral_email
+  #NEED TO MOVE THIS METHOD TO THE MODEL
 
-    if current_user.nil?
-      @referral_email == current_admin.email ? false:true
-    else
-      @referral_email == current_user.email ? false:true
-    end
-  end
 
-  # def check_interest(referral)
-  #   admin = @referral.job.admin
-  #   b = a.changed
-  #   c = b.select{|x| x=="is_interested"}.count
-
-  #   if c == 1
-  #     if a.is_interested == true && a.is_admin_notified == false
-  #       a.is_admin_notified == true
-  #       if a.save
-  #         ReferralMailer.deliver_admin_notification(@referral, )
-  #       else
-  #         render 'edit', error: "We had an issue with your referral request. Please try again."
-  #       end
-  #     end
-  #   end
-  # end
 
 end

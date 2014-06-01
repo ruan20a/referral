@@ -27,7 +27,11 @@
      <ul class="nav nav-tabs nav-justified">
       <li class="active"><a href="#all-referrals" data-toggle="tab">Referrals</a></li>
       <li class=""><a href="#pending-referrals" data-toggle="tab">
-        <%="Pending Review (#{@pending_count})" %></a></li>
+        <% if @hav_ref %>
+          <%="Pending Review (#{@pending_count})" %></a>
+        <% end %>
+        </li>
+
     </ul>
 
        <div id="myTabContent" class="tab-content">

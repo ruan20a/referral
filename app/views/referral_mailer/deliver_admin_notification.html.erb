@@ -1,4 +1,36 @@
-<div>
-  HELLO ADMIN NOTIFICATION
+WHAT THE ADMIN SEES
 
+<div>Hello <%=@admin_FN.titleize%> <%=@admin_LN.titleize%>, </div>
+
+<div>
+  You received a new referral for <strong> <%= @job.job_name.titleize%> </strong> at <%= @job.name.titleize %>. <%=@sender_first_name.titleize%> <%=@sender_last_name.titleize%> has referred <%=@referral.referral_name%> for this position. <%=@referral.referral_name%>  has indicated interest in this position.
 </div>
+
+<br>
+
+<div>
+  Follow the link to view the referral.
+  <br>
+
+  <!-- TODO CHANGE LINK -->
+  <%=link_to 'Referral Link', url_for(controller: 'home', action: 'index', only_path: false)%>
+</div>
+
+<br>
+
+<div>
+  Thank You,
+</div>
+<br>
+<div>
+  WeKrüt Team!
+</div>
+<br>
+<div>
+Job Description
+</div>
+<br>
+<div>
+<%=@job.description%>
+</div>
+

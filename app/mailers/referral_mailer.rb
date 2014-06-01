@@ -24,29 +24,50 @@ class ReferralMailer < ActionMailer::Base
     @receiver_email = @referral.referral_email
 
 
-    job = Job.find(referral.job_id)
-    @job_name = job.name.titleize
+    @job = @referral.job
+    @job_name = @job.name.titleize
 
-    mail(to: @receiver_email,subject: "New Referral for Job #{@job_name}").deliver
+    mail(to: @receiver_email,subject: "New Referral for Job #{@job_name}", cc: @sender_email).deliver
 
   end
 
   def deliver_ask_email(referral, requester)
-    @referee_email = referral.referee_email
+    referee_email = referral.referee_email
     @referee_name = referral.referee_name
-    @job = Job.find(referral.job_id)
+    @job = referral.job
+
     # binding.pry
     @requester_FN = requester.first_name
     @requester_LN = requester.last_name
-    @requester_email = requester.email
+    requester_email = requester.email
 
-    mail(to: @referee_email, subject: "Referral Request from #{@requester_FN.titleize} #{@requester_LN.titleize}").deliver
-    mail(to: @requester_email, subject: "Copy of your referral request to #{@referee_name.titleize}").deliver
+    mail(to: referee_email, subject: "Referral Request from #{@requester_FN.titleize} #{@requester_LN.titleize}").deliver
+    mail(to: requester_email, subject: "Copy of your referral request to #{@referee_name.titleize}").deliver
   end
 
   def deliver_admin_notification(referral, admin)
+    binding.pry
 
+    @referral = referral
 
+    @admin_FN = admin.first_name
+    @admin_LN = admin.last_name
+    admin_email = admin.email
+
+    #TODO FACTOR THIS OUT (METHOD)!!
+    if @referral.user_id.nil?
+      sender = Admin.find(referral.admin_id)
+    else
+      sender = User.find(referral.user_id)
+    end
+
+    @sender_first_name = sender.first_name
+    @sender_last_name = sender.last_name
+    sender_email = sender.email
+
+    @job = Job.find(@referral.job_id)
+
+    mail(to: admin_email,subject: "New Referral for Job #{@job.name}").deliver
   end
 
 end

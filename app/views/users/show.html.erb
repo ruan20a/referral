@@ -3,9 +3,9 @@
 <section class="jobs">
   <div class="container">
     <ul class="nav nav-tabs nav-justified">
-      <li class="active"><a href="#received-referrals" data-toggle="tab"> <strong> Received Referrals - </strong>
+      <li class="active"><a href="#received-referrals" data-toggle="tab"> <strong> Received Referrals </strong>
         <% if @hav_ref %>
-          <%= "#{@unreviewed_count} Requests Pending Review"%>
+          <%= " - #{@unreviewed_count} Requests Pending Review"%>
         <% end %>
 
       </a></li>
