@@ -26,6 +26,7 @@ class ReferralsController < ApplicationController
     end
    # @your_name = current_user.first_name && current_user.last_name || ""
   end
+
 def create
     referral = Referral.new(referral_params)
     admin = referral.job.admin
@@ -42,7 +43,7 @@ def create
           redirect_to jobs_path, notice: "Success. Your referral request has been sent."
         end
       else
-        binding.pry
+        #binding.pry
         flash[:error] = "Please fill in all the required fields"
         redirect_to new_referral_path(:job_id => referral.job_id, :ref_type => referral.ref_type)
       end
@@ -77,6 +78,7 @@ def create
 
   def update
     set_requester(@referral)
+    binding.pry
     if @referral.check_email(@requester)
       if @referral.update(referral_params)
         #logic?
