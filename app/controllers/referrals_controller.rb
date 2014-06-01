@@ -26,6 +26,7 @@ class ReferralsController < ApplicationController
     end
    # @your_name = current_user.first_name && current_user.last_name || ""
  end
+  
   def create
    referral = Referral.new(referral_params)
    admin = referral.job.admin
@@ -50,7 +51,7 @@ class ReferralsController < ApplicationController
      flash[:error] = "Sorry, you cannot refer yourself."
      redirect_to new_referral_path(:job_id => referral.job_id, :ref_type => referral.ref_type)
    end
- end
+  end
 
   def show
     @referral
@@ -76,6 +77,7 @@ class ReferralsController < ApplicationController
 
   def update
     set_requester(@referral)
+    binding.pry
     if @referral.check_email(@requester)
       if @referral.update(referral_params)
         #logic?

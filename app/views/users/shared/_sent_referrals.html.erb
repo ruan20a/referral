@@ -15,15 +15,15 @@
       </tr>
       <% @sent_referrals.each do |referral| %>
       <tr>
-        <td><%= link_to referral.job.name, job_path(referral.job.id), class: "#{referral.status}-stat" %></td>
-        <td><%= link_to referral.job.job_name, job_path(referral.job.id), class: "#{referral.status}-stat" %></td>
+        <td><%= referral.job.name %></td>
+        <td><%= referral.job.job_name %></td>
 
-        <td><%= link_to referral.referral_name, referral_path(referral.id) %></td>
+        <td><%= referral.referral_name %></td>
         <!-- need to change the way class is entered -->
         <td class="#{referral.is_interested}-stat"><%= referral.job.referral_fee %></td>
         <td class="#{referral.is_interested}-stat"><%= time_ago_in_words(referral.updated_at) %></td>
-        <td><%= link_to referral.status, referral_path(referral.id), class: "#{referral.status}-stat" %></td>
-        <td><%= link_to "Update", edit_referral_path(referral.id), class: "btn btn-primary"%> </td>
+        <td><%= referral.status %></td>
+        
       </tr>
       <%end%>
       <%= will_paginate @sent_referrals%>
