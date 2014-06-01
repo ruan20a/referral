@@ -16,13 +16,13 @@
                
                    </li>
                    <li class="page-scroll">
-                       <a href="#about">About</a>
+                       <a href="#about">How it Works</a>
                    </li>
                    <li class="page-scroll">
-                       <a href="jobs">Jobs</a>
+                       <li><%= link_to "Jobs", jobs_path %></li>
                    </li>
                    <li class="page-scroll">
-                       <% if user_signed_in? %> <a>Profile</a> 
+                       <% if user_signed_in? %> <li><%= link_to "Profile", user_path(current_user) %></li>
                        <% else %> 
                       <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Login<b class="caret"></b></a>
                         <ul class="dropdown-menu">
