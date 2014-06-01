@@ -16,9 +16,9 @@
                  <th><strong><span class="fa fa-th"></span> Job Postings  <%= search_form_for @search do |f| %> 
                 </th>
                 <th>
-                  <%= f.text_field :name_or_job_name_or_city_or_state_cont, :placeholder => 'Search' %>
-                </th>
-                <th class="col-md-2 action"><%= f.submit "Search" %>
+                  &nbsp&nbsp<%= f.text_field :name_or_job_name_or_city_or_state_cont, :placeholder => 'Search' %>
+               
+                <%= f.submit "Search" %>
                 </th>
                   <% end %>
               </table>
@@ -69,7 +69,7 @@
 </div>
 </section>
      
-
+<%= render "layouts/footer" %>
       
 
 
