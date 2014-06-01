@@ -1,52 +1,74 @@
-<%= form_for @job do |f| %>
-<div>
-    <%= f.label :name, "Company Name" %><br>
-    <%= f.text_field :name %>
-  </div>
+<%= render 'layouts/header' %>
+<%= render 'layouts/flash' %>
 
-   <div>
-    <%= f.label :job_name, "Position Title" %><br>
-    <%= f.text_field :job_name %>
-  </div>
+<div class="container" style="margin-top:160px">
+      <div class="col-md-8 col-md-offset-2">
+       <div class="panel panel-default">
+         <div class="panel-heading"><h3 class="panel-title"><strong>New Job</strong></h3></div>
+          <div class="panel-body">
+            <div class="login-form">
+              <%= form_for @job do |f| %>
+              <div class="col-md-4">
 
-   <div>
-    <%= f.label :city %><br>
-    <%= f.text_field :city %>
-  </div>
+                <div class="form-group">                  <%= f.label :name, "Company Name" %><br>
+                  <%= f.text_field :name, :class => 'form-control login-field' %>
+                </div>
 
-   <div>
-    <%= f.label :state %><br>
-    <%= f.text_field :state %>
-  </div>
+                 <div>                  <%= f.label :job_name, "Position Title" %><br>
+                  <%= f.text_field :job_name, :class => 'form-control login-field' %>
+                </div>
 
-  <div>
-    <%= f.label :description, "Job Description" %><br>
-    <%= f.text_area :description %>
-  </div>
+                <div><br>
+                  <%= f.label :referral_fee %><br>
+                  <%= f.text_field :referral_fee, :class => 'form-control login-field' %>
+                </div>
 
-  <div>
-    <%= f.label :speciality_1, "What skills are you looking for?" %><br>
-    <%= f.text_field :speciality_1 %>
-  </div>
+                <div><br>
+                  <%= link_to 'Back', jobs_path %>
+                </div>
 
-  <div>
-    <%= f.label :industry %><br>
-    <%= f.select :industry_1, industry_choices %>
-  </div>
+                
 
-<div>
-  <%= f.label :referral_fee %><br>
-  <%= f.text_field :referral_fee %>
-</div>
+              </div>
 
- <div>
-  <%= f.label :image, "Upload Logo File" %><br>
-  <%= f.file_field :image  %>
-</div>
+              <div class="col-md-4">
+                <div>
+                  <%= f.label :city %><br>
+                  <%= f.text_field :city, :class => 'form-control login-field' %>
+                </div>
 
-  <div>
-    <%= f.submit "Submit to Wekrut" %>
-  </div>
-<% end %>
+                 <div><br>
+                  <%= f.label :state %><br>
+                  <%= f.text_field :state, :class => 'form-control login-field' %>
+                </div>
 
-<%= link_to 'Back', jobs_path %>
+                <div><br>
+                  <%= f.label :industry %><br>
+                  <%= f.select :industry_1, industry_choices %>
+                </div>
+
+              </div>
+              <div class="col-md-4">
+
+                <div>
+                  <%= f.label :description, "Job Description" %><br>
+                  <%= f.text_area :description, :class => 'form-control login-field wysihtml5' %>
+                </div>
+
+                <div><br>
+                  <%= f.label :speciality_1, "Preferred Skills" %><br>
+                  <%= f.text_field :speciality_1, :class => 'form-control login-field' %>
+                </div>
+
+                <div><br>
+                 <%= f.label :image, "Upload Logo File" %><br>
+                 <%= f.file_field :image  %>
+                </div>
+                <div><br>
+                  <%= f.submit "Submit to Wekrut", :class => 'btn btn-primary btn-md btn-block' %>
+                  </div>
+            </div>
+
+            <% end %>
+
+           <%= render "layouts/footer_sticky" %>

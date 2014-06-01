@@ -3,88 +3,76 @@
 
 <div class="container" style="margin-top:160px">
   <div class="col-md-8 col-md-offset-2">
-   <div class="panel panel-default">
-     <div class="panel-heading"><h3 class="panel-title"><strong>Krüt Someone you Know</strong></h3></div>
-     <div class="panel-body">
-      <form role="form">
-       <div class="form-group">
-        <div class="row">
-         <div class="col-md-12">
-           <div class="row">
-             <%= form_for :referral, url: referrals_path do |f| %>
-             <div class="col-md-4">
-               <div class="form-group">
-                 <%= f.label "Your Name" %><br>
-                 <%= f.text_field :name, :placeholder => 'Enter Your name', :class => 'form-control login-field' %>
-               </div>
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3 class="panel-title"><strong>Krüt Someone you Know</strong></h3>
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+ 
+         <%= form_for :referral, url: referrals_path do |f| %>
+          <div class="col-md-4">
+            <div class="form-group">
+             <%= f.label "Your Name" %><br>
+             <%= f.text_field :name, :placeholder => 'Enter Your name', :class => 'form-control login-field' %>
+            </div>
 
-               <div class="form-group">
-                <%= f.label "Who would you like to refer?" %><br>
-                <%= f.text_field :referral_name, :placeholder => 'Enter Referral Name', :class => 'form-control login-field' %>
-              </div>
+            <div class="form-group">
+              <%= f.label "Who would you like to refer?" %><br>
+              <%= f.text_field :referral_name, :placeholder => 'Enter Referral Name', :class => 'form-control login-field' %>
+            </div>
 
-              <div class="form-group">
+            <div class="form-group">
                <label> Relationship? </label>
                <row> <%= f.select :relationship, relationship_choices %></row>
-             </div>
-           </div>
+            </div>
 
-           <div class="col-md-4">
+          </div>
+
+          <div class="col-md-4">
+            
             <div class="form-group">
               <%= f.label "What is their LinkedIn Profile URL" %><br>
               <div class="input-group">
-               <span class="input-group-addon"><span class="fa fa-linkedin"></span>
-             </span>
-             <%= f.text_field :linked_profile_url, :class => 'form-control login-field' %></div>
-           </div>
-           <div class="form-group">
-             <%= f.label "What is their GitHub Profile URL" %><br>
-             <div class="input-group">
-               <span class="input-group-addon"><span class="fa fa-github"></span>
-             </span>
-             <%= f.text_field :github_profile_url, :class => 'form-control login-field'%>
+               <span class="input-group-addon"><span class="fa fa-linkedin"></span></span>
+                  <%= f.text_field :linked_profile_url, :class => 'form-control login-field' %>
+              </div>
             </div>
-           </div>
+            
+            <div class="form-group">
+              <%= f.label "What is their GitHub Profile URL" %><br>
+              <div class="input-group">
+                <span class="input-group-addon"><span class="fa fa-github"></span></span>
+                  <%= f.text_field :github_profile_url, :class => 'form-control login-field'%>
+              </div>
+            </div>
 
-           <div class="form-group">
-             <%= f.label "What is their email?" %><br>
-             <%= f.text_field :referral_email, :placeholder => 'Referral Email', :class => 'form-control login-field' %>
-           </div>
+            <div class="form-group">
+              <%= f.label "What is their email?" %><br>
+              <%= f.text_field :referral_email, :placeholder => 'Referral Email', :class => 'form-control login-field' %>
+            </div>
 
-         </div>
+          </div>
 
          <div class="col-md-4">
-          <div class="form-group">
 
+          <div class="form-group">
            <%= f.label "Send a personal note" %><br>
            <%= f.text_area :personal_note %>
-         </div>
+          </div>
 
-         <div>
+          <div>
            <%= f.hidden_field :job_id, :value => @job.id%>
            <%= f.hidden_field :ref_type, value: @ref_type %>
-         </div>
+          </div>
 
-         <div>
+          <div>
           <%= f.submit "Submit to Wekrut", :class => "btn btn-primary pull-right" %>
+          </div>
+          <% end %>
         </div>
       </div>
-    </form>
+    </div>
   </div>
-</div>
-</div>
-</div>
-<% end %>
-
-
-
-
-
-
-</div>
-</div>
-</div>
-</div>
 </div>
 
 <%= render 'layouts/footer_sticky' %>
