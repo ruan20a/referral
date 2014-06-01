@@ -12,13 +12,17 @@
             </th>
             <th class="col-md-2 action"><%= f.submit "Search" %>
             </th>
-              <% end %>
+          <% end %>
+
+          <th><%= link_to "Clear Search", request.path, class:"cancel-button" %></th>
 
             <th>
-              <% if current_admin.nil? %>
-                <%= link_to "#{@unreviewed_requests} Requests Pending Review", user_path(current_user.id) %>
-              <% else %>
-                <%= link_to "#{@unreviewed_requests} Requests Pending Review", admin_path(current_admin.id) %>
+              <% if @has_ref %>
+                <% if current_admin.nil? %>
+                  <%= link_to " #{@unreviewed_requests} Requests Pending Review", user_path(current_user.id) %>
+                <% else %>
+                  <%= link_to "#{@unreviewed_requests} Requests Pending Review", admin_path(current_admin.id) %>
+                <% end %>
               <% end %>
             </th>
           </table>

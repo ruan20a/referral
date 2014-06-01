@@ -4,7 +4,8 @@ class ReferralsController < ApplicationController
   before_action :determine_status, only: [:update, :edit, :show]
   before_action :check_correct_owners, only: [:show, :edit, :update, :destroy]
   before_action :store_location #enables linking back
-
+  before_action :check_main_admin, only: [:index]
+  # before_action :set_requester, only: [:update, :create]
   # after_update :check_interest
 
   #TODO set up params to align with the right owner****
@@ -30,26 +31,20 @@ class ReferralsController < ApplicationController
     #
     referral = Referral.new(referral_params)
     admin = referral.job.admin
-
-    if current_admin.nil?
-      referral.user_id = current_user.id
-      requester = User.find(current_user.id)
-    else
-      referral.admin_id = current_admin.id
-      requester = Admin.find(current_admin.id)
-    end
-
-
-    if referral.check_email(requester) #protected method to check if there is a self-referral.
+    set_requester(referral)
+    if referral.check_email(@requester) #protected method to check if there is a self-referral.
       if referral.save
+        binding.pry
         if referral.ref_type == "refer"
           ReferralMailer.deliver_ref_email(referral)
+          check_whitelist(referral)
+          redirect_to referral, notice: "Your referral has been created"
         else
-          ReferralMailer.deliver_ask_email(referral, requester)
+          ReferralMailer.deliver_ask_email(referral, @requester)
+          redirect_to requester, notice: "Referral Request Sent"
         end
-        check_whitelist(referral)
-        redirect_to referral
       else
+        binding.pry
         flash[:error] = "Please fill in all the required fields"
         redirect_to new_referral_path(:job_id => referral.job_id, :ref_type => referral.ref_type)
       end
@@ -83,16 +78,8 @@ class ReferralsController < ApplicationController
   end
 
   def update
-    @referral
-
-    #TODO REFACTOR IT OUT
-    if current_admin.nil?
-      requester = User.find(current_user.id)
-    else
-      requester = Admin.find(current_admin.id)
-    end
-
-    if @referral.check_email(requester)
+    set_requester(@referral)
+    if @referral.check_email(@requester)
       if @referral.update(referral_params)
         #logic?
         redirect_to @referral
@@ -124,6 +111,16 @@ class ReferralsController < ApplicationController
 
   def set_referral
     @referral = Referral.find(params[:id])
+  end
+
+  def set_requester(referral)
+    if current_admin.nil?
+      @requester = User.find(current_user.id)
+      referral.user_id = @requester.id
+    else
+      @requester = Admin.find(current_admin.id)
+      referral.admin_id = @requester.id
+    end
   end
 
   def referral_params
@@ -177,6 +174,13 @@ class ReferralsController < ApplicationController
     end
   end
   #NEED TO MOVE THIS METHOD TO THE MODEL
+
+  def check_main_admin
+  #need to update this
+    main_admins = ["loritiernan@gmail.com", "info@wekrut.com", "nyc.amy@gmail.com","deaglan1@gmail.com"]
+    status = main_admins.select{|email| email == current_admin.email}
+    redirect_to new_admin_session_path, notice: "You are not an approved admin." if status.empty?
+  end
 
 
 

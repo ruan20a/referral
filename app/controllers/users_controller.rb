@@ -4,6 +4,8 @@ class UsersController < ApplicationController
   before_action :correct_user, only: [:show, :edit, :update, :destroy]
   before_action :store_location #enables linking back
 
+  include ApplicationHelper
+
   def show
     @user_email = @user.email
 
@@ -51,7 +53,4 @@ class UsersController < ApplicationController
     redirect_to new_user_session_path, :error => "You cannot view that account because you're not the correct admin. Please login to the correct account."  unless user == current_user
   end
 
-  def has_any(var)
-    var > 0 ? true : false
-  end
 end

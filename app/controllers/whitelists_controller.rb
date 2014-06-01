@@ -61,7 +61,7 @@ class WhitelistsController < ApplicationController
   #need to update this
     main_admins = ["loritiernan@gmail.com", "info@wekrut.com", "nyc.amy@gmail.com","deaglan1@gmail.com"]
     status = main_admins.select{|email| email == current_admin.email}
-    redirect_to new_admin_session_path, error: "You are not an approved admin whitelister" if status.empty?
+    redirect_to new_admin_session_path, notice: "You are not an approved admin whitelister" if status.empty?
   end
 
 end

@@ -3,6 +3,8 @@ before_action :authenticate_admin!, only: [:show, :index]
 before_action :set_admin, only: [:show, :update, :destroy]
 before_action :correct_admin, only: [:show, :update, :edit, :destroy]
 before_action :check_main_admin, only: [:index]
+# before_action :clear_search_index, :only => [:show]
+
 
   include ApplicationHelper
 
@@ -14,11 +16,12 @@ before_action :check_main_admin, only: [:index]
     @admins = Admin.new
   end
 
-   
+
 
   def show
     @jobs = @admin.jobs
     @search = Referral.search(params[:q])
+    # binding.pry
     @referrals = @search.result.select{|x| x.job.admin == @admin}
     @sorted_referrals = @referrals.select{|x| x.ref_type == "refer" && x.is_interested == true}.paginate(page: params[:page], per_page: 10)
     #is_interested & pending status check
@@ -26,7 +29,7 @@ before_action :check_main_admin, only: [:index]
 
     @pending_count = @pending_referrals.count
 
-    @hav_ref = has_any(@pending_count)
+    @has_ref = has_any(@pending_count)
   end
 
   def destroy
@@ -60,5 +63,12 @@ before_action :check_main_admin, only: [:index]
   def has_any(var)
     var > 0 ? true : false
   end
+
+  #ransack methods
+  def search_params
+    params[:q]
+  end
+
+
 
 end
