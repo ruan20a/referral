@@ -52,12 +52,6 @@
   </div>
 </section>
 </br>
-  <div class="container">
-   <% if admin_signed_in? %>
-   Signed in as <%= current_admin.company %>. Not you?
-   <%= link_to "Sign out", destroy_admin_session_path, :method => :delete %>
-   <% else %>
-   <%= link_to "Sign up", new_admin_registration_path, class: "btn btn-default btn-lg" %> <%= link_to "sign in", new_admin_session_path, class: "btn btn-default btn-lg" %>
-   <% end %>
-<%= link_to 'New Job', new_job_path %>
+ 
+
 <%= render 'layouts/footer' %>

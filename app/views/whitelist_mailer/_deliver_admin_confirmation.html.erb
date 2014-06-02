@@ -3,7 +3,7 @@
 <div>Your email <%=@email%> is approved to sign-up for the private WeKrüt beta test as a Recruiter.  We are excited to have you on the platform and look forward to receiving feedback throughout the beta test. Please follow the link below to Sign Up.
  </div>
 
-<%= link_to 'Sign Up', url_for(controller: 'home', action: 'index', only_path: false)%>
+<%= link_to 'Sign Up', url_for(controller: 'admins/registrations', action: 'new', only_path: false)%>
 
 <div>Thanks for your support!</div>
 <div>WeKrüt Team</div>
