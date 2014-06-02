@@ -478,7 +478,7 @@ a:focus {
 }
 
 .jobs {width: 100%;
-   
+
     background-color: #67809f;
 
 }
@@ -820,7 +820,7 @@ span.tags
 
     .wrapper {
    height: 80px;
-  
+
    top: 50%;
    margin-top: -40px;
    width: 100%;
@@ -866,7 +866,7 @@ width: 450px;
    -o-transition: display 0.3s ease;
    -webkit-transition: display 0.3s ease;
    transition: display 0.3s ease;
-}   
+}
 .sign-up .sign-up-button:hover {
    color: #1abc9c;
 }
@@ -946,7 +946,7 @@ border-color: #bdc3c7;}
 
 .bg-wekrut {
    color: #fff;
-   background-color: #1abc9c; 
+   background-color: #1abc9c;
    padding: 10px;
    font-size: 20px;
 }
@@ -1002,3 +1002,7 @@ padding: 50px;
     padding-top: 50px;
 }
 
+.flash{
+    background-color: #67809f;
+    color: #ecf0f1;
+}

@@ -1,5 +1,6 @@
 class ReferralMailer < ActionMailer::Base
   default from: ENV['GMAIL']
+  include ApplicationHelper
 
   def deliver_ref_email(referral)
     #TODO logic needs upgrade for admin

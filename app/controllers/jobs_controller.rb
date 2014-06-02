@@ -5,6 +5,7 @@ class JobsController < ApplicationController
   before_action :set_job, only: [:show, :update, :edit, :destroy]
   before_action :store_location #enables linking back
   before_action :user_pending_received_requests, only: [:index]
+  before_action :check_signed_in, only: [:show, :edit, :delete, :update, :create]
   # before_action :clear_search_index, :only => [:index]
 
   include ApplicationHelper
@@ -37,6 +38,10 @@ class JobsController < ApplicationController
     @unreviewed_requests
     @has_ref = has_any(@unreviewed_requests)
 
+    respond_to do |format|
+      format.html  # index.html.erb
+      format.json  { render :json => @jobs }
+    end
 	end
 
 
@@ -125,5 +130,9 @@ class JobsController < ApplicationController
     redirect_to request.path
   end
 
-
+  def check_signed_in
+    if !user_signed_in? && !admin_signed_in?
+      redirect_to new_user_session_path, notice: "You need to sign up before viewing this job"
+    end
+  end
 end

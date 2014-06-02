@@ -7,6 +7,8 @@ class ReferralsController < ApplicationController
   before_action :check_main_admin, only: [:index, :show]
   # after_update :check_interest
 
+  include ApplicationHelper
+
   #TODO set up params to align with the right owner****
   def index
 	  # @search = Referral.search(params[:q])
@@ -40,6 +42,7 @@ class ReferralsController < ApplicationController
          redirect_to jobs_path, notice: "Success. Your referral has been created. An email has been sent to confirm interest. "
        else
          ReferralMailer.deliver_ask_email(referral, @requester)
+         check_whitelist(referral)
          redirect_to jobs_path, notice: "Success. Your referral request has been sent."
        end
      else

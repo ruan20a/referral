@@ -10,19 +10,20 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <table>
-
-             <th><strong><span class="fa fa-th"></span> Job Postings&nbsp<%= search_form_for @search do |f| %>
+            <tr>
+             <th>
+              <strong><span class="fa fa-th"></span> Job Postings&nbsp
             </th>
+            <%= search_form_for @search do |f| %>
             <th>
-              <%= f.text_field :name_or_job_name_or_city_or_state_cont, :placeholder => 'Search' %>
+                <%= f.text_field :name_or_job_name_or_city_or_state_cont, :placeholder => 'Search' %>
+                &nbsp
+                <%= f.submit "Search", :class => 'btn btn-default' %>
             </th>
-            <th class="col-md-2 action"><%= f.submit "Search", :class => 'btn btn-default' %>
+            <% end %>
+            <th class="col-md-2 action"> <%= button_to "Reset Search", request.path, :class =>'btn btn-default',:method => :get %>
             </th>
-          <% end %>
-
-          <th class="col-md-2 action"> <%= button_to "Reset Search", request.path, :class =>'btn btn-default',:method => :get %></th>
-
-          <th>&nbsp</th>
+            <th>&nbsp</th>
 
             <th class="pull-right">
               <% if @has_ref %>
