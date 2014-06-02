@@ -1,6 +1,8 @@
-<%= render 'layouts/flash' %>
+
 <%= render 'layouts/header' %>
+
 <section class="jobs">
+  <%= render 'layouts/flash' %>
   <div class="container">
     <div class="page page-table" data-ng-controller="tableCtrl">
 
@@ -61,19 +63,22 @@
             <td><%= job.city %></td>
             <td><%= job.state %></td>
             <td><%= job.industry_1 %></td>
-            <td><%= number_to_currency(calculate_fee(job.referral_fee),precision: 0) %></td>
+            <td><%= job.referral_fee %></td>
             <td><%=link_to 'Delete', url_for(action: :destroy, id: job.id), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-warning btn-sm"%></td>
             <td><%=link_to 'Edit', edit_job_path(job.id), class: "btn btn-primary btn-sm"%></td>
           </tr>
+
           <% end %>
+
           </tbody>
+
         </table>
     </div>
-    <%= will_paginate @jobs %>
   </div>
+  <%= will_paginate @jobs%>
 </div>
 </section>
 
 
-<%= render "layouts/footer" %>
+
 

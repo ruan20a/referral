@@ -266,7 +266,7 @@ a:focus {
     -o-background-size: cover;
 }
 
-.about-section {background: #000;
+.about-section {background: #67809f;
    color: #fff;
     width: 100%;
     padding: 50px;
@@ -314,10 +314,10 @@ a:focus {
 
 .btn-default:hover,
 .btn-default:focus {
-    border: 1px solid #28c3ab;
+    border: 1px solid #16a085;
     outline: 0;
     color: #000;
-    background-color: #28c3ab;
+    background-color: #16a085;
 }
 
 .btn-huge {
@@ -604,7 +604,7 @@ a:focus {
     -o-background-size: cover;
 }
 
-.about-section {background: #141414;
+.about-section {background: #2c3e50;
    color: #fff;
     width: 100%;
     padding: 25px;
@@ -661,10 +661,10 @@ a:focus {
 
 .btn-default:hover,
 .btn-default:focus {
-    border: 1px solid #28c3ab;
+    border: 1px solid #16a085;
     outline: 0;
     color: #000;
-    background-color: #28c3ab;
+    background-color: #16a085;
 }
 
 .btn-huge {
@@ -977,7 +977,7 @@ border-color: #bdc3c7;}
 .banner {
 background-color: #1abc9c;
 color: #fff;
-min-height: 250px;
+min-height: 100px;
 padding: 50px;
 
 }
@@ -1001,8 +1001,4 @@ padding: 50px;
 .extrapad {
     padding-top: 50px;
 }
-.wetasphalt{
-    color: #34495e;
-}
-
 

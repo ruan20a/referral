@@ -2,6 +2,7 @@
 <%= form_for :referral, url: referrals_path, method: :post do |f| %>
   <div class="form-group">
     <%= f.label "Who would you like to refer?" %><br>
+    
     <%= f.text_field :referral_name, :placeholder => 'Enter Referral Name', :class => 'form-control login-field' %>
   </div>
 
@@ -20,7 +21,7 @@
     <div class="input-group">
      <span class="input-group-addon"><span class="fa fa-linkedin"></span></span>
 
-        <%= f.text_field :linked_profile_url, :class => 'form-control login-field' %>
+        <%= f.text_field :linked_profile_url, :placeholder =>  'Hint: This is found in Contact Info', :class => 'form-control login-field' %>
     </div>
   </div>
 
