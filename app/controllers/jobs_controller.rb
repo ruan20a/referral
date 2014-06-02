@@ -5,7 +5,7 @@ class JobsController < ApplicationController
   before_action :set_job, only: [:show, :update, :edit, :destroy]
   before_action :store_location #enables linking back
   before_action :user_pending_received_requests, only: [:index]
-  before_action :checked_sign_in, only: [:show, :edit, :delete, :update, :create]
+  before_action :check_signed_in, only: [:show, :edit, :delete, :update, :create]
   # before_action :clear_search_index, :only => [:index]
 
   include ApplicationHelper
@@ -126,7 +126,7 @@ class JobsController < ApplicationController
     redirect_to request.path
   end
 
-  def check_sign_in
+  def check_signed_in
     if !user_signed_in? && !admin_signed_in?
       redirect_to new_user_session_path, notice: "You need to sign up before viewing this job"
     end
