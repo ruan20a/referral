@@ -4,7 +4,7 @@ class ReferralsController < ApplicationController
   before_action :check_correct_owners, only: [:show, :edit, :update, :destroy]
   before_action :determine_status, only: [:update, :edit, :show]
   before_action :store_location #enables linking back
-  before_action :check_main_admin, only: [:index]
+  before_action :check_main_admin, only: [:index, :show]
   # after_update :check_interest
 
   #TODO set up params to align with the right owner****
@@ -27,6 +27,7 @@ class ReferralsController < ApplicationController
  end
 
   def create
+  # binding.pry
    referral = Referral.new(referral_params)
    admin = referral.job.admin
    set_requester(referral)
@@ -42,7 +43,7 @@ class ReferralsController < ApplicationController
          redirect_to jobs_path, notice: "Success. Your referral request has been sent."
        end
      else
-       #binding.pry
+       # binding.pry
        flash[:error] = "Please fill in all the required fields"
        redirect_to new_referral_path(:job_id => referral.job_id, :ref_type => referral.ref_type)
      end

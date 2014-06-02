@@ -22,7 +22,7 @@
 
 class Job < ActiveRecord::Base
 	belongs_to :admin
-	has_many :referrals
+	has_many :referrals, :dependent => :destroy
 	has_many :users, :through => :referrals
   validates_presence_of :referral_fee, :name, :job_name, :city, :state, :description
 	mount_uploader :image, ImageUploader

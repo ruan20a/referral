@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   def show
     @user_email = @user.email
-
+    # binding.pry
 # Kaminari.paginate_array(@arr_name).page
     #referrals recevied
     select_received = Referral.all.select{|referral| referral.referral_email == @user_email && referral.ref_type == "refer"}

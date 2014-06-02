@@ -12,7 +12,7 @@
 
                 <div class="form-group">
                   <%= f.label :name, "Company Name" %><br>
-                  <%= f.text_field :name, :class => 'form-control login-field' %>
+                  <%= f.text_field :name, :class => 'form-control login-field', :value => "#{current_admin.company}" %>
                 </div>
 
                  <div>
