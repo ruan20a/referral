@@ -42,6 +42,6 @@ class Admin < ActiveRecord::Base
   has_one :profile
   has_many :jobs
   has_many :referrals, :through => :jobs
-  validates :email, presence: true
+  validates :email, :company, :first_name, :last_name, presence: true
   validates :email,  :uniqueness => { :case_sensitive => false }
 end

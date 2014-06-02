@@ -11,7 +11,7 @@ ActionMailer::Base.smtp_settings = {
 :authentication => :plain,
 :user_name      => ENV['SENDGRID_USERNAME'],
 :password       => ENV['SENDGRID_PASSWORD'],
-:domain         => 'heroku.com',
+:domain         => 'heroku',
 :enable_starttls_auto => true
 }
 
@@ -27,7 +27,7 @@ ActionMailer::Base.smtp_settings = {
   #}
 
   #default is heroku app name
-  config.action_mailer.default_url_options = { :host => 'wekrut.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'wekrut.com' }
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both thread web servers

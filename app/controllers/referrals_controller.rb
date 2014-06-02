@@ -24,34 +24,33 @@ class ReferralsController < ApplicationController
       redirect_to jobs_path, notice: "Please select a job to create a referral"
     end
    # @your_name = current_user.first_name && current_user.last_name || ""
-  end
+ end
 
   def create
-    referral = Referral.new(referral_params)
-    admin = referral.job.admin
-    set_requester(referral)
-    if referral.check_email(@requester) #protected method to check if there is a self-referral.
-      if referral.save
-        # binding.pry
-        if referral.ref_type == "refer"
-          ReferralMailer.deliver_ref_email(referral)
-          check_whitelist(referral)
-          redirect_to jobs_path, notice: "Success. Your referral has been created. An email has been sent to confirm interest. "
-        else
-          ReferralMailer.deliver_ask_email(referral, @requester)
-          redirect_to jobs_path, notice: "Success. Your referral request has been sent."
-        end
-      else
-        binding.pry
-        flash[:error] = "Please fill in all the required fields"
-        redirect_to new_referral_path(:job_id => referral.job_id, :ref_type => referral.ref_type)
-      end
-    else
-      flash[:error] = "Sorry, you cannot refer yourself."
-      redirect_to new_referral_path(:job_id => referral.job_id, :ref_type => referral.ref_type)
-    end
+   referral = Referral.new(referral_params)
+   admin = referral.job.admin
+   set_requester(referral)
+   if referral.check_email(@requester) #protected method to check if there is a self-referral.
+     if referral.save
+       # binding.pry
+       if referral.ref_type == "refer"
+         ReferralMailer.deliver_ref_email(referral)
+         check_whitelist(referral)
+         redirect_to jobs_path, notice: "Success. Your referral has been created. An email has been sent to confirm interest. "
+       else
+         ReferralMailer.deliver_ask_email(referral, @requester)
+         redirect_to jobs_path, notice: "Success. Your referral request has been sent."
+       end
+     else
+       #binding.pry
+       flash[:error] = "Please fill in all the required fields"
+       redirect_to new_referral_path(:job_id => referral.job_id, :ref_type => referral.ref_type)
+     end
+   else
+     flash[:error] = "Sorry, you cannot refer yourself."
+     redirect_to new_referral_path(:job_id => referral.job_id, :ref_type => referral.ref_type)
+   end
   end
-
 
   def show
     @referral
@@ -77,6 +76,7 @@ class ReferralsController < ApplicationController
 
   def update
     set_requester(@referral)
+    #binding.pry
     if @referral.check_email(@requester)
       if @referral.update(referral_params)
         #logic?

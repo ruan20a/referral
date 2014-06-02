@@ -60,7 +60,7 @@ class Referral < ActiveRecord::Base
       if !referral.referral_email.nil?
         # binding.pry
         referral_email = referral.referral_email
-        binding.pry
+        #binding.pry
         referral_email == requester.email ? false:true
       else
         true

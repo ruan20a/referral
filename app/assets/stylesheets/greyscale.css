@@ -2,7 +2,7 @@
 body {
     width: 100%;
     height: 100%;
-    background-color: #fff;
+    background-color: #67809f;
     font-family: "Lato", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857;
@@ -145,7 +145,7 @@ a:focus {
 .jobs {width: 100%;
     height: 100%;
     padding: 75px 0;
-    background-color: #fff;
+    background-color: #bdc3c7;
 
 }
 .intro-body {
@@ -438,10 +438,11 @@ a:focus {
 
 @media(min-width:767px) {
     .navbar {
-        padding: 20px 0;
+        padding: 0;
         border-bottom: 0;
         letter-spacing: 1px;
         background: 0 0;
+        background-color: #fff;
         -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
         -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
         transition: background .5s ease-in-out,padding .5s ease-in-out;
@@ -477,9 +478,8 @@ a:focus {
 }
 
 .jobs {width: 100%;
-    height: 100%;
-    padding: 75px 0;
-    background-color: #fff;
+   
+    background-color: #67809f;
 
 }
 
@@ -985,4 +985,24 @@ padding: 50px;
 .fa_img {
     padding: 50px;
 }
+
+.page {
+    min-height: 500px;
+}
+
+.center {
+    text-align:center
+}
+
+.clouds {
+    color: #ecf0f1;
+    padding-top: 20px;
+}
+.extrapad {
+    padding-top: 50px;
+}
+.wetasphalt{
+    color: #34495e;
+}
+
 

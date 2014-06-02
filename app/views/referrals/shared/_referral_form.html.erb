@@ -1,17 +1,15 @@
 <%= render 'layouts/flash' %>
-<%= render 'layouts/headercandidate' %>
 
-<div class="container" style="margin-top:160px">
-  <div class="col-md-8 col-md-offset-2">
-    <div class="panel panel-default">
-      <div class="panel-heading"><h3 class="panel-title"><strong>Refer Someone You Know</strong></h3>
-      </div>
-      <div class="panel-body">
-        <div class="form-group">
+
+
+
+
+   
+     
  
           <%= form_for :referral, url: referrals_path do |f| %>
 
-          <div class="col-md-6">
+         
 
             <div class="form-group">
               <%= f.label "Who would you like to refer?" %><br>
@@ -28,9 +26,7 @@
                <row> <%= f.select :relationship, relationship_choices %></row>
             </div>
 
-          </div>
-
-          <div class="col-md-6">
+       
 
             <div class="form-group">
               <%= f.label "What is their LinkedIn Profile URL" %><br>
@@ -58,14 +54,7 @@
              <%= f.hidden_field :ref_type, value: @ref_type %>
             </div>
              <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+          
 
 
 
-
-<%= render 'layouts/footer_sticky' %>
