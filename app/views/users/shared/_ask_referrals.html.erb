@@ -17,22 +17,15 @@
             <td><%= link_to referral.job.name, job_path(referral.job.id), class: "#{referral.is_interested}-stat" %></td>
             <td><%= link_to referral.job.job_name, job_path(referral.job.id), class: "#{referral.is_interested}-stat" %></td>
             <!-- need to change the way class is entered -->
-            <td class="#{referral.is_interested}-stat"><%= referral.status %></td>
+            <td class="#{referral.is_interested}-stat"><%= referral.status.titleize %></td>
             <td class="#{referral.is_interested}-stat"><%= time_ago_in_words(referral.created_at) %></td>
             <td class="#{referral.is_interested}-stat"><%="#{referral.user.first_name.titleize} #{referral.user.last_name.titleize}"%></td>
             <td><%= link_to "Review Job", job_path(referral.job.id), class: "btn btn-primary"%>
             <%= link_to "Delete Request", referral, :method => :delete, class: "btn btn-primary"%>
             </td>
-
           </tr>
           <% end %>
-
-
           </tbody>
         </table>
       </div>
-<<<<<<< HEAD
-=======
-      <%= will_paginate @received_referrals%>
->>>>>>> 80994d3019d64ada0b34b4a6c5fd1ac9d63682be
     </div>

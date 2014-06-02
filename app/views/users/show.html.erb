@@ -5,7 +5,7 @@
       <%= render 'layouts/flash' %>
       <li class="active"><a href="#received-referrals" data-toggle="tab"> <strong> Received Referrals </strong>
         <% if @hav_ref %>
-          <%= " - #{@unreviewed_count} Requests Pending Review"%>
+          <%= " - #{@unreviewed_count} Awaiting Review"%>
         <% end %>
       </a></li>
       <li class=""><a href="#sent-referrals" data-toggle="tab">Sent Referrals</a></li>

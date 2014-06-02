@@ -1,8 +1,8 @@
 class ReferralsController < ApplicationController
   before_action :check_session
   before_action :set_referral, only: [:update, :edit, :destroy, :show]
-  before_action :determine_status, only: [:update, :edit, :show]
   before_action :check_correct_owners, only: [:show, :edit, :update, :destroy]
+  before_action :determine_status, only: [:update, :edit, :show]
   before_action :store_location #enables linking back
   before_action :check_main_admin, only: [:index]
   # after_update :check_interest
@@ -27,7 +27,6 @@ class ReferralsController < ApplicationController
  end
 
   def create
-    binding.pry
    referral = Referral.new(referral_params)
    admin = referral.job.admin
    set_requester(referral)
@@ -80,8 +79,11 @@ class ReferralsController < ApplicationController
     #binding.pry
     if @referral.check_email(@requester)
       if @referral.update(referral_params)
-        #logic?
-        redirect_to @referral
+        if current_admin.nil?
+          redirect_to current_user
+        else
+          redirect_to current_admin
+        end
       else
         flash[:error] = "There was an issue with your update. Please review your updates."
         #TODO FIX ERROR
@@ -146,10 +148,10 @@ class ReferralsController < ApplicationController
         @my_status = "Receiver-U"
       end
     else #admin logic checks
-      if @referral.admin_id == current_admin.id
-        @my_status = "Sender"
-      else
+      if @referral.job.admin == current_admin
         @my_status = "Receiver-A"
+      else
+        @my_status = "Sender"
       end
     end
   end

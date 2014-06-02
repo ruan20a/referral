@@ -24,9 +24,9 @@
             <th class="pull-right">
               <% if @has_ref %>
                 <% if current_admin.nil? %>
-                  <%= button_to " #{@unreviewed_requests} Requests Pending Review", user_path(current_user.id),:method => :get,:class =>'btn btn-warning btn-md btn-block pull-right' %>
+                  <%= button_to " #{@unreviewed_requests} Requests Pending Review", user_path(current_user.id),:method => :get,:class =>'btn btn-danger pull-right' %>
                 <% else %>
-                  <%= button_to "#{@unreviewed_requests} Requests Pending Review", admin_path(current_admin.id),:method => :get,:class =>'btn btn-warning btn-md btn-block pull-right' %>
+                  <%= button_to "#{@unreviewed_requests} Requests Pending Review", admin_path(current_admin.id),:method => :get,:class =>'btn btn-danger pull-right' %>
                 <% end %>
 
               <% end %>

@@ -12,27 +12,24 @@ class UsersController < ApplicationController
 # Kaminari.paginate_array(@arr_name).page
     #referrals recevied
     select_received = Referral.all.select{|referral| referral.referral_email == @user_email && referral.ref_type == "refer"}
-    @received_referrals = select_received.paginate(:page => params[:page]) if !select_received.nil?
+    @received_referrals = select_received
+    # .paginate(:page => params[:page]) if !select_received.nil?
     # binding.pry
     @unreviewed_referrals = @received_referrals.select{|referral| referral.is_interested == nil}
     @unreviewed_count = @unreviewed_referrals.count
 
     #my referrrals
     select_sent = @user.referrals.select{|referral| referral.ref_type == "refer"}
-    @sent_referrals = select_sent.paginate(:page => params[:page])
+    @sent_referrals = select_sent
+    # .paginate(:page => params[:page])
 
     select_ask = Referral.all.select{|referral| referral.referee_email == @user_email && referral.ref_type == "ask_refer"}
-    @ask_referrals = select_ask.paginate(:page => params[:page])
+    @ask_referrals = select_ask
+    # .paginate(:page => params[:page])
     @ask_referrals_count = select_ask.count
 
     @hav_ref = has_any(@unreviewed_count)
      #
-
-    respond_to do |format|
-      format.html
-      format.js
-    end
-
   end
 
   def destroy
