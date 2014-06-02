@@ -27,7 +27,7 @@ class ReferralsController < ApplicationController
  end
 
   def create
-    binding.pry
+    #binding.pry
    referral = Referral.new(referral_params)
    admin = referral.job.admin
    set_requester(referral)
