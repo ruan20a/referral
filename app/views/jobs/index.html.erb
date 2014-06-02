@@ -17,7 +17,7 @@
             </th>
           <% end %>
 
-          <th class="col-md-2 action"> <%= button_to "Clear", request.path, :class =>'btn btn-default',:method => :get %></th>
+          <th class="col-md-2 action"> <%= button_to "Reset Search", request.path, :class =>'btn btn-default',:method => :get %></th>
 
           <th>&nbsp</th>
 
@@ -63,6 +63,7 @@
             <td><%= job.industry_1 %></td>
             <td><%= number_to_currency(calculate_fee(job.referral_fee),precision: 0) %></td>
             <td><%=link_to 'Delete', url_for(action: :destroy, id: job.id), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-warning btn-sm"%></td>
+            <td><%=link_to 'Edit', edit_job_path(job.id), class: "btn btn-primary btn-sm"%></td>
           </tr>
           <% end %>
           </tbody>

@@ -15,7 +15,7 @@
        <div class="details-section">
       <strong>Description:</strong>
 
-        <%= simple_format(@job.description).gsub(/\n/, '<br/>').html_safe  %>
+        <%= @job.description.gsub(/\n/, '<br/>').html_safe  %>
       </div>
         <div class="details-section">
         <strong>Skills</strong>
