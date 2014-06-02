@@ -2,7 +2,7 @@
 body {
     width: 100%;
     height: 100%;
-    background-color: #fff;
+    background-color: #67809f;
     font-family: "Lato", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857;
@@ -1001,3 +1001,8 @@ padding: 50px;
 .extrapad {
     padding-top: 50px;
 }
+.wetasphalt{
+    color: #34495e;
+}
+
+

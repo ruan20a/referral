@@ -43,8 +43,8 @@ class ReferralMailer < ActionMailer::Base
     @requester_LN = requester.last_name
     requester_email = requester.email
 
-    mail(to: referee_email, subject: "Referral Request from #{@requester_FN.titleize} #{@requester_LN.titleize}").deliver
-    mail(to: requester_email, subject: "Copy of your referral request to #{@referee_name.titleize}").deliver
+    mail(to: referee_email, subject: "Referral Request from #{@requester_FN} #{@requester_LN}").deliver
+    mail(to: requester_email, subject: "Copy of your referral request to #{@referee_name}").deliver
   end
 
   def deliver_admin_notification(referral, admin)
