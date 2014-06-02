@@ -7,6 +7,7 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <table>
+
              <th><strong><span class="fa fa-th"></span> Job Postings&nbsp<%= search_form_for @search do |f| %>
             </th>
             <th>
@@ -60,7 +61,7 @@
             <td><%= job.city %></td>
             <td><%= job.state %></td>
             <td><%= job.industry_1 %></td>
-            <td><%= job.referral_fee %></td>
+            <td><%= number_to_currency(calculate_fee(job.referral_fee),precision: 0) %></td>
             <td><%=link_to 'Delete', url_for(action: :destroy, id: job.id), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-warning btn-sm"%></td>
           </tr>
           <% end %>

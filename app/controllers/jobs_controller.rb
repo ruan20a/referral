@@ -47,6 +47,13 @@ class JobsController < ApplicationController
 
   def show
     @job
+    @referral = Referral.new
+    @ref_type = "refer"
+    if @job.admin == current_admin
+      @status = true
+    else
+      @status = false
+    end
   end
 
   def create

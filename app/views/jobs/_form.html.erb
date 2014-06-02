@@ -10,11 +10,13 @@
               <%= form_for @job do |f| %>
               <div class="col-md-4">
 
-                <div class="form-group">                  <%= f.label :name, "Company Name" %><br>
+                <div class="form-group">
+                  <%= f.label :name, "Company Name" %><br>
                   <%= f.text_field :name, :class => 'form-control login-field' %>
                 </div>
 
-                 <div>                  <%= f.label :job_name, "Position Title" %><br>
+                 <div>
+                  <%= f.label :job_name, "Position Title" %><br>
                   <%= f.text_field :job_name, :class => 'form-control login-field' %>
                 </div>
 
@@ -27,7 +29,7 @@
                   <%= link_to 'Back', jobs_path %>
                 </div>
 
-                
+
 
               </div>
 

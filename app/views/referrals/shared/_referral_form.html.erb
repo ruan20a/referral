@@ -1,60 +1,48 @@
 <%= render 'layouts/flash' %>
+<%= form_for :referral, url: referrals_path, method: :post do |f| %>
+  <div class="form-group">
+    <%= f.label "Who would you like to refer?" %><br>
+    <%= f.text_field :referral_name, :placeholder => 'Enter Referral Name', :class => 'form-control login-field' %>
+  </div>
 
+  <div class="form-group">
+    <%= f.label "What is their email?" %><br>
+    <%= f.text_field :referral_email, :placeholder => 'Referral Email', :class => 'form-control login-field' %>
+  </div>
 
+  <div class="form-group">
+     <label> Relationship? </label>
+     <row> <%= f.select :relationship, relationship_choices %></row>
+  </div>
 
+  <div class="form-group">
+    <%= f.label "What is their LinkedIn Profile URL" %><br>
+    <div class="input-group">
+     <span class="input-group-addon"><span class="fa fa-linkedin"></span></span>
 
+        <%= f.text_field :linked_profile_url, :class => 'form-control login-field' %>
+    </div>
+  </div>
 
-   
-     
- 
-          <%= form_for :referral, url: referrals_path do |f| %>
+  <div class="form-group">
+    <%= f.label "What is their GitHub Profile URL" %><br>
+    <div class="input-group">
+      <span class="input-group-addon"><span class="fa fa-github"></span></span>
+        <%= f.text_field :github_profile_url, :class => 'form-control login-field'%>
+    </div>
+  </div>
 
-         
+  <div class="form-group">
+    <%= f.submit "Submit to Wekrut", :class => "btn btn-primary pull-right" %>
+  </div>
 
-            <div class="form-group">
-              <%= f.label "Who would you like to refer?" %><br>
-              <%= f.text_field :referral_name, :placeholder => 'Enter Referral Name', :class => 'form-control login-field' %>
-            </div>
+  <div>
+   <%= f.hidden_field :job_id, :value => @job.id%>
+   <%= f.hidden_field :ref_type, value: @ref_type %>
+  </div>
 
-            <div class="form-group">
-              <%= f.label "What is their email?" %><br>
-              <%= f.text_field :referral_email, :placeholder => 'Referral Email', :class => 'form-control login-field' %>
-            </div>
+<% end %>
 
-            <div class="form-group">
-               <label> Relationship? </label>
-               <row> <%= f.select :relationship, relationship_choices %></row>
-            </div>
-
-       
-
-            <div class="form-group">
-              <%= f.label "What is their LinkedIn Profile URL" %><br>
-              <div class="input-group">
-               <span class="input-group-addon"><span class="fa fa-linkedin"></span></span>
-
-                  <%= f.text_field :linked_profile_url, :class => 'form-control login-field' %>
-              </div>
-            </div>
-            
-            <div class="form-group">
-              <%= f.label "What is their GitHub Profile URL" %><br>
-              <div class="input-group">
-                <span class="input-group-addon"><span class="fa fa-github"></span></span>
-                  <%= f.text_field :github_profile_url, :class => 'form-control login-field'%>
-              </div>
-            </div>
-
-            <div>
-              <%= f.submit "Submit to Wekrut", :class => "btn btn-primary pull-right" %>
-            </div>
-
-            <div>
-             <%= f.hidden_field :job_id, :value => @job.id%>
-             <%= f.hidden_field :ref_type, value: @ref_type %>
-            </div>
-             <% end %>
-          
 
 
 
