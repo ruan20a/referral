@@ -80,8 +80,11 @@ class ReferralsController < ApplicationController
     #binding.pry
     if @referral.check_email(@requester)
       if @referral.update(referral_params)
-        #logic?
-        redirect_to @referral
+        if current_admin.nil?
+          redirect_to current_user
+        else
+          redirect_to current_admin
+        end
       else
         flash[:error] = "There was an issue with your update. Please review your updates."
         #TODO FIX ERROR
