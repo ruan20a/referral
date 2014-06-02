@@ -4,7 +4,7 @@ class ReferralsController < ApplicationController
   before_action :check_correct_owners, only: [:show, :edit, :update, :destroy]
   before_action :determine_status, only: [:update, :edit, :show]
   before_action :store_location #enables linking back
-  before_action :check_main_admin, only: [:index]
+  before_action :check_main_admin, only: [:index, :show]
   # after_update :check_interest
 
   #TODO set up params to align with the right owner****
