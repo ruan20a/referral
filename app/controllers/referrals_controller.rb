@@ -149,10 +149,10 @@ class ReferralsController < ApplicationController
         @my_status = "Receiver-U"
       end
     else #admin logic checks
-      if @referral.admin_id == current_admin.id
-        @my_status = "Sender"
-      else
+      if @referral.job.admin == current_admin
         @my_status = "Receiver-A"
+      else
+        @my_status = "Sender"
       end
     end
   end
