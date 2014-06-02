@@ -40,6 +40,7 @@ class ReferralsController < ApplicationController
          redirect_to jobs_path, notice: "Success. Your referral has been created. An email has been sent to confirm interest. "
        else
          ReferralMailer.deliver_ask_email(referral, @requester)
+         check_whitelist(referral)
          redirect_to jobs_path, notice: "Success. Your referral request has been sent."
        end
      else
