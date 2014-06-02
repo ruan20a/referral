@@ -35,6 +35,7 @@
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
 #  tagline                :string(255)
+#  linked_in              :string(255)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

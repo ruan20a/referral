@@ -11,7 +11,7 @@
 #  linked_profile_url :string(255)
 #  created_at         :datetime
 #  updated_at         :datetime
-#  status             :string(255)
+#  status             :string(255)      default("pending")
 #  job_id             :integer
 #  user_id            :integer
 #  admin_id           :integer
@@ -21,6 +21,9 @@
 #  ref_type           :string(255)
 #  referee_email      :string(255)
 #  personal_note      :text
+#  referee_name       :string(255)
+#  is_interested      :boolean
+#  is_admin_notified  :boolean          default(FALSE)
 #
 
 class Referral < ActiveRecord::Base

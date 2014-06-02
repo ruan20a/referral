@@ -21,7 +21,6 @@ before_action :check_main_admin, only: [:index]
     @jobs = @admin.jobs
     @search = Referral.search(params[:q])
     # binding.pry
-
     if @jobs.count > 0
       @referrals = @search.result.select{|x| x.job.admin == @admin}
 

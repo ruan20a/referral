@@ -18,6 +18,7 @@
 #  job_name     :string(255)
 #  logo_url     :string(255)
 #  image        :string(255)
+#  industry_1   :string(255)
 #
 
 class Job < ActiveRecord::Base
