@@ -1,6 +1,8 @@
 class ReferralMailer < ActionMailer::Base
   default from: ENV['GMAIL']
 
+  include ApplicationHelper
+
   def deliver_ref_email(referral)
     #TODO logic needs upgrade for admin
     @referral = referral
@@ -67,6 +69,7 @@ class ReferralMailer < ActionMailer::Base
     sender_email = sender.email
 
     @job = Job.find(@referral.job_id)
+    @job_referral_fee = @job.referral_fee / 2
 
     mail(to: admin_email,subject: "New Referral for Job #{@job.name}").deliver
   end
