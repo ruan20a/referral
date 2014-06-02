@@ -5,7 +5,6 @@ before_action :correct_admin, only: [:show, :update, :edit, :destroy]
 before_action :check_main_admin, only: [:index]
 # before_action :clear_search_index, :only => [:show]
 
-
   include ApplicationHelper
 
   def index
@@ -24,6 +23,7 @@ before_action :check_main_admin, only: [:index]
     # binding.pry
     if @jobs.count > 0
       @referrals = @search.result.select{|x| x.job.admin == @admin}
+
       @select_referrals = @referrals.select{|x| x.ref_type == "refer" && x.is_interested == true}
       @sorted_referrals = @select_referrals
       # .paginate(:page => params[:page])
