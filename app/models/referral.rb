@@ -26,7 +26,7 @@
 class Referral < ActiveRecord::Base
 	belongs_to :job
 	belongs_to :user
-  validates_presence_of :job_id, :ref_type
+  validates_presence_of :job_id, :ref_type, :referral_email
   #different logic for ask_refer types lambda substitute for method logic
   # validates_presence_of :referee_email, :referee_name, :unless => lambda{ self.ref_type == "refer" }
   #different logic for refer types lambda substitute for method logic
@@ -59,7 +59,7 @@ class Referral < ActiveRecord::Base
       if !referral.referral_email.nil?
         # binding.pry
         referral_email = referral.referral_email
-        binding.pry
+        #binding.pry
         referral_email == requester.email ? false:true
       else
         true

@@ -61,6 +61,7 @@
             <td><%= job.state %></td>
             <td><%= job.industry_1 %></td>
             <td><%= job.referral_fee   %></td>
+            <td><%=link_to 'Delete', url_for(action: :destroy, id: job.id), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-warning btn-sm"%></td>
           </tr>
           <% end %>
           </tbody>
