@@ -31,7 +31,7 @@
                 <%= link_to 'EDIT JOB', edit_job_path(@job.id), :class => 'Refer_Button'%>
 
               <% else %>
-                <%= link_to 'ASK TO BE REFERRED', new_referral_path(job_id: @job.id, ref_type: "ask_ref"),:class => 'Refer_Button'%>
+                <%= link_to 'ASK TO BE REFERRED', new_referral_path(job_id: @job.id, ref_type: "ask_refer"),:class => 'Refer_Button'%>
               <% end %>
               </div>
             </div>

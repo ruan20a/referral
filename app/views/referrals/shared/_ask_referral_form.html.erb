@@ -4,7 +4,7 @@
 <div class="container" style="margin-top:160px">
   <div class="col-md-8 col-md-offset-2">
    <div class="panel panel-default">
-     <div class="panel-heading"><h3 class="panel-title"><strong>Ask To Be Referred - AMYY</strong></h3></div>
+     <div class="panel-heading"><h3 class="panel-title"><strong>Ask To Be Referred </strong></h3></div>
      <div class="panel-body">
        <div class="form-group">
              <%= form_for :referral, url: referrals_path do |f| %>
@@ -18,7 +18,7 @@
 
      <div class="form-group">
             <%= f.label "What is their email?" %><br>
-    <%= f.text_field :referee_email, :placeholder => 'Their Email', :class => 'form-control login-field' %>
+    <%= f.email_field :referee_email, :placeholder => 'Their Email', :class => 'form-control login-field' %>
 
            </div>
 
