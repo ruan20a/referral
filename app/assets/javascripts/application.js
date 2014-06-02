@@ -12,8 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.infinitescroll
 //= require turbolinks
 //= require bootstrap
 //= require grayscale
 //= require main
 //= require_tree
+
+

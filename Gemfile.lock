@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/rorlab/pageless-rails.git
+  revision: 09274d4ed3db3018f765a27fb72dbe4b080912c8
+  specs:
+    pageless-rails (0.0.2)
+      railties (>= 3.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -33,6 +40,8 @@ GEM
     bcrypt (3.1.7)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-will_paginate (0.0.10)
+      will_paginate
     builder (3.1.4)
     cancan (1.6.10)
     carrierwave (0.10.0)
@@ -99,6 +108,9 @@ GEM
     jbuilder (1.5.3)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
+    jquery-infinite-pages (0.1.1)
+      jquery-rails
+      railties (>= 3.1)
     jquery-rails (3.1.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -228,6 +240,7 @@ PLATFORMS
 DEPENDENCIES
   annotate
   awesome_print
+  bootstrap-will_paginate (~> 0.0.10)
   cancan
   carrierwave
   coffee-rails (~> 4.0.0)
@@ -237,8 +250,10 @@ DEPENDENCIES
   dotenv-rails
   fog (~> 1.22.1)
   jbuilder (~> 1.2)
+  jquery-infinite-pages
   jquery-rails
   mini_magick
+  pageless-rails!
   pg
   pry-debugger
   pry-rails

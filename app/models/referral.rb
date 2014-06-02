@@ -34,6 +34,7 @@ class Referral < ActiveRecord::Base
   before_save :check_notification, :if => :is_interested_changed?
   # before_save :check_email, :if => :referral_email_changed?
 
+  # paginates_per 10
 
     def check_notification
     referral = self

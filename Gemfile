@@ -7,7 +7,10 @@ gem 'rails', '4.0.3'
 
 gem 'will_paginate', '~> 3.0.5'
 
-# gem 'kaminari'
+gem 'pageless-rails', github: 'rorlab/pageless-rails'
+
+gem 'bootstrap-will_paginate', '~> 0.0.10'
+
 
 gem "unicorn"
 
@@ -16,6 +19,8 @@ gem "ransack"
 gem "sendgrid"
 
 gem "titleize"
+
+gem 'jquery-infinite-pages'
 
 
 gem 'sprockets_better_errors'

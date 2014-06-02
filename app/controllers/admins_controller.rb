@@ -23,9 +23,11 @@ before_action :check_main_admin, only: [:index]
     @search = Referral.search(params[:q])
     # binding.pry
     @referrals = @search.result.select{|x| x.job.admin == @admin}
-    @sorted_referrals = @referrals.select{|x| x.ref_type == "refer" && x.is_interested == true}.paginate(page: params[:page], per_page: 10)
+    @select_referrals = @referrals.select{|x| x.ref_type == "refer" && x.is_interested == true}
+    @sorted_referrals = @select_referrals.paginate(:page => params[:page])
     #is_interested & pending status check
-    @pending_referrals = @admin.referrals.select{|x| x.status == "pending" && x.is_interested == true}
+    @select_pending_referrals = @admin.referrals.select{|x| x.status == "pending" && x.is_interested == true}
+    @pending_referrals = @select_pending_referrals.paginate(:page => params[:page])
 
     @pending_count = @pending_referrals.count
 
@@ -68,7 +70,4 @@ before_action :check_main_admin, only: [:index]
   def search_params
     params[:q]
   end
-
-
-
 end
