@@ -6,7 +6,7 @@ class ReferralsController < ApplicationController
   before_action :store_location #enables linking back
   before_action :check_main_admin, only: [:index, :show]
   # after_update :check_interest
-
+include ApplicationHelper
   #TODO set up params to align with the right owner****
   def index
 	  # @search = Referral.search(params[:q])
