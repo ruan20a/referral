@@ -41,7 +41,7 @@
       <div class="col-md-4">
         <div class="panel panel-default center">
           <div class="panel-heading"><h2 class="panel-referal"><strong>Referral Fee:</strong>
-             $<%= number_to_currency(calculate_fee(@job.referral_fee), precision: 0)  %></h2>
+             <%= number_to_currency(calculate_fee(@job.referral_fee), precision: 0)  %></h2>
           </div>
           <div class="panel-body">
             <%= render 'referrals/shared/referral_form'%>
