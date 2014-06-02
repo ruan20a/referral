@@ -18,13 +18,13 @@
                 <%= f.text_field :job_name_or_referral_name_or_status_cont, :placeholder => 'Search' %>
             </div>
             <div class="form-group">
-                <%= f.submit "Search", :class =>"btn btn-primary btn-md btn-block"%>
+                <%= f.submit "Search", :class =>"btn btn-default"%>
             </div>
             <div class="form-group">
-              <%= button_to "Clear Search", request.path, :class =>"btn btn-primary btn-md btn-block",:method => :get %>
+              <%= link_to "Clear Search", request.path, :class =>"btn btn-default",:method => :get %>
             </div>
             <div class="form-group pull-right">
-              <%= button_to 'Create New Job', new_job_path, :class =>"btn btn-primary btn-md btn-block form-group",:method => :get %>
+              <%= link_to 'Create New Job', new_job_path, :class =>"btn btn-danger",:method => :get %>
             </div>
             <% end %>
           </div>
