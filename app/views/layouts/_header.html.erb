@@ -18,6 +18,15 @@
                    <li class="page-scroll">
                     <%= link_to 'Jobs', jobs_path %>
                    </li>
+                     <li class="page-scroll">
+                   <% if admin_signed_in? %>
+           
+             <%= link_to "Recruiter Sign out", destroy_user_session_path, :method => :delete %> <% else %> <%= link_to "Recruiter Log In", new_admin_session_path %><% end %>
+                   </li>
+                  <li class="page-scroll"> <li> <% if user_signed_in? %>
+           
+             <%= link_to "Sign out", destroy_user_session_path, :method => :delete %> <% else %> <%= link_to "Log In", new_user_session_path %><% end %>
+                       </li>
                    <li class="page-scroll">
                       <% if user_signed_in? %>
                         <%= link_to 'Profile', user_path(current_user.id)%>
