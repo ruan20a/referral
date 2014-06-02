@@ -5,7 +5,6 @@ class ReferralsController < ApplicationController
   before_action :check_correct_owners, only: [:show, :edit, :update, :destroy]
   before_action :store_location #enables linking back
   before_action :check_main_admin, only: [:index]
-  # before_action :set_requester, only: [:update, :create]
   # after_update :check_interest
 
   #TODO set up params to align with the right owner****
@@ -97,10 +96,10 @@ class ReferralsController < ApplicationController
   def destroy
     if @referral.destroy
       flash[:notice] = "You successfully removed the referral"
-      redirect_to referrals_path
+      redirect_to session[:return_to]
     else
       flash[:notice] = "Referral could not be deleted."
-      render action: 'edit'
+      render action: session[:return_to]
     end
   end
 
@@ -179,7 +178,4 @@ class ReferralsController < ApplicationController
     status = main_admins.select{|email| email == current_admin.email}
     redirect_to new_admin_session_path, notice: "You are not an approved admin." if status.empty?
   end
-
-
-
 end

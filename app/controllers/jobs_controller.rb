@@ -5,6 +5,7 @@ class JobsController < ApplicationController
   before_action :set_job, only: [:show, :update, :edit, :destroy]
   before_action :store_location #enables linking back
   before_action :user_pending_received_requests, only: [:index]
+  # before_action :clear_search_index, :only => [:index]
 
   include ApplicationHelper
 
@@ -13,12 +14,29 @@ class JobsController < ApplicationController
 		render :json => @user
 	end
 
-	def index
+  	def index
     # binding.pry
-  	@search = Job.search(params[:q])
-  	@jobs = @search.result
+
+      # if @search.nil?
+      #   @jobs = Job.all
+      # else
+          # @jobs = @search.result
+      # end
+
+      # @jobs = Job.all
+      # @jobs.build_sort if @jobs.sorts.empty?
+      # "s" => "job_name asc"
+
+    # if !search_params["name_or_job_name_or_city_or_state_cont"].nil?
+    #   @search = Job.search(search_params)
+    #   @jobs = @search.result
+    # end
+
+    @search = Job.search(params[:q])
+    @jobs = @search.result.paginate(:page => params[:page])
     @unreviewed_requests
     @has_ref = has_any(@unreviewed_requests)
+
 	end
 
 
@@ -91,5 +109,14 @@ class JobsController < ApplicationController
     end
     @unreviewed_requests
   end
+
+  def search_params
+    params[:q]
+  end
+
+  def clear_search_index
+    redirect_to request.path
+  end
+
 
 end

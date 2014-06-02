@@ -9,21 +9,22 @@
             <th>Company</th>
             <th>Job</th>
             <th>Status</th>
-            <th>Last Update</th>
-            <th>Interested?</th>
+            <th>Date Requested</th>
+            <th>Requester</th>
           </tr>
           <tbody class="page">
-            <% @received_referrals.each do |referral| %>
+            <% @ask_referrals.each do |referral| %>
           <tr class="received">
             <td><%= link_to referral.job.name, job_path(referral.job.id), class: "#{referral.is_interested}-stat" %></td>
             <td><%= link_to referral.job.job_name, job_path(referral.job.id), class: "#{referral.is_interested}-stat" %></td>
             <!-- need to change the way class is entered -->
             <td class="#{referral.is_interested}-stat"><%= referral.status %></td>
-            <td class="#{referral.is_interested}-stat"><%= time_ago_in_words(referral.updated_at) %></td>
-            <td><%= link_to "#{translate_boolean(referral.is_interested)}", referral_path(referral.id), class: "#{referral.is_interested}-stat" %></td>
-            <td>
-                <%= link_to "Update", edit_referral_path(referral.id), class: "btn btn-primary"%>
+            <td class="#{referral.is_interested}-stat"><%= time_ago_in_words(referral.created_at) %></td>
+            <td class="#{referral.is_interested}-stat"><%="#{referral.user.first_name.titleize} #{referral.user.last_name.titleize}"%></td>
+            <td><%= link_to "Review Job", job_path(referral.job.id), class: "btn btn-primary"%>
+            <%= link_to "Delete Request", referral, :method => :delete, class: "btn btn-primary"%>
             </td>
+
           </tr>
           <% end %>
 

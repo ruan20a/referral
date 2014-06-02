@@ -4,31 +4,36 @@
     <% current_user.email %> Sent Referrals</strong>
     <%= link_to 'View Jobs', jobs_path %>
   </div>
-    <table class="table">
-      <tr>
-        <th>Company</th>
-        <th>Job</th>
-        <th>Candidate</th>
-        <th>Referral Fee</th>
-        <th>Last Updated</th>
-        <th>Status</th>
-      </tr>
-      <% @sent_referrals.each do |referral| %>
-      <tr>
-        <td><%= link_to referral.job.name, job_path(referral.job.id), class: "#{referral.status}-stat" %></td>
-        <td><%= link_to referral.job.job_name, job_path(referral.job.id), class: "#{referral.status}-stat" %></td>
+    <table class="table" id="my-sent-referrals">
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Job</th>
+          <th>Candidate</th>
+          <th>Referral Fee</th>
+          <th>Last Updated</th>
+          <th>Status</th>
+        </tr>
+      <thead>
 
-        <td><%= link_to referral.referral_name, referral_path(referral.id) %></td>
-        <!-- need to change the way class is entered -->
-        <td class="#{referral.is_interested}-stat"><%= referral.job.referral_fee %></td>
-        <td class="#{referral.is_interested}-stat"><%= time_ago_in_words(referral.updated_at) %></td>
-        <td><%= link_to referral.status, referral_path(referral.id), class: "#{referral.status}-stat" %></td>
-        <td><%= link_to "Update", edit_referral_path(referral.id), class: "btn btn-primary"%> </td>
-      </tr>
-      <%end%>
-      <%= will_paginate @sent_referrals%>
+      <tbody class="page">
+        <% @sent_referrals.each do |referral| %>
+        <tr id="results">
+          <td><%= link_to referral.job.name, job_path(referral.job.id), class: "#{referral.status}-stat" %></td>
+          <td><%= link_to referral.job.job_name, job_path(referral.job.id), class: "#{referral.status}-stat" %></td>
+
+          <td><%= link_to referral.referral_name, referral_path(referral.id) %></td>
+          <!-- need to change the way class is entered -->
+          <td class="#{referral.is_interested}-stat"><%= calculate_fee(referral.job.referral_fee) %></td>
+          <td class="#{referral.is_interested}-stat"><%= time_ago_in_words(referral.updated_at) %></td>
+          <td><%= link_to referral.status, referral_path(referral.id), class: "#{referral.status}-stat" %></td>
+          <td><%= link_to "Update", edit_referral_path(referral.id), class: "btn btn-primary"%> </td>
+        </tr>
+        <% end %>
+      </tbody>
     </table>
+
+    <!-- <%= pageless(@sent_referrals.total_pages, user_path, '#results') %> -->
   </div>
-
+      <%= will_paginate @sent_referrals %>
 </div>
-

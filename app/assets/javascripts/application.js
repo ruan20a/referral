@@ -16,4 +16,5 @@
 //= require bootstrap
 //= require grayscale
 //= require main
-//= require_tree .
+//= require_tree
+//= require jquery.infinitescroll
