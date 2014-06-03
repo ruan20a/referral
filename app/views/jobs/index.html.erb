@@ -13,7 +13,8 @@
              <th>
               <strong><span class="fa fa-th"></span> Job Postings&nbsp
             </th>
-            <%= search_form_for @search do |f| %>
+         
+  <%= search_form_for @search do |f| %>
             <th>
                 <div class="search-form">
                 <%= f.text_field :name_or_job_name_or_city_or_state_cont, :placeholder => 'Search' %>
@@ -67,6 +68,8 @@
             <td><%= job.state %></td>
             <td><%= job.industry_1 %></td>
             <td><%= number_to_currency(calculate_fee(job.referral_fee), precision: 0)  %></td>
+            <td><%=link_to 'Delete', url_for(action: :destroy, id: job.id), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-warning btn-sm"%></td>
+            <td><%=link_to 'Edit', edit_job_path(job.id), class: "btn btn-primary btn-sm"%></td>
           </tr>
 
           <% end %>
