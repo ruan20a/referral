@@ -25,7 +25,7 @@
                   </div>
                   <div class="details-section">
                     <strong>Description:</strong>
-                    <%= @job.description %>
+                    <%= @job.description.gsub(/\n/, '<br/>').html_safe %>
                   </div>
                   <div class="details-section_end">
                     <strong>Skills</strong>

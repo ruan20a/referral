@@ -16,9 +16,11 @@
             </th>
             <%= search_form_for @search do |f| %>
             <th>
+                <div class="search-form">
                 <%= f.text_field :name_or_job_name_or_city_or_state_cont, :placeholder => 'Search' %>
                 &nbsp
                 <%= f.submit "Search", :class => 'btn btn-default' %>
+                </div>
             </th>
             <% end %>
             <th class="col-md-2 action"> <%= button_to "Reset Search", request.path, :class =>'btn btn-default',:method => :get %>
