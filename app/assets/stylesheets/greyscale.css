@@ -1,3 +1,4 @@
+
 body {
     width: 100%;
     height: 100%;
@@ -45,6 +46,8 @@ a {
     -moz-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
 }
+
+
 
 a:hover,
 a:focus {
@@ -587,14 +590,22 @@ padding: 50px;
 .jobs {width: 100%;
     height: 100%;
     padding: 75px 0;
-    background-color: #67809F;
+    background-color: #67809f;
 
 }
 
 .section-heading {color: 000;
 }
 
+.fa-bars {
+    color:#000;
+}
 
+.tab-font {
+    text-transform:uppercase;
+    font-size: 18px;
+    color: #fff;
+}
 
 .flash{
     background-color: #67809f;
@@ -604,4 +615,6 @@ padding: 50px;
 .search-form{
     color: #2c3e50;
 }
+
+
 
