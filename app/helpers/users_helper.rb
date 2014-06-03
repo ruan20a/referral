@@ -4,7 +4,7 @@ module UsersHelper
 	end
 
 	def speciality_choices
-		["Marketing", "Web Development", "Design", "Administrative", "Operations", "Finance", "Business Development", "Account Management", "Other"]
+		["Marketing", "Technology", "Design", "Administrative", "Recruitment", "Consulting", "Operations", "Finance", "Business Development", "Account Management", "Other"]
 	end
 
   def resource_name
