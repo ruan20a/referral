@@ -6,6 +6,7 @@ class JobsController < ApplicationController
   before_action :store_location #enables linking back
   before_action :user_pending_received_requests, only: [:index]
   before_action :check_signed_in, only: [:show, :edit, :delete, :update, :create]
+  before_action :check_level, only: [:new,:create, :edit, :update]
   # before_action :clear_search_index, :only => [:index]
 
   include ApplicationHelper
@@ -46,14 +47,18 @@ class JobsController < ApplicationController
 
 
 	def new
-	 @job = Job.new
-   @job.admin_id = current_admin.id
+    @job = Job.new
+
+    if level == 2
+      @job.admin_id = current_admin.id
+    end
 	end
 
   def show
     @job
     @referral = Referral.new
     @ref_type = "refer"
+
     if @job.admin == current_admin
       @status = true
     else
@@ -135,4 +140,10 @@ class JobsController < ApplicationController
       redirect_to new_user_session_path, notice: "You need to sign up before viewing this job"
     end
   end
+
+  def check_main_admin
+    level = Whitelist.find_by_email(current_admin.email).level
+    redirect_to new_admin_session_path, notice: "You are not an approved admin whitelister" if level != 3
+  end
+
 end

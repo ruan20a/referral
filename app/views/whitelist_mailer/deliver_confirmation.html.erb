@@ -1,4 +1,4 @@
-<% if @status %>
+<% if @level > 1 %>
   <%= render 'whitelist_mailer/deliver_admin_confirmation' %>
 <% else %>
   <%= render 'whitelist_mailer/deliver_user_confirmation' %>

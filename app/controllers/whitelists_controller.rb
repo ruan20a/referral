@@ -1,5 +1,6 @@
 class WhitelistsController < ApplicationController
   before_action :authenticate_admin!
+  # before_action :check_level
   before_action :check_main_admin
   before_action :set_whitelist, only: [:edit, :update, :show, :destroy]
 
@@ -15,7 +16,7 @@ class WhitelistsController < ApplicationController
     whitelist = Whitelist.new(whitelist_params)
     if whitelist.save
       redirect_to whitelists_path, notice: 'Email successfully added to whitelist'
-      WhitelistMailer.deliver_confirmation(whitelist.email, whitelist.is_admin)
+      WhitelistMailer.deliver_confirmation(whitelist.email, whitelist.level)
     else
       redirect_to whitelists_path, notice: "Email #{whitelist.email} could not be added because it already exists"
     end
@@ -49,7 +50,7 @@ class WhitelistsController < ApplicationController
   protected
 
   def whitelist_params
-    params.require(:whitelist).permit(:email, :is_admin)
+    params.require(:whitelist).permit(:email, :level)
   end
 
   def set_whitelist
@@ -63,5 +64,11 @@ class WhitelistsController < ApplicationController
     status = main_admins.select{|email| email == current_admin.email}
     redirect_to new_admin_session_path, notice: "You are not an approved admin whitelister" if status.empty?
   end
+
+  #TODO INTEGRATE after whitelist is RE-set up again
+  # def check_main_admin
+  #   level = Whitelist.find_by_email(current_admin.email).level
+  #   redirect_to new_admin_session_path, notice: "You are not an approved admin whitelister" if level != 3
+  # end
 
 end
