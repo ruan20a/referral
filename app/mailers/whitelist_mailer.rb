@@ -4,6 +4,6 @@ class WhitelistMailer < ActionMailer::Base
   def deliver_confirmation(email, status)
     @email = email
     @status = status
-    mail(to: @email, subject: "WeKrüt Email Approval").deliver
+    mail(to: @email, subject: "Lori Tiernan is inviting you to join the WeKrüt Private Beta Test").deliver
   end
 end
