@@ -8,20 +8,12 @@
                    <span class="light">&nbsp&nbsp&nbspWe</span>Krüt
                </a>
            </div>
-
-<<<<<<< HEAD
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-                <ul class="nav navbar-nav">
-                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-
-=======
            <!-- Collect the nav links, forms, and other content for toggling -->
            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
                <ul class="nav navbar-nav">
                   <li class="page-scroll">
                     <%= link_to 'Jobs', jobs_path %>
-                   </li>
+                 s  </li>
                </ul>
                <ul class="nav navbar-nav">
                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
@@ -34,7 +26,6 @@
                        <li><%= link_to "User", new_user_session_path %></li>
                        <li><%= link_to "Recruiter", new_admin_session_path %></li>
                       </ul>
->>>>>>> b734d7be2b0b15c99b66babc05cbacef7c46c91d
                     </li>
                   <% else %>
                     <li class="dropdown">
@@ -54,26 +45,6 @@
                         </li>
                       </ul>
                     </li>
-<<<<<<< HEAD
-                    <li class="page-scroll">
-                        <a href="jobs">Jobs</a>
-                    </li>
-                    <li class="page-scroll">
-                        <% if user_signed_in? %> <a>Profile</a> <% else %> <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Login<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><%= link_to "User", new_user_session_path %></li>
-                        <li><a href="admins">Recruiter</a></li>
-                            <% end %> </ul>
-
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-
-        <!-- /.container -->
-    </nav>
-=======
                 <% end %>
               </li>
            </div>
@@ -81,4 +52,3 @@
        </div>
        <!-- /.container -->
    </nav>
->>>>>>> b734d7be2b0b15c99b66babc05cbacef7c46c91d
