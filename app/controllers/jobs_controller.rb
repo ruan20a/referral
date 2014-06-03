@@ -49,9 +49,9 @@ class JobsController < ApplicationController
 	def new
     @job = Job.new
 
-    if level == 2
-      @job.admin_id = current_admin.id
-    end
+  if level == 2
+    @job.admin_id = current_admin.id
+  end
 	end
 
   def show

@@ -14,7 +14,8 @@ class ReferralsController < ApplicationController
   def index
 	  # @search = Referral.search(params[:q])
   	# @referrals = @search.result
-    @referrals = Referral.all
+    @search = Referral.search(params[:q])
+    @referrals = @search.result
     @jobs = Job.all
   end
 
