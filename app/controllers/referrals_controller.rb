@@ -1,7 +1,8 @@
 class ReferralsController < ApplicationController
   before_action :check_session
   before_action :set_referral, only: [:update, :edit, :destroy, :show]
-  before_action :check_correct_owners, only: [:show, :edit, :update, :destroy]
+  before_action :check_correct_owners, only: [:show, :edit, :update]
+  before_action :check_destroy_owners, only:[:destroy]
   before_action :determine_status, only: [:update, :edit, :show]
   before_action :store_location #enables linking back
   before_action :check_main_admin, only: [:index, :show]
@@ -66,9 +67,9 @@ class ReferralsController < ApplicationController
   def edit
     @job = Job.find(@referral.job_id)
     @ref_type = @referral.ref_type
-    binding.pry
+    # binding.pry
     @my_status
-    binding.pry
+    # binding.pry
     #name logic
     if @referral.admin_id.nil?
       @user = User.find(@referral.user_id)
@@ -95,16 +96,16 @@ class ReferralsController < ApplicationController
     if @referral.check_email(@requester)
       if @referral.update(referral_params)
         if current_admin.nil?
-          binding.pry
+          # binding.pry
           redirect_to current_user
         else
-          binding.pry
+          # binding.pry
           redirect_to current_admin
         end
       else
         flash[:error] = "There was an issue with your update. Please review your updates."
         #TODO FIX ERROR
-        binding.pry
+        # binding.pry
         render session[:return_to]
       end
     else
@@ -115,12 +116,15 @@ class ReferralsController < ApplicationController
   end
 
   def destroy
+    # binding.pry
     if @referral.destroy
+      # binding.pry
       flash[:notice] = "You successfully removed the referral"
       redirect_to session[:return_to]
     else
+      # binding.pry
       flash[:notice] = "Referral could not be deleted."
-      render action: session[:return_to]
+      redirect_to session[:return_to]
     end
   end
 
@@ -158,8 +162,17 @@ class ReferralsController < ApplicationController
     end
   end
 
+  #owner
+  def check_destroy_owners
+    if @referral.ref_type == "refer"
+      check_correct_owners
+    else
+      redirect_to(new_user_session_path, notice: "You cannot view this referral. Please login to the correct account.") unless @referral.referee_email == current_user.email
+    end
+  end
+
   def determine_status
-    binding.pry
+    # binding.pry
     if current_admin.nil? #user logic checks
       if @referral.user == current_user
         @my_status = "Sender"
@@ -196,7 +209,13 @@ class ReferralsController < ApplicationController
   def check_main_admin
   #need to update this
     main_admins = ["loritiernan@gmail.com", "info@wekrut.com", "nyc.amy@gmail.com","deaglan1@gmail.com"]
-    status = main_admins.select{|email| email == current_admin.email}
+
+    if !current_admin.nil?
+      status = main_admins.select{|email| email == current_admin.email}
+    else
+      status = []
+    end
+
     redirect_to new_admin_session_path, notice: "You are not an approved admin." if status.empty?
   end
 
