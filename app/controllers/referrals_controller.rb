@@ -66,9 +66,9 @@ class ReferralsController < ApplicationController
   def edit
     @job = Job.find(@referral.job_id)
     @ref_type = @referral.ref_type
-    binding.pry
+    #binding.pry
     @my_status
-    binding.pry
+    #binding.pry
     #name logic
     if @referral.admin_id.nil?
       @user = User.find(@referral.user_id)
@@ -93,16 +93,16 @@ class ReferralsController < ApplicationController
     if @referral.check_email(@requester)
       if @referral.update(referral_params)
         if current_admin.nil?
-          binding.pry
+          #binding.pry
           redirect_to current_user
         else
-          binding.pry
+          #binding.pry
           redirect_to current_admin
         end
       else
         flash[:error] = "There was an issue with your update. Please review your updates."
         #TODO FIX ERROR
-        binding.pry
+        #binding.pry
         render session[:return_to]
       end
     else
@@ -157,7 +157,7 @@ class ReferralsController < ApplicationController
   end
 
   def determine_status
-    binding.pry
+    #binding.pry
     if current_admin.nil? #user logic checks
       if @referral.user == current_user
         @my_status = "Sender"
