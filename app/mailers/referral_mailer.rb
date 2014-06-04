@@ -1,6 +1,5 @@
 class ReferralMailer < ActionMailer::Base
   default from: ENV['GMAIL']
-  include ApplicationHelper
 
   include ApplicationHelper
 

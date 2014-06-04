@@ -8,7 +8,7 @@
       </div>
       <div class="panel-body">
         <div class="form-group">
- 
+
         <%= form_for :referral, url: {action:"update"}, method: :put  do |f| %>
 
          <div class="col-md-6">
@@ -45,11 +45,11 @@
                   <%= f.text_field :github_profile_url, :class => 'form-control login-field'%>
               </div>
             </div>
-            
+
             <div>
               <%= f.submit "Submit to Wekrut", :class => "btn btn-primary pull-right" %>
             </div>
-          
+
 
            <div>
             <%= f.hidden_field :job_id, :value => @job.id%>
@@ -62,5 +62,3 @@
     </div>
   </div>
 </div>
-
-<%= render 'layouts/footer_sticky' %>

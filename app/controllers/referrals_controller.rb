@@ -53,7 +53,7 @@ class ReferralsController < ApplicationController
      end
    else
      flash[:error] = "Sorry, you cannot refer yourself."
-     redirect_to new_referral_path(:job_id => referral.job_id, :ref_type => referral.ref_type)
+     redirect_to jobs_path(:job_id => referral.job_id, :ref_type => referral.ref_type)
    end
   end
 
@@ -66,7 +66,9 @@ class ReferralsController < ApplicationController
   def edit
     @job = Job.find(@referral.job_id)
     @ref_type = @referral.ref_type
+    binding.pry
     @my_status
+    binding.pry
     #name logic
     if @referral.admin_id.nil?
       @user = User.find(@referral.user_id)
@@ -80,24 +82,35 @@ class ReferralsController < ApplicationController
   end
 
   def update
-    set_requester(@referral)
+    # binding.pry
+
+    if !@referral.user_id.nil?
+      @requester = User.find(@referral.user_id)
+    else
+      @requester = Admin.find(@referral.admin_id)
+    end
+
+
     #binding.pry
     if @referral.check_email(@requester)
       if @referral.update(referral_params)
         if current_admin.nil?
+          binding.pry
           redirect_to current_user
         else
+          binding.pry
           redirect_to current_admin
         end
       else
         flash[:error] = "There was an issue with your update. Please review your updates."
         #TODO FIX ERROR
-        render 'edit'
+        binding.pry
+        render session[:return_to]
       end
     else
       flash[:error] = "There was an issue with your update. Please review your updates."
       #TODO FIX ERROR
-      render 'edit'
+      render session[:return_to]
     end
   end
 
@@ -146,6 +159,7 @@ class ReferralsController < ApplicationController
   end
 
   def determine_status
+    binding.pry
     if current_admin.nil? #user logic checks
       if @referral.user == current_user
         @my_status = "Sender"

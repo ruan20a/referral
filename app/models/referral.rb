@@ -44,11 +44,12 @@ class Referral < ActiveRecord::Base
     admin = referral.job.admin
 
     if referral.is_interested == true && referral.is_admin_notified == false
-      # binding.pry
+      binding.pry
       if referral.update_attribute(:is_admin_notified, true)
         ReferralMailer.deliver_admin_notification(referral, admin)
         referral.save
       else
+        #TODO render to the right page
         render 'edit', error: "We had an issue with your referral request. Please try again."
       end
     end
@@ -56,14 +57,14 @@ class Referral < ActiveRecord::Base
 
   #TODO RETHINK LOGIC.
   def check_email(requester)
-    # binding.pry
+    binding.pry
     referral = self
     if referral.referral_email_changed?
-      # binding.pry
+      binding.pry
       if !referral.referral_email.nil?
-        # binding.pry
+        binding.pry
         referral_email = referral.referral_email
-        #binding.pry
+        binding.pry
         referral_email == requester.email ? false:true
       else
         true
