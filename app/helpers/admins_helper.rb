@@ -12,6 +12,10 @@ module AdminsHelper
   	["Relevant", "Not Relevant" ]
 	end
 
+  def industry_choices
+    ["Financial Services", "Fashion", "Consumer", "Non-profit", "Advertising", "Professional Services", "Other"]
+  end
+
 
 #DEVISE
   def resource_name

@@ -1,6 +1,7 @@
 class JobsController < ApplicationController
 	# before_action :signed_in? only:[:new, :edit, :update]
   before_action :authenticate_admin!, only: [:new, :edit, :update, :create, :delete]
+  before_action :check_level, only:[:new, :create, :edit, :update]
   before_action :check_admin, only: [:edit, :update, :delete]
   before_action :set_job, only: [:show, :update, :edit, :destroy]
   before_action :store_location #enables linking back
@@ -8,7 +9,7 @@ class JobsController < ApplicationController
   before_action :check_signed_in, only: [:show, :edit, :delete, :update, :create]
   #TODO jobs_restriction for first month only
   # before_action :check_main_admin, only: [:edit, :update]
-  before_action :check_level, only:[:new, :create, :edit, :update]
+
   # before_action :clear_search_index, :only => [:index]
 
   include ApplicationHelper
@@ -18,7 +19,7 @@ class JobsController < ApplicationController
 		render :json => @user
 	end
 
-  	def index
+  def index
     # binding.pry
 
       # if @search.nil?
@@ -47,7 +48,6 @@ class JobsController < ApplicationController
     end
 	end
 
-
 	def new
     @job = Job.new
 
@@ -60,23 +60,17 @@ class JobsController < ApplicationController
     @job
     @referral = Referral.new
     @ref_type = "refer"
-
-    if @job.admin == current_admin
-      @status = true
-    else
-      @status = false
-    end
+    set_status(@job)
   end
 
   def create
     job = Job.new(job_params)
     binding.pry
 
-    if job.admin.nil?
-      job.admin = current_admin
-    end
+    set_admin(job)
 
-    job.name = job.admin.company
+    job.id = @admin.id
+    job.name = @admin.company
 
     if job.save
       redirect_to job, notice: 'Job was successfully created'
@@ -111,14 +105,30 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
   end
 
-	def job_params
+	def set_admin(job)
+    if job.admin.nil?
+      @admin = current_admin
+    else
+      @admin = job.admin
+    end
+  end
+
+  def set_status(job)
+    if job.admin == current_admin
+      @status = true
+    else
+      @status = false
+    end
+  end
+
+  def job_params
     params.require(:job).permit(:name, :job_name, :description, :city, :state, :admin_id, :referral_fee, :image, :image_cache, :remote_image_url, :remove_image,  :speciality_1, :speciality_2, :industry_1, referrals_attributes: [:id])
 	end
 
   def check_admin
     job = Job.find(params[:id])
     admin = Admin.find(job.admin_id)
-    redirect_to job_path unless admin == current_admin
+    redirect_to job_path unless admin == current_admin || @level == 3
   end
 
   def user_pending_received_requests

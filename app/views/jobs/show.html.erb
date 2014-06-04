@@ -7,6 +7,9 @@
         <div class="panel panel-default">
           <div class="panel-heading"><h2 class="panel-referal">
              <%= @job.job_name %> - <%= @job.name %> </h2>
+<!--             <% if !@job.admin.image_url(:thumb).nil? %>
+                <%= image_tag "#{@job.admin.image_url(:thumb)}", :alt => "#{@job.name}" %>
+            <% end %> -->
           </div>
           <div class="panel-body">
             <div class="login-form">
