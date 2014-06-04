@@ -21,4 +21,8 @@ module ApplicationHelper
     referral_fee = referral_fee/2
   end
 
+  def replace_line_br(description)
+    description.gsub(/\n/, '<br/>').html_safe
+  end
+
 end

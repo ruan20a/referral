@@ -22,5 +22,4 @@ module ReferralsHelper
     end
   end
 
-
 end
