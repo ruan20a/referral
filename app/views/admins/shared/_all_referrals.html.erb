@@ -12,7 +12,7 @@
             <tr>
             <!-- TODO fix up links -->
 
-              <td><%= link_to referral.job.job_name, job_path(referral.job.id) %></td>
+              <td><%= link_to referral.job.job_name, edit_referral_path(referral.id) %></td>
               <td><%= referral.job.referral_fee %></td>
               <td><%= link_to referral.referral_name, edit_referral_path(referral.id) %></td>
               <td><%= referral.status.titleize %></td>
