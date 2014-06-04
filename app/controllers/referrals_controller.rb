@@ -6,7 +6,6 @@ class ReferralsController < ApplicationController
   before_action :store_location #enables linking back
   before_action :check_main_admin, only: [:index, :show]
   before_action :check_level, only: [:index]
-  # after_update :check_interest
 
   include ApplicationHelper
 
@@ -179,7 +178,6 @@ class ReferralsController < ApplicationController
       end
     end
   end
-  #NEED TO MOVE THIS METHOD TO THE MODEL
 
   def check_main_admin
   #need to update this

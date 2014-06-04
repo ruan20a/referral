@@ -6,7 +6,9 @@ class JobsController < ApplicationController
   before_action :store_location #enables linking back
   before_action :user_pending_received_requests, only: [:index]
   before_action :check_signed_in, only: [:show, :edit, :delete, :update, :create]
-  before_action :check_level, only: [:new,:create, :edit, :update]
+  #TODO jobs_restriction for first month only
+  # before_action :check_main_admin, only: [:edit, :update]
+  before_action :check_level, only:[:new, :create, :edit, :update]
   # before_action :clear_search_index, :only => [:index]
 
   include ApplicationHelper
@@ -49,10 +51,10 @@ class JobsController < ApplicationController
 	def new
     @job = Job.new
 
-  if level == 2
-    @job.admin_id = current_admin.id
+    if @level == 2
+      @job.admin_id = current_admin.id
+    end
   end
-	end
 
   def show
     @job
@@ -68,7 +70,14 @@ class JobsController < ApplicationController
 
   def create
     job = Job.new(job_params)
-    job.admin_id = current_admin.id
+    binding.pry
+
+    if job.admin.nil?
+      job.admin = current_admin
+    end
+
+    job.name = job.admin.company
+
     if job.save
       redirect_to job, notice: 'Job was successfully created'
     else
@@ -142,8 +151,16 @@ class JobsController < ApplicationController
   end
 
   def check_main_admin
-    level = Whitelist.find_by_email(current_admin.email).level
-    redirect_to new_admin_session_path, notice: "You are not an approved admin whitelister" if level != 3
+    @level = Whitelist.find_by_email(current_admin.email).level
+    @main_status = true
+    redirect_to new_admin_session_path, notice: "You are not an approved admin" if @level != 3
+  end
+
+  def check_level
+    @level = Whitelist.find_by_email(current_admin.email).level
+    if @level > 2
+      @main_status = true
+    end
   end
 
 end

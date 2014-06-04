@@ -18,9 +18,9 @@
             </th>
 
         <%= search_form_for @search do |f| %>
-            <th>
-                <div class="search-form">
-                <%= f.text_field :name_or_job_name_or_city_or_state_cont, :placeholder => 'Search' %>
+            <th class="search-form">
+                <div>
+                <%= f.text_field :name_or_job_name_or_city_or_state_cont, :placeholder => 'Search', style: "color: #2c3e50;" %>
                 &nbsp
                 <%= f.submit "Search", :class => 'btn btn-default' %>
                 </div>
