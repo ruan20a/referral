@@ -69,7 +69,7 @@
             <td><%= link_to job.job_name, "/jobs/#{job.id}" %></td>
             <td><%= job.city %></td>
             <td><%= job.state %></td>
-            <td><%= job.industry_1 %></td>
+            <td><%= job.admin.industry %></td>
             <td><%= number_to_currency(calculate_fee(job.referral_fee), precision: 0) %></td>
           </tr>
 
