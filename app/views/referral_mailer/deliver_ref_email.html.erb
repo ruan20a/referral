@@ -31,7 +31,7 @@ Job Description
 </div>
 <br>
 <div>
-<%=@job.description%>
+<%= @job.description.gsub(/\n/, '<br/>').html_safe %>
 </div>
 
 

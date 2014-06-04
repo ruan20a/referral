@@ -77,7 +77,12 @@ include ApplicationHelper
   end
 
   def update
-    set_requester(@referral)
+    if !@referral.user.id.nil?
+      @requester = User.find(@referral.user_id)
+    else 
+      @requester = Admin.find(@referral.admin_id)
+    end
+
     #binding.pry
     if @referral.check_email(@requester)
       if @referral.update(referral_params)

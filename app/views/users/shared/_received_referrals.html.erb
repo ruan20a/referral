@@ -1,4 +1,4 @@
-    <div class="page page-table">
+<div class="page page-table">
       <div class="panel panel-default">
       <div class="panel-heading"><strong><span class="fa fa-th"></span>
         Received Referrals</strong>
@@ -15,8 +15,8 @@
           <tbody class="page">
             <% @received_referrals.each do |referral| %>
           <tr class="received">
-            <td><%= link_to referral.job.name, job_path(referral.job.id), class: "#{referral.is_interested}-stat" %></td>
-            <td><%= link_to referral.job.job_name, job_path(referral.job.id), class: "#{referral.is_interested}-stat" %></td>
+            <td><%= link_to referral.job.name, edit_referral_path(referral.id), class: "#{referral.is_interested}-stat" %></td>
+            <td><%= link_to referral.job.job_name, edit_referral_path(referral.id), class: "#{referral.is_interested}-stat" %></td>
             <!-- need to change the way class is entered -->
             <td class="#{referral.is_interested}-stat"><%= referral.status.titleize %></td>
             <td class="#{referral.is_interested}-stat"><%= time_ago_in_words(referral.updated_at) %></td>
