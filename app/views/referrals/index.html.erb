@@ -1,22 +1,42 @@
-<%= link_to 'New Job', new_job_path %>
 
 
-<table>
+
+
+
+<table class="table">
   <tr>
-    <th>Referral</th>
-     <th>Job</th>
+    <th>Referral Type</th>
+    <th>Company Name</th>
+    <th>Job Name</th>
+    <th>Referral Status</th>
+    <th>Referral Name</th>
+    <th>Referral Email</th>
+    <th>Referee Name</th>
+    <th>Referee Email</th>
+    <th>Referral Interest </th>
+    <th>Referral Relationship</th>
+    <th>Owner Id</th>
   </tr>
- 
+
   <% @referrals.each do |referral| %>
-  
     <tr>
-      <td><%= link_to referral.referral_name, "/referrals/#{referral.id}" %></td>
-      <% end %>
-   <% @jobs.each do |job| %>
- 
-      <td><%= link_to job.name, "/jobs/#{job.id}" %></td>
-     
-     </tr>
-          
-<% end %>
+      <td><%= referral.ref_type %></td>
+      <td><%= referral.job.name %></td>
+      <td><%= referral.job.job_name %></td>
+      <td><%= referral.status %></td>
+      <td><%= referral.referral_name %></td>
+      <td><%= referral.referral_email %></td>
+      <td><%= referral.referee_name %></td>
+      <td><%= referral.referee_email %></td>
+      <td><%= referral.is_interested %></td>
+      <td><%= referral.relationship %></td>
+      <td>
+        <% if referral.admin_id.nil? %>
+          <%= referral.user_id %>
+        <% else %>
+          <%= referral.admin_id %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
 </table>

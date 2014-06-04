@@ -14,7 +14,7 @@
             <div class="form-group">
               <%= search_form_for @search, url: admin_path(@admin.id) do |f| %>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="color:#2c3e50;">
                 <%= f.text_field :job_name_or_referral_name_or_status_cont, :placeholder => 'Search' %>
             </div>
             <div class="form-group">
@@ -30,7 +30,7 @@
      <ul class="nav nav-tabs nav-justified">
       <li class="active"><a href="#all-referrals" data-toggle="tab">Referrals</a></li>
       <li class=""><a href="#pending-referrals" data-toggle="tab">
-          <%="Pending Review" %> 
+          <%="Pending Review" %>
           <% if !@pending_count.nil? %>
             <%= "#{@pending_count}" %>
           <% end %>

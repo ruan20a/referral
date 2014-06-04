@@ -44,4 +44,5 @@ class Admin < ActiveRecord::Base
   has_many :referrals, :through => :jobs
   validates :email, :company, :first_name, :last_name, presence: true
   validates :email,  :uniqueness => { :case_sensitive => false }
+  mount_uploader :image, ImageUploader
 end

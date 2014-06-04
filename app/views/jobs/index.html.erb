@@ -1,5 +1,8 @@
 <%= render 'layouts/header' %>
-
+<!-- TODO WHY IS THE BR NECESSARY? -->
+<br>
+<br>
+<br>
 <section class="jobs">
 
   <div class="container">
@@ -13,11 +16,11 @@
              <th>
               <strong><span class="fa fa-th"></span> Job Postings&nbsp
             </th>
-         
-  <%= search_form_for @search do |f| %>
-            <th>
-                <div class="search-form">
-                <%= f.text_field :name_or_job_name_or_city_or_state_cont, :placeholder => 'Search' %>
+
+        <%= search_form_for @search do |f| %>
+            <th class="search-form">
+                <div>
+                <%= f.text_field :name_or_job_name_or_city_or_state_cont, :placeholder => 'Search', style: "color: #2c3e50;" %>
                 &nbsp
                 <%= f.submit "Search", :class => 'btn btn-default' %>
                 </div>
@@ -56,18 +59,18 @@
           <% @jobs.each do |job| %>
           <tr>
             <td>
-              <% if job.image_url.nil? %>
-                <%= job.name %>
+              <% if job.admin.image_url(:thumb).nil? %>
+                <%= job.admin.company %>
               <% else %>
-                <%= image_tag "#{job.image_url(:thumb)}", :alt => "#{job.name}" %>
+                <%= image_tag "#{job.admin.image_url(:thumb)}", :alt => "#{job.name}" %>
               <% end %>
             </td>
 
             <td><%= link_to job.job_name, "/jobs/#{job.id}" %></td>
             <td><%= job.city %></td>
             <td><%= job.state %></td>
-            <td><%= job.industry_1 %></td>
-            <td><%= number_to_currency(calculate_fee(job.referral_fee), precision: 0)  %></td>
+            <td><%= job.admin.industry %></td>
+            <td><%= number_to_currency(calculate_fee(job.referral_fee), precision: 0) %></td>
           </tr>
 
           <% end %>

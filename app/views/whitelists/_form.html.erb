@@ -3,11 +3,9 @@
     <%= f.label :email %>
     <%= f.text_field :email %>
   </div>
-
-    <%= f.label 'Check if Admin' %>
-    <%= f.check_box :is_admin, {}, true  %>
   <br>
-
+    <%= f.label 'Access Level- Default is User' %>
+    <%= f.select :level, level_access %>
   <div>
     <%=f.submit 'Update'%>
   </div>

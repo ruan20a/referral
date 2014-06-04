@@ -5,13 +5,16 @@ class ReferralsController < ApplicationController
   before_action :determine_status, only: [:update, :edit, :show]
   before_action :store_location #enables linking back
   before_action :check_main_admin, only: [:index, :show]
-  # after_update :check_interest
-include ApplicationHelper
+  before_action :check_level, only: [:index]
+
+  include ApplicationHelper
+
   #TODO set up params to align with the right owner****
   def index
 	  # @search = Referral.search(params[:q])
   	# @referrals = @search.result
-    @referrals = Referral.all
+    @search = Referral.search(params[:q])
+    @referrals = @search.result
     @jobs = Job.all
   end
 
@@ -50,7 +53,7 @@ include ApplicationHelper
      end
    else
      flash[:error] = "Sorry, you cannot refer yourself."
-     redirect_to new_referral_path(:job_id => referral.job_id, :ref_type => referral.ref_type)
+     redirect_to jobs_path(:job_id => referral.job_id, :ref_type => referral.ref_type)
    end
   end
 
@@ -63,7 +66,9 @@ include ApplicationHelper
   def edit
     @job = Job.find(@referral.job_id)
     @ref_type = @referral.ref_type
+    binding.pry
     @my_status
+    binding.pry
     #name logic
     if @referral.admin_id.nil?
       @user = User.find(@referral.user_id)
@@ -77,29 +82,33 @@ include ApplicationHelper
   end
 
   def update
-    if !@referral.user.id.nil?
+    # binding.pry
+
+    if !@referral.user_id.nil?
       @requester = User.find(@referral.user_id)
-    else 
+    else
       @requester = Admin.find(@referral.admin_id)
     end
 
-    #binding.pry
     if @referral.check_email(@requester)
       if @referral.update(referral_params)
         if current_admin.nil?
+          binding.pry
           redirect_to current_user
         else
+          binding.pry
           redirect_to current_admin
         end
       else
         flash[:error] = "There was an issue with your update. Please review your updates."
         #TODO FIX ERROR
-        render 'edit'
+        binding.pry
+        render session[:return_to]
       end
     else
       flash[:error] = "There was an issue with your update. Please review your updates."
       #TODO FIX ERROR
-      render 'edit'
+      render session[:return_to]
     end
   end
 
@@ -148,6 +157,7 @@ include ApplicationHelper
   end
 
   def determine_status
+    binding.pry
     if current_admin.nil? #user logic checks
       if @referral.user == current_user
         @my_status = "Sender"
@@ -180,7 +190,6 @@ include ApplicationHelper
       end
     end
   end
-  #NEED TO MOVE THIS METHOD TO THE MODEL
 
   def check_main_admin
   #need to update this
@@ -188,4 +197,10 @@ include ApplicationHelper
     status = main_admins.select{|email| email == current_admin.email}
     redirect_to new_admin_session_path, notice: "You are not an approved admin." if status.empty?
   end
+
+  def check_level
+    level = Whitelist.find_by_email(current_admin.email).level
+    redirect_to new_admin_session_path, notice: "You do not have sufficient access level to view this page" if level != 3
+  end
+
 end

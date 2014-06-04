@@ -3,7 +3,7 @@
 <table class="table">
   <tr>
     <th>Email </th>
-    <th>Admin </th>
+    <th>Levels </th>
     <th>Options</th>
   </tr>
 
@@ -13,7 +13,7 @@
     <%=whitelist.email%>
     </td>
     <td>
-      <%=whitelist.is_admin?%>
+      <%=translate_level(whitelist.level)%>
     </td>
     <td>
     <%=link_to 'Edit', edit_whitelist_path(whitelist.id), class: "btn btn-primary btn-sm"%>

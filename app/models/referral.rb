@@ -30,7 +30,7 @@ class Referral < ActiveRecord::Base
 	belongs_to :job
 	belongs_to :user
   validates_presence_of :job_id, :ref_type
-  #different logic for ask_refer types lambda substitute for method logic
+  #different logic for ask_referer types lambda substitute for method logic
   # validates_presence_of :referee_email, :referee_name, :unless => lambda{ self.ref_type == "refer" }
   #different logic for refer types lambda substitute for method logic
   # validates_presence_of :referral_email, :referral_name, :unless => lambda{ self.ref_type == "ask_refer" }
@@ -49,6 +49,7 @@ class Referral < ActiveRecord::Base
         ReferralMailer.deliver_admin_notification(referral, admin)
         referral.save
       else
+        #TODO render to the right page
         render 'edit', error: "We had an issue with your referral request. Please try again."
       end
     end
@@ -63,7 +64,7 @@ class Referral < ActiveRecord::Base
       if !referral.referral_email.nil?
         # binding.pry
         referral_email = referral.referral_email
-        #binding.pry
+        # binding.pry
         referral_email == requester.email ? false:true
       else
         true

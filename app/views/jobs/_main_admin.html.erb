@@ -2,15 +2,20 @@
 <%= render 'layouts/flash' %>
 
 <div class="container" style="margin-top:160px">
-      <div class="col-md-8 col-md-offset-2">
+      <div class="col-md-10 col-md-offset-1">
        <div class="panel panel-default">
          <div class="panel-heading"><h3 class="panel-title"><strong>New Job</strong></h3></div>
           <div class="panel-body">
             <div class="login-form">
               <%= form_for @job do |f| %>
-              <div class="col-md-4">
 
-                 <div>
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <%= f.label :admin_id, "Admin Name" %><br>
+                    <%= f.select :admin_id, admin_selection%>
+                  </div>
+
+                <div>
                   <%= f.label :job_name, "Position Title" %><br>
                   <%= f.text_field :job_name, :class => 'form-control login-field' %>
                 </div>
@@ -20,18 +25,18 @@
                   <%= f.number_field :referral_fee, :class => 'form-control login-field' %>
                 </div>
 
-                <div>
-                  <%= f.label :description, "Job Description" %><br>
-                  <%= f.text_area :description, :class => 'form-control login-field wysihtml5', :rows => "4" %>
+                <div><br>
+                  <%= f.label :description, "Job Description" %></br>
+                  <%= f.text_area :description, :class => 'form-control login-field wysihtml5', :rows => "7" %>
                 </div>
+
 
                 <div><br>
                   <%= link_to 'Back', jobs_path %>
                 </div>
-
               </div>
 
-              <div class="col-md-4">
+              <div class="col-md-5">
                 <div>
                   <%= f.label :city %><br>
                   <%= f.text_field :city, :class => 'form-control login-field' %>
@@ -42,9 +47,7 @@
                   <%= f.text_field :state, :class => 'form-control login-field' %>
                 </div>
 
-              </div>
-              <div class="col-md-4">
-                <div>
+                <div><br>
                   <%= f.label :speciality_1, "Preferred Skills" %><br>
                   <%= f.text_field :speciality_1, :class => 'form-control login-field' %>
                 </div>
@@ -56,4 +59,4 @@
 
             <% end %>
 
-            <%= render "layouts/footer_sticky" %>
+           <%= render "layouts/footer_sticky" %>
