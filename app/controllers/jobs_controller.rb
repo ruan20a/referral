@@ -65,7 +65,7 @@ class JobsController < ApplicationController
 
   def create
     job = Job.new(job_params)
-    binding.pry
+    # binding.pry
 
     set_admin(job)
 
