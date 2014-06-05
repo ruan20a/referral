@@ -66,7 +66,7 @@ class WhitelistsController < ApplicationController
   end
 
   #TODO INTEGRATE after whitelist is RE-set up again
-  # def check_main_admin
+  # def check_level
   #   level = Whitelist.find_by_email(current_admin.email).level
   #   redirect_to new_admin_session_path, notice: "You are not an approved admin whitelister" if level != 3
   # end

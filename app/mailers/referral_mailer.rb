@@ -74,4 +74,14 @@ class ReferralMailer < ActionMailer::Base
     mail(to: admin_email,subject: "New Referral for Job #{@job.name}").deliver
   end
 
+
+  def send_admin_reminder(referral)
+    if referral.is_interested == true && referral.status == "pending"
+      referral.check_update_lag
+    end
+  end
+
+  def send_user_reminder(referral)
+
+  end
 end

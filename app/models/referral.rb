@@ -39,12 +39,11 @@ class Referral < ActiveRecord::Base
 
   # paginates_per 10
 
-    def check_notification
+  def check_notification
     referral = self
     admin = referral.job.admin
 
     if referral.is_interested == true && referral.is_admin_notified == false
-      # binding.pry
       if referral.update_attribute(:is_admin_notified, true)
         ReferralMailer.deliver_admin_notification(referral, admin)
         referral.save
@@ -57,14 +56,10 @@ class Referral < ActiveRecord::Base
 
   #TODO RETHINK LOGIC.
   def check_email(requester)
-    # binding.pry
     referral = self
     if referral.referral_email_changed?
-      # binding.pry
       if !referral.referral_email.nil?
-        # binding.pry
-        referral_email = referral.referral_email
-        # binding.pry
+        referral_email = referral.referral_emai
         referral_email == requester.email ? false:true
       else
         true
@@ -73,6 +68,14 @@ class Referral < ActiveRecord::Base
       true
     end
   end
+
+  # def check_update_lag
+  #   referral = self
+  #   last_update = referral.updated_at
+  #   time_passage = Time.now - last_update
+  #   time_passage > 2 weeks ? true:false
+  # end
+
 
 
 end

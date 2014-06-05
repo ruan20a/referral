@@ -3,8 +3,16 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :destroy]
   before_action :correct_user, only: [:show, :edit, :update, :destroy]
   before_action :store_location #enables linking back
+  before_action :check_main_admin, only: [:index]
 
   include ApplicationHelper
+
+  def index
+      # @search = User.search(params[:q])
+      # @referrals = @search.result
+      # @jobs = Job.all
+      @users = User.all
+  end
 
   def show
     @user_email = @user.email
@@ -61,4 +69,12 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     redirect_to new_user_session_path, :error => "You cannot view that account because you're not the correct admin. Please login to the correct account."  unless user == current_user
   end
+
+  def check_main_admin
+    level = Whitelist.find_by_email(current_admin.email).level
+    redirect_to new_admin_session_path, notice: "You are not an approved admin whitelister" if level != 3
+  end
+
+
+
 end

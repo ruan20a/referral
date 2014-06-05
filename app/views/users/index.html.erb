@@ -1,0 +1,18 @@
+
+<table class="table">
+  <tr>
+    <th>User First Name</th>
+    <th>User Last Name</th>
+    <th>User Email</th>
+    <th>User Referrals (All)</th>
+  </tr>
+
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.first_name %></td>
+      <td><%= user.last_name %></td>
+      <td><%= user.email %></td>
+      <td><%= user.referrals.count %></td>
+    </tr>
+  <% end %>
+</table>
