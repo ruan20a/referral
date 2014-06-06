@@ -4,7 +4,8 @@ include AdminsHelper
 
   def create
     #TODO add in main_admin creation as well
-    unless Whitelist.exists?(:email => params[:admin][:email], :level => 2)
+    email = params[:admin][:email].downcase
+    unless Whitelist.exists?(:email => email, :level => 2)
       email = params[:admin][:email]
       flash[:alert] = "#{email} is currently not on our beta list yet. Sign up #{view_context.link_to('here', root_path)} for our beta version.".html_safe
       redirect_to new_admin_registration_path

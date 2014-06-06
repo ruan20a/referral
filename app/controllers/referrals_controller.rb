@@ -190,14 +190,14 @@ class ReferralsController < ApplicationController
     end
   end
 
-  def check_whitelist(referral)
+def check_whitelist(referral)
     if referral.ref_type == "refer"
       unless Whitelist.exists?(:email => params[:referral][:referral_email])
-        Whitelist.create(:email => params[:referral][:referral_email], :is_admin => false)
+        Whitelist.create(:email => params[:referral][:referral_email], :level => 1)
       end
     else
       unless Whitelist.exists?(:email => params[:referral][:referee_email])
-        Whitelist.create(:email => params[:referral][:referee_email], :is_admin => false)
+        Whitelist.create(:email => params[:referral][:referee_email], :level => 1)
       end
     end
   end
