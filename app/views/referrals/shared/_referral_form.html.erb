@@ -1,14 +1,14 @@
-<%= render 'layouts/flash' %>
+
 <%= form_for :referral, url: referrals_path, method: :post do |f| %>
   <div class="form-group">
     <%= f.label "Who would you like to refer?" %><br>
-    
+
     <%= f.text_field :referral_name, :placeholder => 'Enter Referral Name', :class => 'form-control login-field' %>
   </div>
 
   <div class="form-group">
     <%= f.label "What is their email?" %><br>
-    <%= f.text_field :referral_email, :placeholder => 'Referral Email', :class => 'form-control login-field' %>
+    <%= f.email_field :referral_email, :placeholder => 'Referral Email', :class => 'form-control login-field' %>
   </div>
 
   <div class="form-group">

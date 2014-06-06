@@ -7,12 +7,12 @@ class ReferralMailer < ActionMailer::Base
     #TODO logic needs upgrade for admin
     @referral = referral
     @referral_id = referral.id
-    # binding.pry
+    binding.pry
 
     if referral.user_id.nil?
       sender = Admin.find(referral.admin_id)
     else
-      #binding.pry
+      binding.pry
       sender = User.find(referral.user_id)
     end
 
@@ -75,11 +75,11 @@ class ReferralMailer < ActionMailer::Base
   end
 
 
-  def send_admin_reminder(referral)
-    if referral.is_interested == true && referral.status == "pending"
-      referral.check_update_lag
-    end
-  end
+  # def send_admin_reminder(referral)
+  #   if referral.is_interested == true && referral.status == "pending"
+  #     if referral.check_time_update
+  #   end
+  # end
 
   def send_user_reminder(referral)
 

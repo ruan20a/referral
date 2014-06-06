@@ -31,9 +31,9 @@ class Referral < ActiveRecord::Base
 	belongs_to :user
   validates_presence_of :job_id, :ref_type
   #different logic for ask_referer types lambda substitute for method logic
-  # validates_presence_of :referee_email, :referee_name, :unless => lambda{ self.ref_type == "refer" }
+  validates_presence_of :referee_email, :referee_name, :unless => lambda{ self.ref_type == "refer" }
   #different logic for refer types lambda substitute for method logic
-  # validates_presence_of :referral_email, :referral_name, :unless => lambda{ self.ref_type == "ask_refer" }
+  validates_presence_of :referral_email, :referral_name, :unless => lambda{ self.ref_type == "ask_refer" }
   before_save :check_notification, :if => :is_interested_changed?
   # before_save :check_email, :if => :referral_email_changed?
 
@@ -59,7 +59,7 @@ class Referral < ActiveRecord::Base
     referral = self
     if referral.referral_email_changed?
       if !referral.referral_email.nil?
-        referral_email = referral.referral_emai
+        referral_email = referral.referral_email
         referral_email == requester.email ? false:true
       else
         true
@@ -73,9 +73,8 @@ class Referral < ActiveRecord::Base
   #   referral = self
   #   last_update = referral.updated_at
   #   time_passage = Time.now - last_update
-  #   time_passage > 2 weeks ? true:false
+  #   time_passage > 1209600 ? true:false
   # end
-
 
 
 end

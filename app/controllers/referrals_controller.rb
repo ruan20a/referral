@@ -31,13 +31,13 @@ class ReferralsController < ApplicationController
  end
 
   def create
-  # binding.pry
+  binding.pry
    referral = Referral.new(referral_params)
    admin = referral.job.admin
    set_requester(referral)
    if referral.check_email(@requester) #protected method to check if there is a self-referral.
      if referral.save
-       # binding.pry
+       binding.pry
        if referral.ref_type == "refer"
          ReferralMailer.deliver_ref_email(referral)
          check_whitelist(referral)
@@ -48,9 +48,9 @@ class ReferralsController < ApplicationController
          redirect_to jobs_path, notice: "Success. Your referral request has been sent."
        end
      else
-       # binding.pry
-       flash[:error] = "Please fill in all the required fields"
-       redirect_to new_referral_path(:job_id => referral.job_id, :ref_type => referral.ref_type)
+       binding.pry
+       flash[:notice] = "Please fill in all the required fields"
+       redirect_to session[:return_to]
      end
    else
      flash[:error] = "Sorry, you cannot refer yourself."
@@ -193,11 +193,11 @@ class ReferralsController < ApplicationController
   def check_whitelist(referral)
     if referral.ref_type == "refer"
       unless Whitelist.exists?(:email => params[:referral][:referral_email])
-        Whitelist.create(:email => params[:referral][:referral_email], :is_admin => false)
+        Whitelist.create(:email => params[:referral][:referral_email], :level => 1)
       end
     else
       unless Whitelist.exists?(:email => params[:referral][:referee_email])
-        Whitelist.create(:email => params[:referral][:referee_email], :is_admin => false)
+        Whitelist.create(:email => params[:referral][:referee_email], :level => 1)
       end
     end
   end

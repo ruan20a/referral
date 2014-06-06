@@ -3,7 +3,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 include UsersHelper
 
   def create
-    email = params[:user][:email]
+    email = params[:user][:email].downcase
     unless Whitelist.exists?(:email => email)
       flash[:alert] = "#{email} is currently not on our beta list yet. Sign up #{view_context.link_to('here', root_path)} for our beta version.".html_safe
       redirect_to new_user_registration_path
