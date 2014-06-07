@@ -70,12 +70,13 @@ class Referral < ActiveRecord::Base
     end
   end
 
-  # def check_update_lag
-  #   referral = self
-  #   last_update = referral.updated_at
-  #   time_passage = Time.now - last_update
-  #   time_passage > 1209600 ? true:false
-  # end
+  def check_update_lag
+    #testing required to update referral.updated_at
+    referral = self
+    last_update = referral.updated_at
+    time_passage = Time.now - last_update
+    time_passage > 1209600 ? true:false
+  end
 
 
 end
