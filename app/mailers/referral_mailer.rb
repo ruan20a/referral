@@ -4,28 +4,13 @@ class ReferralMailer < ActionMailer::Base
   include ApplicationHelper
 
   def deliver_ref_email(referral)
-    #TODO logic needs upgrade for admin
     @referral = referral
     @referral_id = referral.id
-    binding.pry
 
-    if referral.user_id.nil?
-      sender = Admin.find(referral.admin_id)
-    else
-      binding.pry
-      sender = User.find(referral.user_id)
-    end
-
-    @sender_first_name = sender.first_name
-    @sender_last_name = sender.last_name
-    @sender_email = sender.email
-
-    # @admin_email = admin.email
-    # @admin_name = admin.first_name
+    set_sender(@referral)
 
     @receiver_name = @referral.referral_name
     @receiver_email = @referral.referral_email
-
 
     @job = @referral.job
     @job_name = @job.name.titleize
@@ -38,7 +23,6 @@ class ReferralMailer < ActionMailer::Base
     referee_email = referral.referee_email
     @referee_name = referral.referee_name
     @job = referral.job
-
     # binding.pry
     @requester_FN = requester.first_name
     @requester_LN = requester.last_name
@@ -48,30 +32,18 @@ class ReferralMailer < ActionMailer::Base
     mail(to: requester_email, subject: "Copy of your referral request to #{@referee_name}").deliver
   end
 
-  def deliver_admin_notification(referral, admin)
+  def deliver_admin_notification(referral)
     #binding.pry
-
     @referral = referral
-
-    @admin_FN = admin.first_name
-    @admin_LN = admin.last_name
-    admin_email = admin.email
+    set_admin(@referral)
 
     #TODO FACTOR THIS OUT (METHOD)!!
-    if @referral.user_id.nil?
-      sender = Admin.find(referral.admin_id)
-    else
-      sender = User.find(referral.user_id)
-    end
-
-    @sender_first_name = sender.first_name
-    @sender_last_name = sender.last_name
-    sender_email = sender.email
+    set_sender(@referral)
 
     @job = Job.find(@referral.job_id)
     @job_referral_fee = @job.referral_fee / 2
 
-    mail(to: admin_email,subject: "New Referral for Job #{@job.name}").deliver
+    mail(to: @admin_email,subject: "New Referral for Job #{@job.name}").deliver
   end
 
 
@@ -81,7 +53,54 @@ class ReferralMailer < ActionMailer::Base
   #   end
   # end
 
-  def send_user_reminder(referral)
+  def send_user_reminder(referral,num_of_times)
+    @referral = referral
+    @num_of_times = num_of_times
+    @receiver_name = @referral.referral_name
+    @receiver_email = @referral.referral_email
 
+    set_sender(referral)
+
+    if @num_of_times == 1
+      mail(to: @user_email,subject: "Reminder - Please indicate your interest for your referral").deliver
+    else
+      mail(to: @user_email,subject: "Last Reminder - Please indicate your interest for your referral").deliver
+    end
   end
+
+
+  def send_admin_reminder(referral,num_of_times)
+    @referral = referral
+    @num_of_times = num_of_times
+    set_sender(@referral)
+    set_admin(@referral)
+
+    if @num_of_times == 1
+      mail(to: @admin_email,subject: "Reminder - Please update the referral status for your #{referral.job.job_name} posting").deliver
+    else
+      mail(to: @admin_email,subject: "Last Reminder - Please update referral status for your #{referral.job.job_name} posting").deliver
+    end
+  end
+
+  protected
+
+  def set_sender(referral)
+    if referral.user_id.nil?
+      sender = Admin.find(referral.admin_id)
+    else
+      binding.pry
+      sender = User.find(referral.user_id)
+    end
+
+    @sender_first_name = sender.first_name
+    @sender_last_name = sender.last_name
+    @sender_email = sender.email
+  end
+
+  def set_admin(referral)
+    @admin_FN = referral.job.admin.first_name
+    @admin_LN = referral.job.admin.last_name
+    @admin_email = referral.job.admin.email
+  end
+
 end

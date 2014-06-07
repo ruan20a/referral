@@ -31,6 +31,7 @@ class ReferralsController < ApplicationController
  end
 
   def create
+  # need to move check_whitelist to models
   # binding.pry
    referral = Referral.new(referral_params)
    admin = referral.job.admin
@@ -70,7 +71,7 @@ class ReferralsController < ApplicationController
     #binding.pry
     @my_status
     #binding.pry
-    #name logic
+    #TODO move to model
     if @referral.admin_id.nil?
       @user = User.find(@referral.user_id)
       @referrer_FN = @user.first_name
@@ -143,7 +144,7 @@ class ReferralsController < ApplicationController
   end
 
   def referral_params
-    params.require(:referral).permit(:name, :job_id, :referral_name, :referral_email, :relationship, :additional_details, :linked_profile_url, :status, :github_profile_url, :relevance, :user_id, :admin_id, :ref_type, :status, :referee_name, :referee_email, :personal_note, :is_interested, :is_admin_notified)
+    params.require(:referral).permit(:name, :job_id, :referral_name, :referral_email, :relationship, :additional_details, :linked_profile_url, :status, :github_profile_url, :relevance, :user_id, :admin_id, :ref_type, :status, :referee_name, :referee_email, :personal_note, :is_interested)
   end
 
   #only correct user and admin can destroy

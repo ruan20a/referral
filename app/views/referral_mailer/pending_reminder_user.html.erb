@@ -1,0 +1,52 @@
+<div>Hello <%=@receiver_name.titleize%>, </div>
+
+<div>
+  We just wanted to let you know that you still haven't indicated your interest to a referral by <%=@sender_first_name%> <%=@sender_last_name%> for a <%=@referral.job.job_name.titleize %> position at <%=@referral.job.name.titleize%>.
+</div>
+
+
+<% if @num_of_times > 1 %>
+  <div>
+    This is the last reminder we will send you. In <strong> 1 week </strong>, the referral will be removed and you will no longer be able to update it.
+  </div>
+<% end %>
+
+
+<% end %>
+
+<div>
+  If you're interested, the recruiter will review your profile and reach out if there is a match.
+</div>
+
+<br>
+
+<div>
+  <br>
+  <% if User.find_by_email(@receiver_email).nil? %>
+    Follow the link to sign up and complete your referral profile to be submitted. Please find the job description below.
+    <%=link_to 'Sign Up', url_for(controller: 'users/registrations', action: 'new', only_path: false)%>
+  <% else %>
+    Follow the link to login and indicate your interest. Please find the job description below.
+    <%=link_to 'Log In', url_for(controller: 'users/sessions', action: 'new', only_path: false)%>
+  <% end %>
+
+</div>
+
+<br>
+
+<div>
+  Thank You,
+</div>
+<br>
+<div>
+  WeKrüt Team!
+<br>
+<div>
+Job Description
+</div>
+<br>
+<div>
+<%= @job.description.gsub(/\n/, '<br/>').html_safe %>
+</div>
+
+

@@ -5,6 +5,8 @@ gem 'rake', '10.2.2'
 
 gem 'rails', '4.0.3'
 
+gem 'whenever', :require => false
+
 gem 'will_paginate', '~> 3.0.5'
 
 gem 'pageless-rails', github: 'rorlab/pageless-rails'

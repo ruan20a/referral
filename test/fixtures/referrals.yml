@@ -23,7 +23,6 @@
 #  personal_note      :text
 #  referee_name       :string(255)
 #  is_interested      :boolean
-#  is_admin_notified  :boolean          default(FALSE)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

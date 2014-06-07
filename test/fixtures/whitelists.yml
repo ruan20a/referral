@@ -6,7 +6,7 @@
 #  email      :string(255)
 #  created_at :datetime
 #  updated_at :datetime
-#  is_admin   :boolean          default(FALSE)
+#  level      :integer          default(1)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

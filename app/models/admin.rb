@@ -31,6 +31,8 @@
 #  confirmation_sent_at   :datetime
 #  first_name             :string(255)
 #  last_name              :string(255)
+#  image                  :string(255)
+#  industry               :string(255)
 #
 
 class Admin < ActiveRecord::Base

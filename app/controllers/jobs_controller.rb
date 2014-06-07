@@ -14,6 +14,8 @@ class JobsController < ApplicationController
 
   include ApplicationHelper
 
+
+  #TODO move some variables to the model
 	def invite_user
 		@user = User.invite!(:email => params[:user][:email], :name => params[:user][:name])
 		render :json => @user
@@ -65,7 +67,7 @@ class JobsController < ApplicationController
 
   def create
     job = Job.new(job_params)
-    binding.pry
+    # binding.pry
 
     set_admin(job)
 

@@ -23,30 +23,37 @@
 #  personal_note      :text
 #  referee_name       :string(255)
 #  is_interested      :boolean
-#  is_admin_notified  :boolean          default(FALSE)
 #
 
 class Referral < ActiveRecord::Base
+
 	belongs_to :job
 	belongs_to :user
+  has_one :email
   validates_presence_of :job_id, :ref_type
   #different logic for ask_referer types lambda substitute for method logic
   # validates_presence_of :referee_email, :referee_name, :unless => lambda{ self.ref_type == "refer" }
   validates_uniqueness_of :referral_email, :scope => [:job_id, :user_id], :unless => lambda{ self.ref_type == "ask_refer"}
   #different logic for refer types lambda substitute for method logic
   # validates_presence_of :referral_email, :referral_name, :linked_profile_url, :unless => lambda{ self.ref_type == "ask_refer" }
-  before_save :check_notification, :if => :is_interested_changed?
+  #TODO - testing for before_update
+  before_update :check_notification, :if => :is_interested_changed?
+  after_create :create_email
   # before_save :check_email, :if => :referral_email_changed?
-
   # paginates_per 10
+
+  def create_email
+    referral = self
+    Email.create(:referral_id => referral.id)
+  end
+
 
   def check_notification
     referral = self
-    admin = referral.job.admin
 
-    if referral.is_interested == true && referral.is_admin_notified == false
-      if referral.update_attribute(:is_admin_notified, true)
-        ReferralMailer.deliver_admin_notification(referral, admin)
+    if referral.is_interested == true && referral.email.admin_notification == false
+      if referral.email.update_attribute(:admin_notification, true)
+        ReferralMailer.deliver_admin_notification(referral)
         referral.save
       else
         #TODO render to the right page
@@ -69,14 +76,27 @@ class Referral < ActiveRecord::Base
       true
     end
   end
-
-  def check_update_lag
-    #testing required to update referral.updated_at
+  #calculate is_interested status for user logic
+  def return_is_interested_lag
     referral = self
-    last_update = referral.updated_at
-    time_passage = Time.now - last_update
-    time_passage > 1209600 ? true:false
+    if referral.is_interested.nil?
+      last_update = Date.parse(referral.update_at.to_s)
+      current_date = Date.parse(Time.now.to_s)
+      days_lag = current_date - last_update
+    else
+      days_lag = 0
+    end
   end
-
+  #calculate pending status for admin logic
+  def return_pending_status_lag
+    referral = self
+    if referral.email.first_admin_notification && referral.status == "pending"
+      last_update = Date.parse(referral.update_at.to_s)
+      current_date = Date.parse(Time.now.to_s)
+      days_lag = current_date - last_update
+    else
+      days_lag = 0
+    end
+  end
 
 end
