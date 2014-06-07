@@ -31,7 +31,7 @@ class ReferralsController < ApplicationController
  end
 
   def create
-  binding.pry
+  # binding.pry
    referral = Referral.new(referral_params)
    admin = referral.job.admin
    set_requester(referral)
@@ -48,8 +48,8 @@ class ReferralsController < ApplicationController
          redirect_to jobs_path, notice: "Success. Your referral request has been sent."
        end
      else
-       binding.pry
-       flash[:notice] = "Please fill in all the required fields"
+       # binding.pry
+       flash[:notice] = "Please review your request. You either created this referral already or did not fill out the "
        redirect_to session[:return_to]
      end
    else
