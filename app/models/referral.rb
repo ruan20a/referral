@@ -38,7 +38,7 @@ class Referral < ActiveRecord::Base
   # before_save :check_email, :if => :referral_email_changed?
 
   # paginates_per 10
-
+validates_uniqueness_of :referral_email, :scope => [:job_id, :user_id, :admin_id], :unless => lambda{ self.ref_type == "ask_refer"}
     def check_notification
     referral = self
     admin = referral.job.admin

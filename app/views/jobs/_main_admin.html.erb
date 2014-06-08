@@ -52,6 +52,10 @@
                   <%= f.text_field :speciality_1, :class => 'form-control login-field' %>
                 </div>
 
+                <div class="form-group">
+          Logo: <%= f.file_field :image, :placeholder=>"Logo"%>
+        </div>
+
                 <div><br>
                   <%= f.submit "Submit to Wekrut", :class => 'btn btn-primary btn-md btn-block' %>
                   </div>

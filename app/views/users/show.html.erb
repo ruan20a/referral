@@ -3,13 +3,16 @@
   <div class="container">
     <ul class="nav nav-tabs nav-justified">
       <%= render 'layouts/flash' %>
-      <li class="active"><a href="#received-referrals" data-toggle="tab"> <strong> Received Referrals </strong>
-        <% if @hav_ref %>
-          <%= " - #{@unreviewed_count} Awaiting Review"%>
+      <li class="active"><a class ="tab-font" href="#received-referrals" data-toggle="tab"> Received Referrals
+        <% if @hav_ref %><div class="badge pull-right">
+          <%= "#{@unreviewed_count} NEW"%></div>
+
         <% end %>
       </a></li>
-      <li class=""><a href="#sent-referrals" data-toggle="tab">Sent Referrals</a></li>
-      <li class=""><a href="#ask-referrals" data-toggle="tab"> Requested Referrals </a></li>
+
+      <li class=""><a class ="tab-font" href="#sent-referrals" data-toggle="tab">Sent Referrals</a></li>
+      <li class=""><a class ="tab-font" href="#ask-referrals" data-toggle="tab"> Requested Referrals </a></li>
+
     </ul>
 
     <div class="tab-content">

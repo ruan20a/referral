@@ -49,8 +49,9 @@ class ReferralsController < ApplicationController
        end
      else
        # binding.pry
-       flash[:error] = "Please fill in all the required fields"
-       redirect_to new_referral_path(:job_id => referral.job_id, :ref_type => referral.ref_type)
+       flash[:notice] = "Please review your request. You either created this referral for the person already or did not fill out required fields"
+      # PUT A STAR on the form fields next to required fields (linked in, name and email)
+       redirect_to session[:return_to]
      end
    else
      flash[:error] = "Sorry, you cannot refer yourself."

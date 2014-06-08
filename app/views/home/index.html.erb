@@ -1,10 +1,11 @@
 <nav class="navbar-home navbar-fixed-top" role="navigation">
+
  <div class="container">
    <div class="navbar-header page-scroll">
      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
        <i class="fa fa-bars"></i>
      </button>
-     <a class="navbar-brand" href="">
+     <a class="navbar-brand" href="http://www.wekrut.com">
        <span class="light">&nbsp&nbsp&nbspWe</span>Krüt
      </a>
    </div>
@@ -22,23 +23,38 @@
       <%= link_to 'Jobs', jobs_path %>
     </li>
     <li class="page-scroll">
-      <% if user_signed_in? %>
-      <%= link_to 'Profile', user_path(current_user.id)%>
-      <% elsif admin_signed_in? %>
-      <%= link_to 'Recruiter', admin_path(current_admin.id) %>
-      <% else %>
-      <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Login<b class="caret"></b></a>
-        <ul class="dropdown-menu">
-         <li><%= link_to "User", new_user_session_path %></li>
-         <li><%= link_to "Recruiter", new_admin_session_path %></li>
-         <% end %>
-       </ul>
-     </li>
-   </ul>
+                  <% if !user_signed_in? && !admin_signed_in? %>
+                    <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Login<b class="caret"></b></a>
+                      <ul class="dropdown-menu">
+                       <li><%= link_to "User", new_user_session_path %></li>
+                       <li><%= link_to "Recruiter", new_admin_session_path %></li>
+                      </ul>
+                    </li>
+                  <% else %>
+                    <li class="dropdown">
+                      <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                        ACCOUNT
+                        <b class="caret"></b>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li class="dropdown-menu">
+                          <% if user_signed_in? %>
+                            <li> <%= link_to 'My Referrals', user_path(current_user.id)%> </li>
+                            <li> <%= link_to "User Sign out", destroy_user_session_path, :method => :delete %> </li>
+                          <% else admin_signed_in? %>
+                            <li> <%= link_to 'My Referrals', admin_path(current_admin.id) %> </li>
+                            <li> <%= link_to "Recruiter Sign out", destroy_admin_session_path, :method => :delete %> </li>
+                          <% end %>
+                        </li>
+                      </ul>
+                    </li>
+                <% end %>
+              </li>
  </div>
 </div>
 </nav>
   <section class="intro">
+
     <div class="intro-body">
         <div class="container">
             <div class="row">
@@ -53,6 +69,7 @@
                 </div>
             </div>
         </div>
+
     </div>
   </section>
   <section id="about">
@@ -62,9 +79,9 @@
 
         <hr class="section-heading-spacer">
         <div class="clearfix"></div>
-        <h2 class="section-heading">networking</h2>
+        <h2 class="section-heading">Empower Your <br> Network</h2>
         <%= image_tag "triangle.png", :class => "img-responsive" %>
-        <h3 class="lead"> We connect you to companies. <br>
+        <h3 class="lead"> We connect you to companies.
           You connect your network to jobs.</h3>
 
 
@@ -77,7 +94,7 @@
       <div class="col-md-4 ">
           <hr class="section-heading-spacer">
           <div class="clearfix"></div>
-          <h2 class="section-heading">We Show You Jobs</h2><br><br><%= image_tag "imac_jobs.png", :class => "img-responsive" %><br><br>
+          <h2 class="section-heading">We Show You <br> Great Jobs</h2><%= image_tag "imac_jobs.png", :class => "img-responsive" %>
           <h3 class="lead"> Search available jobs. Know someone that would be a good fit? Krüt them.</h3>
 
 
@@ -86,12 +103,12 @@
 
 
 
-        <div class="col-lg-4">
+        <div class="col-md-4">
           <hr class="section-heading-spacer">
           <div class="clearfix"></div>
-          <h2 class="section-heading">Incentivize Altruism</h2><%= image_tag "heartdollar.png", :class => "img-responsive" %>
+          <h2 class="section-heading">Incentivize <br>Altruism</h2><%= image_tag "heartdollar.png", :class => "img-responsive" %>
           <h3 class="lead">
-           Place a candidate and in 30 days you get a referal fee. Do well by doing good. </h3>
+           Place a candidate and in 30 days you get a commission. Do well by doing good. </h3>
 
 
 
@@ -105,6 +122,7 @@
 
 
   <div class="banner">
+
     <div class="container"> 
         <div class="row">
             <div class="col-md-8">       
@@ -122,13 +140,9 @@
               <%= render 'home/beta_form' %>
           </div>
         </div>
+
     </div>
 </div>
-
-
-      <!-- /.container -->
-
-    </div>
 
 
 
