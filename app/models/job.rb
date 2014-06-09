@@ -27,15 +27,16 @@ class Job < ActiveRecord::Base
 	has_many :users, :through => :referrals
   validates_presence_of :referral_fee, :name, :job_name, :city, :state, :description
 	mount_uploader :image, ImageUploader
+  before_update :check_inactive, :if => :is_active_changed?
 
-
-
-
-  def self.my_search(search)
-    self.where("LOWER(name) LIKE ? OR LOWER(job_name) LIKE ? OR LOWER(city) LIKE ? OR LOWER(state) LIKE?", "%#{search.downcase}%","%#{search.downcase}%","%#{search.downcase}%","%#{search.downcase}%")
+  def check_inactive
+    referrals = self.referrals
+    if !self.is_active
+      referrals.each {|referral| referral.turn_inactive}
+    else
+      referrals.each {|referral| referral.turn_active}
+    end
   end
-
-
 
 
 end

@@ -100,7 +100,12 @@ class Referral < ActiveRecord::Base
   end
 
   def turn_inactive
+    self.update_column(:is_active, false)
     #turn inactive after one week after the second admin notification or second user notification
+  end
+
+  def turn_active
+    self.update_column(:is_active, true)
   end
 
 end

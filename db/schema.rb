@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140609193309) do
+ActiveRecord::Schema.define(version: 20140609195032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,7 +88,6 @@ ActiveRecord::Schema.define(version: 20140609193309) do
     t.text     "description"
     t.integer  "recruiter_id"
     t.string   "speciality_1"
-    t.string   "speciality_2"
     t.integer  "referral_fee"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -100,6 +99,7 @@ ActiveRecord::Schema.define(version: 20140609193309) do
     t.string   "logo_url"
     t.string   "image"
     t.string   "industry_1"
+    t.boolean  "is_active",    default: true
   end
 
   create_table "profiles", force: true do |t|

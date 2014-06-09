@@ -50,6 +50,12 @@
                 </div>
 
                 <div><br>
+                  <%= f.label :is_active, "Is Active?" %><br>
+                  <%= f.select :is_active, active_choices, :class => 'form-control login-field' %>
+                </div>
+
+
+                <div><br>
                   <%= f.submit "Submit to Wekrut", :class => 'btn btn-primary btn-md btn-block' %>
                   </div>
             </div>

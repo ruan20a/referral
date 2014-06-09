@@ -82,12 +82,14 @@ class JobsController < ApplicationController
 	end
 
   def edit
-    @job.admin_id = current_admin.id
+    @job
+    # @job.admin_id = current_admin.id
   end
 
   def update
     if @job.update(job_params)
-      redirect_to @job, notice: 'Item was successfully updated.'
+      binding.pry
+      redirect_to @job, notice: 'Job successfully updated.'
     else
       render action: 'edit'
     end
@@ -124,7 +126,7 @@ class JobsController < ApplicationController
   end
 
   def job_params
-    params.require(:job).permit(:name, :job_name, :description, :city, :state, :admin_id, :referral_fee, :image, :image_cache, :remote_image_url, :remove_image,  :speciality_1, :speciality_2, :industry_1, referrals_attributes: [:id])
+    params.require(:job).permit(:name, :job_name, :description, :city, :state, :admin_id, :referral_fee, :image, :image_cache, :remote_image_url, :remove_image,  :speciality_1, :speciality_2, :is_active, :industry_1, referrals_attributes: [:id])
 	end
 
   def check_admin
