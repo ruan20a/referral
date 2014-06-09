@@ -62,9 +62,9 @@ class ReferralMailer < ActionMailer::Base
     set_sender(referral)
 
     if @num_of_times == 1
-      mail(to: @user_email,subject: "Reminder - Please indicate your interest for your referral").deliver
+      mail(to: @receiver_email,subject: "Reminder - Please indicate your interest for your referral").deliver
     else
-      mail(to: @user_email,subject: "Last Reminder - Please indicate your interest for your referral").deliver
+      mail(to: @receiver_email,subject: "Last Reminder - Please indicate your interest for your referral").deliver
     end
   end
 
@@ -88,7 +88,7 @@ class ReferralMailer < ActionMailer::Base
     if referral.user_id.nil?
       sender = Admin.find(referral.admin_id)
     else
-      binding.pry
+      # binding.pry
       sender = User.find(referral.user_id)
     end
 

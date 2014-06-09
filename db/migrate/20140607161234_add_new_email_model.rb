@@ -7,6 +7,7 @@ class AddNewEmailModel < ActiveRecord::Migration
       t.boolean :first_user_reminder, :default => false
       t.boolean :second_admin_reminder, :default => false
       t.boolean :second_user_reminder, :default => false
+      t.timestamps
     end
 
     for referral in Referral.all

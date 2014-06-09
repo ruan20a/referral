@@ -68,7 +68,7 @@ class UsersController < ApplicationController
   def correct_user
     user = User.find(params[:id])
 
-    if !current_admin.email.nil?
+    if !current_admin.nil?
       level = Whitelist.find_by_email(current_admin.email).level
     end
 

@@ -29,11 +29,11 @@ class Referral < ActiveRecord::Base
 
 	belongs_to :job
 	belongs_to :user
-  has_one :email
+  has_one :email, :dependent => :destroy
   validates_presence_of :job_id, :ref_type
   #different logic for ask_referer types lambda substitute for method logic
   # validates_presence_of :referee_email, :referee_name, :unless => lambda{ self.ref_type == "refer" }
-  validates_uniqueness_of :referral_email, :scope => [:job_id, :user_id], :unless => lambda{ self.ref_type == "ask_refer"}
+  validates_uniqueness_of :referral_email, :scope => [:job_id, :user_id, :admin_id], :unless => lambda{ self.ref_type == "ask_refer"}
   #different logic for refer types lambda substitute for method logic
   # validates_presence_of :referral_email, :referral_name, :linked_profile_url, :unless => lambda{ self.ref_type == "ask_refer" }
   #TODO - testing for before_update
@@ -80,7 +80,7 @@ class Referral < ActiveRecord::Base
   def return_is_interested_lag
     referral = self
     if referral.is_interested.nil?
-      last_update = Date.parse(referral.update_at.to_s)
+      last_update = Date.parse(referral.updated_at.to_s)
       current_date = Date.parse(Time.now.to_s)
       days_lag = current_date - last_update
     else
@@ -90,13 +90,17 @@ class Referral < ActiveRecord::Base
   #calculate pending status for admin logic
   def return_pending_status_lag
     referral = self
-    if referral.email.first_admin_notification && referral.status == "pending"
-      last_update = Date.parse(referral.update_at.to_s)
+    if referral.email.admin_notification && referral.status == "pending"
+      last_update = Date.parse(referral.updated_at.to_s)
       current_date = Date.parse(Time.now.to_s)
       days_lag = current_date - last_update
     else
       days_lag = 0
     end
+  end
+
+  def turn_inactive
+    #turn inactive after one week after the second admin notification or second user notification
   end
 
 end

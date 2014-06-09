@@ -11,15 +11,15 @@ namespace :pending_reminder_user do
 
         if days_lag > 3
           if !referral.email.first_user_reminder
-            referral.email.update_attributes(:first_user_reminder => true)
             ReferralMailer.send_user_reminder(referral, 1)
+            referral.email.update_attributes(:first_user_reminder => true)
           end
         end
 
-        if days_lag > 10
+        if days_lag > 5
           if !referral.email.second_user_reminder && referral.email.first_user_reminder
-            referral.email.update_attributes(:second_user_reminder => true)
             ReferralMailer.send_user_reminder(referral, 2)
+            referral.email.update_attributes(:second_user_reminder => true)
           end
         end
 

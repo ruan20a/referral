@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140607162932) do
+ActiveRecord::Schema.define(version: 20140609193309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,12 +73,14 @@ ActiveRecord::Schema.define(version: 20140607162932) do
   add_index "admins_referrals", ["referral_id", "admin_id"], name: "index_admins_referrals_on_referral_id_and_admin_id", using: :btree
 
   create_table "emails", force: true do |t|
-    t.integer "referral_id"
-    t.boolean "admin_notification",    default: false
-    t.boolean "first_admin_reminder",  default: false
-    t.boolean "first_user_reminder",   default: false
-    t.boolean "second_admin_reminder", default: false
-    t.boolean "second_user_reminder",  default: false
+    t.integer  "referral_id"
+    t.boolean  "admin_notification",    default: false
+    t.boolean  "first_admin_reminder",  default: false
+    t.boolean  "first_user_reminder",   default: false
+    t.boolean  "second_admin_reminder", default: false
+    t.boolean  "second_user_reminder",  default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "jobs", force: true do |t|
@@ -128,6 +130,7 @@ ActiveRecord::Schema.define(version: 20140607162932) do
     t.text     "personal_note"
     t.string   "referee_name"
     t.boolean  "is_interested"
+    t.boolean  "is_active",          default: true
   end
 
   create_table "users", force: true do |t|

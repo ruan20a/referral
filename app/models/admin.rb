@@ -41,8 +41,7 @@ class Admin < ActiveRecord::Base
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   belongs_to :whitelist
-  has_one :profile
-  has_many :jobs
+  has_many :jobs, :dependent => :destroy
   has_many :referrals, :through => :jobs
   validates :email, :company, :first_name, :last_name, presence: true
   validates :email,  :uniqueness => { :case_sensitive => false }
