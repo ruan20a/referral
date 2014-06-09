@@ -44,7 +44,6 @@
             <th><%= sort_link @search, :job_name, "Position" %></th>
             <th><%= sort_link @search, :city, "City" %></th>
             <th><%= sort_link @search, :state, "State" %></th>
-            <th><%= sort_link @search, :industry_1, "Industry" %></th>
             <th><%= sort_link @search, :referral_fee, "Referral Fee" %></th>
           </tr>
         </thead>
@@ -63,7 +62,6 @@
             <td ><%= link_to job.job_name, "/jobs/#{job.id}" %></td>
             <td><%= job.city %></td>
             <td><%= job.state %></td>
-            <td><%= job.admin.industry %></td>
             <td><%= number_to_currency(calculate_fee(job.referral_fee), precision: 0) %></td>
           </tr>
 

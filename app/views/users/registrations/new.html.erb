@@ -1,5 +1,5 @@
 <%= render 'layouts/header' %>
-<section class="jobs">
+<div class="jobs">
   <div class="col-md-4 col-md-offset-1">
     <div class="row">
       <%= image_tag "triangle.png", :class => "img-responsive col-md-6" %> 
@@ -21,71 +21,69 @@
     </div>
   </div>
 
-         <div class="container" style="margin-top:80px">
-      <div class="col-md-6 col-md-offset-1">
-       <div class="panel panel-default">
+  <div class="container" style="margin-top:80px">
+    <div class="col-md-6 col-md-offset-1">
+      <div class="panel panel-default">
         <%= render 'layouts/flash' %>
-         <div class="panel-heading"><h3 class="panel-title"><strong>Sign Up</strong></h3></div>
+        <div class="panel-heading"><h3 class="panel-title"><strong>Sign Up</strong></h3>
+        </div>
           <div class="panel-body">
             
             <div class="login-form">
 
                 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <%= f.email_field :email, autofocus: true, :placeholder => 'Email address', :class => 'form-control login-field' %>
-                    </div>
-
-                    <div class="form-group">
-                      <%= f.password_field :password, autocomplete: "off", :placeholder => 'Password', :class => 'form-control login-field' %>
-                    </div>
-
-                    <div class="form-group">
-                      <%= f.password_field :password_confirmation, autocomplete: "off", :placeholder => 'Password Confirmation', :class => 'form-control login-field' %>
-                    </div>
-                    <div class="form-group">
-                      <label> Industry Choice &nbsp;  &nbsp;</label>
-
-                      <row> <%= f.select :industry_1, industry_choices %> </row>
-                    </div>
-                    
-                  </div>
-
-                  <div class="col-md-6">
-
-                    <div class="form-group">
-                      <%= f.text_field :first_name, autocomplete: "off", :placeholder => 'First Name', :class => 'form-control login-field' %>
-                    </div>
-
-                    <div class="form-group">
-                      <%= f.text_field :last_name, autocomplete: "off", :placeholder => 'Last Name', :class => 'form-control login-field' %>
-                    </div>
-
-                    <div class="form-group">
-                      <%= f.text_field :tagline, autocomplete: "off", :placeholder => 'Tagline, i.e. Product Guru', :class => 'form-control login-field' %>
-                    </div>
-
-                    <div class="form-group">
-                      <label> Speciality Choice </label>
-                      <row> <%= f.select :speciality_1, speciality_choices %></row>
-                    </div>
-
-                    <div>
-                      <%= f.submit "Sign up", :class => 'btn btn-primary btn-lg btn-block'%>
-                    </div>
-                    <% end %>
-                  </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <%= f.email_field :email, autofocus: true, :placeholder => 'Email address', :class => 'form-control login-field' %>
                 </div>
+
+                <div class="form-group">
+                  <%= f.password_field :password, autocomplete: "off", :placeholder => 'Password', :class => 'form-control login-field' %>
+                </div>
+
+                <div class="form-group">
+                  <%= f.password_field :password_confirmation, autocomplete: "off", :placeholder => 'Password Confirmation', :class => 'form-control login-field' %>
+                </div>
+                <div class="form-group">
+                  <label> Industry Choice &nbsp;  &nbsp;</label>
+
+                  <row> <%= f.select :industry_1, industry_choices %> </row>
+                </div>
+                
+              </div>
+
+              <div class="col-md-6">
+
+                <div class="form-group">
+                  <%= f.text_field :first_name, autocomplete: "off", :placeholder => 'First Name', :class => 'form-control login-field' %>
+                </div>
+
+                <div class="form-group">
+                  <%= f.text_field :last_name, autocomplete: "off", :placeholder => 'Last Name', :class => 'form-control login-field' %>
+                </div>
+
+                <div class="form-group">
+                  <%= f.text_field :tagline, autocomplete: "off", :placeholder => 'Tagline, i.e. Product Guru', :class => 'form-control login-field' %>
+                </div>
+
+                <div class="form-group">
+                  <label> Speciality Choice </label>
+                  <row> <%= f.select :speciality_1, speciality_choices %></row>
+                </div>
+
+                <div>
+                  <%= f.submit "Sign up", :class => 'btn btn-primary btn-lg btn-block'%>
+                </div>
+                <% end %>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-
-
-
-
-
-</section>
 
 
       <%= render "layouts/footer" %>
+    </div>
