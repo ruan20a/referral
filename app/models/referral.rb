@@ -32,13 +32,14 @@ class Referral < ActiveRecord::Base
   has_one :email, :dependent => :destroy
   validates_presence_of :job_id, :ref_type
   #different logic for ask_referer types lambda substitute for method logic
-  # validates_presence_of :referee_email, :referee_name, :unless => lambda{ self.ref_type == "refer" }
+  validates_presence_of :referee_email, :referee_name, :unless => lambda{ self.ref_type == "refer" }
   validates_uniqueness_of :referral_email, :scope => [:job_id, :user_id, :admin_id], :unless => lambda{ self.ref_type == "ask_refer"}
   #different logic for refer types lambda substitute for method logic
-  # validates_presence_of :referral_email, :referral_name, :linked_profile_url, :unless => lambda{ self.ref_type == "ask_refer" }
+  validates_presence_of :referral_email, :referral_name, :linked_profile_url, :unless => lambda{ self.ref_type == "ask_refer" }
   #TODO - testing for before_update
   before_update :check_notification, :if => :is_interested_changed?
   after_create :create_email
+  has_paper_trail
   # before_save :check_email, :if => :referral_email_changed?
   # paginates_per 10
 
@@ -80,6 +81,7 @@ class Referral < ActiveRecord::Base
   def return_is_interested_lag
     referral = self
     if referral.is_interested.nil?
+      #TODO loophole this won't work correctly if the sender/receiver changes the referral constantly aside from the key fields.
       last_update = Date.parse(referral.updated_at.to_s)
       current_date = Date.parse(Time.now.to_s)
       days_lag = current_date - last_update
@@ -90,7 +92,9 @@ class Referral < ActiveRecord::Base
   #calculate pending status for admin logic
   def return_pending_status_lag
     referral = self
-    if referral.email.admin_notification && referral.status == "pending"
+    #need to ensure that admin is notified, status is pending, and is_interested status is still valid.
+    #TODO this won't work correctly if any user (sender/receiver) changes the referral.
+    if referral.email.admin_notification && referral.status == "pending" && referral.is_interested == true
       last_update = Date.parse(referral.updated_at.to_s)
       current_date = Date.parse(Time.now.to_s)
       days_lag = current_date - last_update

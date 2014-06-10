@@ -98,7 +98,7 @@ class JobsController < ApplicationController
     if @job.destroy
       redirect_to jobs_path, notice: 'Job successfully destroyed'
     else
-      render action: 'edit'
+      render action: 'edit', notice: 'We could not delele this job. Please try again.'
     end
   end
 
