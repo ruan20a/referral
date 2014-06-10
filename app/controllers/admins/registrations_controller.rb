@@ -3,6 +3,7 @@ class Admins::RegistrationsController < Devise::RegistrationsController
 include AdminsHelper
 
   def create
+    #TODO add in main_admin creation as well
     email = params[:admin][:email].downcase
     unless Whitelist.exists?(:email => email, :level => 2)
       email = params[:admin][:email]

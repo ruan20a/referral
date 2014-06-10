@@ -83,7 +83,6 @@ class JobsController < ApplicationController
 
   def edit
     @job
-    # @job.admin_id = current_admin.id
   end
 
   def update
@@ -91,7 +90,7 @@ class JobsController < ApplicationController
       binding.pry
       redirect_to @job, notice: 'Job successfully updated.'
     else
-      render action: 'edit'
+      render action: 'edit', notice: 'Please try again.'
     end
   end
 

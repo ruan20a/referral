@@ -21,6 +21,5 @@ class Whitelist < ActiveRecord::Base
   def downcase_email
     self.email.downcase!
   end
-
-
 end
+

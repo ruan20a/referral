@@ -55,10 +55,10 @@
           <% @jobs.each do |job| %>
           <tr>
             <td>
-              <% if job.admin.image_url(:thumb).nil? %>
+              <% if job.image_url.nil? %>
                 <%= job.admin.company %>
               <% else %>
-                <%= image_tag "#{job.admin.image_url(:thumb)}", :alt => "#{job.name}" %>
+                <%= image_tag "#{job.image_url(:thumb)}", :alt => "#{job.name}" %>
               <% end %>
             </td>
 
