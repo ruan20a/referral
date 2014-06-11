@@ -10,11 +10,6 @@
               <%= form_for @job do |f| %>
               <div class="col-md-4">
 
-                <div class="form-group">
-                  <%= f.label :name, "Company Name" %><br>
-                  <%= f.text_field :name, :class => 'form-control login-field', :value => "#{current_admin.company}" %>
-                </div>
-
                  <div>
                   <%= f.label :job_name, "Position Title" %><br>
                   <%= f.text_field :job_name, :class => 'form-control login-field' %>
@@ -22,14 +17,17 @@
 
                 <div><br>
                   <%= f.label :referral_fee %><br>
-                  <%= f.text_field :referral_fee, :class => 'form-control login-field' %>
+                  <%= f.number_field :referral_fee, :class => 'form-control login-field' %>
+                </div>
+
+                <div>
+                  <%= f.label :description, "Job Description" %><br>
+                  <%= f.text_area :description, :class => 'form-control login-field wysihtml5', :rows => "4" %>
                 </div>
 
                 <div><br>
                   <%= link_to 'Back', jobs_path %>
                 </div>
-
-
 
               </div>
 
@@ -44,28 +42,19 @@
                   <%= f.text_field :state, :class => 'form-control login-field' %>
                 </div>
 
-                <div><br>
-                  <%= f.label :industry %><br>
-                  <%= f.select :industry_1, industry_choices %>
-                </div>
-
               </div>
               <div class="col-md-4">
-
                 <div>
-                  <%= f.label :description, "Job Description" %><br>
-                  <%= f.text_area :description, :class => 'form-control login-field wysihtml5' %>
-                </div>
-
-                <div><br>
                   <%= f.label :speciality_1, "Preferred Skills" %><br>
                   <%= f.text_field :speciality_1, :class => 'form-control login-field' %>
                 </div>
 
                 <div><br>
-                 <%= f.label :image, "Upload Logo File" %><br>
-                 <%= f.file_field :image %>
+                  <%= f.label :is_active, "Is Active?" %><br>
+                  <%= f.select :is_active, active_choices, :class => 'form-control login-field' %>
                 </div>
+
+
                 <div><br>
                   <%= f.submit "Submit to Wekrut", :class => 'btn btn-primary btn-md btn-block' %>
                   </div>
@@ -73,4 +62,4 @@
 
             <% end %>
 
-           <%= render "layouts/footer_sticky" %>
+            <%= render "layouts/footer_sticky" %>
