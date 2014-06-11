@@ -33,4 +33,5 @@ every 5.minutes do
   rake "pending_reminder_admin:check", environment => "development"
   rake "inactive_referral_user:check", environment => "development"
   rake "inactive_referral_admin:check", environment => "development"
+  rake "inactive_referral_is_inactive_check", environment => "development"
 end

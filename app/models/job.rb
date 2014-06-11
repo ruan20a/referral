@@ -28,6 +28,7 @@ class Job < ActiveRecord::Base
   validates_presence_of :referral_fee, :name, :job_name, :city, :state, :description
 	mount_uploader :image, ImageUploader
   before_update :check_inactive, :if => :is_active_changed?
+  # has_paper_trail #TODO - to undo remove/inactive jobs later
 
   def check_inactive
     referrals = self.referrals
@@ -36,6 +37,12 @@ class Job < ActiveRecord::Base
     else
       referrals.each {|referral| referral.turn_active}
     end
+  end
+
+  def check_days_since_creation
+    create_date = Date.parse(self.created_at.to_s)
+    current_date = Date.parse(Time.now.to_s)
+    days_lag = current_date - create_date
   end
 
 

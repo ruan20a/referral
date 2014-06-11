@@ -39,6 +39,7 @@ class ReferralsController < ApplicationController
    if referral.check_email(@requester) #protected method to check if there is a self-referral.
      if referral.save
        # binding.pry
+       #TODO think about moving to MODEL logic
        if referral.ref_type == "refer"
          ReferralMailer.deliver_ref_email(referral)
          check_whitelist(referral)

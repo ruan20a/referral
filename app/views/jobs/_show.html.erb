@@ -1,4 +1,4 @@
-    <div class="col-md-8 col-md-offset-1">
+<div class="col-md-8 col-md-offset-1">
       <div class="candidate">
         <div class="person_header">
            <strong>Referral Fee:</strong>
@@ -15,7 +15,7 @@
        <div class="details-section">
       <strong>Description:</strong>
 
-        <%= replace_line_br(@job.description) %>
+        <%= @job.description.gsub(/\n/, '<br/>').html_safe %>
       </div>
         <div class="details-section">
         <strong>Skills</strong>

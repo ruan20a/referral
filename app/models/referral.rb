@@ -40,11 +40,16 @@ class Referral < ActiveRecord::Base
   #different logic for refer types lambda substitute for method logic
   validates_presence_of :referral_email, :referral_name, :linked_profile_url, :unless => lambda{ self.ref_type == "ask_refer" }
   #TODO - testing for before_update
+  #on create need to change the date time.
+  before_create :store_interest_update
+  before_create :store_status_update
+  #update when column changes
   before_update :store_interest_update, :if => :status_changed?
   before_update :store_status_update, :if => :is_interested_changed?
   before_update :check_notification, :if => :is_interested_changed?
   after_create :create_email
   before_update :status_change_email, :if => :status_changed?
+
   # has_paper_trail :only => [:is_interested, :status], :meta => [:store_interest_changes => :store_interest_update, :store_status_change => :store_status_update ]
   # before_save :check_email, :if => :referral_email_changed?
   # paginates_per 10
@@ -58,13 +63,10 @@ class Referral < ActiveRecord::Base
   end
 
   def status_change_email
-    # case self.status
-    # when "interview"
-    # when "interview"
-    # end
-
-    # end
+    # new_status = self.status
+    # ReferralMailer.update_status_change(self)
   end
+
   def create_email
     referral = self
     Email.create(:referral_id => referral.id)
@@ -103,7 +105,6 @@ class Referral < ActiveRecord::Base
   def return_is_interested_lag
     referral = self
     if referral.is_interested.nil?
-      #TODO loophole this won't work correctly if the sender/receiver changes the referral constantly aside from the key fields.
       last_update = Date.parse(referral.last_interest_update.to_s)
       current_date = Date.parse(Time.now.to_s)
       days_lag = current_date - last_update
@@ -114,8 +115,6 @@ class Referral < ActiveRecord::Base
   #calculate pending status for admin logic
   def return_pending_status_lag
     referral = self
-    #need to ensure that admin is notified, status is pending, and is_interested status is still valid.
-    #TODO this won't work correctly if any user (sender/receiver) changes the referral.
     if referral.email.admin_notification && referral.status == "Pending" && referral.is_interested == true
       last_update = Date.parse(referral.last_status_update.to_s)
       current_date = Date.parse(Time.now.to_s)

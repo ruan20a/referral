@@ -1,4 +1,5 @@
 <%= render 'layouts/header' %>
+
 <section class="jobs">
 
   <div class="container">
@@ -12,11 +13,10 @@
              <th>
               <strong><span class="fa fa-th"></span> Job Postings&nbsp
             </th>
-
-        <%= search_form_for @search do |f| %>
-            <th class="search-form">
-                <div>
-                <%= f.text_field :name_or_job_name_or_city_or_state_cont, :placeholder => 'Search', style: "color: #2c3e50;" %>
+            <%= search_form_for @search do |f| %>
+            <th>
+                <div class="search-form">
+                <%= f.text_field :name_or_job_name_or_city_or_state_cont, :placeholder => 'Search' %>
                 &nbsp
                 <%= f.submit "Search", :class => 'btn btn-default' %>
                 </div>
@@ -56,7 +56,7 @@
           <tr>
             <td>
               <% if job.image_url.nil? %>
-                <%= job.admin.company %>
+                <%= job.name %>
               <% else %>
                 <%= image_tag "#{job.image_url(:thumb)}", :alt => "#{job.name}" %>
               <% end %>
@@ -65,7 +65,7 @@
             <td><%= link_to job.job_name, "/jobs/#{job.id}" %></td>
             <td><%= job.city %></td>
             <td><%= job.state %></td>
-            <td><%= job.admin.industry %></td>
+            <td><%= job.industry_1 %></td>
             <td><%= number_to_currency(calculate_fee(job.referral_fee), precision: 0) %></td>
           </tr>
 
@@ -79,6 +79,5 @@
   <%= will_paginate @jobs%>
 </div>
 </section>
-
 
 

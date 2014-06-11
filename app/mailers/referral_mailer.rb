@@ -6,11 +6,9 @@ class ReferralMailer < ActionMailer::Base
   def deliver_ref_email(referral)
     @referral = referral
     @referral_id = referral.id
-
+    set_receiver(@referral)
     set_sender(@referral)
 
-    @receiver_name = @referral.referral_name
-    @receiver_email = @referral.referral_email
 
     @job = @referral.job
     @job_name = @job.name.titleize
@@ -56,10 +54,8 @@ class ReferralMailer < ActionMailer::Base
   def send_user_reminder(referral,num_of_times)
     @referral = referral
     @num_of_times = num_of_times
-    @receiver_name = @referral.referral_name
-    @receiver_email = @referral.referral_email
-
-    set_sender(referral)
+    set_receiver(@referral)
+    set_sender(@referral)
 
     if @num_of_times == 1
       mail(to: @receiver_email,subject: "Reminder - Please indicate your interest for your referral").deliver
@@ -82,7 +78,18 @@ class ReferralMailer < ActionMailer::Base
     end
   end
 
+  def update_status_change(referral)
+    # @status = referral.status
+    # set_receiver(referral)
+    # set_admin(referral)
+    # mail(to: @receiver_email,subject: "Referral Status Update ").deliver
+  end
+
   protected
+  def set_receiver(referral)
+    @receiver_name = referral.referral_name
+    @receiver_email = referral.referral_email
+  end
 
   def set_sender(referral)
     if referral.user_id.nil?
