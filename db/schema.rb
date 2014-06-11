@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140610215025) do
+ActiveRecord::Schema.define(version: 20140611054852) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,7 +118,7 @@ ActiveRecord::Schema.define(version: 20140610215025) do
     t.string   "linked_profile_url"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status",             default: "pending"
+    t.string   "status",               default: "Pending"
     t.integer  "job_id"
     t.integer  "user_id"
     t.integer  "admin_id"
@@ -130,7 +130,9 @@ ActiveRecord::Schema.define(version: 20140610215025) do
     t.text     "personal_note"
     t.string   "referee_name"
     t.boolean  "is_interested"
-    t.boolean  "is_active",          default: true
+    t.boolean  "is_active",            default: true
+    t.datetime "last_status_update",   default: '2014-06-11 00:32:29'
+    t.datetime "last_interest_update", default: '2014-06-11 00:32:29'
   end
 
   create_table "users", force: true do |t|
@@ -177,12 +179,13 @@ ActiveRecord::Schema.define(version: 20140610215025) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "versions", force: true do |t|
-    t.string   "item_type",  null: false
-    t.integer  "item_id",    null: false
-    t.string   "event",      null: false
+    t.string   "item_type",      null: false
+    t.integer  "item_id",        null: false
+    t.string   "event",          null: false
     t.string   "whodunnit"
     t.text     "object"
     t.datetime "created_at"
+    t.text     "object_changes"
   end
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree

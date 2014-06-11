@@ -50,7 +50,7 @@ class ReferralsController < ApplicationController
        end
      else
        # binding.pry
-       flash[:notice] = "Please review your request. You either created this referral already or did not fill out the "
+       flash[:notice] = "Please review your request. You either created this referral already or did not fill out required fields "
        redirect_to session[:return_to]
      end
    else

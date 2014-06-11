@@ -5,12 +5,13 @@ namespace :inactive_referral_user do
     emails = Email.all
 
     emails.each do |email|
-      if email.second_user_reminder && !email.first_admin_notification
-        #if first_admin_notification is not sent then is_interested for referral is still nil.
-        days_lag = email.return_lag(second_user_reminder)
-        referral = email.referral
+      referral = email.referral
+      if email.second_user_reminder && email.referral.is_interested == nil && referral.is_active == true
+        #if first_admin_notification is not sent then is_interested for referral is still nil and admins have not touched it.
+        days_lag = email.return_second_user_lag
         # checking how many days passed since last updated if second_user_reminder was sent
-        if days_lag > 7
+        puts "inactive user #{referral.id} - email days_lag #{days_lag}"
+        if days_lag > 1
           referral.turn_inactive
         end
       end

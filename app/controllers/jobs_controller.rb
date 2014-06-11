@@ -40,7 +40,7 @@ class JobsController < ApplicationController
     # end
 
     @search = Job.search(params[:q])
-    @jobs = @search.result.paginate(:page => params[:page])
+    @jobs = @search.result.select{|x| x.is_active == true}.paginate(:page => params[:page])
     @unreviewed_requests
     @has_ref = has_any(@unreviewed_requests)
 
@@ -142,7 +142,7 @@ class JobsController < ApplicationController
     elsif !current_admin.nil?
       #admin referrals - is_interested = true & ref_type = refer.
       admin_referrals = current_admin.referrals.select{|referral| referral.ref_type == "refer" && referral.is_interested == true}
-      @unreviewed_requests = admin_referrals.select{|referral| referral.status == "pending"}.count
+      @unreviewed_requests = admin_referrals.select{|referral| referral.status == "Pending"}.count
     else
       @unreviewed_requests = 0
     end

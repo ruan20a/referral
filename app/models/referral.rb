@@ -2,27 +2,30 @@
 #
 # Table name: referrals
 #
-#  id                 :integer          not null, primary key
-#  name               :string(255)
-#  referral_name      :string(255)
-#  relationship       :string(255)
-#  referral_email     :string(255)
-#  additional_details :string(255)
-#  linked_profile_url :string(255)
-#  created_at         :datetime
-#  updated_at         :datetime
-#  status             :string(255)      default("pending")
-#  job_id             :integer
-#  user_id            :integer
-#  admin_id           :integer
-#  github_profile_url :string(255)
-#  relevant           :boolean
-#  relevance          :string(255)
-#  ref_type           :string(255)
-#  referee_email      :string(255)
-#  personal_note      :text
-#  referee_name       :string(255)
-#  is_interested      :boolean
+#  id                   :integer          not null, primary key
+#  name                 :string(255)
+#  referral_name        :string(255)
+#  relationship         :string(255)
+#  referral_email       :string(255)
+#  additional_details   :string(255)
+#  linked_profile_url   :string(255)
+#  created_at           :datetime
+#  updated_at           :datetime
+#  status               :string(255)      default("pending")
+#  job_id               :integer
+#  user_id              :integer
+#  admin_id             :integer
+#  github_profile_url   :string(255)
+#  relevant             :boolean
+#  relevance            :string(255)
+#  ref_type             :string(255)
+#  referee_email        :string(255)
+#  personal_note        :text
+#  referee_name         :string(255)
+#  is_interested        :boolean
+#  is_active            :boolean          default(TRUE)
+#  last_status_update   :datetime         default(2014-06-11 00:32:29 UTC)
+#  last_interest_update :datetime         default(2014-06-11 00:32:29 UTC)
 #
 
 class Referral < ActiveRecord::Base
@@ -37,12 +40,31 @@ class Referral < ActiveRecord::Base
   #different logic for refer types lambda substitute for method logic
   validates_presence_of :referral_email, :referral_name, :linked_profile_url, :unless => lambda{ self.ref_type == "ask_refer" }
   #TODO - testing for before_update
+  before_update :store_interest_update, :if => :status_changed?
+  before_update :store_status_update, :if => :is_interested_changed?
   before_update :check_notification, :if => :is_interested_changed?
   after_create :create_email
-  has_paper_trail
+  before_update :status_change_email, :if => :status_changed?
+  # has_paper_trail :only => [:is_interested, :status], :meta => [:store_interest_changes => :store_interest_update, :store_status_change => :store_status_update ]
   # before_save :check_email, :if => :referral_email_changed?
   # paginates_per 10
 
+  def store_interest_update
+    self.last_interest_update = Time.now
+  end
+
+  def store_status_update
+    self.last_status_update = Time.now
+  end
+
+  def status_change_email
+    # case self.status
+    # when "interview"
+    # when "interview"
+    # end
+
+    # end
+  end
   def create_email
     referral = self
     Email.create(:referral_id => referral.id)
@@ -82,7 +104,7 @@ class Referral < ActiveRecord::Base
     referral = self
     if referral.is_interested.nil?
       #TODO loophole this won't work correctly if the sender/receiver changes the referral constantly aside from the key fields.
-      last_update = Date.parse(referral.updated_at.to_s)
+      last_update = Date.parse(referral.last_interest_update.to_s)
       current_date = Date.parse(Time.now.to_s)
       days_lag = current_date - last_update
     else
@@ -94,8 +116,8 @@ class Referral < ActiveRecord::Base
     referral = self
     #need to ensure that admin is notified, status is pending, and is_interested status is still valid.
     #TODO this won't work correctly if any user (sender/receiver) changes the referral.
-    if referral.email.admin_notification && referral.status == "pending" && referral.is_interested == true
-      last_update = Date.parse(referral.updated_at.to_s)
+    if referral.email.admin_notification && referral.status == "Pending" && referral.is_interested == true
+      last_update = Date.parse(referral.last_status_update.to_s)
       current_date = Date.parse(Time.now.to_s)
       days_lag = current_date - last_update
     else

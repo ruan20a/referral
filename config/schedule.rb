@@ -31,4 +31,6 @@ job_type :script, "'#{path}/script/:task' :output"
 every 5.minutes do
   rake "pending_reminder_user:check", environment => "development"
   rake "pending_reminder_admin:check", environment => "development"
+  rake "inactive_referral_user:check", environment => "development"
+  rake "inactive_referral_admin:check", environment => "development"
 end
