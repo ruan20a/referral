@@ -18,8 +18,7 @@ module JobsHelper
     @select_admins
   end
 
-  def find_company(admin_id)
+  def salary_to_referral_fee_conversion
 
   end
-
 end
