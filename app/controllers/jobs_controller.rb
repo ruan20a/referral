@@ -22,23 +22,6 @@ class JobsController < ApplicationController
 	end
 
   def index
-    # binding.pry
-
-      # if @search.nil?
-      #   @jobs = Job.all
-      # else
-          # @jobs = @search.result
-      # end
-
-      # @jobs = Job.all
-      # @jobs.build_sort if @jobs.sorts.empty?
-      # "s" => "job_name asc"
-
-    # if !search_params["name_or_job_name_or_city_or_state_cont"].nil?
-    #   @search = Job.search(search_params)
-    #   @jobs = @search.result
-    # end
-
     @search = Job.search(params[:q])
     @jobs = @search.result.select{|x| x.is_active == true}.paginate(:page => params[:page])
     @unreviewed_requests

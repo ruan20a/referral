@@ -72,7 +72,6 @@ class Referral < ActiveRecord::Base
     Email.create(:referral_id => referral.id)
   end
 
-
   def check_notification
     referral = self
 
