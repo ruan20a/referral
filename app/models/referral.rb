@@ -48,7 +48,6 @@ class Referral < ActiveRecord::Base
   before_update :store_status_update, :if => :is_interested_changed?
   before_update :check_notification, :if => :is_interested_changed?
   after_create :create_email
-  before_update :status_change_email, :if => :status_changed?
 
   # has_paper_trail :only => [:is_interested, :status], :meta => [:store_interest_changes => :store_interest_update, :store_status_change => :store_status_update ]
   # before_save :check_email, :if => :referral_email_changed?
@@ -60,11 +59,6 @@ class Referral < ActiveRecord::Base
 
   def store_status_update
     self.last_status_update = Time.now
-  end
-
-  def status_change_email
-    # new_status = self.status
-    # ReferralMailer.update_status_change(self)
   end
 
   def create_email
