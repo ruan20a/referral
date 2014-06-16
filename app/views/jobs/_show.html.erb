@@ -2,7 +2,7 @@
       <div class="candidate">
         <div class="person_header">
            <strong>Referral Fee:</strong>
-           <%= @job.referral_fee %>
+           <%= number_to_currency(calculate_fee(@job.referral_fee), precision: 0) %>
         </div>
        <div class="details-section">
          <strong>About <%= @job.name %></strong>

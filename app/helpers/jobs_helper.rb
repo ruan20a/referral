@@ -17,8 +17,4 @@ module JobsHelper
     end
     @select_admins
   end
-
-  def salary_to_referral_fee_conversion
-
-  end
 end

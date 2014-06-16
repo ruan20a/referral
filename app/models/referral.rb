@@ -38,7 +38,7 @@ class Referral < ActiveRecord::Base
   validates_presence_of :referee_email, :referee_name, :unless => lambda{ self.ref_type == "refer" }
   validates_uniqueness_of :referral_email, :scope => [:job_id, :user_id, :admin_id], :unless => lambda{ self.ref_type == "ask_refer"}
   #different logic for refer types lambda substitute for method logic
-  validates_presence_of :referral_email, :referral_name, :linked_profile_url, :unless => lambda{ self.ref_type == "ask_refer" }
+  validates_presence_of :referral_email, :referral_name, :min_salary, :linked_profile_url, :unless => lambda{ self.ref_type == "ask_refer" }
   #TODO - testing for before_update
   #on create need to change the date time.
   before_create :store_interest_update
@@ -48,10 +48,10 @@ class Referral < ActiveRecord::Base
   before_update :store_status_update, :if => :is_interested_changed?
   before_update :check_notification, :if => :is_interested_changed?
   after_create :create_email
-
   # has_paper_trail :only => [:is_interested, :status], :meta => [:store_interest_changes => :store_interest_update, :store_status_change => :store_status_update ]
   # before_save :check_email, :if => :referral_email_changed?
   # paginates_per 10
+
 
   def store_interest_update
     self.last_interest_update = Time.now
