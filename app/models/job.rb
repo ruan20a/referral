@@ -25,9 +25,10 @@ class Job < ActiveRecord::Base
 	belongs_to :admin
 	has_many :referrals, :dependent => :destroy
 	has_many :users, :through => :referrals
-  validates_presence_of :referral_fee, :name, :job_name, :city, :state, :description
-	mount_uploader :image, ImageUploader
+  validates_presence_of :referral_fee, :name, :job_name, :city, :state, :description, :min_salary
+  mount_uploader :image, ImageUploader
   before_update :check_inactive, :if => :is_active_changed?
+  before_save :convert_salary_to_referral_fee
   # has_paper_trail #TODO - to undo remove/inactive jobs later
 
   def check_inactive
@@ -45,5 +46,8 @@ class Job < ActiveRecord::Base
     days_lag = current_date - create_date
   end
 
-
+  def convert_salary_to_referral_fee
+    min_salary = self.min_salary
+    self.referral_fee = min_salary * (0.05)
+  end
 end

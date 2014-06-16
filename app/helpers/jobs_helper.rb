@@ -17,9 +17,4 @@ module JobsHelper
     end
     @select_admins
   end
-
-  def find_company(admin_id)
-
-  end
-
 end

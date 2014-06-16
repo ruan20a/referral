@@ -48,7 +48,7 @@
 
           <div>
             <strong>Referral Fee:</strong>
-            <%= @referral.job.referral_fee %>
+            <%=  number_to_currency(calculate_fee(@referral.job.referral_fee), precision: 0) %>
           </div>
 
           </div>
