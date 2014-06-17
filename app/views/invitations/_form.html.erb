@@ -1,0 +1,36 @@
+<%= render 'layouts/header' %>
+
+
+<div class="container" style="margin-top:160px">
+      <div class="col-md-8 col-md-offset-2">
+       <div class="panel panel-default">
+         <%= render 'layouts/flash' %>
+         <div class="panel-heading"><h3 class="panel-title"><strong>New Invitation</strong></h3></div>
+          <div class="panel-body">
+
+            <div class="login-form">
+              <%= form_for @invitation do |f| %>
+              <div class="col-md-4">
+
+                 <div>
+                  <%= f.label :invited_name, "Who do you want to invite" %><br>
+                  <%= f.text_field :invited_name, :class => 'form-control login-field' %>
+                </div>
+
+                <div><br>
+                  <%= f.label :invited_email, "What is their email?" %><br>
+                  <%= f.text_field :invited_email, :class => 'form-control login-field' %>
+                </div>
+
+                  <div><br>
+                  <%= f.submit "Submit to Wekrut", :class => 'btn btn-primary btn-md btn-block' %>
+                  </div>
+
+              </div>
+
+              <% end %>
+
+           
+   
+
+            <%= render "layouts/footer_sticky" %>

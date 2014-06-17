@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  invited_name: 
+  invited_email: MyString
+
+two:
+  user_id: 
+  invited_name: 
+  invited_email: MyString

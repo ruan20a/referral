@@ -5,6 +5,7 @@ Wekrut::Application.routes.draw do
   resources :users
   resources :admins
   resources :jobs
+  resources :invitations
 
   resources :referrals
   resources :whitelists

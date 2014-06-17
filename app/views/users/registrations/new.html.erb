@@ -72,6 +72,12 @@
                   <row> <%= f.select :speciality_1, speciality_choices %></row>
                 </div>
 
+
+                <div class="form-group">
+                  <label> Who invited you? </label>
+                  <row> <%= f.email_field :inviter_email, :placeholder => 'Email', :class => 'form-control login-field' %></row>
+                </div>
+
                 <div>
                   <%= f.submit "Sign up", :class => 'btn btn-primary btn-lg btn-block'%>
                 </div>
