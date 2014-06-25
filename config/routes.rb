@@ -13,6 +13,7 @@ Wekrut::Application.routes.draw do
   root "home#index"
   #beta request only on post
   match '/send_request', to: 'home#send_request', via: 'post'
+  match '/send_company_request', to: 'home#send_company_request', via: 'post'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

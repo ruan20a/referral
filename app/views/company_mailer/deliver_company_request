@@ -1,0 +1,10 @@
+<div> Hello! </div>
+
+<div>Please review the following company request </div>
+<div>User_Email: <%=@user_email%> </div>
+<div>User_name: <%=@user_name%> </div>
+<div>Recruiter_name: <%=@recruiter_name%> </div>
+<div>Recruiter_email: <%=@recruiter_email%> </div>
+<div>Company: <%=@company%> </div>
+
+Thanks!

@@ -17,4 +17,24 @@ class HomeController < ApplicationController
     end
   end
 
+#company request email
+    def send_company_request
+    user_name = params[:user_name]
+    user_email = params[:user_email]
+    recruiter_name = params[:recruiter_name]
+    recruiter_email = params[:recruiter_email]
+    company = params[:company]
+
+    if [user_name, user_email, recruiter_name, recruiter_email, company].select{|x| x==""}.empty?
+      binding.pry
+      CompanyMailer.deliver_company_request(user_name, user_email, recruiter_name, recruiter_email, company)
+      binding.pry
+      redirect_to root_path, notice: 'Your request has been sent!'
+    else
+      redirect_to root_path, error: 'Request was not sent because there were missing fields. Please fill in all fields'
+    end
+  end
+
 end
+
+

@@ -1,0 +1,28 @@
+<%= content_tag(:div, flash.now[:notice], :id => "flash_notice") if flash.now[:notice] %>
+
+<h2>
+  Refer your company to join. When they place their first candidate, you get $100!
+</h2>
+
+<%= content_tag(:div, flash.now[:error], :id => "flash_error") if flash.now[:error] %>
+
+<%= form_tag(send_company_request_path) do %>
+ <div class="form-group">
+      <%= text_field_tag 'user_name', nil, class: 'form-control', placeholder: 'Your Name' %>
+  </div>
+  <div class="form-group">
+      <%= email_field_tag 'user_email', nil, class: 'form-control', placeholder: 'Your Email Address' %>
+  </div>
+   <div class="form-group">
+      <%= text_field_tag 'recruiter_name', nil, class: 'form-control', placeholder: 'Talent Contact Name' %>
+  </div>
+  <div class="form-group">
+      <%= email_field_tag 'recruiter_email', nil, class: 'form-control', placeholder: 'Talent Contact Email' %>
+  </div>
+  <div class="form-group">
+      <%= text_field_tag 'company', nil, class: 'form-control', placeholder: 'Company Name' %>
+  </div>
+ <%= submit_tag nil, class: 'btn btn-default btn-about' %>
+
+<% end %>
+
