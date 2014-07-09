@@ -1,5 +1,5 @@
 class JobsController < ApplicationController
-	# before_action :signed_in? only:[:new, :edit, :update]
+  # before_action :signed_in? only:[:new, :edit, :update]
   before_action :authenticate_admin!, only: [:new, :edit, :update, :create, :delete]
   before_action :check_level, only:[:new, :create, :edit, :update]
   before_action :check_admin, only: [:edit, :update, :delete]
@@ -14,10 +14,10 @@ class JobsController < ApplicationController
 
   include ApplicationHelper
 
-	def invite_user
-		@user = User.invite!(:email => params[:user][:email], :name => params[:user][:name])
-		render :json => @user
-	end
+  def invite_user
+    @user = User.invite!(:email => params[:user][:email], :name => params[:user][:name])
+    render :json => @user
+  end
 
   def index
     # binding.pry
@@ -46,14 +46,10 @@ class JobsController < ApplicationController
       format.html  # index.html.erb
       format.json  { render :json => @jobs }
     end
-	end
+  end
 
-	def new
+  def new
     @job = Job.new
-
-    if @level == 2
-      @job.admin_id = current_admin.id
-    end
   end
 
   def show
@@ -63,24 +59,22 @@ class JobsController < ApplicationController
     set_status(@job)
   end
 
+    
   def create
-    job = Job.new(job_params)
+    @job = Job.new(job_params)
     # binding.pry
 
-    set_admin(job)
+    set_admin(@job)
 
-    job.id = @admin.id
-    job.name = @admin.company
-
-    if job.save
-      redirect_to job, notice: 'Job was successfully created'
+    if @job.save
+      redirect_to jobs_path, notice: 'Job was successfully created'
     else
       render action: 'new'
     end
-	end
+  end
 
   def edit
-    @job.admin_id = current_admin.id
+    @job
   end
 
   def update
@@ -99,18 +93,19 @@ class JobsController < ApplicationController
     end
   end
 
-	private
+  private
 
   def set_job
     @job = Job.find(params[:id])
   end
 
-	def set_admin(job)
+  def set_admin(job)
     if job.admin.nil?
       @admin = current_admin
     else
       @admin = job.admin
     end
+     job.name = @admin.company
   end
 
   def set_status(job)
@@ -123,7 +118,7 @@ class JobsController < ApplicationController
 
   def job_params
     params.require(:job).permit(:name, :job_name, :description, :city, :state, :admin_id, :referral_fee, :image, :image_cache, :remote_image_url, :remove_image,  :speciality_1, :speciality_2, :industry_1, referrals_attributes: [:id])
-	end
+  end
 
   def check_admin
     job = Job.find(params[:id])

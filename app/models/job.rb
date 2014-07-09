@@ -19,7 +19,6 @@
 #  logo_url     :string(255)
 #  image        :string(255)
 #  industry_1   :string(255)
-#
 
 class Job < ActiveRecord::Base
 	belongs_to :admin
