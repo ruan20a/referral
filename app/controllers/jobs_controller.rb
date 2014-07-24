@@ -6,7 +6,7 @@ class JobsController < ApplicationController
   before_action :set_job, only: [:show, :update, :edit, :destroy]
   before_action :store_location #enables linking back
   before_action :user_pending_received_requests, only: [:index]
-  before_action :check_signed_in, only: [:show, :edit, :delete, :update, :create]
+  before_action :check_signed_in, only: [:edit, :delete, :update, :create]
   #TODO jobs_restriction for first month only
   # before_action :check_main_admin, only: [:edit, :update]
 
