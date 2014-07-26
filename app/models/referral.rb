@@ -41,27 +41,19 @@ class Referral < ActiveRecord::Base
   validates_presence_of :referral_email, :referral_name, :min_salary, :linked_profile_url, :unless => lambda{ self.ref_type == "ask_refer" }
   #TODO - testing for before_update
   #on create need to change the date time.
-  before_create :store_interest_update
-  before_create :store_status_update
-  #update when column changes
-  before_update :store_interest_update, :if => :status_changed?
-  before_update :store_status_update, :if => :is_interested_changed?
-  before_update :check_notification, :if => :is_interested_changed?
-  after_create :create_email
+  # before_create :store_interest_update
+  # before_create :store_status_update
+  # #update when column changes
+  # before_update :store_interest_update, :if => :status_changed?
+  # before_update :store_status_update, :if => :is_interested_changed?
+  # before_update :check_notification, :if => :is_interested_changed?
+  # after_create :create_email
     # has_paper_trail :only => [:is_interested, :status], :meta => [:store_interest_changes => :store_interest_update, :store_status_change => :store_status_update ]
   # before_save :check_email, :if => :referral_email_changed?
   # paginates_per 10
 
 
-  def store_interest_update
-    self.last_interest_update = Time.now
-  end
-
-  def store_status_update
-    self.last_status_update = Time.now
-  end
-
-  def create_email
+    def check_notification
     referral = self
     Email.create(:referral_id => referral.id)
   end

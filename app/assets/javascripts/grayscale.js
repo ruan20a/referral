@@ -17,3 +17,10 @@ $(function() {
         event.preventDefault();
     });
 });
+
+jQuery('.data-table').each(function() {
+    var thetable=jQuery(this);
+    jQuery(this).find('tbody td').each(function() {
+        jQuery(this).attr('data-heading',thetable.find('thead th:nth-child('+(jQuery(this).index()+1)+')').text());
+    });
+});

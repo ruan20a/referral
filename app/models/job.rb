@@ -25,7 +25,7 @@ class Job < ActiveRecord::Base
 	belongs_to :admin
 	has_many :referrals, :dependent => :destroy
 	has_many :users, :through => :referrals
-  validates_presence_of :referral_fee, :name, :job_name, :city, :state, :description, :min_salary
+  validates_presence_of :min_salary, :name, :job_name, :city, :state, :description
   mount_uploader :image, ImageUploader
   before_update :check_inactive, :if => :is_active_changed?
   before_save :convert_salary_to_referral_fee

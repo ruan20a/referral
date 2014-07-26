@@ -34,7 +34,7 @@ gem 'pg'
 
 gem 'cancan'
 
-gem 'rmagick', :require => 'RMagick'
+# gem 'rmagick'
 
 gem "carrierwave"
 

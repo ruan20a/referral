@@ -8,10 +8,7 @@ class UsersController < ApplicationController
   include ApplicationHelper
 
   def index
-      # @search = User.search(params[:q])
-      # @referrals = @search.result
-      # @jobs = Job.all
-      @users = User.all
+   @users = User.all
   end
 
   def show
@@ -55,7 +52,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :industry_1, :speciality_1, :referral_id, :profile_id, :tagline)
+    params.require(:user).permit(:email, :password, :industry_1, :inviter_email, :speciality_1, :referral_id, :profile_id, :tagline)
   end
 
   def check_session
@@ -83,3 +80,10 @@ class UsersController < ApplicationController
 
 
 end
+
+
+#only lets main admin see this page
+  def check_main_admin
+    level = Whitelist.find_by_email(current_admin.email).level
+    redirect_to new_admin_session_path, notice: "You are not an approved admin whitelister" if level != 3
+  end

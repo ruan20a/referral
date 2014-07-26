@@ -1,10 +1,10 @@
 module ReferralsHelper
 	def relationship_choices
-		["Friend" , "Coworker", "Family", "Client"]
+		["Friend" , "Family", "Coworker", "Former Coworker", "Supervisor", "Former Supervisor", "Client", "Former Client"]
 	end
 
 	def status_choices
-		["Pending","Pass","Interview", "Interview - No Offer", "Interview - Offer" , "Offer Declined", "Succesful Placement"]
+		["Pending","Pass","Interested", "Interview", "Interview - No Offer", "Interview - Offer" , "Offer Declined", "Succesful Placement"]
 	end
 
 	def relevance_choices

@@ -35,10 +35,6 @@ class JobsController < ApplicationController
 
 	def new
     @job = Job.new
-
-    if @level == 2
-      @job.admin_id = current_admin.id
-    end
   end
 
   def show
@@ -49,16 +45,13 @@ class JobsController < ApplicationController
   end
 
   def create
-    job = Job.new(job_params)
     # binding.pry
-
-    set_admin(job)
-
-    job.id = @admin.id
-    job.name = @admin.company
-
-    if job.save
-      redirect_to job, notice: 'Job was successfully created'
+    @job = Job.new(job_params)
+    set_admin(@job)
+    # binding.pry
+    if @job.save
+      # binding.pry
+      redirect_to @job, notice: 'Job was successfully created'
     else
       render action: 'new'
     end
@@ -97,6 +90,7 @@ class JobsController < ApplicationController
     else
       @admin = job.admin
     end
+    job.name = @admin.company
   end
 
   def set_status(job)

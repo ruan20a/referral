@@ -41,12 +41,12 @@
             <div class="login-form">
              <%= form_for :referral, url: {action:"update"}, method: :put do |f| %>
   <div>
-    <%= f.label "Your Name" %><br>
+    <%= f.label "Your Name*" %><br>
     <%= f.text_field :referral_name, :class => 'form-control login-field' %>
   </div>
 <br>
   <div>
-    <%= f.label "Your LinkedIn Profile URL" %><br>
+    <%= f.label "Your LinkedIn Profile URL*" %><br>
     <%= f.text_field :linked_profile_url, :class => 'form-control login-field' %>
   </div>
 <br>

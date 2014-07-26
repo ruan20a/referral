@@ -47,6 +47,7 @@ class User < ActiveRecord::Base
     belongs_to :whitelist
     has_many :referrals
     has_many :jobs, :through => :referrals
+    has_many :invitations
     validates :first_name, :last_name, :email, presence: true
     validates :email, :uniqueness => { :case_sensitive => false }
 

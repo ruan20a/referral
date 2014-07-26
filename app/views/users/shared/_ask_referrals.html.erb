@@ -2,9 +2,10 @@
     <div class="page page-table">
       <div class="panel panel-default">
       <div class="panel-heading"><strong><span class="fa fa-th"></span>
-        Received Referrals</strong>
+        Requested Referrals</strong>
       </div>
         <table class="table" id="received-referrals">
+          <thead>
           <tr>
             <th>Company</th>
             <th>Job</th>
@@ -12,6 +13,7 @@
             <th>Date Requested</th>
             <th>Requester</th>
           </tr>
+          </thead>
           <tbody class="page">
             <% @ask_referrals.each do |referral| %>
           <tr class="received">

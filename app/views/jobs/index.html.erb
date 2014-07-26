@@ -1,3 +1,4 @@
+
 <%= render 'layouts/header' %>
 
 <section class="jobs">
@@ -8,25 +9,24 @@
 
       <div class="panel panel-default">
         <div class="panel-heading">
-          <table>
-            <tr>
-             <th>
-              <strong><span class="fa fa-th"></span> Job Postings&nbsp
-            </th>
-            <%= search_form_for @search do |f| %>
-            <th>
-                <div class="search-form">
-                <%= f.text_field :name_or_job_name_or_city_or_state_cont, :placeholder => 'Search' %>
-                &nbsp
+          <div class="form-inline" role="form">
+            <div class="form-group">
+              <span class="fa fa-th"></span> Job Postings <%= search_form_for @search do |f| %>
+            </div>
+            <div class="form-group">
+                <%= f.text_field :name_or_job_name_or_city_or_state_cont, :placeholder => 'Search', style: "color: #2c3e50; " %>
+            </div>
+            <div class="form-group">
                 <%= f.submit "Search", :class => 'btn btn-default' %>
-                </div>
-            </th>
-            <% end %>
-            <th class="col-md-2 action"> <%= button_to "Reset Search", request.path, :class =>'btn btn-default',:method => :get %>
-            </th>
-            <th>&nbsp</th>
+            </div>
 
-            <th class="pull-right">
+            <% end %>
+
+            <div class="form-group">
+              <%= button_to "Reset Search", request.path, :class =>'btn btn-default',:method => :get %>
+            </div>
+
+            <div class="form-group pull-right">
               <% if @has_ref %>
                 <% if current_admin.nil? %>
                   <%= button_to " #{@unreviewed_requests} Requests Pending Review", user_path(current_user.id),:method => :get,:class =>'btn btn-danger pull-right' %>
@@ -35,37 +35,35 @@
                 <% end %>
 
               <% end %>
-            </th>
-          </table>
+            </div>
         </div>
+      </div>
 
-        <table class="table table-hover">
+        <table class="table">
          <thead>
           <tr>
             <th><%= sort_link @search, :name, "Company Name" %></th>
             <th><%= sort_link @search, :job_name, "Position" %></th>
             <th><%= sort_link @search, :city, "City" %></th>
             <th><%= sort_link @search, :state, "State" %></th>
-            <th><%= sort_link @search, :industry_1, "Industry" %></th>
             <th><%= sort_link @search, :referral_fee, "Referral Fee" %></th>
           </tr>
         </thead>
 
         <tbody>
           <% @jobs.each do |job| %>
-          <tr>
+          <tr >
             <td>
-              <% if job.image_url.nil? %>
-                <%= job.name %>
+              <% if job.image_url(:thumb).nil? %>
+                <%= job.admin.company %>
               <% else %>
                 <%= image_tag "#{job.image_url(:thumb)}", :alt => "#{job.name}" %>
               <% end %>
             </td>
 
-            <td><%= link_to job.job_name, "/jobs/#{job.id}" %></td>
+            <td ><%= link_to job.job_name, "/jobs/#{job.id}" %></td>
             <td><%= job.city %></td>
             <td><%= job.state %></td>
-            <td><%= job.industry_1 %></td>
             <td><%= number_to_currency(calculate_fee(job.referral_fee), precision: 0) %></td>
           </tr>
 

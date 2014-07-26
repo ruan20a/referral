@@ -12,6 +12,12 @@
            <!-- Collect the nav links, forms, and other content for toggling -->
            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
                <ul class="nav navbar-nav">
+                <li class="page-scroll">
+                  <% if user_signed_in? %>
+                   <li> <%= link_to 'Invite', new_invitation_path %> </li>
+                    <% end %>
+
+                   </li>
                   <li class="page-scroll">
                     <%= link_to 'Jobs', jobs_path %>
                    </li>

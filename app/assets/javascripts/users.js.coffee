@@ -1,6 +1,7 @@
 $(document).ready ->
   $("a[href=\"#received-referrals\"]").on "click", ->
     $("#sent-referrals").removeClass "active in"
+    $("#ask-referrals").removeClass "active in"
     return
 
   $("a[href=\"#sent-referrals\"]").on "click", ->

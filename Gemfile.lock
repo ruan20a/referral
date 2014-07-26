@@ -82,8 +82,8 @@ GEM
     dotenv-rails (0.11.1)
       dotenv (= 0.11.1)
     erubis (2.7.0)
-    excon (0.34.0)
-    execjs (2.1.0)
+    excon (0.36.0)
+    execjs (2.2.0)
     fog (1.22.1)
       fog-brightbox
       fog-core (~> 1.22)
@@ -188,7 +188,6 @@ GEM
       polyamorous (~> 1.0.0)
     rdoc (4.1.1)
       json (~> 1.4)
-    rmagick (2.13.2)
     ruby-graphviz (1.0.9)
     sass (3.2.19)
     sass-rails (4.0.3)
@@ -271,7 +270,6 @@ DEPENDENCIES
   rails_12factor
   rake (= 10.2.2)
   ransack
-  rmagick
   sass-rails (~> 4.0.0)
   sdoc
   sendgrid

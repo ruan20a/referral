@@ -51,7 +51,8 @@ class ReferralsController < ApplicationController
        end
      else
        # binding.pry
-       flash[:notice] = "Please review your request. You either created this referral already or did not fill out required fields "
+       flash[:notice] = "Please review your request. You either created this referral for the person already or did not fill out required fields"
+      # PUT A STAR on the form fields next to required fields (linked in, name and email)
        redirect_to session[:return_to]
      end
    else
@@ -192,7 +193,7 @@ class ReferralsController < ApplicationController
     end
   end
 
-def check_whitelist(referral)
+  def check_whitelist(referral)
     if referral.ref_type == "refer"
       unless Whitelist.exists?(:email => params[:referral][:referral_email])
         Whitelist.create(:email => params[:referral][:referral_email], :level => 1)
