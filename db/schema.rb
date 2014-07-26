@@ -10,10 +10,7 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended that you check this file into your version control system.
-
-
-ActiveRecord::Schema.define(version: 20140616222254) do
-
+ActiveRecord::Schema.define(version: 20140725144650) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -71,6 +68,7 @@ ActiveRecord::Schema.define(version: 20140616222254) do
   end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   add_index "admins_referrals", ["admin_id", "referral_id"], name: "index_admins_referrals_on_admin_id_and_referral_id", using: :btree
   add_index "admins_referrals", ["referral_id", "admin_id"], name: "index_admins_referrals_on_referral_id_and_admin_id", using: :btree
 
@@ -82,6 +80,19 @@ ActiveRecord::Schema.define(version: 20140616222254) do
     t.boolean  "second_admin_reminder", default: false
     t.boolean  "second_user_reminder",  default: false
 =======
+=======
+  create_table "authorizations", force: true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "token"
+    t.string   "secret"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "profile_page"
+  end
+
+>>>>>>> 4c60bac2f35c2167de077e2b51d4e0b9456de1f0
   create_table "invitations", force: true do |t|
     t.integer  "user_id"
     t.string   "invited_name"
@@ -180,6 +191,8 @@ ActiveRecord::Schema.define(version: 20140616222254) do
     t.string   "tagline"
     t.string   "linked_in"
     t.string   "inviter_email"
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
