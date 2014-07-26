@@ -1,19 +1,18 @@
 class JobsController < ApplicationController
-	# before_action :signed_in? only:[:new, :edit, :update]
+  # before_action :signed_in? only:[:new, :edit, :update]
   before_action :authenticate_admin!, only: [:new, :edit, :update, :create, :delete]
   before_action :check_level, only:[:new, :create, :edit, :update]
   before_action :check_admin, only: [:edit, :update, :delete]
   before_action :set_job, only: [:show, :update, :edit, :destroy]
   before_action :store_location #enables linking back
   before_action :user_pending_received_requests, only: [:index]
-  before_action :check_signed_in, only: [:show, :edit, :delete, :update, :create]
+  before_action :check_signed_in, only: [:edit, :delete, :update, :create]
   #TODO jobs_restriction for first month only
   # before_action :check_main_admin, only: [:edit, :update]
 
   # before_action :clear_search_index, :only => [:index]
 
   include ApplicationHelper
-
 
   #TODO move some variables to the model
 	def invite_user
@@ -31,9 +30,9 @@ class JobsController < ApplicationController
       format.html  # index.html.erb
       format.json  { render :json => @jobs }
     end
-	end
+  end
 
-	def new
+  def new
     @job = Job.new
   end
 
@@ -44,7 +43,9 @@ class JobsController < ApplicationController
     set_status(@job)
   end
 
+
   def create
+<<<<<<< HEAD
     # binding.pry
     @job = Job.new(job_params)
     set_admin(@job)
@@ -52,10 +53,19 @@ class JobsController < ApplicationController
     if @job.save
       # binding.pry
       redirect_to @job, notice: 'Job was successfully created'
+=======
+    @job = Job.new(job_params)
+    # binding.pry
+
+    set_admin(@job)
+
+    if @job.save
+      redirect_to jobs_path, notice: 'Job was successfully created'
+>>>>>>> 2c4329e81c5ce6fbd62fd1ef2da8a9f2fdb07e81
     else
       render action: 'new'
     end
-	end
+  end
 
   def edit
     @job
@@ -78,19 +88,23 @@ class JobsController < ApplicationController
     end
   end
 
-	private
+  private
 
   def set_job
     @job = Job.find(params[:id])
   end
 
-	def set_admin(job)
+  def set_admin(job)
     if job.admin.nil?
       @admin = current_admin
     else
       @admin = job.admin
     end
+<<<<<<< HEAD
     job.name = @admin.company
+=======
+     job.name = @admin.company
+>>>>>>> 2c4329e81c5ce6fbd62fd1ef2da8a9f2fdb07e81
   end
 
   def set_status(job)
@@ -102,8 +116,13 @@ class JobsController < ApplicationController
   end
 
   def job_params
+<<<<<<< HEAD
     params.require(:job).permit(:name, :job_name, :description, :city, :state, :admin_id, :referral_fee, :image, :image_cache, :remote_image_url, :remove_image,  :speciality_1, :speciality_2, :is_active, :industry_1, :min_salary, referrals_attributes: [:id])
 	end
+=======
+    params.require(:job).permit(:name, :job_name, :description, :city, :state, :admin_id, :referral_fee, :image, :image_cache, :remote_image_url, :remove_image,  :speciality_1, :speciality_2, :industry_1, referrals_attributes: [:id])
+  end
+>>>>>>> 2c4329e81c5ce6fbd62fd1ef2da8a9f2fdb07e81
 
   def check_admin
     job = Job.find(params[:id])
