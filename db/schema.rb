@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140616222254) do
+ActiveRecord::Schema.define(version: 20140725144650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,17 @@ ActiveRecord::Schema.define(version: 20140616222254) do
   create_table "admins_referrals", id: false, force: true do |t|
     t.integer "admin_id",    null: false
     t.integer "referral_id", null: false
+  end
+
+  create_table "authorizations", force: true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "token"
+    t.string   "secret"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "profile_page"
   end
 
   create_table "invitations", force: true do |t|
@@ -210,6 +221,8 @@ ActiveRecord::Schema.define(version: 20140616222254) do
     t.string   "tagline"
     t.string   "linked_in"
     t.string   "inviter_email"
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
