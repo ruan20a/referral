@@ -71,17 +71,42 @@ class User < ActiveRecord::Base
   def self.from_omniauth(auth, current_user)
     authorization = Authorization.where(:provider => auth.provider, :uid => auth.uid.to_s, :token => auth.credentials.token, :secret => auth.credentials.secret).first_or_initialize
     if authorization.user.blank?
-      user = current_user.nil? ? User.where('email = ?', auth["info"]["email"]).first : current_user
+      user = current_user.nil? ? User.where("email = ?", auth["info"]["email"]).first : current_user
       if user.blank?
-       user = User.new
-       user.password = Devise.friendly_token[0,10]
-       user.name = auth.info.name
-       user.email = auth.info.email
+        user_create(auth)
      end
+     authorization.user_id = user.id
      authorization.save
    end
    authorization.user
  end
+
+ def user_create(auth)
+  user = User.new
+  user.password = Devise.friend_token[0,10]
+  user.first_name = auth.info.first_name
+  user.last_name = auth.info.last_name
+  user.email = auth.info.email
+  user.save
+  profile_create(auth, user)
+ end
+
+ def profile_create(auth, user)
+  profile = User_profile.new
+  profile.user_id = user.id
+  profile.email = auth.info.email
+  profile.location = auth.info.location
+  profile.headline = auth.info.headline
+  profile.industry = auth.info.industry
+  profile.image = auth.info.image
+  profile.public_profile = auth.info.urls.public_profile
+  peofile.education =  auth["extra"]["raw_info"]["educations"]["values"]
+  profile.positions = auth["extra"]["raw_info"]["positions"]["values"]
+  profile.skills = auth["extra"]["raw_info"]["skills"]["values"]
+  profile.save
+ end
+
+
 end
 
 

@@ -10,7 +10,9 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended that you check this file into your version control system.
+
 ActiveRecord::Schema.define(version: 20140725144650) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -67,20 +69,9 @@ ActiveRecord::Schema.define(version: 20140725144650) do
     t.integer "referral_id", null: false
   end
 
-<<<<<<< HEAD
-<<<<<<< HEAD
   add_index "admins_referrals", ["admin_id", "referral_id"], name: "index_admins_referrals_on_admin_id_and_referral_id", using: :btree
   add_index "admins_referrals", ["referral_id", "admin_id"], name: "index_admins_referrals_on_referral_id_and_admin_id", using: :btree
 
-  create_table "emails", force: true do |t|
-    t.integer  "referral_id"
-    t.boolean  "admin_notification",    default: false
-    t.boolean  "first_admin_reminder",  default: false
-    t.boolean  "first_user_reminder",   default: false
-    t.boolean  "second_admin_reminder", default: false
-    t.boolean  "second_user_reminder",  default: false
-=======
-=======
   create_table "authorizations", force: true do |t|
     t.integer  "user_id"
     t.string   "provider"
@@ -92,13 +83,22 @@ ActiveRecord::Schema.define(version: 20140725144650) do
     t.string   "profile_page"
   end
 
->>>>>>> 4c60bac2f35c2167de077e2b51d4e0b9456de1f0
+  create_table "emails", force: true do |t|
+    t.integer  "referral_id"
+    t.boolean  "admin_notification",    default: false
+    t.boolean  "first_admin_reminder",  default: false
+    t.boolean  "first_user_reminder",   default: false
+    t.boolean  "second_admin_reminder", default: false
+    t.boolean  "second_user_reminder",  default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "invitations", force: true do |t|
     t.integer  "user_id"
     t.string   "invited_name"
     t.string   "invited_email"
     t.boolean  "is_successful", default: false
->>>>>>> 31616d32093e2b3849c98a1fdda95fa7ecd2f623
     t.datetime "created_at"
     t.datetime "updated_at"
   end
