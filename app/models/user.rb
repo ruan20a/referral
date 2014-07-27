@@ -35,6 +35,7 @@
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
 #  tagline                :string(255)
+#  linked_in              :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -47,7 +48,8 @@ class User < ActiveRecord::Base
   github: 'Github',
   linkedin: 'Linkedin'
 }
-    has_one :profile
+    
+    has_one :user_profile
     belongs_to :whitelist
     has_many :referrals
     has_many :authorizations
@@ -70,19 +72,19 @@ class User < ActiveRecord::Base
   def self.from_omniauth(auth, current_user)
     authorization = Authorization.where(:provider => auth.provider, :uid => auth.uid.to_s, :token => auth.credentials.token, :secret => auth.credentials.secret).first_or_initialize
     if authorization.user.blank?
-      user = current_user.nil? ? User.where('email = ?', auth["info"]["email"]).first : current_user
+      user = current_user.nil? ? User.where("email = ?", auth["info"]["email"]).first : current_user
       if user.blank?
        user = User.new
        user.password = Devise.friendly_token[0,10]
        user.name = auth.info.name
        user.email = auth.info.email
      end
+     authorization.user_id = user.id
      authorization.save
    end
    authorization.user
  end
 end
-
 
 
 
