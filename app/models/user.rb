@@ -73,10 +73,13 @@ class User < ActiveRecord::Base
     authorization = Authorization.where(:provider => auth.provider, :uid => auth.uid.to_s, :token => auth.credentials.token, :secret => auth.credentials.secret).first_or_initialize
     if authorization.user.blank?
       user = current_user.nil? ? User.where("email = ?", auth["info"]["email"]).first : current_user
+      binding.pry
       if user.blank?
+        binding.pry
         user_create(auth)
       else
         if user.user_profile.blank?
+          binding.pry
           user.profile_create(auth.user)
         end
      end
@@ -87,6 +90,7 @@ class User < ActiveRecord::Base
  end
 
  def user_create(auth)
+  binding.pry
   user = User.new
   user.password = Devise.friend_token[0,10]
   user.first_name = auth.info.first_name
@@ -97,6 +101,7 @@ class User < ActiveRecord::Base
  end
 
  def profile_create(auth, user)
+  binding.pry
   profile = UserProfile.new
   profile.user_id = user.id
   profile.email = auth.info.email

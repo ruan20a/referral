@@ -12,7 +12,7 @@ class CreateUserProfiles < ActiveRecord::Migration
       t.string :skills, array: true, default: '{}'
       t.string :educations, array: true, default: '{}'
       t.string :positions, array: true, default: '{}'
-
+      t.string :user_id
       t.timestamps
     end
   end
