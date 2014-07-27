@@ -48,7 +48,8 @@ class User < ActiveRecord::Base
   github: 'Github',
   linkedin: 'Linkedin'
 }
-    has_one :profile
+    
+    has_one :user_profile
     belongs_to :whitelist
     has_many :referrals
     has_many :authorizations
@@ -112,7 +113,6 @@ class User < ActiveRecord::Base
 
 
 end
-
 
 
 
