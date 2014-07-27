@@ -74,6 +74,10 @@ class User < ActiveRecord::Base
       user = current_user.nil? ? User.where("email = ?", auth["info"]["email"]).first : current_user
       if user.blank?
         user_create(auth)
+      else
+        if user.user_profile.blank?
+          user.profile_create(auth.user)
+        end
      end
      authorization.user_id = user.id
      authorization.save
