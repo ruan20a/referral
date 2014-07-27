@@ -10,8 +10,8 @@ class CreateUserProfiles < ActiveRecord::Migration
       t.string :public_profile_url
       t.string :location
       t.string :skills, array: true, default: '{}'
-      t.string :skills, array: true, default: '{}'
-      t.string :skills, array: true, default: '{}'
+      t.string :educations, array: true, default: '{}'
+      t.string :positions, array: true, default: '{}'
 
       t.timestamps
     end

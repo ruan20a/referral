@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
   github: 'Github',
   linkedin: 'Linkedin'
 }
-    
+
     has_one :user_profile
     belongs_to :whitelist
     has_many :referrals
@@ -97,7 +97,7 @@ class User < ActiveRecord::Base
  end
 
  def profile_create(auth, user)
-  profile = User_profile.new
+  profile = UserProfile.new
   profile.user_id = user.id
   profile.email = auth.info.email
   profile.location = auth.info.location
