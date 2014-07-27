@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140726232947) do
+ActiveRecord::Schema.define(version: 20140727004142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,6 +155,23 @@ ActiveRecord::Schema.define(version: 20140726232947) do
     t.boolean  "is_active",            default: true
     t.datetime "last_status_update",   default: '2014-06-11 00:32:29'
     t.datetime "last_interest_update", default: '2014-06-11 00:32:29'
+  end
+
+  create_table "user_profiles", force: true do |t|
+    t.string   "email"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "headline"
+    t.string   "industry"
+    t.string   "image"
+    t.string   "public_profile_url"
+    t.string   "location"
+    t.string   "skills",             default: [], array: true
+    t.json     "positions"
+    t.json     "educations"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "users", force: true do |t|

@@ -3,6 +3,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 	skip_before_filter :authenticate_user!
 	def all
 		p env["omniauth.auth"]
+		binding.pry
 		user = User.from_omniauth(env["omniauth.auth"], current_user)
 		binding.pry
 		if user.persisted?

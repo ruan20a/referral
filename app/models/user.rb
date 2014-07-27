@@ -43,11 +43,11 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :omniauthable, :registerable,
          :recoverable, :rememberable, :validatable
-         SOCIALS = {
-  facebook: 'Facebook',
-  github: 'Github',
-  linkedin: 'Linkedin'
-}
+  SOCIALS = {
+    facebook: 'Facebook',
+    github: 'Github',
+    linkedin: 'Linkedin'
+  }
 
     has_one :user_profile
     belongs_to :whitelist
@@ -70,50 +70,50 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth, current_user)
+    binding.pry
     authorization = Authorization.where(:provider => auth.provider, :uid => auth.uid.to_s, :token => auth.credentials.token, :secret => auth.credentials.secret).first_or_initialize
     if authorization.user.blank?
-      user = current_user.nil? ? User.where("email = ?", auth["info"]["email"]).first : current_user
       binding.pry
+      user = current_user.nil? ? User.where("email = ?", auth["info"]["email"]).first : current_user
       if user.blank?
         binding.pry
-        user_create(auth)
-      else
-        if user.user_profile.blank?
-          binding.pry
-          user.profile_create(auth.user)
-        end
-     end
+        user = User.new
+        user.create_user(auth, user)
+      end
+      binding.pry
      authorization.user_id = user.id
      authorization.save
    end
-   authorization.user
+    authorization.user.create_profile(auth, authorization.user)
+    authorization.user
  end
 
- def user_create(auth)
-  binding.pry
-  user = User.new
-  user.password = Devise.friend_token[0,10]
+ def create_user(auth, user)
+  user.password = Devise.friendly_token[0,10]
   user.first_name = auth.info.first_name
   user.last_name = auth.info.last_name
   user.email = auth.info.email
   user.save
-  profile_create(auth, user)
+  create_profile(auth, user)
  end
 
- def profile_create(auth, user)
-  binding.pry
-  profile = UserProfile.new
+ def create_profile(auth, user)
+  profile = UserProfile.find_or_initialize_by_user_id(user.id)
   profile.user_id = user.id
-  profile.email = auth.info.email
-  profile.location = auth.info.location
-  profile.headline = auth.info.headline
-  profile.industry = auth.info.industry
-  profile.image = auth.info.image
-  profile.public_profile = auth.info.urls.public_profile
-  peofile.education =  auth["extra"]["raw_info"]["educations"]["values"]
-  profile.positions = auth["extra"]["raw_info"]["positions"]["values"]
-  profile.skills = auth["extra"]["raw_info"]["skills"]["values"]
-  profile.save
+  profile.first_name = auth["info"].fetch("first_name") { nil }
+  profile.last_name = auth["info"].fetch("last_name") { nil }
+  profile.email = auth["info"].fetch("email") { nil }
+  profile.location = auth["info"].fetch("location") { nil }
+  profile.headline = auth["info"].fetch("headline") { nil }
+  profile.industry = auth["info"].fetch("industry") { nil }
+  profile.image = auth["info"].fetch("image") { nil }
+  profile.public_profile_url = auth["info"]["urls"].fetch("public_profile") { nil }
+  profile.educations = auth["extra"]["raw_info"]["educations"].fetch("values") {nil}
+  profile.positions = auth["extra"]["raw_info"]["positions"].fetch("values") {nil}
+  all_skills = []
+  auth["extra"]["raw_info"]["skills"]["values"].each{|value| all_skills << value["skill"].fetch("name") {nil}}
+  profile.skills = all_skills
+  profile.save!
  end
 
 
