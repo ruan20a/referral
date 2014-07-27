@@ -1,0 +1,24 @@
+<table>
+  <thead>
+    <th>Company Name</th>
+    <th>Position</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Industry</th>
+    <th>Referral Fee</th>
+  </thead>
+
+  <tbody>
+    <%= @new_jobs.each do |job| %>
+      <th><%= link_to job.name, url_for(controller: 'jobs', action: 'index', only_path: false) %></th>
+      <th><%= job.job_name, url_for(controller: 'jobs', action: 'index', only_path: false) %></th>
+      <th><%= job.city, url_for(controller: 'jobs', action: 'index', only_path: false) %></th>
+      <th><%= job.state, url_for(controller: 'jobs', action: 'index', only_path: false)  %></th>
+      <th><%= job.industry_1, url_for(controller: 'jobs', action: 'index', only_path: false) %></th>
+      <th><%= number_to_currency(calculate_fee(job.referral_fee), precision: 0), url_for(controller: 'jobs', action: 'index', only_path: false) %></th>
+    <% end %>
+  </tbody>
+</table>
+</table>
+
+

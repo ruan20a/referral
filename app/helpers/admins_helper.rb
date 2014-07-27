@@ -4,10 +4,6 @@ module AdminsHelper
 		@referrals =referral.all
 	end
 
-	def status_choices
-  	["Accepted", "Pending", "Approved"]
-	end
-
 	def relevance_choices
   	["Relevant", "Not Relevant" ]
 	end

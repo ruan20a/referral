@@ -51,6 +51,7 @@ GEM
       json (>= 1.7)
       mime-types (>= 1.16)
     choice (0.1.6)
+    chronic (0.10.2)
     coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -173,6 +174,9 @@ GEM
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
+    paper_trail (3.0.2)
+      activerecord (>= 3.0, < 5.0)
+      activesupport (>= 3.0, < 5.0)
     pg (0.17.1)
     polyamorous (1.0.0)
       activerecord (>= 3.0)
@@ -225,7 +229,6 @@ GEM
       polyamorous (~> 1.0.0)
     rdoc (4.1.1)
       json (~> 1.4)
-    rmagick (2.13.2)
     ruby-graphviz (1.0.9)
     sass (3.2.19)
     sass-rails (4.0.3)
@@ -302,6 +305,7 @@ DEPENDENCIES
   omniauth-linkedin
   omniauth-oauth2
   pageless-rails!
+  paper_trail (~> 3.0.2)
   pg
   pry-debugger
   pry-rails
@@ -311,7 +315,6 @@ DEPENDENCIES
   rails_12factor
   rake (= 10.2.2)
   ransack
-  rmagick
   sass-rails (~> 4.0.0)
   sdoc
   sendgrid
@@ -320,4 +323,5 @@ DEPENDENCIES
   turbolinks
   uglifier (>= 1.3.0)
   unicorn
+  whenever
   will_paginate (~> 3.0.5)

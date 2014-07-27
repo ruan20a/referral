@@ -16,8 +16,8 @@
                 </div>
 
                 <div><br>
-                  <%= f.label :referral_fee %><br>
-                  <%= f.number_field :referral_fee, :class => 'form-control login-field' %>
+                  <%= f.label :min_salary, "Minimum Salary" %><br>
+                  <%= f.number_field :min_salary, :class => 'form-control login-field' %>
                 </div>
 
                 <div>
@@ -52,6 +52,12 @@
                  <div class="form-group">
           Logo: <%= f.file_field :image, :placeholder=>"Logo"%>
         </div>
+
+                <div><br>
+                  <%= f.label :is_active, "Is Active?" %><br>
+                  <%= f.select :is_active, active_choices, :class => 'form-control login-field' %>
+                </div>
+
 
                 <div><br>
                   <%= f.submit "Submit to Wekrut", :class => 'btn btn-primary btn-md btn-block' %>

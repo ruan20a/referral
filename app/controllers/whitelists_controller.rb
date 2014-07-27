@@ -4,6 +4,8 @@ class WhitelistsController < ApplicationController
   before_action :check_main_admin
   before_action :set_whitelist, only: [:edit, :update, :show, :destroy]
 
+
+
   def index
     @whitelist = Whitelist.all
   end
@@ -65,8 +67,9 @@ class WhitelistsController < ApplicationController
     redirect_to new_admin_session_path, notice: "You are not an approved admin whitelister" if status.empty?
   end
 
+
   #TODO INTEGRATE after whitelist is RE-set up again
-  # def check_main_admin
+  # def check_level
   #   level = Whitelist.find_by_email(current_admin.email).level
   #   redirect_to new_admin_session_path, notice: "You are not an approved admin whitelister" if level != 3
   # end

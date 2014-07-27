@@ -6,7 +6,7 @@
 #  email      :string(255)
 #  created_at :datetime
 #  updated_at :datetime
-#  is_admin   :boolean          default(FALSE)
+#  level      :integer          default(1)
 #
 
 class Whitelist < ActiveRecord::Base
@@ -21,7 +21,5 @@ class Whitelist < ActiveRecord::Base
   def downcase_email
     self.email.downcase!
   end
-
-  
 end
 

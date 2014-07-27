@@ -11,6 +11,14 @@ module ReferralsHelper
 	  ["Relevant", "Not Relevant" ]
 	end
 
+  def is_interested_choices
+    ["I'm interested in this role","I'm NOT interested in this role"]
+  end
+
+  def boolean
+    [true, false]
+  end
+
   def translate_boolean(status)
     case status
     when true

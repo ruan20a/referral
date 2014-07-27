@@ -64,8 +64,21 @@ class UsersController < ApplicationController
 
   def correct_user
     user = User.find(params[:id])
-    redirect_to new_user_session_path, :error => "You cannot view that account because you're not the correct admin. Please login to the correct account."  unless user == current_user
+
+    if !current_admin.nil?
+      level = Whitelist.find_by_email(current_admin.email).level
+    end
+
+    redirect_to new_user_session_path, :error => "You cannot view that account because you're not the correct admin. Please login to the correct account."  unless user == current_user || level == 3
   end
+
+  def check_main_admin
+    level = Whitelist.find_by_email(current_admin.email).level
+    redirect_to new_admin_session_path, notice: "You are not an approved admin whitelister" if level != 3
+  end
+
+
+
 end
 
 

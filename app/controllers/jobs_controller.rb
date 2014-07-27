@@ -14,31 +14,15 @@ class JobsController < ApplicationController
 
   include ApplicationHelper
 
-  def invite_user
-    @user = User.invite!(:email => params[:user][:email], :name => params[:user][:name])
-    render :json => @user
-  end
+  #TODO move some variables to the model
+	def invite_user
+		@user = User.invite!(:email => params[:user][:email], :name => params[:user][:name])
+		render :json => @user
+	end
 
   def index
-    # binding.pry
-
-      # if @search.nil?
-      #   @jobs = Job.all
-      # else
-          # @jobs = @search.result
-      # end
-
-      # @jobs = Job.all
-      # @jobs.build_sort if @jobs.sorts.empty?
-      # "s" => "job_name asc"
-
-    # if !search_params["name_or_job_name_or_city_or_state_cont"].nil?
-    #   @search = Job.search(search_params)
-    #   @jobs = @search.result
-    # end
-
     @search = Job.search(params[:q])
-    @jobs = @search.result.paginate(:page => params[:page])
+    @jobs = @search.result.select{|x| x.is_active == true}.paginate(:page => params[:page])
     @unreviewed_requests
     @has_ref = has_any(@unreviewed_requests)
 
@@ -59,15 +43,15 @@ class JobsController < ApplicationController
     set_status(@job)
   end
 
-    
+
   def create
-    @job = Job.new(job_params)
     # binding.pry
-
+    @job = Job.new(job_params)
     set_admin(@job)
-
+    # binding.pry
     if @job.save
-      redirect_to jobs_path, notice: 'Job was successfully created'
+      # binding.pry
+      redirect_to @job, notice: 'Job was successfully created'
     else
       render action: 'new'
     end
@@ -79,9 +63,10 @@ class JobsController < ApplicationController
 
   def update
     if @job.update(job_params)
-      redirect_to @job, notice: 'Item was successfully updated.'
+      binding.pry
+      redirect_to @job, notice: 'Job successfully updated.'
     else
-      render action: 'edit'
+      render action: 'edit', notice: 'Please try again.'
     end
   end
 
@@ -89,7 +74,7 @@ class JobsController < ApplicationController
     if @job.destroy
       redirect_to jobs_path, notice: 'Job successfully destroyed'
     else
-      render action: 'edit'
+      render action: 'edit', notice: 'We could not delele this job. Please try again.'
     end
   end
 
@@ -105,7 +90,7 @@ class JobsController < ApplicationController
     else
       @admin = job.admin
     end
-     job.name = @admin.company
+    job.name = @admin.company
   end
 
   def set_status(job)
@@ -117,8 +102,8 @@ class JobsController < ApplicationController
   end
 
   def job_params
-    params.require(:job).permit(:name, :job_name, :description, :city, :state, :admin_id, :referral_fee, :image, :image_cache, :remote_image_url, :remove_image,  :speciality_1, :speciality_2, :industry_1, referrals_attributes: [:id])
-  end
+    params.require(:job).permit(:name, :job_name, :description, :city, :state, :admin_id, :referral_fee, :image, :image_cache, :remote_image_url, :remove_image,  :speciality_1, :speciality_2, :is_active, :industry_1, :min_salary, referrals_attributes: [:id])
+	end
 
   def check_admin
     job = Job.find(params[:id])
@@ -134,7 +119,7 @@ class JobsController < ApplicationController
     elsif !current_admin.nil?
       #admin referrals - is_interested = true & ref_type = refer.
       admin_referrals = current_admin.referrals.select{|referral| referral.ref_type == "refer" && referral.is_interested == true}
-      @unreviewed_requests = admin_referrals.select{|referral| referral.status == "pending"}.count
+      @unreviewed_requests = admin_referrals.select{|referral| referral.status == "Pending"}.count
     else
       @unreviewed_requests = 0
     end

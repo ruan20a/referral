@@ -27,10 +27,5 @@ include AdminsHelper
         respond_with resource
       end
     end
-    # unless Whitelist.exists?(:email => params[:user][:email])
-    # else
-    #   super
-    # end
   end
-
 end

@@ -7,7 +7,6 @@
 #  description  :text
 #  recruiter_id :integer
 #  speciality_1 :string(255)
-#  speciality_2 :string(255)
 #  referral_fee :integer
 #  created_at   :datetime
 #  updated_at   :datetime
@@ -19,6 +18,7 @@
 #  logo_url     :string(255)
 #  image        :string(255)
 #  industry_1   :string(255)
+#  is_active    :boolean          default(TRUE)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

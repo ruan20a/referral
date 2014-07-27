@@ -5,9 +5,13 @@ gem 'rake', '10.2.2'
 
 gem 'rails', '4.0.3'
 
+gem 'whenever', :require => false
+
 gem 'will_paginate', '~> 3.0.5'
 
 gem 'pageless-rails', github: 'rorlab/pageless-rails'
+
+gem 'paper_trail', '~> 3.0.2'
 
 gem 'bootstrap-will_paginate', '~> 0.0.10'
 
@@ -30,7 +34,7 @@ gem 'pg'
 
 gem 'cancan'
 
-gem 'rmagick', :require => 'RMagick'
+# gem 'rmagick'
 
 gem "carrierwave"
 

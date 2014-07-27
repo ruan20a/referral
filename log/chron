@@ -1,0 +1,14 @@
+rake aborted!
+ArgumentError: Missing required arguments: aws_access_key_id, aws_secret_access_key
+rake aborted!
+ArgumentError: Missing required arguments: aws_access_key_id, aws_secret_access_key
+/Users/Amy/wekrut/config/initializers/carrierwave.rb:2:in `block in <top (required)>'
+/Users/Amy/wekrut/config/initializers/carrierwave.rb:1:in `<top (required)>'
+/Users/Amy/wekrut/config/environment.rb:5:in `<top (required)>'
+Tasks: TOP => pending_reminder_admin:check => environment
+(See full trace by running task with --trace)
+/Users/Amy/wekrut/config/initializers/carrierwave.rb:2:in `block in <top (required)>'
+/Users/Amy/wekrut/config/initializers/carrierwave.rb:1:in `<top (required)>'
+/Users/Amy/wekrut/config/environment.rb:5:in `<top (required)>'
+Tasks: TOP => pending_reminder_user:check => environment
+(See full trace by running task with --trace)

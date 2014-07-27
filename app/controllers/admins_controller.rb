@@ -28,7 +28,7 @@ before_action :check_main_admin, only: [:index]
       @sorted_referrals = @select_referrals
       # .paginate(:page => params[:page])
       #is_interested & pending status check
-      @select_pending_referrals = @admin.referrals.select{|x| x.status == "pending" && x.is_interested == true}
+      @select_pending_referrals = @admin.referrals.select{|x| x.status == "Pending" && x.is_interested == true}
       @pending_referrals = @select_pending_referrals
       # .paginate(:page => params[:page])
 

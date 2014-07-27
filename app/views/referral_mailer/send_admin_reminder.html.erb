@@ -1,0 +1,33 @@
+<div>Hello <%=@admin_FN%> <%=@admin_LN%>, </div>
+
+<div>
+  We just wanted to remind you to update the referral status for <strong> <%= @referral.job.job_name %> </strong> position. <%=@referral.referral_name.titleize%> is awaiting your referral update.
+</div>
+
+<br>
+
+<% if @num_of_times > 1 %>
+  <div>
+    This is the last reminder we will send you. In <strong> 1 week </strong>, the referral will be <strong> inactive </strong> and you will no longer be able to update it without contacting us via email.
+  </div>
+<% end %>
+
+
+<div>
+  Follow the link to sign-in and update the referral.
+  <br>
+  <!-- TODO CHANGE LINK -->
+  <%=link_to 'Sign In', url_for(controller: 'admins/sessions', action: 'new', only_path: false)%>
+</div>
+
+<br>
+
+<div>
+  Thank You!
+</div>
+<br>
+<div>
+  WeKrüt Team
+</div>
+
+
