@@ -35,10 +35,15 @@ class Referral < ActiveRecord::Base
   #different logic for refer types lambda substitute for method logic
   # validates_presence_of :referral_email, :referral_name, :unless => lambda{ self.ref_type == "ask_refer" }
   before_save :check_notification, :if => :is_interested_changed?
+  before_create :generate_referral_token
+  
   # before_save :check_email, :if => :referral_email_changed?
 
   # paginates_per 10
 validates_uniqueness_of :referral_email, :scope => [:job_id, :user_id, :admin_id], :unless => lambda{ self.ref_type == "ask_refer"}
+    def generate_referral_token
+    self.referral_token = Digest::SHA1.hexdigest([Time.now, rand].join)
+    end 
     def check_notification
     referral = self
     admin = referral.job.admin
