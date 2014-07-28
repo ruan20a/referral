@@ -6,6 +6,7 @@ Wekrut::Application.routes.draw do
   resources :admins
   resources :jobs
   resources :invitations
+  resources :user_profiles
 
   resources :referrals
   resources :whitelists

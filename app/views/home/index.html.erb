@@ -69,10 +69,7 @@
 
                     <!-- Button trigger modal -->
 
-<button class="btn btn-default btn-about btn-lg" data-toggle="modal" data-target="#myModal">
-  Join the Beta
-</button>
- <%= content_tag(:div, flash.now[:notice], :id => "flash_notice") if flash.now[:notice] %>
+<%= link_to 'CONNECT WITH LINKEDIN', user_omniauth_authorize_path(:linkedin),class: "btn-linkedin btn-lg" %>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

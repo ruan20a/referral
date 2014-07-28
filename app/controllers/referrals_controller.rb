@@ -31,22 +31,28 @@ class ReferralsController < ApplicationController
  end
 
   def create
+    binding.pry
   # need to move check_whitelist to models
   # binding.pry
    referral = Referral.new(referral_params)
+   binding.pry
    admin = referral.job.admin
+   binding.pry
    set_requester(referral)
-   if referral.check_email(@requester) #protected method to check if there is a self-referral.
+   binding.pry
+   if referral.check_email(@requester)
+   binding.pry #protected method to check if there is a self-referral.
      if referral.save
+      binding.pry
        # binding.pry
        #TODO think about moving to MODEL logic
        if referral.ref_type == "refer"
          ReferralMailer.deliver_ref_email(referral)
-         check_whitelist(referral)
+         #check_whitelist(referral)
          redirect_to jobs_path, notice: "Success. Your referral has been created. An email has been sent to confirm interest. "
        else
          ReferralMailer.deliver_ask_email(referral, @requester)
-         check_whitelist(referral)
+         #check_whitelist(referral)
          redirect_to jobs_path, notice: "Success. Your referral request has been sent."
        end
      else
@@ -87,15 +93,20 @@ class ReferralsController < ApplicationController
 
   def update
     # binding.pry
-
+binding.pry
     if !@referral.user_id.nil?
       @requester = User.find(@referral.user_id)
+      binding.pry
     else
+      binding.pry
       @requester = Admin.find(@referral.admin_id)
+      binding.pry
     end
 
     if @referral.check_email(@requester)
+      binding.pry
       if @referral.update(referral_params)
+        binding.pry
         if current_admin.nil?
           #binding.pry
           redirect_to current_user
@@ -137,11 +148,16 @@ class ReferralsController < ApplicationController
 
   def set_requester(referral)
     if current_admin.nil?
+      binding.pry
       @requester = User.find(current_user.id)
+      binding.pry
       referral.user_id = @requester.id
+      binding.pry
     else
       @requester = Admin.find(current_admin.id)
+      binding.pry
       referral.admin_id = @requester.id
+      binding.pry
     end
   end
 
@@ -189,21 +205,21 @@ class ReferralsController < ApplicationController
 
   def check_session
     if current_user.nil? && current_admin.nil?
-      redirect_to(new_user_session_path, notice: "Please sign-in to make referrals")
+      redirect_to(root_path, notice: "Please sign-in to make referrals")
     end
   end
 
-  def check_whitelist(referral)
-    if referral.ref_type == "refer"
-      unless Whitelist.exists?(:email => params[:referral][:referral_email])
-        Whitelist.create(:email => params[:referral][:referral_email], :level => 1)
-      end
-    else
-      unless Whitelist.exists?(:email => params[:referral][:referee_email])
-        Whitelist.create(:email => params[:referral][:referee_email], :level => 1)
-      end
-    end
-  end
+  #def check_whitelist(referral)
+    #if referral.ref_type == "refer"
+      #unless Whitelist.exists?(:email => params[:referral][:referral_email])
+        #Whitelist.create(:email => params[:referral][:referral_email], :level => 1)
+      #end
+    #else
+      #unless Whitelist.exists?(:email => params[:referral][:referee_email])
+        #Whitelist.create(:email => params[:referral][:referee_email], :level => 1)
+      #end
+    #end
+  #end
 
   def check_main_admin
   #need to update this
