@@ -22,7 +22,7 @@ class JobsController < ApplicationController
 
   def index
     @search = Job.search(params[:q])
-    @jobs = @search.result.select{|x| x.is_active == true}.paginate(:page => params[:page])
+    @jobs = @search.result.paginate(:page => params[:page])
     @unreviewed_requests
     @has_ref = has_any(@unreviewed_requests)
 
