@@ -1,12 +1,12 @@
 Wekrut::Application.routes.draw do
   devise_for :views
   devise_for :admins, controllers: { registrations: "admins/registrations", sessions: "admins/sessions"}
-  devise_for :users, controllers: { registrations: "users/registrations", sessions: "users/sessions", omniauth_callbacks: "omniauth_callbacks" }
+  devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
   resources :users
   resources :admins
   resources :jobs
   resources :invitations
-  resources :user_profiles
+  #resources :user_profiles
 
   resources :referrals
   resources :whitelists

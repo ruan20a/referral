@@ -70,17 +70,17 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth, current_user)
-    binding.pry
+    #binding.pry
     authorization = Authorization.where(:provider => auth.provider, :uid => auth.uid.to_s, :token => auth.credentials.token, :secret => auth.credentials.secret).first_or_initialize
     if authorization.user.blank?
-      binding.pry
+      #binding.pry
       user = current_user.nil? ? User.where("email = ?", auth["info"]["email"]).first : current_user
       if user.blank?
-        binding.pry
+        #binding.pry
         user = User.new
         user.create_user(auth, user)
       end
-      binding.pry
+      #binding.pry
      authorization.user_id = user.id
      authorization.save
    end

@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :destroy]
   before_action :correct_user, only: [:show, :edit, :update, :destroy]
   before_action :store_location #enables linking back
-  before_action :check_main_admin, only: [:index]
+  before_action :check_main_admin, only: [:index, :new ]
 
   include ApplicationHelper
 

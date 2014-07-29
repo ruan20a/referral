@@ -19,7 +19,7 @@
               <div class="form-group">
               <%= f.password_field :password, autocomplete: "off", :placeholder => 'Enter Your Password', :class => 'form-control login-field' %>
               </div>
-
+ <div class="form-group">
               <% if devise_mapping.rememberable? -%>
               <div><%= f.check_box :remember_me %> <%= f.label :remember_me %>
               </div>
@@ -29,6 +29,8 @@
                 <% end %>
 
                 <%= render "users/shared/links" %>
+              </div>
+
 
             </div>
           </div>

@@ -27,63 +27,34 @@
                 <%= @job.speciality_1 %>
               </div>
               <div class="details-section_end">
-               
-
-
-                
-           
               </div>
             </div>
           </div>
         </div>
       </div>
-        <div class="col-md-4">
-          
-          <div class="panel panel-default center">
-            <div class="panel-heading"><h2 class="panel-referal"><strong>Referral Fee:</strong>
-               <%= number_to_currency(calculate_fee(@job.referral_fee), precision: 0)  %></h2>
-            </div>
-            <div class="panel-body details-section">
-              <%= render 'referrals/shared/referral_form'%>
-
-            </div>
-
-<br>
-            <div class="form-group">
-             <% if @status %>
-                <%= link_to 'EDIT JOB', edit_job_path(@job.id), :class => 'btn btn-primary'%>
-
-              <% else %>
-                <%= link_to 'ASK FOR REFERRAL', new_referral_path(job_id: @job.id, ref_type: "ask_refer"),:class => 'btn btn-primary'%>
-              <% end %>
-            </div>
-
-
-                <ul class="list-inline">
-                <li>&nbsp</li><li>&nbsp</li>
-                        <li><a class="facebook" target="_window" onclick="return !window.open(this.href, 'Facebook', 'width=640,height=300')" href="http://www.facebook.com/sharer/sharer.php?u=YOUR_URL">
-
-                          
-
-    <i class="fa fa-facebook fa-2x"></i></a>
-                        </li>
-                        <li><a class="btn share twitter" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no…able=yes,scrollbars=yes,height=600,width=600');return false;" href="https://twitter.com/intent/tweet?text=Application Security S…&hashtags=hiring,techjobs&url=http://www.jobbox.io/offers/83">
-
-    <i class="fa fa-twitter fa-2x"></i>
-
-</a>
-                        </li>
-                        <li><a class="btn share linkedin" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no…able=yes,scrollbars=yes,height=600,width=600');return false;" href="http://www.linkedin.com/shareArticle?mini=true&url=http://ww…pecialist @ Centralway&summary=Refer a friend. Get rewarded.">
-
-    <i class="fa fa-linkedin fa-2x"></i></li>
-                   
-                        
-                      </ul>
+      <div class="col-md-4">
+        
+        <div class="panel panel-default center">
+          <div class="panel-heading"><h2 class="panel-referal"><strong>Referral Fee:</strong>
+             <%= number_to_currency(calculate_fee(@job.referral_fee), precision: 0)  %></h2>
+          </div>
+          <div class="panel-body details-section">
+            <%= render 'referrals/shared/referral_form'%>
 
           </div>
-  
 
+            
+          <div class="form-group"><br>
+           <% if @status %>
+              <%= link_to 'EDIT JOB', edit_job_path(@job.id), :class => 'btn btn-primary'%>
 
+            <% else %>
+              <%= link_to 'ASK FOR REFERRAL', new_referral_path(job_id: @job.id, ref_type: "ask_refer"),:class => 'btn btn-primary'%>
+            <% end %>
+            <br>&nbsp</br>
+
+          </div>
+        </div>
       </div>
     </div>
   </div>

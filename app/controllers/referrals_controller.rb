@@ -31,19 +31,19 @@ class ReferralsController < ApplicationController
  end
 
   def create
-    binding.pry
+    
   # need to move check_whitelist to models
   # binding.pry
    referral = Referral.new(referral_params)
-   binding.pry
+   
    admin = referral.job.admin
-   binding.pry
+  
    set_requester(referral)
-   binding.pry
+   
    if referral.check_email(@requester)
-   binding.pry #protected method to check if there is a self-referral.
+    #protected method to check if there is a self-referral.
      if referral.save
-      binding.pry
+      
        # binding.pry
        #TODO think about moving to MODEL logic
        if referral.ref_type == "refer"
@@ -93,20 +93,20 @@ class ReferralsController < ApplicationController
 
   def update
     # binding.pry
-binding.pry
+
     if !@referral.user_id.nil?
       @requester = User.find(@referral.user_id)
-      binding.pry
+      
     else
-      binding.pry
+      
       @requester = Admin.find(@referral.admin_id)
-      binding.pry
+     
     end
 
     if @referral.check_email(@requester)
-      binding.pry
+      
       if @referral.update(referral_params)
-        binding.pry
+        
         if current_admin.nil?
           #binding.pry
           redirect_to current_user
@@ -148,16 +148,16 @@ binding.pry
 
   def set_requester(referral)
     if current_admin.nil?
-      binding.pry
+      #binding.pry
       @requester = User.find(current_user.id)
-      binding.pry
+      #binding.pry
       referral.user_id = @requester.id
-      binding.pry
+      #binding.pry
     else
       @requester = Admin.find(current_admin.id)
-      binding.pry
+      #binding.pry
       referral.admin_id = @requester.id
-      binding.pry
+      #binding.pry
     end
   end
 

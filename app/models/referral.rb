@@ -42,7 +42,7 @@ class Referral < ActiveRecord::Base
   # paginates_per 10
 validates_uniqueness_of :referral_email, :scope => [:job_id, :user_id, :admin_id], :unless => lambda{ self.ref_type == "ask_refer"}
     #def check_notification
-     # binding.pry
+     #binding.pry
     #referral = self
     #binding.pry
     #admin = referral.job.admin
