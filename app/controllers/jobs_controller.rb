@@ -63,7 +63,7 @@ class JobsController < ApplicationController
 
   def update
     if @job.update(job_params)
-      binding.pry
+      #binding.pry
       redirect_to @job, notice: 'Job successfully updated.'
     else
       render action: 'edit', notice: 'Please try again.'
