@@ -111,7 +111,7 @@ class User < ActiveRecord::Base
   profile.educations = auth["extra"]["raw_info"]["educations"].fetch("values") {nil}
   profile.positions = auth["extra"]["raw_info"]["positions"].fetch("values") {nil}
   all_skills = []
-if auth["extra"]["raw_info"]["skills"]["values"].count > 1
+  unless auth["extra"]["raw_info"]["skills"].blank?
 
   auth["extra"]["raw_info"]["skills"]["values"].each{|value| all_skills << value["skill"].fetch("name") {nil}}
 end
