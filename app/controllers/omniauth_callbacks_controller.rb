@@ -9,7 +9,8 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 		if user.persisted?
 			#binding.pry
 			flash[:notice] = "Welcome #{user.first_name}, you have successfully signed in."
-			sign_in_and_redirect(user)
+			sign_in(user)
+			redirect_to jobs_path
 		else
 			#binding.pry
 			session["devise.user_attributes"] = user.attributes
