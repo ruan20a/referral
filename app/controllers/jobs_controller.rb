@@ -45,12 +45,12 @@ class JobsController < ApplicationController
 
 
   def create
-    # binding.pry
+    binding.pry
     @job = Job.new(job_params)
     set_admin(@job)
-    # binding.pry
+    binding.pry
     if @job.save
-      # binding.pry
+      binding.pry
       redirect_to @job, notice: 'Job was successfully created'
     else
       render action: 'new'
