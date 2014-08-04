@@ -3,13 +3,14 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 	skip_before_filter :authenticate_user!
 	def all
 		p env["omniauth.auth"]
-		binding.pry
+		#binding.pry
 		user = User.from_omniauth(env["omniauth.auth"], current_user)
-		binding.pry
+		#binding.pry
 		if user.persisted?
-			binding.pry
+			#binding.pry
 			flash[:notice] = "Welcome #{user.first_name}, you have successfully signed in."
-			sign_in_and_redirect(user)
+			sign_in(user)
+			redirect_to jobs_path
 		else
 			session["devise.user_attributes"] = user.attributes
 			redirect_to new_user_registration_url

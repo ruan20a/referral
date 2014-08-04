@@ -22,7 +22,7 @@ class JobsController < ApplicationController
 
   def index
     @search = Job.search(params[:q])
-    @jobs = @search.result.select{|x| x.is_active == true}.paginate(:page => params[:page])
+    @jobs = @search.result.paginate(:page => params[:page])
     @unreviewed_requests
     @has_ref = has_any(@unreviewed_requests)
 
@@ -45,12 +45,12 @@ class JobsController < ApplicationController
 
 
   def create
-    # binding.pry
+    #binding.pry
     @job = Job.new(job_params)
     set_admin(@job)
-    # binding.pry
+    #binding.pry
     if @job.save
-      # binding.pry
+      #binding.pry
       redirect_to @job, notice: 'Job was successfully created'
     else
       render action: 'new'
@@ -63,7 +63,7 @@ class JobsController < ApplicationController
 
   def update
     if @job.update(job_params)
-      binding.pry
+      #binding.pry
       redirect_to @job, notice: 'Job successfully updated.'
     else
       render action: 'edit', notice: 'Please try again.'

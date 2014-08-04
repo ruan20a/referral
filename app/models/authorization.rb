@@ -23,15 +23,15 @@ class Authorization < ActiveRecord::Base
 
 
 	def fetch_details_from_facebook
-		binding.pry
+		#binding.pry
 		graph = Koala::Facebook::API.new(self.token)
-		binding.pry
+		#binding.pry
 		facebook_data = graph.get_object("me")
-		binding.pry
+		#binding.pry
 		self.user = facebook_data['user']
-		binding.pry
+		#binding.pry
 		self.save
-		binding.pry
+		#binding.pry
 	end
 
 	def fetch_details_from_github

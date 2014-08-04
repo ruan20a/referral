@@ -69,16 +69,10 @@ ActiveRecord::Schema.define(version: 20140804113650) do
     t.integer "job_id",   null: false
   end
 
-  add_index "admins_jobs", ["admin_id", "job_id"], name: "index_admins_jobs_on_admin_id_and_job_id", using: :btree
-  add_index "admins_jobs", ["job_id", "admin_id"], name: "index_admins_jobs_on_job_id_and_admin_id", using: :btree
-
   create_table "admins_referrals", id: false, force: true do |t|
     t.integer "admin_id",    null: false
     t.integer "referral_id", null: false
   end
-
-  add_index "admins_referrals", ["admin_id", "referral_id"], name: "index_admins_referrals_on_admin_id_and_referral_id", using: :btree
-  add_index "admins_referrals", ["referral_id", "admin_id"], name: "index_admins_referrals_on_referral_id_and_admin_id", using: :btree
 
   create_table "authorizations", force: true do |t|
     t.integer  "user_id"
@@ -179,9 +173,54 @@ ActiveRecord::Schema.define(version: 20140804113650) do
     t.string   "referee_name"
     t.boolean  "is_interested"
     t.boolean  "is_active",            default: true
-    t.datetime "last_status_update",   default: '2014-06-11 00:32:29'
-    t.datetime "last_interest_update", default: '2014-06-11 00:32:29'
+    t.datetime "last_status_update",   default: '2014-07-27 23:14:25'
+    t.datetime "last_interest_update", default: '2014-07-27 23:14:25'
+    t.string   "referral_token"
   end
+
+  create_table "rs_evaluations", force: true do |t|
+    t.string   "reputation_name"
+    t.integer  "source_id"
+    t.string   "source_type"
+    t.integer  "target_id"
+    t.string   "target_type"
+    t.float    "value",           default: 0.0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rs_evaluations", ["reputation_name", "source_id", "source_type", "target_id", "target_type"], name: "index_rs_evaluations_on_reputation_name_and_source_and_target", unique: true, using: :btree
+  add_index "rs_evaluations", ["reputation_name"], name: "index_rs_evaluations_on_reputation_name", using: :btree
+  add_index "rs_evaluations", ["source_id", "source_type"], name: "index_rs_evaluations_on_source_id_and_source_type", using: :btree
+  add_index "rs_evaluations", ["target_id", "target_type"], name: "index_rs_evaluations_on_target_id_and_target_type", using: :btree
+
+  create_table "rs_reputation_messages", force: true do |t|
+    t.integer  "sender_id"
+    t.string   "sender_type"
+    t.integer  "receiver_id"
+    t.float    "weight",      default: 1.0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rs_reputation_messages", ["receiver_id", "sender_id", "sender_type"], name: "index_rs_reputation_messages_on_receiver_id_and_sender", unique: true, using: :btree
+  add_index "rs_reputation_messages", ["receiver_id"], name: "index_rs_reputation_messages_on_receiver_id", using: :btree
+  add_index "rs_reputation_messages", ["sender_id", "sender_type"], name: "index_rs_reputation_messages_on_sender_id_and_sender_type", using: :btree
+
+  create_table "rs_reputations", force: true do |t|
+    t.string   "reputation_name"
+    t.float    "value",           default: 0.0
+    t.string   "aggregated_by"
+    t.integer  "target_id"
+    t.string   "target_type"
+    t.boolean  "active",          default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rs_reputations", ["reputation_name", "target_id", "target_type"], name: "index_rs_reputations_on_reputation_name_and_target", using: :btree
+  add_index "rs_reputations", ["reputation_name"], name: "index_rs_reputations_on_reputation_name", using: :btree
+  add_index "rs_reputations", ["target_id", "target_type"], name: "index_rs_reputations_on_target_id_and_target_type", using: :btree
 
   create_table "user_profiles", force: true do |t|
     t.string   "email"
@@ -198,6 +237,12 @@ ActiveRecord::Schema.define(version: 20140804113650) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+  end
+
+  create_table "user_whitelists", force: true do |t|
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
