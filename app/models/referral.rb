@@ -11,7 +11,7 @@
 #  linked_profile_url   :string(255)
 #  created_at           :datetime
 #  updated_at           :datetime
-#  status               :string(255)      default("pending")
+#  status               :string(255)      default("Pending")
 #  job_id               :integer
 #  user_id              :integer
 #  admin_id             :integer

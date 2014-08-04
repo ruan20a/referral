@@ -11,11 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140727004142) do
+ActiveRecord::Schema.define(version: 20140804113650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
+
+  create_table "accesses", force: true do |t|
+    t.integer "company_id"
+    t.integer "user_id"
+    t.integer "level",      default: 1
+  end
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -32,7 +38,7 @@ ActiveRecord::Schema.define(version: 20140727004142) do
     t.datetime "updated_at"
     t.integer  "job_id"
     t.integer  "profile_id"
-    t.string   "company"
+    t.string   "company_name"
     t.string   "invitation_token"
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"
@@ -48,6 +54,7 @@ ActiveRecord::Schema.define(version: 20140727004142) do
     t.string   "last_name"
     t.string   "image"
     t.string   "industry"
+    t.integer  "company_id"
   end
 
   add_index "admins", ["confirmation_token"], name: "index_admins_on_confirmation_token", unique: true, using: :btree
@@ -82,6 +89,23 @@ ActiveRecord::Schema.define(version: 20140727004142) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "profile_page"
+  end
+
+  create_table "companies", force: true do |t|
+    t.string   "name"
+    t.string   "image"
+    t.string   "access_token"
+    t.text     "address_line_1"
+    t.text     "address_line_2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "country"
+    t.string   "postal_code"
+    t.integer  "level",          default: 1
+    t.text     "description"
+    t.string   "industry"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "emails", force: true do |t|
@@ -122,6 +146,8 @@ ActiveRecord::Schema.define(version: 20140727004142) do
     t.string   "industry_1"
     t.boolean  "is_active",    default: true
     t.float    "min_salary",   default: 0.0
+    t.integer  "company_id"
+    t.boolean  "is_public",    default: true
   end
 
   create_table "profiles", force: true do |t|

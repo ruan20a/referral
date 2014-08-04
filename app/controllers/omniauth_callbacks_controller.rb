@@ -11,7 +11,6 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 			flash[:notice] = "Welcome #{user.first_name}, you have successfully signed in."
 			sign_in_and_redirect(user)
 		else
-			binding.pry
 			session["devise.user_attributes"] = user.attributes
 			redirect_to new_user_registration_url
 		end

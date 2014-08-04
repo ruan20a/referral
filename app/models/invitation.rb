@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: invitations
+#
+#  id            :integer          not null, primary key
+#  user_id       :integer
+#  invited_name  :string(255)
+#  invited_email :string(255)
+#  is_successful :boolean          default(FALSE)
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+
 class Invitation < ActiveRecord::Base
 	belongs_to :user
 	validates_presence_of :user_id

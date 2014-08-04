@@ -7,7 +7,7 @@
 #  description  :text
 #  recruiter_id :integer
 #  speciality_1 :string(255)
-#  referral_fee :integer
+#  referral_fee :float
 #  created_at   :datetime
 #  updated_at   :datetime
 #  admin_id     :integer
@@ -19,10 +19,12 @@
 #  image        :string(255)
 #  industry_1   :string(255)
 #  is_active    :boolean          default(TRUE)
+#  min_salary   :float            default(0.0)
 #
 
 class Job < ActiveRecord::Base
 	belongs_to :admin
+  belongs_to :company
 	has_many :referrals, :dependent => :destroy
 	has_many :users, :through => :referrals
   validates_presence_of :min_salary, :name, :job_name, :city, :state, :description

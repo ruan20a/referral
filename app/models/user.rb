@@ -36,6 +36,9 @@
 #  confirmation_sent_at   :datetime
 #  tagline                :string(255)
 #  linked_in              :string(255)
+#  inviter_email          :string(255)
+#  provider               :string(255)
+#  uid                    :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -49,12 +52,13 @@ class User < ActiveRecord::Base
     linkedin: 'Linkedin'
   }
 
-    has_one :user_profile
+    has_one :user_profile, :dependent => :destroy
     belongs_to :whitelist
-    has_many :referrals
-    has_many :authorizations
+    has_many :referrals, :dependent => :destroy
+    has_many :authorizations, :dependent => :destroy
     has_many :jobs, :through => :referrals
-    has_many :invitations
+    has_many :invitations, :dependent => :destroy
+    has_many :companies, :through => :access
     validates :first_name, :last_name, :email, presence: true
     validates :email, :uniqueness => { :case_sensitive => false }
 
@@ -73,14 +77,12 @@ class User < ActiveRecord::Base
     binding.pry
     authorization = Authorization.where(:provider => auth.provider, :uid => auth.uid.to_s, :token => auth.credentials.token, :secret => auth.credentials.secret).first_or_initialize
     if authorization.user.blank?
-      binding.pry
       user = current_user.nil? ? User.where("email = ?", auth["info"]["email"]).first : current_user
       if user.blank?
-        binding.pry
         user = User.new
+        binding.pry
         user.create_user(auth, user)
       end
-      binding.pry
      authorization.user_id = user.id
      authorization.save
    end
@@ -89,7 +91,10 @@ class User < ActiveRecord::Base
  end
 
  def create_user(auth, user)
-  user.password = Devise.friendly_token[0,10]
+  binding.pry
+  user.password = auth["credentials"]["token"]
+  #Devise.friendly_token[0,10]
+  binding.pry
   user.first_name = auth.info.first_name
   user.last_name = auth.info.last_name
   user.email = auth.info.email
@@ -111,7 +116,9 @@ class User < ActiveRecord::Base
   profile.educations = auth["extra"]["raw_info"]["educations"].fetch("values") {nil}
   profile.positions = auth["extra"]["raw_info"]["positions"].fetch("values") {nil}
   all_skills = []
-  auth["extra"]["raw_info"]["skills"]["values"].each{|value| all_skills << value["skill"].fetch("name") {nil}}
+  unless auth["extra"]["raw_info"]["skills"].blank?
+    auth["extra"]["raw_info"]["skills"]["values"].each{|value| all_skills << value["skill"].fetch("name") {nil}}
+  end
   profile.skills = all_skills
   profile.save!
  end
