@@ -73,8 +73,8 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.from_omniauth(auth, current_user)
-    #binding.pry
+  def self.from_omniauth(auth, current_user, access_token=nil) #default is nil
+    # binding.pry
     authorization = Authorization.where(:provider => auth.provider, :uid => auth.uid.to_s, :token => auth.credentials.token, :secret => auth.credentials.secret).first_or_initialize
     if authorization.user.blank?
       #binding.pry
@@ -82,22 +82,21 @@ class User < ActiveRecord::Base
       if user.blank?
         #binding.pry
         user = User.new
-        binding.pry
         user.create_user(auth, user)
       end
-
      authorization.user_id = user.id
      authorization.save
    end
+    # binding.pry
+    authorization.user.check_access_token(access_token, authorization.user_id) unless access_token.nil?
     authorization.user.create_profile(auth, authorization.user)
     authorization.user
  end
 
  def create_user(auth, user)
-  binding.pry
+  # binding.pry
   user.password = auth["credentials"]["token"]
   #Devise.friendly_token[0,10]
-  binding.pry
   user.first_name = auth.info.first_name
   user.last_name = auth.info.last_name
   user.email = auth.info.email
@@ -106,7 +105,7 @@ class User < ActiveRecord::Base
  end
 
  def create_profile(auth, user)
-  profile = UserProfile.find_or_initialize_by_user_id(user.id)
+  profile = UserProfile.find_or_initialize_by(user_id: user.id)
   profile.user_id = user.id
   profile.first_name = auth["info"].fetch("first_name") { nil }
   profile.last_name = auth["info"].fetch("last_name") { nil }
@@ -125,6 +124,12 @@ class User < ActiveRecord::Base
 
   profile.skills = all_skills
   profile.save!
+ end
+
+ def check_access_token(access_token, user_id)
+  # binding.pry
+  company_id = Company.find_by_access_token(access_token).id
+  Access.find_or_create_by(user_id: user_id, company_id: company_id, level: 2) #denotes super_user enables private
  end
 
 

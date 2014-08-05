@@ -116,7 +116,7 @@
 Wekrut::Application.routes.draw do
   devise_for :views
   devise_for :admins, controllers: { registrations: "admins/registrations", sessions: "admins/sessions"}
-  devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
+  devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks", sessions: "users/sessions" }
   resources :users
   resources :admins
   resources :jobs
@@ -131,9 +131,12 @@ Wekrut::Application.routes.draw do
 
 
   root "home#index"
+  match '/private/:access_token', to: 'home#private', via: 'get'
   #beta request only on post
   match '/send_request', to: 'home#send_request', via: 'post'
   match '/send_company_request', to: 'home#send_company_request', via: 'post'
+
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.
