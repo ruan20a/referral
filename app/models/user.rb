@@ -58,9 +58,11 @@ class User < ActiveRecord::Base
     has_many :authorizations, :dependent => :destroy
     has_many :jobs, :through => :referrals
     has_many :invitations, :dependent => :destroy
-    has_many :companies, :through => :access
+    has_many :accesses
+    has_many :companies, :through => :accesses
     validates :first_name, :last_name, :email, presence: true
     validates :email, :uniqueness => { :case_sensitive => false }
+
 
  def self.new_with_session(params,session)
     if session["devise.user_attributes"]
@@ -127,9 +129,8 @@ class User < ActiveRecord::Base
  end
 
  def check_access_token(access_token, user_id)
-  # binding.pry
   company_id = Company.find_by_access_token(access_token).id
-  Access.find_or_create_by(user_id: user_id, company_id: company_id, level: 2) #denotes super_user enables private
+  Access.find_or_create_by(user_id: user_id, company_id: company_id, level: 2) unless company_id.nil?#denotes super_user enables private
  end
 
 

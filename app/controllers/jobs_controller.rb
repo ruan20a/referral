@@ -1,12 +1,16 @@
 class JobsController < ApplicationController
   # before_action :signed_in? only:[:new, :edit, :update]
   before_action :authenticate_admin!, only: [:new, :edit, :update, :create, :delete]
-  before_action :check_level, only:[:new, :create, :edit, :update]
+  before_action :check_level, only:[:new, :create, :edit, :update, :private]
   before_action :check_admin, only: [:edit, :update, :delete]
   before_action :set_job, only: [:show, :update, :edit, :destroy]
   before_action :store_location #enables linking back
   before_action :user_pending_received_requests, only: [:index]
-  before_action :check_signed_in, only: [:edit, :delete, :update, :create]
+  before_action :check_signed_in, only: [:edit, :delete, :update, :create, :private]
+  # before_action :select_access, only: [:private]
+  # before_action :find_access_level, only: [:index]
+
+  # before_action :remove_private_jobs, only: [:index]
   #TODO jobs_restriction for first month only
   # before_action :check_main_admin, only: [:edit, :update]
 
@@ -20,9 +24,31 @@ class JobsController < ApplicationController
 		render :json => @user
 	end
 
+  def private
+    @all_jobs = Job.private
+    @jobs = []
+    #TODO REFORMATTTTT!!
+    if !current_user.nil?
+      @all_jobs.each do |job|
+        access = Access.exists?(user_id: current_user.id, company_id: job.company_id)
+        @jobs << job unless access.nil?
+      end
+    elsif !@main_admin
+      @all_jobs.each do |job|
+        @jobs << job if current_admin.company == job.company
+      end
+    else
+      @all_jobs.each do |job|
+        @jobs << job
+      end
+    end
+  end
+
+
   def index
-    @search = Job.search(params[:q])
+    @search = Job.public.search(params[:q])
     @jobs = @search.result.paginate(:page => params[:page])
+
     @unreviewed_requests
     @has_ref = has_any(@unreviewed_requests)
 
@@ -43,6 +69,9 @@ class JobsController < ApplicationController
     set_status(@job)
   end
 
+  def show_private
+
+  end
 
   def create
     #binding.pry
@@ -102,7 +131,7 @@ class JobsController < ApplicationController
   end
 
   def job_params
-    params.require(:job).permit(:name, :job_name, :description, :city, :state, :admin_id, :referral_fee, :image, :image_cache, :remote_image_url, :remove_image,  :speciality_1, :speciality_2, :is_active, :industry_1, :min_salary, referrals_attributes: [:id])
+    params.require(:job).permit(:name, :job_name, :description, :city, :state, :admin_id, :referral_fee, :image, :image_cache, :remote_image_url, :remove_image,  :speciality_1, :speciality_2, :is_active, :industry_1, :company_id, :min_salary, referrals_attributes: [:id])
 	end
 
   def check_admin
@@ -110,6 +139,12 @@ class JobsController < ApplicationController
     admin = Admin.find(job.admin_id)
     redirect_to job_path unless admin == current_admin || @level == 3
   end
+
+  def search_params
+    #
+    params[:q]
+  end
+
 
   def user_pending_received_requests
     #TODO need to refactor code!!
@@ -126,9 +161,6 @@ class JobsController < ApplicationController
     @unreviewed_requests
   end
 
-  def search_params
-    params[:q]
-  end
 
   def clear_search_index
     redirect_to request.path
@@ -140,16 +172,18 @@ class JobsController < ApplicationController
     end
   end
 
-  def check_main_admin
-    @level = Whitelist.find_by_email(current_admin.email).level
-    @main_status = true
-    redirect_to new_admin_session_path, notice: "You are not an approved admin" if @level != 3
-  end
+  # def check_main_admin
+  #   @level = Whitelist.find_by_email(current_admin.email).level
+  #   @main_status = true
+  #   redirect_to new_admin_session_path, notice: "You are not an approved admin" if @level != 3
+  # end
 
   def check_level
-    @level = Whitelist.find_by_email(current_admin.email).level
-    if @level > 2
-      @main_status = true
+    unless current_admin.nil?
+      @level = Whitelist.find_by_email(current_admin.email).level  #modified for private method
+      if @level > 2
+        @main_status = true
+      end
     end
   end
 

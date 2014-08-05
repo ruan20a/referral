@@ -119,7 +119,12 @@ Wekrut::Application.routes.draw do
   devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks", sessions: "users/sessions" }
   resources :users
   resources :admins
-  resources :jobs
+  resources :jobs do
+    collection do
+      get 'private'
+    end
+  end
+
   resources :invitations
   #resources :user_profiles
 
