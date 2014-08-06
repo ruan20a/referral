@@ -7,13 +7,8 @@ class JobsController < ApplicationController
   before_action :store_location #enables linking back
   before_action :user_pending_received_requests, only: [:index]
   before_action :check_signed_in, only: [:edit, :delete, :update, :create, :private]
-  # before_action :select_access, only: [:private]
-  # before_action :find_access_level, only: [:index]
 
-  # before_action :remove_private_jobs, only: [:index]
-  #TODO jobs_restriction for first month only
   # before_action :check_main_admin, only: [:edit, :update]
-
   # before_action :clear_search_index, :only => [:index]
 
   include ApplicationHelper
@@ -27,23 +22,18 @@ class JobsController < ApplicationController
   def private
     @all_jobs = Job.private
     @jobs = []
-    #TODO REFORMATTTTT!!
-    if !current_user.nil?
-      @all_jobs.each do |job|
+
+    @all_jobs.each do |job|
+      if !current_user.nil? #users
         access = Access.exists?(user_id: current_user.id, company_id: job.company_id)
         @jobs << job unless access.nil?
-      end
-    elsif !@main_admin
-      @all_jobs.each do |job|
+      elsif !@main_status # admin
         @jobs << job if current_admin.company == job.company
-      end
-    else
-      @all_jobs.each do |job|
+      else #main_admin
         @jobs << job
       end
     end
   end
-
 
   def index
     @search = Job.public.search(params[:q])
@@ -67,10 +57,6 @@ class JobsController < ApplicationController
     @referral = Referral.new
     @ref_type = "refer"
     set_status(@job)
-  end
-
-  def show_private
-
   end
 
   def create
@@ -145,7 +131,7 @@ class JobsController < ApplicationController
     params[:q]
   end
 
-
+  #TODO REFACTOR!!
   def user_pending_received_requests
     #TODO need to refactor code!!
     if !current_user.nil?
