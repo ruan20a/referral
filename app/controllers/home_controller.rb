@@ -3,6 +3,13 @@ class HomeController < ApplicationController
   def index
   end
 
+  def private
+    @access_token = params[:access_token]
+    @company = Company.find_by_access_token(@access_token)
+    redirect_to root_path, notice: 'Private site does not exists. Please check your URL or contact info@wekrut.com' if @company.nil?
+    #flash[:error] not working?
+  end
+
   #beta request email
   def send_request
     email = params[:email]

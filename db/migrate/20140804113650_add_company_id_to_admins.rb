@@ -8,8 +8,13 @@ class AddCompanyIdToAdmins < ActiveRecord::Migration
       company_name = admin.company_name #TODO drop company_name
       
       unless company_name.nil?
+
         company = Company.where(:name => company_name)
         admin.update_attribute(:company_id,company[0].id)
+
+
+        company = Company.find_by_name(company_name)
+        admin.update_attribute(:company_id,company.id)
 
       end
     end

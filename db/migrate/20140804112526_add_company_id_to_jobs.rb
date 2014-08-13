@@ -7,8 +7,8 @@ class AddCompanyIdToJobs < ActiveRecord::Migration
 
     jobs.each do |job|
       company_name = job.name #TODO drop name soon.
-      company = Company.where(:name => company_name)
-      job.update_attribute(:company_id, company[0].id)
+      company = Company.find_by_name(company_name)
+      job.update_attribute(:company_id, company.id)
     end
   end
 
