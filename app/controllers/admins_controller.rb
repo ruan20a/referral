@@ -50,7 +50,7 @@ before_action :check_main_admin, only: [:index]
     end
 
   def admin_params
-    params.require(:admin).permit(:first_name, :last_name, :company, :email, :password, :password_confirmation, :remember_me, :encrypted_password, :industry, :image, :image_cache, :remote_image_url, :remove_image)
+    params.require(:admin).permit(:first_name, :last_name, :company_name, :email, :password, :password_confirmation, :remember_me, :encrypted_password, :industry, :image, :image_cache, :remote_image_url, :remove_image)
   end
 
   def correct_admin
