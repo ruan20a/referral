@@ -7,9 +7,6 @@
         <div class="panel panel-default">
           <div class="panel-heading"><h2 class="panel-referal">
              <%= @job.job_name %> - <%= @job.name %> </h2>
-<!--             <% if !@job.admin.image_url(:thumb).nil? %>
-                <%= image_tag "#{@job.admin.image_url(:thumb)}", :alt => "#{@job.name}" %>
-            <% end %> -->
           </div>
           <div class="panel-body">
             <div class="login-form">
@@ -33,7 +30,7 @@
         </div>
       </div>
       <div class="col-md-4">
-        
+
         <div class="panel panel-default center">
           <div class="panel-heading"><h2 class="panel-referal"><strong>Referral Fee:</strong>
              <%= number_to_currency(calculate_fee(@job.referral_fee), precision: 0)  %></h2>
@@ -43,7 +40,7 @@
 
           </div>
 
-            
+
           <div class="form-group"><br>
            <% if @status %>
               <%= link_to 'EDIT JOB', edit_job_path(@job.id), :class => 'btn btn-primary'%>

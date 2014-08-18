@@ -4,7 +4,7 @@
 <div class="container" style="margin-top:160px">
       <div class="col-md-8 col-md-offset-2">
        <div class="panel panel-default">
-         <div class="panel-heading"><h3 class="panel-title"><strong>New Job</strong></h3></div>
+         <div class="panel-heading"><h3 class="panel-title"><strong>New Job - Enterprise Access</strong></h3></div>
           <div class="panel-body">
             <div class="login-form">
               <%= form_for @job do |f| %>
@@ -52,6 +52,11 @@
                 <div><br>
                   <%= f.label :is_active, "Is Active?" %><br>
                   <%= f.select :is_active, active_choices, :class => 'form-control login-field' %>
+                </div>
+
+                <div><br>
+                  <%= f.label :is_public, "Is Public?" %><br>
+                  <%= f.select :is_public, public_choices, :class => 'form-control login-field' %>
                 </div>
 
 
