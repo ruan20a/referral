@@ -32,6 +32,10 @@ class Referral < ActiveRecord::Base
   belongs_to :job
   belongs_to :user
   validates_presence_of :job_id, :ref_type
+  validates_uniqueness_of :referral_email, :scope => [:job_id, :user_id, :admin_id], :unless => lambda{ self.ref_type == "ask_refer"}
+  has_one :email
+  after_create :create_email
+
   #different logic for ask_referer types lambda substitute for method logic
   # validates_presence_of :referee_email, :referee_name, :unless => lambda{ self.ref_type == "refer" }
   #different logic for refer types lambda substitute for method logic
@@ -40,7 +44,8 @@ class Referral < ActiveRecord::Base
   # before_save :check_email, :if => :referral_email_changed?
 
   # paginates_per 10
-validates_uniqueness_of :referral_email, :scope => [:job_id, :user_id, :admin_id], :unless => lambda{ self.ref_type == "ask_refer"}
+
+
     #def check_notification
      #binding.pry
     #referral = self
@@ -60,6 +65,10 @@ validates_uniqueness_of :referral_email, :scope => [:job_id, :user_id, :admin_id
     #end
   #end
 
+  def create_email
+    referral_id = self.id
+    Email.create(referral_id: referral_id)
+  end
   #TODO RETHINK LOGIC.
   def check_email(requester)
     # binding.pry
@@ -78,6 +87,8 @@ validates_uniqueness_of :referral_email, :scope => [:job_id, :user_id, :admin_id
       true
     end
   end
+
+
 
 
 end

@@ -9,7 +9,7 @@ module JobsHelper
     @select_admins = []
     @admins.each do |admin|
       new_el = []
-      full_name = admin.company + " - " + admin.first_name + " " + admin.last_name
+      full_name = admin.company_name + " - " + admin.first_name + " " + admin.last_name
       id = admin.id
       new_el << full_name
       new_el << id

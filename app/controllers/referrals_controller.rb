@@ -27,23 +27,19 @@ class ReferralsController < ApplicationController
     else
       redirect_to jobs_path, notice: "Please select a job to create a referral"
     end
-   # @your_name = current_user.first_name && current_user.last_name || ""
  end
 
   def create
-    
+
   # need to move check_whitelist to models
   # binding.pry
    referral = Referral.new(referral_params)
-   
    admin = referral.job.admin
-  
    set_requester(referral)
-   
+
    if referral.check_email(@requester)
     #protected method to check if there is a self-referral.
      if referral.save
-      
        # binding.pry
        #TODO think about moving to MODEL logic
        if referral.ref_type == "refer"
@@ -96,17 +92,17 @@ class ReferralsController < ApplicationController
 
     if !@referral.user_id.nil?
       @requester = User.find(@referral.user_id)
-      
+
     else
-      
+
       @requester = Admin.find(@referral.admin_id)
-     
+
     end
 
     if @referral.check_email(@requester)
-      
+
       if @referral.update(referral_params)
-        
+
         if current_admin.nil?
           #binding.pry
           redirect_to current_user
