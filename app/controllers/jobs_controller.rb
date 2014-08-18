@@ -1,4 +1,4 @@
-class JobsController < ApplicationController
+  class JobsController < ApplicationController
   # before_action :signed_in? only:[:new, :edit, :update]
   before_action :authenticate_admin!, only: [:new, :edit, :update, :create, :delete]
   before_action :check_level, only:[:new, :create, :edit, :update, :private]
@@ -37,7 +37,7 @@ class JobsController < ApplicationController
 
   def index
     @search = Job.public.search(params[:q])
-    @jobs = @search.result.paginate(:page => params[:page])
+    @jobs = @search.result.select{|x| x.is_active == true}.paginate(:page => params[:page])
 
     @unreviewed_requests
     @has_ref = has_any(@unreviewed_requests)
@@ -50,6 +50,7 @@ class JobsController < ApplicationController
 
   def new
     @job = Job.new
+    check_enterprise_access
   end
 
   def show
@@ -65,10 +66,11 @@ class JobsController < ApplicationController
     set_admin(@job)
     #binding.pry
     if @job.save
-      #binding.pry
+      binding.pry
       redirect_to @job, notice: 'Job was successfully created'
     else
-      render action: 'new'
+      binding.pry
+      redirect_to :back, notice: 'There was an issue with your request'
     end
   end
 
@@ -105,7 +107,8 @@ class JobsController < ApplicationController
     else
       @admin = job.admin
     end
-    job.name = @admin.company
+    job.name = @admin.company.name
+    job.company_id = @admin.company.id
   end
 
   def set_status(job)
@@ -117,7 +120,7 @@ class JobsController < ApplicationController
   end
 
   def job_params
-    params.require(:job).permit(:name, :job_name, :description, :city, :state, :admin_id, :referral_fee, :image, :image_cache, :remote_image_url, :remove_image,  :speciality_1, :speciality_2, :is_active, :industry_1, :company_id, :min_salary, referrals_attributes: [:id])
+    params.require(:job).permit(:name, :job_name, :description, :city, :state, :admin_id, :referral_fee, :image, :image_cache, :remote_image_url, :remove_image,  :speciality_1, :speciality_2, :is_active, :industry_1, :company_id, :is_public, :min_salary, referrals_attributes: [:id])
 	end
 
   def check_admin
@@ -165,11 +168,20 @@ class JobsController < ApplicationController
   # end
 
   def check_level
+    check_enterprise_access
     unless current_admin.nil?
       @level = Whitelist.find_by_email(current_admin.email).level  #modified for private method
       if @level > 2
         @main_status = true
       end
+    end
+  end
+
+  def check_enterprise_access
+    if current_admin.company.level == 2
+      @enterprise = true
+    else
+      @enterprise = false
     end
   end
 

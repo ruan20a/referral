@@ -33,8 +33,9 @@ before_action :check_main_admin, only: [:index]
       # .paginate(:page => params[:page])
 
       @pending_count = @pending_referrals.count
-
       @has_ref = has_any(@pending_count)
+      #figure out which view to show (enterprise vs. basic)
+      check_enterprise_access
     end
   end
 
@@ -73,5 +74,13 @@ before_action :check_main_admin, only: [:index]
   #ransack methods
   def search_params
     params[:q]
+  end
+
+  def check_enterprise_access
+    if current_admin.company.level == 2
+      @enterprise = true
+    else
+      @enterprise = false
+    end
   end
 end

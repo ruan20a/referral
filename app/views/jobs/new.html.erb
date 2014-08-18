@@ -1,5 +1,9 @@
 <% if @main_status %>
   <%= render 'main_admin' %>
 <% else %>
-  <%= render 'form' %>
+  <% if @enterprise %>
+    <%= render 'enterprise_form' %>
+  <% else %>
+    <%= render 'form' %>
+  <% end %>
 <% end %>

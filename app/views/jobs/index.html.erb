@@ -55,7 +55,7 @@
           <tr >
             <td>
               <% if job.image_url(:thumb).nil? %>
-                <%= job.admin.company %>
+                <%= job.admin.company_name %>
               <% else %>
                 <%= image_tag "#{job.image_url(:thumb)}", :alt => "#{job.name}" %>
               <% end %>

@@ -29,4 +29,8 @@ module ApplicationHelper
     [["Active", true],["Inactive", false]]
   end
 
+  def public_choices
+    [["Public", true],["Private", false]]
+  end
+
 end

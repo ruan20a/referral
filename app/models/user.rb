@@ -82,7 +82,7 @@ class User < ActiveRecord::Base
       #binding.pry
       user = current_user.nil? ? User.where("email = ?", auth["info"]["email"]).first : current_user
       if user.blank?
-        #binding.pry
+        binding.pry
         user = User.new
         user.create_user(auth, user)
       end
