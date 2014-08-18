@@ -30,13 +30,11 @@ class ReferralsController < ApplicationController
  end
 
   def create
-
   # need to move check_whitelist to models
   # binding.pry
    referral = Referral.new(referral_params)
    admin = referral.job.admin
    set_requester(referral)
-
    if referral.check_email(@requester)
     #protected method to check if there is a self-referral.
      if referral.save
@@ -89,20 +87,13 @@ class ReferralsController < ApplicationController
 
   def update
     # binding.pry
-
     if !@referral.user_id.nil?
       @requester = User.find(@referral.user_id)
-
     else
-
       @requester = Admin.find(@referral.admin_id)
-
     end
-
     if @referral.check_email(@requester)
-
       if @referral.update(referral_params)
-
         if current_admin.nil?
           #binding.pry
           redirect_to current_user
@@ -112,12 +103,10 @@ class ReferralsController < ApplicationController
         end
       else
         flash[:error] = "There was an issue with your update. Please review your updates."
-        #TODO FIX ERROR
         render session[:return_to]
       end
     else
       flash[:error] = "There was an issue with your update. Please review your updates."
-      #TODO FIX ERROR
       render session[:return_to]
     end
   end

@@ -1,4 +1,4 @@
-class JobsController < ApplicationController
+  class JobsController < ApplicationController
   # before_action :signed_in? only:[:new, :edit, :update]
   before_action :authenticate_admin!, only: [:new, :edit, :update, :create, :delete]
   before_action :check_level, only:[:new, :create, :edit, :update, :private]

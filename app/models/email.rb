@@ -22,7 +22,7 @@
 
 
 class Email < ActiveRecord::Base
-  belongs_to :referral
+  belongs_to :referral, :dependent => :destroy
   validates_uniqueness_of :referral_id
 
   def return_second_user_lag
