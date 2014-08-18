@@ -50,7 +50,7 @@ class Referral < ActiveRecord::Base
   def check_notification
     referral = self
     admin = referral.job.admin
-    binding.pry
+    # binding.pry
 
     if referral.is_interested == true && referral.email.admin_notification == false
       if referral.email.update_attribute(:admin_notification, true)
