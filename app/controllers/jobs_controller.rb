@@ -7,7 +7,7 @@
   before_action :store_location #enables linking back
   before_action :user_pending_received_requests, only: [:index]
   before_action :check_signed_in, only: [:edit, :delete, :update, :create, :private]
-
+  before_action :check_enterprise_access, only: [:new, :edit]
   # before_action :check_main_admin, only: [:edit, :update]
   # before_action :clear_search_index, :only => [:index]
 
@@ -20,6 +20,23 @@
 	end
 
   def private
+    # @all_jobs.each do |job|
+      # if !current_user.nil? #users
+        # @search = Job.selected_user(current_user).search(params[:q])
+        # @jobs = @search.result.select{|x| x.is_active == true}.paginate(:page => params[:page])
+        # access = Access.exists?(user_id: current_user.id, company_id: job.company_id)
+        # @jobs << job unless access.nil?
+      # elsif !@main_status # admin (dont have main status)
+        # @search = Job.enterprise_admin(current_admin).search(params[:q])
+        # @jobs = @search.result.select{|x| x.is_active == true}.paginate(:page => params[:page])
+        # @jobs << job if current_admin.company == job.company
+      # else #main_admin
+        # @search = Job.private.search(params[:q])
+        # @jobs = @search.result.select{|x| x.is_active == true}.paginate(:page => params[:page])
+        # @jobs << job
+      # end
+    # end
+
     @all_jobs = Job.private
     @jobs = []
 
@@ -50,7 +67,6 @@
 
   def new
     @job = Job.new
-    check_enterprise_access
   end
 
   def show
@@ -168,7 +184,7 @@
   # end
 
   def check_level
-    check_enterprise_access
+    # check_enterprise_access
     unless current_admin.nil?
       @level = Whitelist.find_by_email(current_admin.email).level  #modified for private method
       if @level > 2
