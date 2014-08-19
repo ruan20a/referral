@@ -34,4 +34,18 @@ module AdminsHelper
     resource.errors.full_messages.map { |msg| content_tag(:p, msg) }.join
   end
 
+  def company_selection
+    @companies = Company.all
+    @select_companies = [["Select Company", nil]]
+    @companies.each do |company|
+      new_el = []
+      full_name = company.name
+      id = company.id
+      new_el << full_name
+      new_el << id
+      @select_companies << new_el
+    end
+    @select_companies
+  end
+
 end
