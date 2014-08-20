@@ -114,6 +114,16 @@ jQuery(function($){
   $("tr[data-link]").click(function() {
     window.location = this.dataset.link
   });
-})
+});
+
+
+// Company Click
+  $('.company').on("click", showCompany)
+  });
+
+  function showCompany(e) {
+    e.preventDefault
+    alert("hello")
+  };
 
 });

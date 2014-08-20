@@ -73,7 +73,7 @@
     @job
     @referral = Referral.new
     @ref_type = "refer"
-    set_status(@job)
+    set_status(@job) #only for owner admin
   end
 
   def create
@@ -82,10 +82,10 @@
     set_admin(@job)
     #binding.pry
     if @job.save
-      binding.pry
+      # binding.pry
       redirect_to @job, notice: 'Job was successfully created'
     else
-      binding.pry
+      # binding.pry
       redirect_to :back, notice: 'There was an issue with your request'
     end
   end

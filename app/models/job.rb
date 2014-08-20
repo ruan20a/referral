@@ -20,6 +20,8 @@
 #  industry_1   :string(255)
 #  is_active    :boolean          default(TRUE)
 #  min_salary   :float            default(0.0)
+#  company_id   :integer
+#  is_public    :boolean          default(TRUE)
 #
 
 class Job < ActiveRecord::Base

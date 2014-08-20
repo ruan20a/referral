@@ -17,4 +17,12 @@ module JobsHelper
     end
     @select_admins
   end
+
+  def active_choices
+    [["Active", true],["Inactive", false]]
+  end
+
+  def public_choices
+    [["Public", true],["Private", false]]
+  end
 end

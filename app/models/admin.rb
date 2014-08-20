@@ -17,7 +17,7 @@
 #  updated_at             :datetime
 #  job_id                 :integer
 #  profile_id             :integer
-#  company                :string(255)
+#  company_name           :string(255)
 #  invitation_token       :string(255)
 #  invitation_created_at  :datetime
 #  invitation_sent_at     :datetime
@@ -33,6 +33,7 @@
 #  last_name              :string(255)
 #  image                  :string(255)
 #  industry               :string(255)
+#  company_id             :integer
 #
 
 class Admin < ActiveRecord::Base
@@ -46,5 +47,4 @@ class Admin < ActiveRecord::Base
   belongs_to :company
   validates :email, :company, :first_name, :last_name, presence: true
   validates :email,  :uniqueness => { :case_sensitive => false }
-  mount_uploader :image, ImageUploader
 end

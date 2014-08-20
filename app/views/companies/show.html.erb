@@ -1,0 +1,67 @@
+  <%= render 'layouts/headerjob' %>
+
+  <section class="jobs">
+    <div class="container" style="margin-top:40px">
+      <div class="col-md-12">
+        <div class="col-md-8">
+          <div class="panel panel-default">
+            <div class="panel-heading"><h2 class="panel-referal">
+               <%= @company.name %>
+                  <% if !@company.image_url(:thumb).nil? %>
+                  <!-- write size -->
+                  <%= image_tag "@company.image_url(:thumb)", :alt => "#{@company.name}" %>
+                <% end %></h2>
+            </div>
+            <div class="panel-body">
+              <div class="login-form">
+                <div class="details-section">
+                  <strong>Location:</strong>
+                  <%= @company.address_line_1 %>
+                  <%= @company.address_line_2 %>
+                  <%= "  #{@company.city}, #{@company.state} #{@company.country} #{@company.postal_code}" %>
+                </div>
+                <div class="details-section">
+                  <strong>Description:</strong>
+                  <%= replace_line_br(@company.description) %>
+                </div>
+                <div class="details-section_end">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading center"><h2 class="panel-referal"><strong>Current Jobs</strong>
+            </h2>
+            </div>
+            <% if @jobs.count > 0 %>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th> <%= "Job Name" %> </th>
+                  <th> <%= "Referral Fee" %></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @jobs.each do |job|%>
+                  <tr>
+                      <td style="align-items: flex-start" ><%= link_to job.job_name.titleize, job_path(job.id) %></td>
+                    <td>
+                      <%= number_to_currency(calculate_fee(job.referral_fee), precision: 0)  %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <%else%>
+              <div class= "details-section center">
+                 </br> <strong> No Active Job </strong>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
