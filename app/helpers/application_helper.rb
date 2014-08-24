@@ -25,12 +25,4 @@ module ApplicationHelper
     description.gsub(/\n/, '<br/>').html_safe
   end
 
-  def active_choices
-    [["Active", true],["Inactive", false]]
-  end
-
-  def public_choices
-    [["Public", true],["Private", false]]
-  end
-
 end

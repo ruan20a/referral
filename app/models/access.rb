@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: accesses
+#
+#  id         :integer          not null, primary key
+#  company_id :integer
+#  user_id    :integer
+#  level      :integer          default(1)
+#
+
 class Access < ActiveRecord::Base
   belongs_to :company
   belongs_to :user, :dependent => :destroy

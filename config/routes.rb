@@ -140,7 +140,7 @@ Wekrut::Application.routes.draw do
   #beta request only on post
   match '/send_request', to: 'home#send_request', via: 'post'
   match '/send_company_request', to: 'home#send_company_request', via: 'post'
-
+  match '/companies/:id/private_access', to: 'companies/private_access'
 
 
 

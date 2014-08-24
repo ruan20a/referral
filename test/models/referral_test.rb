@@ -26,6 +26,7 @@
 #  is_active            :boolean          default(TRUE)
 #  last_status_update   :datetime         default(2014-06-11 00:32:29 UTC)
 #  last_interest_update :datetime         default(2014-06-11 00:32:29 UTC)
+#  referral_token       :string(255)
 #
 
 require 'test_helper'
