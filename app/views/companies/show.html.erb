@@ -6,11 +6,7 @@
         <div class="col-md-8">
           <div class="panel panel-default">
             <div class="panel-heading"><h2 class="panel-referal">
-               <%= @company.name %>
-                  <% if !@company.image_url(:thumb).nil? %>
-                  <!-- write size -->
-                  <%= image_tag "@company.image_url(:thumb)", :alt => "#{@company.name}" %>
-                <% end %></h2>
+               <%= @company.name %> </h2>
             </div>
             <div class="panel-body">
               <div class="login-form">
@@ -23,6 +19,10 @@
                 <div class="details-section">
                   <strong>Description:</strong>
                   <%= replace_line_br(@company.description) %>
+                  <% if !@company.image_url(:favicon).nil? %>
+                  <!-- write size -->
+                  <%= image_tag @company.image_url(:favicon), :alt => "#{@company.name}" %>
+                <% end %>
                 </div>
                 <div class="details-section_end">
                 </div>

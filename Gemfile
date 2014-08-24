@@ -17,6 +17,12 @@ gem 'bootstrap-will_paginate', '~> 0.0.10'
 
 gem "unicorn"
 
+gem 'simple_form'
+
+gem 'country_select'
+
+gem 'countries', :require => 'iso3166'
+
 gem "ransack"
 
 gem "sendgrid"

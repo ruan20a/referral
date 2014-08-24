@@ -811,8 +811,12 @@ padding: 50px;
 }
 
 .company:hover{
-  background-color: #fffddb;
-  cursor: pointer;
+    background-color: #fffddb;
+    cursor: pointer;
+}
+
+.equal-height{
+    overflow: hidden;
 }
 
 .section-heading {color: 000;

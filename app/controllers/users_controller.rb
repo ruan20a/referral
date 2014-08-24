@@ -39,7 +39,7 @@ class UsersController < ApplicationController
 
   def destroy
     if @user.destroy
-      redirect_to new_user_registration_path, notice: "Account has been deleted."
+      redirect_to user_omniauth_authorize_path, notice: "Account has been deleted."
     else
       render action: 'edit'
     end
@@ -58,7 +58,7 @@ class UsersController < ApplicationController
   def check_session
     if current_user.nil? && current_admin.nil?
       flash[:notice] = "Please sign-in to continue."
-      redirect_to new_user_session_path
+      redirect_to user_omniauth_authorize_path
     end
   end
 

@@ -2,7 +2,6 @@
 <%= render 'layouts/header' %>
 
 <section class="jobs">
-
   <div class="container">
     <%= render 'layouts/flash' %>
     <div class="page page-table" data-ng-controller="tableCtrl">
@@ -57,7 +56,7 @@
               <% if job.company.image_url(:thumb).nil? %>
                 <%= job.company.name %>
               <% else %>
-                <%= image_tag "job.company.image_url(:thumb)", :alt => "#{job.company.name}" %>
+                <%= image_tag job.company.image_url(:thumb), :alt => "#{job.company.name}" %>
               <% end %>
             </td>
 

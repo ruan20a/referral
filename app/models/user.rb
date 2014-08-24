@@ -63,6 +63,7 @@ class User < ActiveRecord::Base
     validates :first_name, :last_name, :email, presence: true
     validates :email, :uniqueness => { :case_sensitive => false }
 
+    scope :private_company, lambda {|company| joins(:accesses).where('accesses.company_id = ?', company.id)}
 
  def self.new_with_session(params,session)
     if session["devise.user_attributes"]

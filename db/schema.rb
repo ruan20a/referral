@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140804113650) do
+ActiveRecord::Schema.define(version: 20140823032154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -148,6 +148,15 @@ ActiveRecord::Schema.define(version: 20140804113650) do
     t.float    "min_salary",   default: 0.0
     t.integer  "company_id"
     t.boolean  "is_public",    default: true
+  end
+
+  create_table "private_invitations", force: true do |t|
+    t.string  "first_name"
+    t.string  "last_name"
+    t.string  "email"
+    t.integer "company_id"
+    t.boolean "is_active",      default: false
+    t.integer "num_of_invites", default: 1
   end
 
   create_table "profiles", force: true do |t|

@@ -20,7 +20,7 @@
 #
 
 class UserProfile < ActiveRecord::Base
-	belongs_to :user
+	belongs_to :user, dependent: :destroy
   validates :user_id, presence: true
   mount_uploader :image, ImageUploader
 end

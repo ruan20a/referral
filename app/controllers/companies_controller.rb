@@ -1,12 +1,14 @@
 class CompaniesController < ApplicationController
-  before_action :set_company, only: [:show, :edit, :update, :destroy]
-  before_action :check_access, only: [:edit, :update, :destroy]
-  before_action :check_main_admin, only: [:new, :create]
-  before_action :check_enterprise_access, only: [:private_Access]
+  before_action :set_company, only: [:show, :edit, :update, :destroy, :enterprise]
+  before_action :check_access, only: [:edit, :update, :destroy, :enterprise]
+  before_action :redirect_incorrect_admin, only: [:new, :create]
+  before_action :check_enterprise_access, only: [:enterprise]
 
   #TODO - logic
-  def private_access
-
+  def enterprise
+    @invited_list
+    @search = User.private_company(@company).search(params[:q])
+    @active_users = @search.result.paginate(:page => params[:page])
   end
 
   def index
@@ -19,12 +21,12 @@ class CompaniesController < ApplicationController
 
   def create
     @company = Company.new(company_params)
-    binding.pry
+    # binding.pry
     if @company.save
-      binding.pry
+      # binding.pry
       redirect_to @company, notice: 'Job was successfully created'
     else
-      binding.pry
+      # binding.pry
       redirect_to :new, notice: 'Please complete required fields'
     end
   end
@@ -67,7 +69,7 @@ class CompaniesController < ApplicationController
       @company = Company.find(params[:id])
   end
 
-  def check_access
+  def check_access #all admins can edit their own profile
     unless current_admin.nil?
       if current_admin.company != @company
         redirect_incorrect_admin
@@ -77,13 +79,12 @@ class CompaniesController < ApplicationController
     end
   end
 
-  def check_enterprise_access
+  def check_enterprise_access #only enterprise admins won't be redirected
+    redirect_to new_admin_session_path, notice: "You do not have enterprise access level." if current_admin.company.level == 1
   end
 
-  def check_main_admin
-    unless current_admin.nil?
-      redirect_incorrect_admin
-    else
+  def redirect_non_admin
+    if current_admin.nil?
       redirect_to new_admin_session_path, notice: "You must be an approved administrator to create a new company listing."
     end
   end

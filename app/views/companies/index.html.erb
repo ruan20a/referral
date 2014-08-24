@@ -3,28 +3,30 @@
     <div class="container" style="margin-top:40px">
       <div class="col-md-12">
         <% @companies.each do |company|%>
-        <div class="col-md-4">
-          <div class="panel panel-default company">
-            <div class="panel-heading"><h2 class="panel-referal">
-               <%= company.name %>
-            </div>
-            <div class="panel-body">
-              <div class="login-form">
-                <div class="details-section">
-                  <strong>Location:</strong>
-                  <%= "  #{company.city}, #{company.state}" %>
-                </div>
-                <div class="details-section">
-                  <strong>Description:</strong>
-                  <%= replace_line_br(company.description) %>
-                </div>
-                  <div class="details-section_end">
+          <div class="col-md-4">
+            <div class="panel panel-default company equal-height" data-companyurl='<%= company_path(company) %>'>
+              <div class="panel-heading"><h2 class="panel-referal">
+                 <%= company.name %>
+              </div>
+              <div class="panel-body">
+                <div class="login-form">
+                  <div class="details-section">
+                    <strong>Location:</strong>
+                    <%= "  #{company.city}, #{company.state}" %>
                   </div>
+                  <div class="details-section">
+                    <strong>Description:</strong>
+                    <%= replace_line_br(company.description).truncate(50, omission: '... (continued)') %>
+                  <% if !company.image_url(:favicon).nil? %>
+                  <!-- write size -->
+                    <%= image_tag company.image_url(:favicon), :alt => "#{company.name}" %>
+                  <% end %>
+                  </div>
+                    <div class="details-section_end">
+                    </div>
+                </div>
               </div>
             </div>
-
-          </div>
-
         </div>
         <% end %>
       </div>
