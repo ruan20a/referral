@@ -1,0 +1,32 @@
+
+<%= render 'layouts/header' %>
+<section class="jobs">
+  <div class="container">
+    <ul class="nav nav-tabs nav-justified">
+      <%= render 'layouts/flash' %>
+      <li class="active"><a class ="tab-font" href="#active-users" data-toggle="tab"> Active Users
+      </a></li>
+
+      <li class=""><a class ="tab-font" href="#invited-users" data-toggle="tab">Invited Users</a></li>
+
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane fade active in" id="received-referrals">
+        <%= render 'companies/shared/active_users'%>
+      </div>
+
+      <div class="tab-pane fade" id="sent-referrals">
+        <%= render 'companies/shared/invited_users'%>
+      </div>
+    </div>
+  </div>
+<!--   <%= render 'layouts/footer_sticky' %> -->
+</section>
+
+</br>
+
+
+
+
+

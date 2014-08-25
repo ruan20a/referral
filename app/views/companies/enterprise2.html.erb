@@ -1,0 +1,60 @@
+<%= render 'layouts/header' %>
+
+<section class="jobs">
+  <div class="container">
+    <%= render 'layouts/flash' %>
+    <div class="page page-table" data-ng-controller="tableCtrl">
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="form-inline" role="form">
+            <div class="form-group">
+              <span class="fa fa-th"></span> Active Users <%= search_form_for @search do |f| %>
+            </div>
+            <div class="form-group">
+                <%= f.text_field :first_name_or_last_name_or_email_cont, :placeholder => 'Search', style: "color: #2c3e50; " %>
+            </div>
+            <div class="form-group">
+                <%= f.submit "Search", :class => 'btn btn-default' %>
+            </div>
+
+            <% end %>
+
+            <div class="form-group">
+              <%= button_to "Reset Search", request.path, :class =>'btn btn-default',:method => :get %>
+            </div>
+
+            <div class="form-group">
+              <%= button_to "Invite Users", request.path, :class =>'btn btn-default', style: "color: #2c3e50;", :method => :get %>
+            </div>
+        </div>
+      </div>
+
+        <table class="table">
+         <thead>
+          <tr>
+            <th><%= sort_link @search, :first_name, "First Name" %></th>
+            <th><%= sort_link @search, :last_name, "Last Name" %></th>
+            <th><%= sort_link @search, :email, "Email" %></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @active_users.each do |user| %>
+          <tr >
+            <td ><%= user.first_name %></td>
+            <td><%= user.last_name %></td>
+            <td><%= user.email %></td>
+            <td><%=link_to "Remove", user.accesses.find_by_company_id(1), :method => :delete %> </td>
+          </tr>
+
+          <% end %>
+
+          </tbody>
+
+        </table>
+    </div>
+  </div>
+  <%= will_paginate @active_users%>
+</div>
+</section>

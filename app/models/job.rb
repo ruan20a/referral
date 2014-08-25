@@ -34,6 +34,8 @@ class Job < ActiveRecord::Base
   before_update :check_inactive, :if => :is_active_changed?
   scope :private, -> { where(is_public: false) }
   scope :public, -> { where(is_public: true) }
+  scope :active, -> { where(is_active: true) }
+  scope :inactive, -> { where(is_active: false) }
   # scope :selected_users, lambda { |user|
   #   joins(:access).where('access.user = ?', email)
   # }
@@ -87,4 +89,8 @@ class Job < ActiveRecord::Base
     days_lag = current_date - create_date
   end
 
+  def country_name
+    country = ISO3166::Country[country_code]
+    country.translations[I18n.locale.to_s] || country.name
+  end
  end

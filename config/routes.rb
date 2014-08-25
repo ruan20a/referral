@@ -47,13 +47,13 @@
 #        edit_user_password GET      /users/password/edit(.:format)         devise/passwords#edit
 #                           PATCH    /users/password(.:format)              devise/passwords#update
 #                           PUT      /users/password(.:format)              devise/passwords#update
-#  cancel_user_registration GET      /users/cancel(.:format)                users/registrations#cancel
-#         user_registration POST     /users(.:format)                       users/registrations#create
-#     new_user_registration GET      /users/sign_up(.:format)               users/registrations#new
-#    edit_user_registration GET      /users/edit(.:format)                  users/registrations#edit
-#                           PATCH    /users(.:format)                       users/registrations#update
-#                           PUT      /users(.:format)                       users/registrations#update
-#                           DELETE   /users(.:format)                       users/registrations#destroy
+#  cancel_user_registration GET      /users/cancel(.:format)                devise_invitable/registrations#cancel
+#         user_registration POST     /users(.:format)                       devise_invitable/registrations#create
+#     new_user_registration GET      /users/sign_up(.:format)               devise_invitable/registrations#new
+#    edit_user_registration GET      /users/edit(.:format)                  devise_invitable/registrations#edit
+#                           PATCH    /users(.:format)                       devise_invitable/registrations#update
+#                           PUT      /users(.:format)                       devise_invitable/registrations#update
+#                           DELETE   /users(.:format)                       devise_invitable/registrations#destroy
 #    accept_user_invitation GET      /users/invitation/accept(.:format)     devise/invitations#edit
 #    remove_user_invitation GET      /users/invitation/remove(.:format)     devise/invitations#destroy
 #           user_invitation POST     /users/invitation(.:format)            devise/invitations#create
@@ -76,6 +76,7 @@
 #                           PATCH    /admins/:id(.:format)                  admins#update
 #                           PUT      /admins/:id(.:format)                  admins#update
 #                           DELETE   /admins/:id(.:format)                  admins#destroy
+#              private_jobs GET      /jobs/private(.:format)                jobs#private
 #                      jobs GET      /jobs(.:format)                        jobs#index
 #                           POST     /jobs(.:format)                        jobs#create
 #                   new_job GET      /jobs/new(.:format)                    jobs#new
@@ -108,7 +109,25 @@
 #                           PATCH    /whitelists/:id(.:format)              whitelists#update
 #                           PUT      /whitelists/:id(.:format)              whitelists#update
 #                           DELETE   /whitelists/:id(.:format)              whitelists#destroy
+#        enterprise_company GET      /companies/:id/enterprise(.:format)    companies#enterprise
+#                 companies GET      /companies(.:format)                   companies#index
+#                           POST     /companies(.:format)                   companies#create
+#               new_company GET      /companies/new(.:format)               companies#new
+#              edit_company GET      /companies/:id/edit(.:format)          companies#edit
+#                   company GET      /companies/:id(.:format)               companies#show
+#                           PATCH    /companies/:id(.:format)               companies#update
+#                           PUT      /companies/:id(.:format)               companies#update
+#                           DELETE   /companies/:id(.:format)               companies#destroy
+#                  accesses GET      /accesses(.:format)                    accesses#index
+#                           POST     /accesses(.:format)                    accesses#create
+#                new_access GET      /accesses/new(.:format)                accesses#new
+#               edit_access GET      /accesses/:id/edit(.:format)           accesses#edit
+#                    access GET      /accesses/:id(.:format)                accesses#show
+#                           PATCH    /accesses/:id(.:format)                accesses#update
+#                           PUT      /accesses/:id(.:format)                accesses#update
+#                           DELETE   /accesses/:id(.:format)                accesses#destroy
 #                      root GET      /                                      home#index
+#                           GET      /private/:access_token(.:format)       home#private
 #              send_request POST     /send_request(.:format)                home#send_request
 #      send_company_request POST     /send_company_request(.:format)        home#send_company_request
 #
@@ -131,7 +150,13 @@ Wekrut::Application.routes.draw do
   resources :referrals
   resources :whitelists
 
-  resources :companies
+  resources :companies do
+    member do
+      get 'enterprise'
+      resources :private_invitations
+    end
+
+  end
   resources :accesses
 
 
@@ -140,7 +165,7 @@ Wekrut::Application.routes.draw do
   #beta request only on post
   match '/send_request', to: 'home#send_request', via: 'post'
   match '/send_company_request', to: 'home#send_company_request', via: 'post'
-  match '/companies/:id/private_access', to: 'companies/private_access'
+  # match '/companies/:id/enterprise', to: 'companies#enterprise', via: 'get'
 
 
 

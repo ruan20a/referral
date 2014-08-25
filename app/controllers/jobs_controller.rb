@@ -52,8 +52,10 @@
     end
   end
 
+
+
   def index
-    @search = Job.public.search(params[:q])
+    @search = Job.public.search(params[:q]) #can chain with inactive
     @jobs = @search.result.select{|x| x.is_active == true}.paginate(:page => params[:page])
 
     @unreviewed_requests

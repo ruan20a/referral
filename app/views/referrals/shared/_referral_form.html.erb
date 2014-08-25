@@ -1,8 +1,7 @@
-<%= render 'layouts/flash' %>
 <%= form_for :referral, url: referrals_path, method: :post do |f| %>
   <div class="form-group">
     <%= f.label "Who would you like to refer?" %><br>
-    
+
     <%= f.text_field :referral_name, :placeholder => 'Enter Referral Name', :required => true, :class => 'form-control login-field' %>
   </div>
 
@@ -19,7 +18,7 @@
   <div class="form-group">
     <%= f.submit "Submit to Wekrut", :class => "btn btn-primary" %>
   </div>
-   
+
 
   <div>
    <%= f.hidden_field :job_id, :value => @job.id%>

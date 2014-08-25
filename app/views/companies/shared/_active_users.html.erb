@@ -1,0 +1,30 @@
+<div class="page page-table">
+      <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="form-inline" role="form">
+            <div class="form-group">
+              <%= button_to "Invite Users (+)", request.path, :class =>'btn btn-default', :method => :get %>
+            </div>
+        </div>
+      </div>
+        <table class="table" id="active-users">
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+          </tr>
+          <tbody class="page">
+            <% @active_users.each do |user| %>
+          <tr class="active">
+            <td ><%= user.first_name %></td>
+            <td><%= user.last_name %></td>
+            <td><%= user.email %></td>
+            <td><%=link_to "Remove", user.accesses.find_by_company_id(1), :method => :delete %> </td>
+          </tr>
+          <% end %>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>

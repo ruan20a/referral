@@ -37,7 +37,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   version :favicon do
-    process :resize_to_fit => [30, 30]
+    process :resize_to_fit => [50, 30]
   end
 
 

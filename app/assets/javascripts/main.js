@@ -116,14 +116,4 @@ jQuery(function($){
   });
 });
 
-
-// Company Click
-  $('.company').on("click", showCompany)
-  });
-
-  function showCompany(e) {
-    e.preventDefault
-    alert("hello")
-  };
-
 });
