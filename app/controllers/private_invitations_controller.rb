@@ -8,8 +8,7 @@ class PrivateInvitationsController < ApplicationController
   end
 
   def new
-    @invite = PrivateInvitation.new
-
+    @private_invitation = PrivateInvitation.new
   end
 
   def create
