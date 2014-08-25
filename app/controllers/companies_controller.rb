@@ -2,7 +2,7 @@ class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
   before_action :check_access, only: [:edit, :update, :destroy]
   before_action :check_main_admin, only: [:new, :create]
-  before_action :check_enterprise_access, only: [:private_Access]
+  before_action :check_enterprise_access, only: [:private_access]
 
   #TODO - logic
   def private_access
