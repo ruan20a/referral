@@ -9,6 +9,7 @@ class PrivateInvitationsController < ApplicationController
 
   def new
     @invite = PrivateInvitation.new
+
   end
 
   def create
@@ -23,11 +24,11 @@ class PrivateInvitationsController < ApplicationController
   end
 
   def destroy
-    binding.pry
+    # binding.pry
     if @private_invitation.destroy
-      redirect_to enterprise_company_path, notice: 'Invitation Successfully Sent.'
+      redirect_to enterprise_company_path(current_admin.company.id), notice: 'Invitation Successfully Deleted. The user will not be able to sign up through the email link.'
     else
-      redirect_to :back, notice: 'There was an issue with your invite'
+      redirect_to :back, notice: 'There was an issue with your removal.'
     end
   end
 
