@@ -12,13 +12,18 @@ class PrivateInvitationsController < ApplicationController
   end
 
   def create
-    @invite = PrivateInvitation.new(private_invite_params)
-    @invite.company_id = @invite.map_company(current_admin.company)
+    # binding.pry
+    @private_invitation = PrivateInvitation.new(private_invitation_params)
+    @private_invitation.map_company(current_admin.company)
 
-    if @invite.save
-      redirect_to enterprise_company_path, notice: 'Invitation successfully sent'
-    else
-      redirect_to :back, error: 'There was an issue with your request'
+    respond_to do |format|
+      if @private_invitation.save
+        format.html {redirect_to enterprise_company_path, notice: 'Invitation successfully sent'}
+        format.json{render json:@private_invitation, status: :created}
+      else
+        format.html {redirect_to enterprise_company_path, notice: 'Email already exists.'}
+        format.json {render json: @private_invitation.errors, status: :unprocessable_entity}
+      end
     end
   end
 
@@ -34,7 +39,6 @@ class PrivateInvitationsController < ApplicationController
   private
 
   def set_private_invitation
-    binding.pry
     @private_invitation = PrivateInvitation.find(params[:private_invitation_id])
   end
 

@@ -1,9 +1,11 @@
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+
 <div class="page page-table">
       <div class="panel panel-default">
       <div class="panel-heading">
         <div class="form-inline" role="form">
             <div class="form-group">
-              <%= button_to "Invite Users (+)", new_private_invitation_path, :class =>'btn btn-default invite-enterprise-users', :method => :get %>
+              <div class="btn btn-default" id="add-invite-button">Invite Users (+)</div>
             </div>
         </div>
       </div>

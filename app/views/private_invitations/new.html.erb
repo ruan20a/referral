@@ -1,24 +1,24 @@
 <%= render 'layouts/headerjob' %>
-<%= render 'layouts/flash' %>
 <br>
 <div class="container" style="margin-top:120px">
       <div class="col-md-10 col-md-offset-1">
        <div class="panel panel-default">
+        <%= render 'layouts/flash' %>
          <div class="panel-heading"><h3 class="panel-title"><strong>Private Invitation</strong></h3></div>
           <div class="panel-body">
             <div class="login-form">
-              <%= simple_form_for @private_invitation do |f| %>
+              <%= form_for @private_invitation do |f| %>
                 <div class="col-md-8 col-md-offset-2">
                   <div class="form-group">
-                    <%= f.text_field :email, autocomplete: "off", :placeholder => 'Email', :class => 'form-control login-field' %>
+                    <%= f.email_field :email, autocomplete: "off", :placeholder => 'Email', :class => 'form-control login-field', :required => true %>
                   </div>
 
                   <div>
-                    <%= f.text_field :first_name, autocomplete: "off", :placeholder => 'First Name', :class => 'form-control login-field' %>
+                    <%= f.text_field :first_name, autocomplete: "off", :placeholder => 'First Name', :class => 'form-control login-field', :required => true %>
                   </div>
 
                   <div><br>
-                    <%= f.text_field :last_name, autocomplete: "off", :placeholder => 'Last Name', :class => 'form-control login-field' %>
+                    <%= f.text_field :last_name, autocomplete: "off", :placeholder => 'Last Name', :class => 'form-control login-field', :required => true %>
                   </div>
                   <div> <br>
                     <%= f.submit "Submit", :class => 'btn btn-primary btn-md btn-block' %>

@@ -10,6 +10,13 @@ class CompaniesController < ApplicationController
     # @search = User.private_company(@company).search(params[:q])
     @active_users = User.private_company(@company).paginate(:page => params[:page])
     @invited_users = PrivateInvitation.inactive.private_company(@company).paginate(:page => params[:page])
+      respond_to do |format|
+      format.html # show.html.erb
+      format.js
+      format.json { render json: @company }
+    end
+
+
   end
 
   def index
@@ -38,6 +45,7 @@ class CompaniesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
+      format.js
       format.json { render json: @company }
     end
   end
