@@ -54,12 +54,10 @@
           <tr >
             <td>
 
-              <% if job.company.image_url(:thumb).nil? %>
-                <%= job.company.name %>
-              <% else %>
-
-                <%= image_tag "job.company.image_url(:thumb)", :alt => "#{job.company.name}" %>
-              <% end %>
+              
+                
+             
+            
             </td>
 
             <td ><%= link_to job.job_name, job_path(job.id) %></td>
