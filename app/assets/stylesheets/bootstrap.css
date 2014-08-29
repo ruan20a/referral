@@ -2007,7 +2007,7 @@ select[multiple].input-lg {
           user-select: none;
   background-image: none;
   border: 1px solid transparent;
- 
+
 }
 .btn:focus,
 .btn:active:focus,
@@ -4766,7 +4766,7 @@ a.list-group-item-danger.active:focus {
 .panel-heading {
   padding: 10px 15px;
   border-bottom: 1px solid transparent;
- 
+
 }
 .panel-heading > .dropdown .dropdown-toggle {
   color: inherit;

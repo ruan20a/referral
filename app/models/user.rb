@@ -52,18 +52,22 @@ class User < ActiveRecord::Base
     linkedin: 'Linkedin'
   }
 
-    has_one :user_profile, :dependent => :destroy
-    belongs_to :whitelist
-    has_many :referrals, :dependent => :destroy
-    has_many :authorizations, :dependent => :destroy
-    has_many :jobs, :through => :referrals
-    has_many :invitations, :dependent => :destroy
-    has_many :accesses
-    has_many :companies, :through => :accesses
-    validates :first_name, :last_name, :email, presence: true
-    validates :email, :uniqueness => { :case_sensitive => false }
+  has_one :user_profile, :dependent => :destroy
+  belongs_to :whitelist
+  has_many :referrals, :dependent => :destroy
+  has_many :authorizations, :dependent => :destroy
+  has_many :jobs, :through => :referrals
+  has_many :invitations, :dependent => :destroy
+  has_many :accesses
+  has_many :companies, :through => :accesses
+  validates :first_name, :last_name, :email, presence: true
+  validates :email, :uniqueness => { :case_sensitive => false }
+  scope :private_company, lambda {|company| joins(:accesses).where('accesses.company_id = ?', company.id)}
 
-    scope :private_company, lambda {|company| joins(:accesses).where('accesses.company_id = ?', company.id)}
+  def has_enterprise
+    false
+    true if self.accesses.count > 0
+  end
 
  def self.new_with_session(params,session)
     if session["devise.user_attributes"]

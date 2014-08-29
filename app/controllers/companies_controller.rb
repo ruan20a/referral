@@ -3,11 +3,22 @@ class CompaniesController < ApplicationController
   before_action :check_access, only: [:edit, :update, :destroy, :enterprise]
   before_action :redirect_incorrect_admin, only: [:new, :create]
   before_action :check_enterprise_access, only: [:enterprise]
+
   #TODO - logic
+
+  #TODO - search does not work
   def enterprise
     @invited_list
-    @search = User.private_company(@company).search(params[:q])
-    @active_users = @search.result.paginate(:page => params[:page])
+    # @search = User.private_company(@company).search(params[:q])
+    @active_users = User.private_company(@company).paginate(:page => params[:page])
+    @invited_users = PrivateInvitation.inactive.private_company(@company).paginate(:page => params[:page])
+      respond_to do |format|
+      format.html # show.html.erb
+      format.js
+      format.json { render json: @company }
+    end
+
+
   end
 
   def index
@@ -36,6 +47,7 @@ class CompaniesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
+      format.js
       format.json { render json: @company }
     end
   end

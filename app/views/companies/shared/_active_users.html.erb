@@ -3,7 +3,7 @@
       <div class="panel-heading">
         <div class="form-inline" role="form">
             <div class="form-group">
-              <%= button_to "Invite Users (+)", request.path, :class =>'btn btn-default', :method => :get %>
+              <%= button_to "Invite Users (+)", new_private_invitation_path, :class =>'btn btn-default invite-enterprise-users add-invite-button', :method => :get %>
             </div>
         </div>
       </div>
@@ -19,7 +19,7 @@
             <td ><%= user.first_name %></td>
             <td><%= user.last_name %></td>
             <td><%= user.email %></td>
-            <td><%=link_to "Remove", user.accesses.find_by_company_id(1), :method => :delete %> </td>
+            <td><%=link_to "Remove", user.accesses.find_by_company_id(@company.id), :method => :delete %> </td>
           </tr>
           <% end %>
 
