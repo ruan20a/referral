@@ -9,7 +9,7 @@
             <div class="login-form">
               <%= form_for @job do |f| %>
 
-                <div class="col-md-5">
+                <div class="col-md-6">
                   <div class="form-group">
                     <%= f.label :admin_id, "Admin Name" %><br>
                     <%= f.select :admin_id, admin_selection %>
@@ -18,11 +18,6 @@
                 <div>
                   <%= f.label :job_name, "Position Title" %><br>
                   <%= f.text_field :job_name, :class => 'form-control login-field' %>
-                </div>
-
-                <div><br>
-                  <%= f.label :referral_fee, "Referral Fee" %><br>
-                  <%= f.number_field :referral_fee, :class => 'form-control login-field' %>
                 </div>
 
                 <div><br>
@@ -36,7 +31,13 @@
                 </div>
               </div>
 
-              <div class="col-md-5">
+              <div class="col-md-6">
+
+                                <div>
+                  <%= f.label :referral_fee, "Referral Fee" %><br>
+                  <%= f.number_field :referral_fee, :class => 'form-control login-field' %>
+                </div>
+
                 <div>
                   <%= f.label :city %><br>
                   <%= f.text_field :city, :class => 'form-control login-field' %>
@@ -44,12 +45,17 @@
 
                  <div><br>
                   <%= f.label :state %><br>
-                  <%= f.text_field :state, :class => 'form-control login-field' %>
+                  <%= f.select :state, state_choices, :class => 'form-control login-field' %>
                 </div>
 
                 <div><br>
                   <%= f.label :speciality_1, "Preferred Skills" %><br>
                   <%= f.text_field :speciality_1, :class => 'form-control login-field' %>
+                </div>
+
+                <div><br>
+                  <%= f.label :is_public, "Is Public?" %><br>
+                  <%= f.select :is_public, public_choices, :class => 'form-control login-field' %>
                 </div>
 
                 <div><br>

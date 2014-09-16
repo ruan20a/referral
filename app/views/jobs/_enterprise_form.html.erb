@@ -2,69 +2,70 @@
 <%= render 'layouts/flash' %>
 
 <div class="container" style="margin-top:160px">
-      <div class="col-md-8 col-md-offset-2">
-       <div class="panel panel-default">
-         <div class="panel-heading"><h3 class="panel-title"><strong>New Job - Enterprise Access</strong></h3></div>
-          <div class="panel-body">
-            <div class="login-form">
-              <%= form_for @job do |f| %>
-              <div class="col-md-4">
+  <div class="col-md-8 col-md-offset-2">
+   <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        <strong>New Job - Enterprise Access</strong>
+      </h3>
+    </div>
+    <div class="panel-body">
+      <div class="login-form">
+        <%= form_for @job do |f| %>
+        <div class="col-md-4">
+           <div>
+            <%= f.label :job_name, "Position Title" %><br>
+            <%= f.text_field :job_name, :class => 'form-control login-field' %>
+          </div>
+          <div><br>
+            <%= f.label :referral_fee, "Referral Fee" %><br>
+            <%= f.number_field :referral_fee, :class => 'form-control login-field' %>
+          </div>
+          <div>
+            <%= f.label :description, "Job Description" %><br>
+            <%= f.text_area :description, :class => 'form-control login-field wysihtml5', :rows => "4" %>
+          </div>
+          <div><br>
+            <%= link_to 'Back', jobs_path %>
+          </div>
+        </div>
 
-                 <div>
-                  <%= f.label :job_name, "Position Title" %><br>
-                  <%= f.text_field :job_name, :class => 'form-control login-field' %>
-                </div>
+        <div class="col-md-4">
+          <div>
+            <%= f.label :city %><br>
+            <%= f.text_field :city, :class => 'form-control login-field' %>
+          </div>
 
-                <div><br>
-                  <%= f.label :referral_fee, "Referral Fee" %><br>
-                  <%= f.number_field :referral_fee, :class => 'form-control login-field' %>
-                </div>
+           <div><br>
+            <%= f.label :state %><br>
+            <%= f.text_field :state, :class => 'form-control login-field' %>
+          </div>
 
-                <div>
-                  <%= f.label :description, "Job Description" %><br>
-                  <%= f.text_area :description, :class => 'form-control login-field wysihtml5', :rows => "4" %>
-                </div>
+        </div>
+        <div class="col-md-4">
+          <div>
+            <%= f.label :speciality_1, "Preferred Skills" %><br>
+            <%= f.text_field :speciality_1, :class => 'form-control login-field' %>
+          </div>
 
-                <div><br>
-                  <%= link_to 'Back', jobs_path %>
-                </div>
+          <div><br>
+            <%= f.label :is_active, "Is Active?" %><br>
+            <%= f.select :is_active, active_choices, :class => 'form-control login-field' %>
+          </div>
 
-              </div>
-
-              <div class="col-md-4">
-                <div>
-                  <%= f.label :city %><br>
-                  <%= f.text_field :city, :class => 'form-control login-field' %>
-                </div>
-
-                 <div><br>
-                  <%= f.label :state %><br>
-                  <%= f.text_field :state, :class => 'form-control login-field' %>
-                </div>
-
-              </div>
-              <div class="col-md-4">
-                <div>
-                  <%= f.label :speciality_1, "Preferred Skills" %><br>
-                  <%= f.text_field :speciality_1, :class => 'form-control login-field' %>
-                </div>
-
-                <div><br>
-                  <%= f.label :is_active, "Is Active?" %><br>
-                  <%= f.select :is_active, active_choices, :class => 'form-control login-field' %>
-                </div>
-
-                <div><br>
-                  <%= f.label :is_public, "Is Public?" %><br>
-                  <%= f.select :is_public, public_choices, :class => 'form-control login-field' %>
-                </div>
+          <div><br>
+            <%= f.label :is_public, "Is Public?" %><br>
+            <%= f.select :is_public, public_choices, :class => 'form-control login-field' %>
+          </div>
 
 
-                <div><br>
-                  <%= f.submit "Submit to Wekrut", :class => 'btn btn-primary btn-md btn-block' %>
-                  </div>
-            </div>
-
-            <% end %>
-
-            <%= render "layouts/footer_sticky" %>
+          <div><br>
+            <%= f.submit "Submit to Wekrut", :class => 'btn btn-primary btn-md btn-block' %>
+          </div>
+        </div>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render "layouts/footer_sticky" %>

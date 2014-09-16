@@ -1,9 +1,6 @@
 <% if @main_status %>
   <%= render 'main_admin' %>
 <% else %>
-  <% if @enterprise %>
-    <%= render 'enterprise_form' %>
-  <% else %>
     <%= render 'form' %>
-  <% end %>
+    <!-- enterprise and regular form are exactly the same right now -->
 <% end %>
