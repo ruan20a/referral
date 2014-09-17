@@ -1,13 +1,13 @@
 class CompaniesController < ApplicationController
-  before_action :set_company, only: [:show, :edit, :update, :destroy, :enterprise]
-  before_action :check_access, only: [:edit, :update, :destroy, :enterprise]
+  before_action :set_company, only: [:show, :edit, :update, :destroy, :private]
+  before_action :check_access, only: [:edit, :update, :destroy, :private]
   before_action :redirect_incorrect_admin, only: [:new, :create]
-  before_action :check_enterprise_access, only: [:enterprise]
+  # before_action :check_enterprise_access, only: [:enterprise]
 
   #TODO - logic
 
   #TODO - search does not work
-  def enterprise
+  def private
     @invited_list
     # @search = User.private_company(@company).search(params[:q])
     @active_users = User.private_company(@company).paginate(:page => params[:page])

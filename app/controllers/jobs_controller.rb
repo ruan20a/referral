@@ -7,7 +7,7 @@
   before_action :store_location #enables linking back
   before_action :user_pending_received_requests, only: [:index]
   before_action :check_signed_in, only: [:edit, :delete, :update, :create, :private]
-  before_action :check_enterprise_access, only: [:new, :edit]
+  # before_action :check_enterprise_access, only: [:new, :edit]
   # before_action :check_main_admin, only: [:edit, :update]
   # before_action :clear_search_index, :only => [:index]
 

@@ -41,11 +41,9 @@
                           <% else admin_signed_in? %>
                             <li> <%= link_to 'My Referrals', admin_path(current_admin.id) %> </li>
                             <li> <%= link_to current_admin.company.name, company_path(current_admin.company.id) %> </li>
-                            <% if current_admin.company.level > 1 %>
                               <li>
-                              <%= link_to "Enterprise Access", enterprise_company_path(current_admin.company.id) %>
+                              <%= link_to "Private Settings", private_company_path(current_admin.company.id) %>
                               </li>
-                              <% end %>
                             <li> <%= link_to "Recruiter Sign out", destroy_admin_session_path, :method => :delete  %> </li>
                           <% end %>
                         </li>

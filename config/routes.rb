@@ -160,7 +160,7 @@ Wekrut::Application.routes.draw do
 
   resources :companies do
     member do
-      get 'enterprise'
+      get 'private'
       resources :private_invitations
     end
 
@@ -169,7 +169,7 @@ Wekrut::Application.routes.draw do
 
 
   root "home#index"
-  match '/enterprise/:access_token', to: 'home#enterprise', via: 'get'
+  match '/private/:access_token', to: 'home#private', via: 'get'
   #beta request only on post
   match '/send_request', to: 'home#send_request', via: 'post'
   match '/send_company_request', to: 'home#send_company_request', via: 'post'

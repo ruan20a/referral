@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
 
-  def enterprise
+  def private
     @access_token = params[:access_token]
     @company = Company.find_by_access_token(@access_token)
     redirect_to root_path, notice: 'Private site does not exists. Please check your URL or contact info@wekrut.com' if @company.nil?
