@@ -153,7 +153,7 @@ Wekrut::Application.routes.draw do
   end
 
   resources :invitations
-  #resources :user_profiles
+  resources :user_profiles
 
   resources :referrals
   resources :whitelists

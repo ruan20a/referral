@@ -43,7 +43,7 @@ class PrivateInvitationsController < ApplicationController
   end
 
   def private_invitation_params
-    params.require(:private_invitation).permit(:first_name, :last_name, :email, :company_id)
+    params.require(:private_invitation).permit(:email, :company_id)
   end
 
   def redirect_incorrect_admin

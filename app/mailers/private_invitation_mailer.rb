@@ -7,7 +7,7 @@ class PrivateInvitationMailer < ActionMailer::Base
     @invitee = invitee
     @company = @invitee.company
     @company_link = "#{@company.access_token}"
-    mail(to: @invitee.email, subject: "#{@invitee.first_name}'s Enterprise User Invite from #{@company.name} - WeKrut").deliver
+    mail(to: @invitee.email, subject: "WeKrüt Enterprise User Invite from #{@company.name}").deliver
   end
 
 end

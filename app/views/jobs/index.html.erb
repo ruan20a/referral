@@ -1,16 +1,25 @@
-
 <%= render 'layouts/header' %>
-
 <section class="jobs">
-  <div class="container">
-    <%= render 'layouts/flash' %>
-    <div class="page page-table" data-ng-controller="tableCtrl">
 
+
+ 
+  
+
+
+
+<h1 class="page-title container">All jobs</h1>
+
+  
+
+
+
+
+  <div class="container">
       <div class="panel panel-default">
         <div class="panel-heading">
           <div class="form-inline" role="form">
             <div class="form-group">
-              <span class="fa fa-th"></span> Job Postings <%= search_form_for @search do |f| %>
+            <%= search_form_for @search do |f| %>
             </div>
             <div class="form-group">
                 <%= f.text_field :name_or_job_name_or_city_or_state_cont, :placeholder => 'Search', style: "color: #2c3e50; " %>
@@ -18,12 +27,17 @@
             <div class="form-group">
                 <%= f.submit "Search", :class => 'btn btn-default' %>
             </div>
-
-            <% end %>
+            
+       
 
             <div class="form-group">
-              <%= button_to "Reset Search", request.path, :class =>'btn btn-default',:method => :get %>
+              <%= button_to "Clear", request.path, :class =>'btn btn-default',:method => :get %>
             </div>
+
+
+                 <% end %>
+
+                 
 
             <div class="form-group pull-right">
               <% if @has_ref %>
@@ -38,43 +52,27 @@
         </div>
       </div>
 
-        <table class="table">
-         <thead>
-          <tr>
-            <th><%= sort_link @search, :name, "Company Name" %></th>
-            <th><%= sort_link @search, :job_name, "Position" %></th>
-            <th><%= sort_link @search, :city, "City" %></th>
-            <th><%= sort_link @search, :state, "State" %></th>
-            <th><%= sort_link @search, :referral_fee, "Referral Fee" %></th>
-          </tr>
-        </thead>
 
-        <tbody>
-          <% @jobs.each do |job| %>
-          <tr >
-            <td>
 
-              
-                
-             
-            
-            </td>
-
-            <td ><%= link_to job.job_name, job_path(job.id) %></td>
-            <td><%= job.city %></td>
-            <td><%= job.state %></td>
-            <td><%= number_to_currency(calculate_fee(job.referral_fee), precision: 0) %></td>
-          </tr>
-
-          <% end %>
-
-          </tbody>
-
-        </table>
-    </div>
+    <% @jobs.each do |job| %>
+      <div class="row jobrow">
+      
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+          <div class="job_title"><%= link_to job.job_name, "/jobs/#{job.id}" %></div>
+          <div class="location"><i class="fa fa-map-marker"></i>&nbsp<%= job.city %>, <%= job.state %></div>
+          <div class="description hidden-xs">Connect millions of people with their favourite songs and create a service that people love to use</div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+          <div class="location">Referral Fee:</div>
+          <div class="reward_value"><%= number_to_currency(calculate_fee(job.referral_fee), precision: 0) %></div>
+        </div>
+      </div>
+      <% end %>
   </div>
-  <%= will_paginate @jobs%>
-</div>
+
+
+
 </section>
+
 
 
