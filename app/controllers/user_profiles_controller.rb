@@ -1,12 +1,21 @@
 class UserProfilesController < ApplicationController
   before_action :set_user_profile, only: [:show, :edit]
 
+  include ApplicationHelper
+
   def index
-    @user_profiles = UserProfile.all
+    @search = UserProfile.search(params[:q])
+    @user_profiles = @search.result.paginate(:page => params[:page])
+
+    respond_to do |format|
+      format.html
+      format.json {render :json => @user_profiles}
+    end
   end
 
   def show
     @user_profile
+    @user = @user_profile.user
   end
 
   def edit

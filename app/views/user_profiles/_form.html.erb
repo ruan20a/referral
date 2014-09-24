@@ -1,3 +1,70 @@
+<%= render 'layouts/headerjob' %>
+<%= render 'layouts/flash' %>
+<br>
+<div class="container" style="margin-top:120px">
+      <div class="col-md-10 col-md-offset-1">
+       <div class="panel panel-default">
+         <div class="panel-heading"><h3 class="panel-title"><strong>Company Form</strong></h3></div>
+          <div class="panel-body">
+            <div class="login-form">
+              <%= simple_form_for @company do |f| %>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <%= f.text_field :name, autocomplete: "off", :placeholder => 'Name', :class => 'form-control login-field' %>
+                  </div>
+
+                  <div>
+                    <%= f.text_field :address_line_1, autocomplete: "off", :placeholder => 'Address Line 1', :class => 'form-control login-field' %>
+                  </div>
+
+                  <div><br>
+                    <%= f.text_field :address_line_2, autocomplete: "off", :placeholder => 'Address Line 2', :class => 'form-control login-field' %>
+                  </div>
+
+                  <div><br>
+                    <%= f.text_field :city, autocomplete: "off", :placeholder => 'City', :class => 'form-control login-field' %>
+                  </div>
+
+                  <div><br>
+                    <%= f.select :state, state_choices, :class => 'form-control login-field dropdown-login'  %>
+                  </div>
+
+                  <div><br>
+                    <%= f.input_field :country, as: :country,:class => 'form-control login-field' %>
+                  </div>
+
+                  <div><br>
+                    <%= f.text_field :postal_code, autocomplete: "off", :placeholder => 'Postal Code', :class => 'form-control login-field' %>
+                  </div>
+
+                  <div><br>
+                    <%= link_to 'Back', jobs_path %>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+
+                  <div>
+                    <%= f.text_area :description, autocomplete: "off", :placeholder => 'Company Description', :class => 'form-control login-field', :rows => "9" %>
+                  </div>
+
+                  <div><br>
+                    Industry  <%= f.select :industry, industry_choices, :class => 'form-control login-field' %>
+                  </div>
+                  <div>
+                    <%= f.submit "Submit", :class => 'btn btn-primary btn-md btn-block' %>
+                  </div>
+              </div>
+
+            <% end %>
+
+
+
+
+
+
+
+
    t.string :email
       t.string :first_name
       t.string :last_name
@@ -17,8 +84,8 @@
            <%= @user_profile.industry %>
            <strong>LinkedIn Profile URL</strong>
            <%= @user_profile.public_profile_url%>
-            
-               
+
+
                 <%= image_tag @user_profile.image %>
-              
+
 

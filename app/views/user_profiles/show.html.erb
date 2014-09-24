@@ -1,1 +1,52 @@
-  <%= render 'form' %>
+  <%= render 'layouts/headerjob' %>
+  <section class="jobs">
+    <div class="container" style="margin-top:40px">
+      <div class="col-md-12">
+        <div class="col-md-8">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h2 class="panel-referal">
+                <%= @user_profile.first_name %>
+                <%= @user_profile.last_name %>
+              </h2>
+            </div>
+            <div class="panel-body">
+              <div class="login-form">
+                <div class="details-section">
+                <% unless @user_profile.positions.blank? %>
+                  <strong>Position:
+                  <%= @user_profile.positions[0]["company"]["name"] %> - </strong/>
+                  <%= @user_profile.positions[0]["title"]%>
+                  <%=  %>
+                </div>
+                <% end %>
+                <div class="details-section">
+                  <strong>Location:</strong>
+                  <%= @user_profile.location %>
+                </div>
+                <% unless @user_profile.educations.blank? %>
+                <div class="details-section">
+                  <strong>Education:</strong>
+                  <%= @user_profile.educations[0]["schoolName"] %>
+                </div>
+                <div class="details-section">
+                  <strong>Field of Study:</strong>
+                  <%= @user_profile.educations[0]["fieldOfStudy"] %>
+                </div>
+                <% end %>
+
+                <% unless @user_profile.skills.blank? %>
+                  <div class="details-section">
+                    <strong>Skills:</strong>
+                    <% @user_profile.skills.join(",") %>
+                  </div>
+                <% end %>
+                <div class="details-section_end">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

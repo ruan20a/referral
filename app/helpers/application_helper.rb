@@ -33,4 +33,8 @@ module ApplicationHelper
             "South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]
   end
 
+  def sanitize_location(name)
+    name.sub!(/,\s\w*$/,"")
+  end
+
 end
