@@ -11,13 +11,20 @@
   </div>
 
   <div class="form-group">
-     <label> Relationship? </label>
+     <label> Relationship? </label> <br>
      <row> <%= f.select :relationship, relationship_choices %></row>
   </div>
 
   <div class="form-group">
+     <label> Are you an employee of <%="#{@job.name}"%>? </label>
+     <row> <%= f.select :is_employee, employee_choices %></row>
+  </div>
+
+
+  <div class="form-group">
     <%= f.submit "Submit to Wekrut", :class => "btn btn-primary" %>
   </div>
+
 
 
   <div>

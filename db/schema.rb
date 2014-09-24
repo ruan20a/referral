@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140823032154) do
+ActiveRecord::Schema.define(version: 20140924134038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -191,6 +191,7 @@ ActiveRecord::Schema.define(version: 20140823032154) do
     t.datetime "last_status_update",   default: '2014-06-11 00:32:29'
     t.datetime "last_interest_update", default: '2014-06-11 00:32:29'
     t.string   "referral_token"
+    t.boolean  "is_employee",          default: false
   end
 
   create_table "user_profiles", force: true do |t|
