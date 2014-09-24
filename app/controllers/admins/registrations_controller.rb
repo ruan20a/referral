@@ -26,6 +26,6 @@ include AdminsHelper
         clean_up_passwords resource
         respond_with resource
       end
-    end
+    # end
   end
 end

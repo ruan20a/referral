@@ -22,5 +22,6 @@
 class UserProfile < ActiveRecord::Base
 	belongs_to :user, dependent: :destroy
   validates :user_id, presence: true
+  validates_uniqueness_of :user_id
   mount_uploader :image, ImageUploader
 end

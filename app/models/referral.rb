@@ -46,7 +46,7 @@ class Referral < ActiveRecord::Base
   # before_save :check_email, :if => :referral_email_changed?
 
   scope :received_referrals, lambda{|user| where('referrals.referral_email = ? AND referrals.ref_type = ?', user.email, "refer")}
-  scope :unreviewed_referrals, -> { where(is_interested: nil)}
+  scope :unreviewed, -> { where(is_interested: nil)}
   scope :sent_referrals, lambda {|user| where('referrals.ref_type = ? AND referrals.user_id = ?', "refer", user.id)}
   scope :requested_referrals, lambda {|user| where('referrals.referee_email = ? AND referrals.ref_type = ?', user.email, "ask_refer")}
   scope :pending, lambda {where('referrals.status = ?', "Pending")}
@@ -55,6 +55,9 @@ class Referral < ActiveRecord::Base
 
   scope :completed, -> {where(status: ["Pass", "Interview - No Offer", "Offer Declined", "Successful Placement"])}
   scope :success, -> {where(status: "Successful Placement")}
+# TODO
+  # scope :active
+  # scope :inactive
   # paginates_per 10
 
 

@@ -37,6 +37,7 @@
                         <li class="dropdown-menu">
                           <% if user_signed_in? %>
                             <li> <%= link_to 'My Referrals', user_path(current_user.id)%> </li>
+                            <li> <%= link_to 'My Profile', user_profile_path(current_user.user_profile.id)%> </li>
                             <li> <%= link_to "User Sign out", destroy_user_session_path, :method => :delete  %> </li>
                           <% else admin_signed_in? %>
                             <li> <%= link_to 'My Referrals', admin_path(current_admin.id) %> </li>

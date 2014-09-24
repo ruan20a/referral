@@ -47,6 +47,118 @@
             </div>
           </div>
         </div>
+        <div class= "col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading center"><h2 class="panel-referal"><strong>Referrals </strong>
+            </h2>
+            </div>
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th> <%= "Type" %> </th>
+                  <th class="center"> <%= "Quantity" %></th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td style="align-items: flex-start" >Sent Referrals</td>
+                    <td class="center">
+                      <%= @sent_referrals %>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td style="align-items: flex-start" >Requested Referrals</td>
+                    <td class="center">
+                      <%= @requested_referrals %>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td style="align-items: flex-start" >Received Referrals</td>
+                    <td class="center">
+                      <%= @received_referrals %>
+                    </td>
+                  </tr>
+
+
+
+                  <tr>
+                    <td style="align-items: flex-start" >Received Referrals - New</td>
+                    <td class="center">
+                      <%= @unreviewed_referrals%>
+                    </td>
+                  </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+
+
+<div class="panel panel-default">
+            <div class="panel-heading center"><h2 class="panel-referal"><strong>Sent Referrals </strong>
+            </h2>
+            </div>
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th> <%= "Type" %> </th>
+                  <th class="center"> <%= "Quantity" %></th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td style="align-items: flex-start" >Pending</td>
+                    <td class="center">
+                      <%= @pending %>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td style="align-items: flex-start" >Interview Stage</td>
+                    <td class="center">
+                      <%= @interview %>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td style="align-items: flex-start" >Completed</td>
+                    <td class="center">
+                      <%= @completed %>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td style="align-items: flex-start" >Successful</td>
+                    <td class="center">
+                      <%= @successful %>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td style="align-items: flex-start" >Total</td>
+                    <td class="center">
+                      <%= @sent_referrals %>
+                    </td>
+                  </tr>
+
+
+              </tbody>
+            </table>
+          </div>
+
+
+
+
+
+
+        </div>
+
+
+
       </div>
     </div>
   </section>
