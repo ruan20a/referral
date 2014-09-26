@@ -27,6 +27,14 @@
                   <strong>Skills:</strong>
                   <%= @job.speciality_1 %>
                 </div>
+                <% if correct_admin?(@job) %>
+                  <div class="detail-section">
+                  <%=link_to 'Edit Job', edit_job_path, class: "btn btn-primary" %>
+
+                  <%=link_to 'Delete Job', @job, :method => :delete, confirm: "Are you sure?",class: "btn btn-primary" %>
+                  </div>
+                <% end %>
+
                 <div class="details-section_end">
                 </div>
               </div>

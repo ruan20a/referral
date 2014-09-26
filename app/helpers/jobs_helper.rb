@@ -4,6 +4,18 @@
     ["Financial Services", "Fashion", "Consumer", "Non-profit", "Advertising", "Professional Services", "Other"]
   end
 
+  def correct_admin?(job)
+    if job.company.admins.include?(current_admin) || main_admin?
+      return true
+    else
+      return false
+    end
+  end
+
+  def main_admin?
+    return true if Whitelist.find_by_email(current_admin.email).level > 2
+  end
+
   def admin_selection
     @admins = Admin.all
     @select_admins = []

@@ -63,19 +63,11 @@ class User < ActiveRecord::Base
   validates :first_name, :last_name, :email, presence: true
   validates :email, :uniqueness => { :case_sensitive => false }
   scope :private_company, lambda {|company| joins(:accesses).where('accesses.company_id = ?', company.id)}
-  # scope :received_referrals,lambda {||}
-  #scope received_referrals
-  #scope unreviewed_referrals @received referrals is_interested == nil
-  #my sent_referrals
-  #scope select_sent@user.referrals.select{|referral| referral.ref_type == "refer"}
-  # scope :received_referrals
-  # scope :unreviewed_referrals
-  # scope :sent_referrals
 
-  #finds who has made the referrals
-  scope :ask_referrals, lambda {|user| joins(:referrals).where('referrals.referee_email = ? AND referrals.ref_type = ?', user.email, "ask_refer")}
+  before_create :generate_unique_token
 
-  # select_ask = Referral.all.select{|referral| referral.referee_email == @user_email && referral.ref_type == "ask_refer"}
+  def generate_unique_token
+  end
 
   def received_referrals
       Referral.join('INNER JOIN' "user")

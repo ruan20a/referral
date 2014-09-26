@@ -36,6 +36,8 @@ class Job < ActiveRecord::Base
   scope :public, -> { where(is_public: true) }
   scope :active, -> { where(is_active: true) }
   scope :inactive, -> { where(is_active: false) }
+  # scope :unapproved, -> {where{is_approved: true}}
+  # scope :approved, -> {where{is_approved: false}}
   # scope :selected_users, lambda { |user|
   #   joins(:access).where('access.user = ?', email)
   # }

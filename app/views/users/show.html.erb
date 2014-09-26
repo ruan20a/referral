@@ -6,7 +6,6 @@
       <li class="active"><a class ="tab-font" href="#received-referrals" data-toggle="tab"> Received Referrals
         <% if @hav_ref %><div class="badge pull-right">
           <%= "#{@unreviewed_count} NEW"%></div>
-
         <% end %>
       </a></li>
       <li class=""><a class ="tab-font" href="#sent-referrals" data-toggle="tab">Sent Referrals</a></li>
@@ -17,14 +16,15 @@
       <div class="tab-pane fade active in" id="received-referrals">
         <%= render 'users/shared/received_referrals'%>
       </div>
+    <!-- DONT CHANGE THE ORDER - Unknown defect  -->
+      <div class="tab-pane fade" id="ask-referrals">
+        <%= render 'users/shared/ask_referrals'%>
+      </div>
 
       <div class="tab-pane fade" id="sent-referrals">
         <%= render 'users/shared/sent_referrals'%>
       </div>
 
-      <div class="tab-pane fade" id="ask-referrals">
-        <%= render 'users/shared/ask_referrals'%>
-      </div>
 
     </div>
   </div>

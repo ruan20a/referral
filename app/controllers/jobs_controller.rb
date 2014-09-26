@@ -84,8 +84,9 @@
     set_admin(@job)
     #binding.pry
     if @job.save
+
       # binding.pry
-      redirect_to @job, notice: 'Job was successfully created'
+      redirect_to @job, notice: 'Job was successfully created. Job will be visible after approval process. You will be notified via email within 24 hours.'
     else
       # binding.pry
       redirect_to :back, notice: 'There was an issue with your request'

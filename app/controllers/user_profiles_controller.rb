@@ -28,6 +28,7 @@ class UserProfilesController < ApplicationController
     @received_referrals = Referral.received_referrals(@user).count
     @requested_referrals = Referral.requested_referrals(@user).count
 
+
     @inactive
   end
 
