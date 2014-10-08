@@ -3,11 +3,6 @@ class CompaniesController < ApplicationController
   before_action :check_access, only: [:edit, :update, :destroy, :private]
   before_action :redirect_incorrect_admin, only: [:new, :create]
   # before_action :check_enterprise_access, only: [:enterprise]
-<<<<<<< HEAD
-
-  #TODO - logic
-=======
->>>>>>> 70f068cae7126d7505388aa6816dfd54d50bc977
 
   #TODO - search does not work
   def private

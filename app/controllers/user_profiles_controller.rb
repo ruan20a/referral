@@ -1,11 +1,11 @@
 class UserProfilesController < ApplicationController
+   before_action :set_user_profile, only: [:show, :edit]
 
 
 
   def show
   	@user_profile
-    
-  before_action :set_user_profile, only: [:show, :edit]
+    end
 
   def index
     @user_profiles = UserProfile.all
@@ -32,3 +32,4 @@ class UserProfilesController < ApplicationController
   # 	@user.profile
   # end
 end
+

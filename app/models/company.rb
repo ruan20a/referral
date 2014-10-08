@@ -17,6 +17,7 @@
 #  industry       :string(255)
 #  created_at     :datetime
 #  updated_at     :datetime
+#  url			  :string
 #
 
 class Company < ActiveRecord::Base
