@@ -51,7 +51,10 @@
         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
           <div class="job_title"><%=job.job_name %></div>
           <div class="location"><i class="fa fa-map-marker"></i>&nbsp<%= job.city %>, <%= job.state %></div>
-          <div class="description hidden-xs">Connect millions of people with their favourite songs and create a service that people love to use</div>
+
+          <div class="description hidden-xs"><%=job.company.description %></div>
+        
+         <div class="description hidden-xs"><%= job.company.url %></div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
           <div class="location">Referral Fee:</div>
