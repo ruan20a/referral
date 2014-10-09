@@ -1,58 +1,40 @@
 <%= render 'layouts/header' %>
 <div class="jobs">
-  <div class="container">
-    <ul class="nav nav-tabs nav-justified">
-      <li class="active"><a class ="tab-font" href="#all-referrals" data-toggle="tab">Referrals</a></li>
-      <li class=""><a class ="tab-font" href="#pending-referrals" data-toggle="tab">Pending Review
-        <% if !@pending_count.nil? %>
-    <div class="badge pull-right"><%= "#{@pending_count} NEW" %>
-    </div>
-        <% end %>
-      </a></li>
-    </ul>
-    <div class="page page-table">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <div class="form-inline" role="form">
-            <strong><span class="fa fa-th"></span>
-              <%= current_admin.company.name %> </strong>
-            <div class="form-group">
-              <%= search_form_for @search, url: admin_path(@admin.id) do |f| %>
-            </div>
-            <div class="form-group" style="color:#2c3e50;">
-              <%= f.text_field :job_name_or_referral_name_or_status_cont, :placeholder => 'Search' %>
-            </div>
-            <div class="form-group">
-              <%= f.submit "Search", :class =>"btn btn-default"%>
-            </div>
-            <div class="form-group">
-              <%= link_to "Clear Search", request.path, :class =>"btn btn-default",:method => :get %>
-            </div>
-            <% end %>
-          </div>
+ <div class="container">
+   
+       <% if !@pending_count.nil? %>
+   <div class="badge pull-right"><%= "#{@pending_count} NEW" %>
+   </div>
+       <% end %>
+     </a></li>
+   </ul>
+
+   <div class="page page-table">
+     <div class="panel panel-primary">
+       <div class="panel-heading">
+        <div class="form-inline" role="form">
+          <div class="form-group">
+            <form class="navbar-form navbar-right" action="#" role="search">
+              <div class="form-group">    
+                <%= search_form_for @search, url: admin_path(@admin.id) do |f| %>
+                <div class="input-group">
+                  <input class="form-control" id="q_name_or_job_name_or_city_or_state_cont" name="q[name_or_job_name_or_city_or_state_cont]" placeholder="Search" type="search">
+                <span class="input-group-btn">
+                  <button type="submit" class="btn"><span class="fa fa-search"></span>
+                  </button>
+                </span>
+                </div>
+                </div>           
+          </form>
         </div>
-        <div id="myTabContent" class="tab-content">
-          <div class="tab-pane fade active in" id="all-referrals">
-            <% if @enterprise %>
-              <%= render 'admins/shared/all_referrals_enterprise'%>
-            <% else %>
-              <%= render 'admins/shared/all_referrals'%>
-            <% end %>
-          </div>
-          <div class="tab-pane fade" id="pending-referrals">
-            <% if @enterprise %>
-              <%= render 'admins/shared/pending_referrals_enterprise'%>
-            <% else %>
-              <%= render 'admins/shared/pending_referrals'%>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+         </div>
+         <% end %>
+       </div>
+      
+           <%= render 'admins/shared/all_referrals'%>
+      
+       </div>
+     </div>
+   </div>
+ </div>
 </div>
-
-
-
-
-

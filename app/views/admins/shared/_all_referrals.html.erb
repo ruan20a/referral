@@ -1,26 +1,24 @@
-        <table class="table">
-          <thead>
-          <tr>
-            <th><%= sort_link @search, :job_name, "Position" %></th>
-            <th><%= sort_link @search, :referral_fee, "Referral Fee" %></th>
-            <th><%= sort_link @search, :referral_name, "Candidates" %></th>
-            <th><%= sort_link @search, :status, "Status" %></th>
-            <th><%= sort_link @search, :updated_at, "Last Updated" %></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% if !@sorted_referrals.nil? %>
-            <% @sorted_referrals.each do |referral| %>
-            <tr>
-            <!-- TODO fix up links -->
+<% @sorted_referrals.each do |referral| %>
+     <a href="/jobs/#{job.id}">
+       <div class="row jobrow">
+       <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">   
 
-              <td><%= link_to referral.job.job_name, edit_referral_path(referral.id) %></td>
-              <td><%= number_to_currency(calculate_fee(referral.job.referral_fee), precision: 0) %></td>
-              <td><%= link_to referral.referral_name, edit_referral_path(referral.id) %></td>
-              <td><%= referral.status.titleize %></td>
-              <td><%= time_ago_in_words(referral.updated_at) %></td>
-            </tr>
-            <%end%>
-          <% end %>
-        </tbody>
-      </table>
+       <div class="location"><%= link_to referral.job.job_name, edit_referral_path(referral.id) %></div>
+         <div class="description hidden-xs"><%= referral.job.referral_fee %></div>            
+       </div>
+       <div class="col-xs-12 col-sm-12 col-md-8 col-lg-5">
+         <div class="job_title"><%= link_to referral.referral_name, edit_referral_path(referral.id) %></div>
+       </div>  
+       <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+         <div class="location">Last Updated:<br><%= time_ago_in_words(referral.updated_at) %></div>
+       </div>
+
+       <div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
+         
+         <div class="btn btn-info"><%= referral.status.titleize %></div>
+       </div>
+     </div>
+     <% end %>
+   </a>
+ </div>
+

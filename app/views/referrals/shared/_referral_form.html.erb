@@ -1,29 +1,34 @@
+<%= render 'layouts/flash' %>
 <%= form_for :referral, url: referrals_path, method: :post do |f| %>
-  <div class="form-group">
-    <%= f.label "Who would you like to refer?" %><br>
+ <div class="form-group">
+ 
+   
+   <%= f.text_field :referral_name, :placeholder => 'Enter Referral Name *', :required => true, :class => 'form-control invert login-field' %>
+ </div>
 
-    <%= f.text_field :referral_name, :placeholder => 'Enter Referral Name', :required => true, :class => 'form-control login-field' %>
-  </div>
+ <div class="form-group">
+  
+   <%= f.email_field :referral_email, :placeholder => 'Enter Referral Email *', :required => true, :class => 'form-control invert login-field' %>
+ </div>
 
-  <div class="form-group">
-    <%= f.label "What is their email?" %><br>
-    <%= f.email_field :referral_email, :placeholder => 'Can be found in LinkedIn Contact Info', :required => true, :class => 'form-control login-field' %>
-  </div>
+ <div class="form-group">
+    <select class="selectpicker">
+           <option>Relationship?</option>
+           <option>Friend</option>
+           <option>CoWorker</option>
+           <option>Family</option>
+         </select>
+ </div>
 
-  <div class="form-group">
-     <label> Relationship? </label>
-     <row> <%= f.select :relationship, relationship_choices %></row>
-  </div>
+ <div class="form-group">
+   <%= f.submit "Submit to Wekrut", :class => "btn btn-primary" %>
+ </div>
+  
 
-  <div class="form-group">
-    <%= f.submit "Submit to Wekrut", :class => "btn btn-primary" %>
-  </div>
-
-
-  <div>
-   <%= f.hidden_field :job_id, :value => @job.id%>
-   <%= f.hidden_field :ref_type, value: @ref_type %>
-  </div>
+ <div>
+  <%= f.hidden_field :job_id, :value => @job.id%>
+  <%= f.hidden_field :ref_type, value: @ref_type %>
+ </div>
 
 <% end %>
 
