@@ -41,7 +41,7 @@
                             <li> <%= link_to 'Inactive Referrals', user_path(current_user.id)%> </li>
                             <li> <%= link_to "User Sign out", destroy_user_session_path, :method => :delete  %> </li>
                           <% else admin_signed_in? %>
-                            <li> <%= link_to 'My Referrals', admin_path(current_admin.id) %> </li>
+                            <li> <%= link_to 'Referral Dashboard', admin_path(current_admin.id) %> </li>
                             <li> <%= link_to current_admin.company.name, enterprise_company_path(current_admin.company.id) %> </li>
                              
                             <% end %>
