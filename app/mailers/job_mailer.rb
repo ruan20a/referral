@@ -12,4 +12,27 @@ class JobMailer < ActionMailer::Base
     end
   end
 
+  #to wekrut
+  def deliver_approval_initiation(job)
+    @job = job
+    mail(to: ENV['GMAIL'], subject: "URGENT: Job Approval Needed for #{job.name} at #{job.company.name}")
+  end
+
+  #to admins #creator_id
+  def deliver_approval_confirmation(job)
+    @job = job
+    job.company.admins.each do |admin|
+      mail(to: admin.email , subject: "Approval Complete for #{@job.name} at #{@job.company.name}")
+    end
+  end
+
+  #to admins #creator_id
+  def deliver_approval_rejection(job)
+    @job = job
+    job.company.admins.each do |admin|
+      @admin = admin
+      mail(to: admin.email , subject: "Approval Denied for #{@job.name} at #{@job.company.name}")
+    end
+  end
+
 end

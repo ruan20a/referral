@@ -39,7 +39,7 @@
 class Admin < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :invitable, :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   belongs_to :whitelist
   has_many :jobs, :dependent => :destroy
@@ -47,6 +47,16 @@ class Admin < ActiveRecord::Base
   belongs_to :company
   validates :email, :company, :first_name, :last_name, presence: true
   validates :email,  :uniqueness => { :case_sensitive => false }
+  before_create :generate_unique_token
+  before_create :generate_inviter_profile
+  has_one :inviter_profile, :as => :owner
 
+  def generate_unique_token
+    self.unique_token = Digest::SHA1.hexdigest([Time.now,rand].join)
+  end
+
+  def generate_inviter_profile
+    self.create_inviter_profile(:unique_token => self.unique_token)
+  end
 
 end

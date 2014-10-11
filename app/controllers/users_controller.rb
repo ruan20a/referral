@@ -13,26 +13,17 @@ class UsersController < ApplicationController
 
   def show
     @user_email = @user.email
-    # binding.pry
 # Kaminari.paginate_array(@arr_name).page
     #referrals recevied
-    select_received = Referral.all.select{|referral| referral.referral_email == @user_email && referral.ref_type == "refer"}
-    @received_referrals = select_received
+    @received_referrals = Referral.received_referrals(@user)
     # .paginate(:page => params[:page]) if !select_received.nil?
-    # binding.pry
-    @unreviewed_referrals = @received_referrals.select{|referral| referral.is_interested == nil}
+    @unreviewed_referrals = Referral.received_referrals(@user).unreviewed
     @unreviewed_count = @unreviewed_referrals.count
-
     #my referrrals
-    select_sent = @user.referrals.select{|referral| referral.ref_type == "refer"}
-    @sent_referrals = select_sent
+    @sent_referrals = Referral.sent_referrals(@user)
     # .paginate(:page => params[:page])
-
-    select_ask = Referral.all.select{|referral| referral.referee_email == @user_email && referral.ref_type == "ask_refer"}
-    @ask_referrals = select_ask
-    # .paginate(:page => params[:page])
-    @ask_referrals_count = select_ask.count
-
+    @ask_referrals = Referral.requested_referrals(@user)
+    @ask_referrals_count = @ask_referrals.count
     @hav_ref = has_any(@unreviewed_count)
      #
   end
@@ -52,7 +43,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :industry_1, :inviter_email, :speciality_1, :referral_id, :profile_id, :tagline)
+    params.require(:user).permit(:email, :invited_by_ipf_id, :password, :industry_1, :inviter_email, :speciality_1, :referral_id, :profile_id, :tagline)
   end
 
   def check_session

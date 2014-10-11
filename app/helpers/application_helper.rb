@@ -33,6 +33,26 @@ module ApplicationHelper
             "South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]
   end
 
+  def correct_admin?(job)
+    if admin_signed_in?
+      if job.company.admins.include?(current_admin) || main_admin?
+        return true
+      else
+        return false
+      end
+    else
+      return false
+    end
+  end
+
+  def main_admin?
+    if admin_signed_in?
+      return true if Whitelist.find_by_email(current_admin.email).level > 2
+    else
+      return false
+    end
+  end
+
   def sanitize_location(name)
     name.sub!(/,\s\w*$/,"")
   end

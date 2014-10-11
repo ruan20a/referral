@@ -44,33 +44,34 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :invitable, :database_authenticatable, :omniauthable, :registerable,
+  devise :database_authenticatable, :omniauthable, :registerable,
          :recoverable, :rememberable, :validatable
   SOCIALS = {
     facebook: 'Facebook',
     github: 'Github',
     linkedin: 'Linkedin'
   }
-
+  has_one :inviter_profile, :as => :owner, :dependent => :destroy
   has_one :user_profile, :dependent => :destroy
   belongs_to :whitelist
   has_many :referrals, :dependent => :destroy
   has_many :authorizations, :dependent => :destroy
   has_many :jobs, :through => :referrals
-  has_many :invitations, :dependent => :destroy
   has_many :accesses
   has_many :companies, :through => :accesses
   validates :first_name, :last_name, :email, presence: true
   validates :email, :uniqueness => { :case_sensitive => false }
   scope :private_company, lambda {|company| joins(:accesses).where('accesses.company_id = ?', company.id)}
-
   before_create :generate_unique_token
+  before_create :generate_inviter_profile
 
   def generate_unique_token
+    self.unique_token = Digest::SHA1.hexdigest([Time.now,rand].join)
   end
 
-  def received_referrals
-      Referral.join('INNER JOIN' "user")
+  def generate_inviter_profile
+    #has_one (create_inviter_profile) vs. has_many (inviter_profile.create)
+    self.create_inviter_profile(:unique_token => self.unique_token)
   end
 
   def has_enterprise

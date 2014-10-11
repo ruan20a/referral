@@ -44,7 +44,7 @@ gem 'cancan'
 
 gem "carrierwave"
 
-gem "devise_invitable"
+# gem "devise_invitable"
 
 gem 'devise'
 

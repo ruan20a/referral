@@ -30,14 +30,16 @@ class Job < ActiveRecord::Base
   has_many :accesses, :through  => :company
 	has_many :referrals, :dependent => :destroy
 	has_many :users, :through => :referrals
-  validates_presence_of :referral_fee, :name, :job_name, :city, :state, :description
+  validates_presence_of :referral_fee, :name, :job_name, :city, :state, :description, :is_active, :is_public
   before_update :check_inactive, :if => :is_active_changed?
   scope :private, -> { where(is_public: false) }
   scope :public, -> { where(is_public: true) }
   scope :active, -> { where(is_active: true) }
   scope :inactive, -> { where(is_active: false) }
-  # scope :unapproved, -> {where{is_approved: true}}
-  # scope :approved, -> {where{is_approved: false}}
+  scope :approved, -> { where(is_approved: true) }
+  scope :unapproved, -> { where(is_approved: false) }
+  after_create :initiate_approval
+  before_update :check_approval, :if => :is_approved_changed?
   # scope :selected_users, lambda { |user|
   #   joins(:access).where('access.user = ?', email)
   # }
@@ -65,16 +67,20 @@ class Job < ActiveRecord::Base
   # joins(:posts).group("users.id") & Post.published
 # }
 
-  def self.enterprise_admin(admin)
-    self.private.select{|job| admin.company == job.company}
+  #TODO test
+  def initiate_approval
+    job = self
+    JobMailer.deliver_approval_initiation(job)
   end
 
-  # def self.selected_user(user)
-  #   if status.present?
-  #     where(status: status)
-  #   end
-  #     # Access.exists?(user_id: user.id, company_id: self.company_id)
-  # end
+  #TODO test
+  def check_approval
+    if self.is_approved
+      JobMailer.deliver_approval_confirmation(job)
+    else
+      JobMailer.deliver_approval_rejection(job)
+    end
+  end
 
   def check_inactive
     referrals = self.referrals

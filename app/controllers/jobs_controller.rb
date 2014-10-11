@@ -139,7 +139,7 @@
   end
 
   def job_params
-    params.require(:job).permit(:name, :job_name, :description, :city, :state, :admin_id, :referral_fee, :image, :image_cache, :remote_image_url, :remove_image,  :speciality_1, :speciality_2, :is_active, :industry_1, :company_id, :is_public, :min_salary, referrals_attributes: [:id])
+    params.require(:job).permit(:name, :invited_by_ipf_id, :job_name, :description, :city, :state, :admin_id, :referral_fee, :image, :image_cache, :remote_image_url, :remove_image,  :speciality_1, :speciality_2, :is_active, :industry_1, :company_id, :is_public, :min_salary, referrals_attributes: [:id])
 	end
 
   def check_admin
