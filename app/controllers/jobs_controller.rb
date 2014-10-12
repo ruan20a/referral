@@ -20,23 +20,6 @@
 	end
 
   def private
-    # @all_jobs.each do |job|
-      # if !current_user.nil? #users
-        # @search = Job.selected_user(current_user).search(params[:q])
-        # @jobs = @search.result.select{|x| x.is_active == true}.paginate(:page => params[:page])
-        # access = Access.exists?(user_id: current_user.id, company_id: job.company_id)
-        # @jobs << job unless access.nil?
-      # elsif !@main_status # admin (dont have main status)
-        # @search = Job.enterprise_admin(current_admin).search(params[:q])
-        # @jobs = @search.result.select{|x| x.is_active == true}.paginate(:page => params[:page])
-        # @jobs << job if current_admin.company == job.company
-      # else #main_admin
-        # @search = Job.private.search(params[:q])
-        # @jobs = @search.result.select{|x| x.is_active == true}.paginate(:page => params[:page])
-        # @jobs << job
-      # end
-    # end
-
     @all_jobs = Job.private
     @jobs = []
 
@@ -69,6 +52,7 @@
 
   def new
     @job = Job.new
+    check_enterprise_access
   end
 
   def show
@@ -79,7 +63,6 @@
   end
 
   def create
-    #binding.pry
     @job = Job.new(job_params)
     set_admin(@job)
     #binding.pry
@@ -176,7 +159,7 @@
 
   def check_signed_in
     if !user_signed_in? && !admin_signed_in?
-      redirect_to new_user_session_path, notice: "You need to sign up before viewing this job"
+      redirect_to new_user_session_path, notice: "You need to sign up before you can view this page."
     end
   end
 

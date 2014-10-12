@@ -16,3 +16,5 @@
 /tmp
 /config/database.yml
 /.env
+/combined.crt
+/2b739839652570.crt

@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 20141003034010) do
     t.string   "industry"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "url"
   end
 
   create_table "emails", force: true do |t|
@@ -112,8 +113,8 @@ ActiveRecord::Schema.define(version: 20141003034010) do
     t.string   "unique_token"
     t.integer  "owner_id"
     t.string   "owner_type"
-    t.integer  "successful_user_invites",  default: 0
-    t.integer  "successful_job_referrals", default: 0
+    t.integer  "users_generated",     default: 0
+    t.integer  "referrals_generated", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -134,15 +135,12 @@ ActiveRecord::Schema.define(version: 20141003034010) do
     t.string   "logo_url"
     t.string   "image"
     t.string   "industry_1"
-    t.boolean  "is_active",         default: true
-    t.float    "min_salary",        default: 0.0
+    t.boolean  "is_active",    default: true
+    t.float    "min_salary",   default: 0.0
     t.integer  "company_id"
-    t.boolean  "is_public",         default: true
-    t.boolean  "is_approved",       default: false
-    t.integer  "invited_by_ipf_id"
+    t.boolean  "is_public",    default: true
+    t.boolean  "is_approved",  default: false
   end
-
-  add_index "jobs", ["invited_by_ipf_id"], name: "index_jobs_on_invited_by_ipf_id", using: :btree
 
   create_table "private_invitations", force: true do |t|
     t.string  "first_name"
@@ -186,7 +184,10 @@ ActiveRecord::Schema.define(version: 20141003034010) do
     t.datetime "last_interest_update", default: '2014-06-11 00:32:29'
     t.string   "referral_token"
     t.boolean  "is_employee",          default: false
+    t.integer  "invited_by_ipf_id"
   end
+
+  add_index "referrals", ["invited_by_ipf_id"], name: "index_referrals_on_invited_by_ipf_id", using: :btree
 
   create_table "user_profiles", force: true do |t|
     t.string   "email"

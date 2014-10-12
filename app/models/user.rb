@@ -64,6 +64,14 @@ class User < ActiveRecord::Base
   scope :private_company, lambda {|company| joins(:accesses).where('accesses.company_id = ?', company.id)}
   before_create :generate_unique_token
   before_create :generate_inviter_profile
+  after_create :update_inviter_profile
+
+
+  def update_inviter_profile
+    inviter = InviterProfile.find(self.invited_by_ipf_id)
+    referrals_num = inviter.users_generated
+    inviter.update_attribute(:users_generated, referrals_num + 1)
+  end
 
   def generate_unique_token
     self.unique_token = Digest::SHA1.hexdigest([Time.now,rand].join)
@@ -90,16 +98,13 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.from_omniauth(auth, current_user, access_token=nil) #default is nil
-    # binding.pry
+  def self.from_omniauth(auth, current_user, access_token=nil, ipf_id) #default is nil
     authorization = Authorization.where(:provider => auth.provider, :uid => auth.uid.to_s, :token => auth.credentials.token, :secret => auth.credentials.secret).first_or_initialize
     if authorization.user.blank?
-      #binding.pry
       user = current_user.nil? ? User.where("email = ?", auth["info"]["email"]).first : current_user
       if user.blank?
-        binding.pry
         user = User.new
-        user.create_user(auth, user)
+        user.create_user(auth, user, ipf_id)
       end
      authorization.user_id = user.id
      authorization.save
@@ -110,13 +115,14 @@ class User < ActiveRecord::Base
     authorization.user
  end
 
- def create_user(auth, user)
+ def create_user(auth, user, ipf_id)
   # binding.pry
   user.password = auth["credentials"]["token"]
   #Devise.friendly_token[0,10]
   user.first_name = auth.info.first_name
   user.last_name = auth.info.last_name
   user.email = auth.info.email
+  user.invited_by_ipf_id = ipf_id
   user.save
   create_profile(auth, user)
  end

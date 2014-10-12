@@ -37,6 +37,7 @@ class Referral < ActiveRecord::Base
   validates_presence_of :referral_email, :referral_name, :linked_profile_url, :unless => lambda{ self.ref_type == "ask_refer" }
   has_one :email
   after_create :create_email
+  after_create :update_inviter_profile
 
   #different logic for ask_referer types lambda substitute for method logic
   # validates_presence_of :referee_email, :referee_name, :unless => lambda{ self.ref_type == "refer" }
@@ -45,6 +46,7 @@ class Referral < ActiveRecord::Base
   before_save :check_notification, :if => :is_interested_changed?
   # before_save :check_email, :if => :referral_email_changed?
 
+  #users
   scope :received_referrals, lambda{|user| where('referrals.referral_email = ? AND referrals.ref_type = ?', user.email, "refer")}
   scope :unreviewed, -> { where(is_interested: nil)}
   scope :sent_referrals, lambda {|user| where('referrals.ref_type = ? AND referrals.user_id = ?', "refer", user.id)}
@@ -53,13 +55,25 @@ class Referral < ActiveRecord::Base
   scope :interview, -> {where(status: "Interview")}
   scope :interview_offer, -> {where(status: "Interview - Offer")}
 
+  #admins
+  scope :received_referrals_admin, lambda{|admin| where('referrals.ref_type = ? AND referrals.is_interested = ?', "refer", true)}
+  scope :pending_referrals_admin, lambda{|admin| where('referrals.ref_type = ? AND referrals.status = ? AND referrals.is_interested = ?', "refer","Pending", true)}
+
+
   scope :completed, -> {where(status: ["Pass", "Interview - No Offer", "Offer Declined", "Successful Placement"])}
   scope :success, -> {where(status: "Successful Placement")}
+
+
 # TODO
   # scope :active
   # scope :inactive
   # paginates_per 10
 
+  def update_inviter_profile
+    inviter = InviterProfile.find(self.invited_by_ipf_id)
+    referrals_num = inviter.referrals_generated
+    inviter.update_attribute(:referrals_generated, referrals_num + 1)
+  end
 
   def check_notification
     referral = self

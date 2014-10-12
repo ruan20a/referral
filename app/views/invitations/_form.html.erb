@@ -10,7 +10,7 @@
 
           <div class="col-md-6">
              <%= image_tag "heartdollar100.png", :class => "img-responsive" %>
-             <div class="rfont">  Earn $100 when someone you invite places a candidate.</div> 
+             <div class="rfont">  Share the love. </div> 
           </div>
           
 <br>
@@ -19,13 +19,8 @@
               <%= form_for @invitation do |f| %>
           
               <div class="form-group">
-                <%= f.label :invited_name, "Who do you want to invite" %><br>
-                <%= f.text_field :invited_name, :placeholder => 'Enter Name', :class => 'form-control login-field' %>
-              </div>
-
-              <div class="form-group">
-                <%= f.label :invited_email, "What is their email?" %><br>
-                <%= f.text_field :invited_email, :placeholder => 'Find in LinkedIn Contact Info', :class => 'form-control login-field' %>
+                <%= f.label :invited_email, "Invite Your Friends" %><br>
+                <%= f.text_field :invited_email, :placeholder => 'Enter Emails', :multipe => true, :class => 'form-control login-field' %>
               </div>
 
               <div>

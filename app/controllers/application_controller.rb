@@ -7,8 +7,8 @@ class ApplicationController < ActionController::Base
   before_action :capture_unique_token
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :inviter_email, :password, :password_confirmation, :company, :first_name, :last_name, :industry, :image, :image_cache, :remote_image_url, :remove_image, :access_token, :company_id) }
-    devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:email, :inviter_email, :password, :remember_me, :first_name, :last_name, :speciality_1, :speciality_2, :industry_1, :industry_2, :access_token) }
+    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :invited_by_ipf_id, :password, :password_confirmation, :company, :first_name, :last_name, :industry, :image, :image_cache, :remote_image_url, :remove_image, :access_token, :company_id) }
+    devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:email, :password, :remember_me, :first_name, :last_name, :speciality_1, :speciality_2, :industry_1, :industry_2, :access_token) }
   end
 
   protected
@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   private
 
   def capture_unique_token
-    session[:unique_token] = params[:unique_token] if params[:unique_token]
+    session[:ipf_id] = params[:ipf_id] if params[:ipf_id]
   end
   #TODO figure out how to persist pending referrals
 

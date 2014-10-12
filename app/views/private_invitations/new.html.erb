@@ -10,17 +10,10 @@
               <%= form_for @private_invitation do |f| %>
                 <div class="col-md-8 col-md-offset-2">
                   <div class="form-group">
-                    <%= f.email_field :email, autocomplete: "off", :placeholder => 'Email', :class => 'form-control login-field', :required => true %>
+                    <%= f.email_field :email, autocomplete: "off", :placeholder => 'Email', :class => 'form-control login-field', :required => true, :multipe => true %>
                   </div>
 
                   <div>
-                    <%= f.text_field :first_name, autocomplete: "off", :placeholder => 'First Name', :class => 'form-control login-field', :required => true %>
-                  </div>
-
-                  <div><br>
-                    <%= f.text_field :last_name, autocomplete: "off", :placeholder => 'Last Name', :class => 'form-control login-field', :required => true %>
-                  </div>
-                  <div> <br>
                     <%= f.submit "Submit", :class => 'btn btn-primary btn-md btn-block' %>
                   </div>
               </div>

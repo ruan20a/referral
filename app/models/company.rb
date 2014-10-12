@@ -17,12 +17,16 @@
 #  industry       :string(255)
 #  created_at     :datetime
 #  updated_at     :datetime
+#  url			  :string
 #
 
 class Company < ActiveRecord::Base
 mount_uploader :image, ImageUploader
 has_many :admins
 has_many :jobs
+
+has_many :users, :through => :access
+
 has_many :accesses
 has_many :private_invitations
 accepts_nested_attributes_for :private_invitations

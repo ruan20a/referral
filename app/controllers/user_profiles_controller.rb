@@ -1,5 +1,11 @@
 class UserProfilesController < ApplicationController
-  before_action :set_user_profile, only: [:show, :edit]
+   before_action :set_user_profile, only: [:show, :edit]
+
+
+
+  def show
+  	@user_profile
+    end
 
   include ApplicationHelper
 
@@ -49,3 +55,4 @@ class UserProfilesController < ApplicationController
   # 	@user.profile
   # end
 end
+

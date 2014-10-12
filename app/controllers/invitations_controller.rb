@@ -41,6 +41,6 @@ class InvitationsController < ApplicationController
   	end
 
    	def invitation_params
-    	params.require(:invitation).permit(:invited_email, :invited_name, :user_id, :is_successful)
+    	params.require(:invitation).permit(:invited_email, :is_successful)
 	end
 end

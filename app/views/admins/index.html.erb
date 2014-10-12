@@ -1,5 +1,4 @@
-
- <%= render 'layouts/header' %>
+<%= render 'layouts/header' %>
 
 <section class="jobs">
 <div class="container">
@@ -52,7 +51,7 @@
 
       <td><%= link_to referral.job.job_name, "/jobs/#{referral.job.id}" %></td>
 
-      <td><%= number_to_currency(calculate_fee(referral.job.referral_fee), precision: 0)  %></td>
+      <td><%= referral.job.referral_fee %></td>
 
       <td><%= link_to referral.referral_name, "/referrals/edit/#{referral.id}" %></td>
 
@@ -72,5 +71,6 @@
 </div>
 </div>
 </section>
+
 
 

@@ -1,17 +1,36 @@
   <%= render 'layouts/headerjob' %>
+  <%= render 'layouts/flash' %>
 
-  <section class="jobs">
-    <div class="container" style="margin-top:40px">
+<section class="jobs">
+  <div class="container" style="margin-top:40px">
+    <div class="col-md-12">
+      <div class="col-md-8">
+        <div class="panel panel-primary">
+          <div class="row jobrowshow">
+            <div class="col-md-12">
+              <div class="job_title"><%= @job.job_name %></div>
+              <div class="inline">
+                <%= link_to @job.company.name, company_path(@job.company.id) %>
+                <%= link_to @job.company.url%>
 
-      <div class="col-md-12">
-        <div class="col-md-8">
-          <%= render 'layouts/flash' %>
-        </div>
-        <div class="col-md-8">
-          <div class="panel panel-default">
-            <div class="panel-heading"><h2 class="panel-referal">
-               <%= @job.job_name %> - <%= @job.name %> </h2>
+              </div>
+              <div class="location"><i class="fa fa-map-marker"></i>&nbsp
+                <%= @job.city %>, <%= @job.state %>
+              <ul class="list-inline pull-right">
+                <li><a title="send to Facebook" href="http://www.facebook.com/sharer.php?s=100&p[title]=YOUR_TITLE&p[summary]=YOUR_SUMMARY&p[url]=YOUR_URL&p[images][0]=YOUR_IMAGE_TO_SHARE_OBJECT"target="_blank">
+                <i class="fa fa-facebook fa-lg"></i></a>
+                </li>
+                <li><a href="http://twitter.com/home?status=[TITLE]+[URL]"><i class="fa fa-twitter fa-lg"></i></a>
+                </li>
+                <li><a href="http://www.linkedin.com/shareArticle?mini=true&url=[URL]&title=[TITLE]&source=[SOURCE]"><i class="fa fa-linkedin fa-lg"></i></a></li>
+              </ul>
+              <!-- <div class="description hidden-xs"><%= replace_line_br(@job.description) %></div> -->
             </div>
+          </div>
+            <!-- <div class="col-xs-12 col-sm-12 col-md-8 col-lg-3"> -->
+
+            <!-- </div> -->
+
             <div class="panel-body">
               <div class="login-form">
                 <div class="details-section">
@@ -34,35 +53,57 @@
                   <%=link_to 'Delete Job', @job, :method => :delete, confirm: "Are you sure?",class: "btn btn-primary" %>
                   </div>
                 <% end %>
+              <div class="detail-section">
+
+            </div>
 
                 <div class="details-section_end">
                 </div>
+<!-- >>>>>>> 0335a7cc3850ac8e2b062e09df63f58fcad0d0cc -->
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="panel panel-default center">
-            <div class="panel-heading"><h2 class="panel-referal"><strong>Referral Fee:</strong>
-               <%= number_to_currency(calculate_fee(@job.referral_fee), precision: 0)  %></h2>
+      </div>
+      <div class="col-md-4">
+        <div class="panel panel-primary center">
+          <div class="panel-heading ">
+            <h2 class="panel-referal"><strong>Make a Referral</strong>
+            </h2>
+            <div class='referral-font'><%= number_to_currency(calculate_fee(@job.referral_fee), precision: 0)%>
             </div>
-            <div class="panel-body details-section">
+          </div>
+          <div class="panel-body">
               <%= render 'referrals/shared/referral_form'%>
-            </div>
+          </div>
+        </div>
 
-
-            <div class="form-group"><br>
+        <div class="panel panel-primary center">
+          <div class="panel-heading ">
+            <h2 class="panel-referal"><strong>Apply yourself</strong></h2>
+          </div>
+          <div class="panel-body">
+            <div class="form-group">
              <% if @status %>
                 <%= link_to 'EDIT JOB', edit_job_path(@job.id), :class => 'btn btn-primary'%>
 
               <% else %>
-                <%= link_to 'ASK FOR REFERRAL', new_referral_path(job_id: @job.id, ref_type: "ask_refer"),:class => 'btn btn-primary'%>
+                <%= link_to 'APPLY', new_referral_path(job_id: @job.id, ref_type: "ask_refer"),:class => 'btn btn-primary'%>
               <% end %>
-              <br>&nbsp</br>
-
             </div>
           </div>
         </div>
       </div>
+
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "14b2fecf-2857-4e86-942e-495c4c74f924", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+
+      </div>
     </div>
-  </section>
+  </div>
+</section>
+
+
+      <!-- <div class="panel-body"> -->
+
+

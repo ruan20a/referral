@@ -4,6 +4,7 @@ include AdminsHelper
 
   def create
     #TODO add in main_admin creation as well
+    # binding.pry
     email = params[:admin][:email].downcase
     # unless Whitelist.exists?(:email => email, :level => 2)
     #   email = params[:admin][:email]
@@ -15,11 +16,14 @@ include AdminsHelper
         yield resource if block_given?
         if resource.active_for_authentication?
           set_flash_message :notice, :signed_up if is_flashing_format?
+          binding.pry
           sign_up(resource_name, resource)
+          binding.pry
           redirect_to resource_path(resource.id)
         else
           set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_flashing_format?
           expire_data_after_sign_in!
+          binding.pry
           redirect_to new_admin_session_path
         end
       else
