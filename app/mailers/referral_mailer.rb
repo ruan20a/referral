@@ -34,10 +34,11 @@ class ReferralMailer < ActionMailer::Base
     #binding.pry
     @referral = referral
     set_admin(@referral)
-
     #TODO FACTOR THIS OUT (METHOD)!!
     set_sender(@referral)
-
+ #TODO NEED TO CHECK if this okay. #sender.user_profile
+    @user_profile = User.find_by_email(@referral.email).user_profile
+    @user_profile = @sender.user_profile
     @job = Job.find(@referral.job_id)
     @job_referral_fee = @job.referral_fee / 2
 

@@ -20,23 +20,6 @@
 	end
 
   def private
-    # @all_jobs.each do |job|
-      # if !current_user.nil? #users
-        # @search = Job.selected_user(current_user).search(params[:q])
-        # @jobs = @search.result.select{|x| x.is_active == true}.paginate(:page => params[:page])
-        # access = Access.exists?(user_id: current_user.id, company_id: job.company_id)
-        # @jobs << job unless access.nil?
-      # elsif !@main_status # admin (dont have main status)
-        # @search = Job.enterprise_admin(current_admin).search(params[:q])
-        # @jobs = @search.result.select{|x| x.is_active == true}.paginate(:page => params[:page])
-        # @jobs << job if current_admin.company == job.company
-      # else #main_admin
-        # @search = Job.private.search(params[:q])
-        # @jobs = @search.result.select{|x| x.is_active == true}.paginate(:page => params[:page])
-        # @jobs << job
-      # end
-    # end
-
     @all_jobs = Job.private
     @jobs = []
 
@@ -80,13 +63,13 @@
   end
 
   def create
-    #binding.pry
     @job = Job.new(job_params)
     set_admin(@job)
     #binding.pry
     if @job.save
+
       # binding.pry
-      redirect_to @job, notice: 'Job was successfully created'
+      redirect_to @job, notice: 'Job was successfully created. Job will be visible after approval process. You will be notified via email within 24 hours.'
     else
       # binding.pry
       redirect_to :back, notice: 'There was an issue with your request'
@@ -139,7 +122,7 @@
   end
 
   def job_params
-    params.require(:job).permit(:name, :job_name, :description, :city, :state, :admin_id, :referral_fee, :image, :image_cache, :remote_image_url, :remove_image,  :speciality_1, :speciality_2, :is_active, :industry_1, :company_id, :is_public, :min_salary, referrals_attributes: [:id])
+    params.require(:job).permit(:name, :invited_by_ipf_id, :job_name, :description, :city, :state, :admin_id, :referral_fee, :image, :image_cache, :remote_image_url, :remove_image,  :speciality_1, :speciality_2, :is_active, :industry_1, :company_id, :is_public, :min_salary, referrals_attributes: [:id])
 	end
 
   def check_admin
@@ -176,7 +159,7 @@
 
   def check_signed_in
     if !user_signed_in? && !admin_signed_in?
-      redirect_to new_user_session_path, notice: "You need to sign up before viewing this job"
+      redirect_to new_user_session_path, notice: "You need to sign up before you can view this page."
     end
   end
 
@@ -187,11 +170,7 @@
   # end
 
   def check_level
-
-    check_enterprise_access
-
     # check_enterprise_access
-
     unless current_admin.nil?
       @level = Whitelist.find_by_email(current_admin.email).level  #modified for private method
       if @level > 2

@@ -1,1 +1,14 @@
-  <%= render 'form' %>
+  <%= render 'layouts/headerjob' %>
+  <section class="jobs">
+    <div class="container" style="margin-top:40px">
+      <div class="col-md-12">
+        <div class="col-md-8">
+          <%=render 'user_profiles/shared/user_profile'%>
+        </div>
+        <div class="col-md-4">
+          <%=render 'user_profiles/shared/all_referral_stats'%>
+          <%=render 'user_profiles/shared/sent_referral_stats'%>
+        </div>
+      </div>
+    </div>
+  </section>

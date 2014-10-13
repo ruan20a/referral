@@ -11,8 +11,6 @@ gem 'will_paginate', '~> 3.0.5'
 
 gem 'pageless-rails', github: 'rorlab/pageless-rails'
 
-gem 'paper_trail', '~> 3.0.2'
-
 gem 'bootstrap-will_paginate', '~> 0.0.10'
 
 gem "unicorn"
@@ -31,6 +29,7 @@ gem "titleize"
 
 gem 'jquery-infinite-pages'
 
+gem 'tzinfo'
 
 gem 'sprockets_better_errors'
 
@@ -44,7 +43,7 @@ gem 'cancan'
 
 gem "carrierwave"
 
-gem "devise_invitable"
+# gem "devise_invitable"
 
 gem 'devise'
 

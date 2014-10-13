@@ -7,20 +7,15 @@
       <div class="col-md-8">
         <div class="panel panel-primary">
           <div class="row jobrowshow">
-            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">               
-           <%= @job.name %>
-            </div>
-             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-7">
-            <%= @job.company.description %>
-           <%= @job.company.url %>
-         </div>
-            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-7">
+            <div class="col-md-12">
               <div class="job_title"><%= @job.job_name %></div>
-              <div class="location"><i class="fa fa-map-marker"></i>&nbsp<%= @job.city %>,
-                  <%= @job.state %></div>
-              <div class="description hidden-xs"><%= replace_line_br(@job.description) %></div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-3">
+              <div class="inline">
+                <%= link_to @job.company.name, company_path(@job.company.id) %>
+                <%= link_to @job.company.url%>
+
+              </div>
+              <div class="location"><i class="fa fa-map-marker"></i>&nbsp
+                <%= @job.city %>, <%= @job.state %>
               <ul class="list-inline pull-right">
                 <li><a title="send to Facebook" href="http://www.facebook.com/sharer.php?s=100&p[title]=YOUR_TITLE&p[summary]=YOUR_SUMMARY&p[url]=YOUR_URL&p[images][0]=YOUR_IMAGE_TO_SHARE_OBJECT"target="_blank">
                 <i class="fa fa-facebook fa-lg"></i></a>
@@ -29,17 +24,42 @@
                 </li>
                 <li><a href="http://www.linkedin.com/shareArticle?mini=true&url=[URL]&title=[TITLE]&source=[SOURCE]"><i class="fa fa-linkedin fa-lg"></i></a></li>
               </ul>
+              <!-- <div class="description hidden-xs"><%= replace_line_br(@job.description) %></div> -->
+            </div>
+          </div>
+            <!-- <div class="col-xs-12 col-sm-12 col-md-8 col-lg-3"> -->
+
+            <!-- </div> -->
+
+            <div class="panel-body">
+              <div class="login-form">
+                <div class="details-section">
+                  <strong>Location:</strong>
+                  <%= @job.city %>
+                  <%= @job.state %>
+                </div>
+                <div class="details-section">
+                  <strong>Description:</strong>
+                  <%= replace_line_br(@job.description) %>
+                </div>
+                <div class="details-section">
+                  <strong>Skills:</strong>
+                  <%= @job.speciality_1 %>
+                </div>
+                <% if correct_admin?(@job) %>
+                  <div class="detail-section">
+                  <%=link_to 'Edit Job', edit_job_path, class: "btn btn-primary" %>
+
+                  <%=link_to 'Delete Job', @job, :method => :delete, confirm: "Are you sure?",class: "btn btn-primary" %>
+                  </div>
+                <% end %>
+              <div class="detail-section">
+
             </div>
 
-          </div>
-          <div class="panel-body">
-            <div class="login-form">
-              <div class="details-section">
-                <strong>Skills:</strong>
-                <%= @job.speciality_1 %>
-
-              </div>
-              <div class="details-section_end">
+                <div class="details-section_end">
+                </div>
+<!-- >>>>>>> 0335a7cc3850ac8e2b062e09df63f58fcad0d0cc -->
               </div>
             </div>
           </div>
@@ -48,7 +68,7 @@
       <div class="col-md-4">
         <div class="panel panel-primary center">
           <div class="panel-heading ">
-            <h2 class="panel-referal"><strong>Make a Referal</strong>
+            <h2 class="panel-referal"><strong>Make a Referral</strong>
             </h2>
             <div class='referral-font'><%= number_to_currency(calculate_fee(@job.referral_fee), precision: 0)%>
             </div>
@@ -61,8 +81,6 @@
         <div class="panel panel-primary center">
           <div class="panel-heading ">
             <h2 class="panel-referal"><strong>Apply yourself</strong></h2>
-            <div class='referral-font'><%= number_to_currency(calculate_fee(@job.referral_fee)/2, precision: 0)%>
-            </div>
           </div>
           <div class="panel-body">
             <div class="form-group">
@@ -75,8 +93,8 @@
             </div>
           </div>
         </div>
-                
-  
+      </div>
+
 <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
 <script type="text/javascript">stLight.options({publisher: "14b2fecf-2857-4e86-942e-495c4c74f924", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
 
@@ -88,4 +106,4 @@
 
       <!-- <div class="panel-body"> -->
 
-        <%= render 'layouts/footer' %>
+

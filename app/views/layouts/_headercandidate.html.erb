@@ -11,10 +11,15 @@
 
            <!-- Collect the nav links, forms, and other content for toggling -->
            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-               <ul class="nav navbar-nav">
+              <ul class="nav navbar-nav">
                   <li class="page-scroll">
                     <%= link_to 'Jobs', jobs_path %>
                    </li>
+                    <li><%= link_to "Private Jobs", private_jobs_path %></li>
+                     <% if admin_signed_in? %>
+                      <li><%= link_to "Create New Jobs", new_job_path %></li>
+                     <% end %>
+               </ul>
                </ul>
                <ul class="nav navbar-nav">
                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
@@ -38,6 +43,7 @@
                         <li class="dropdown-menu">
                           <% if user_signed_in? %>
                             <li> <%= link_to 'My Referrals', user_path(current_user.id)%> </li>
+                            <li> <%= link_to 'My Profile', user_profile_path(current_user.user_profile.id)%> </li>
                             <li> <%= link_to 'Inactive Referrals', user_path(current_user.id)%> </li>
                             <li> <%= link_to "User Sign out", destroy_user_session_path, :method => :delete  %> </li>
                           <% else admin_signed_in? %>

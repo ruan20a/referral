@@ -1,56 +1,59 @@
-  <%= render 'layouts/headerjob' %>
-  <section class="companies">
-    <div class="container" style="margin-top:40px">
-      <div class="col-md-12">
-        <% @user_profiles.each do |user|%>
-          <div class="col-md-4">
-            <div class="panel panel-default company equal-height"%>
-              <div class="panel-heading"><h2 class="panel-referal">
-                 <%= user.first_name %>
-                 <%= user.last_name %>
-                 <%= user.location %>
-              </div>
-              <div class="panel-body">
-                <div class="login-form">
-                  <div class="details-section">
-                    <strong>Industry:</strong>
-                    <%= user.industry %>
-                  </div>
-                  <div class="details-section">
-                    <% unless user.educations.nil? %>
-                    <strong>Position:</strong>
-                    <%= user.positions[0]["company"]["name"] %> -
-                    <%= user.positions[0]["title"] %>
-                  </div>
-                  <% end %>
-                  <div class="details-section">
-                    <strong>Education:</strong> <br>
-                    <% unless user.educations.nil? %>
-                    <%= user.educations[0]["schoolName"]  %>
-                    <br>
-                    <strong>Field of Study: </strong> <br>
-                    <%= user.educations[0]["fieldOfStudy"] %>
-                  </div>
-                  <% end %>
-                  <div class="details-section">
-                    <strong>Skills:</strong>
-                    <% user.skills.each do |skill| %>
-                      <%= skill + "," %>
-                    <% end %>
-                  </div>
+<%= render 'layouts/header' %>
 
-                  <div class="details-section">
-                    <strong>LinkedIn URL:</strong>
-                    <%= user.public_profile_url %>
-                  </div>
-                    <div class="details-section_end">
-                  </div>
-                </div>
-              </div>
+<section class="jobs">
+  <div class="container">
+    <%= render 'layouts/flash' %>
+    <div class="page page-table" data-ng-controller="tableCtrl">
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="form-inline" role="form">
+            <div class="form-group">
+              <span class="fa fa-th"></span> User Profiles <%= search_form_for @search do |f| %>
+            </div>
+            <div class="form-group">
+                <%= f.text_field :first_name_or_last_name_or_industry_or_location_cont, :placeholder => 'Search', style: "color: #2c3e50; " %>
+            </div>
+            <div class="form-group">
+                <%= f.submit "Search", :class => 'btn btn-default' %>
             </div>
 
+            <% end %>
+
+            <div class="form-group">
+              <%= button_to "Reset Search", request.path, :class =>'btn btn-default',:method => :get %>
+            </div>
         </div>
-          <% end %>
       </div>
 
+        <table class="table">
+         <thead>
+          <tr>
+            <th><%= sort_link @search, :first_name, "First Name" %></th>
+            <th><%= sort_link @search, :last_name, "Last Name" %></th>
+            <th><%= sort_link @search, :industry, "Industry" %></th>
+            <th><%= sort_link @search, :location, "Location" %></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @user_profiles.each do |user_profile| %>
+          <tr>
+            <td ><%= link_to user_profile.first_name, user_profile_path(user_profile.id) %></td>
+            <td ><%= link_to user_profile.last_name, user_profile_path(user_profile.id) %></td>
+            <td><%= user_profile.industry %></td>
+            <td><%= sanitize_location(user_profile.location) %></td>
+          </tr>
+
+          <% end %>
+
+          </tbody>
+
+        </table>
+    </div>
+  </div>
+  <%= will_paginate @user_profiles%>
+</div>
 </section>
+
+

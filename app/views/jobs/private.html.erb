@@ -2,70 +2,71 @@
 <%= render 'layouts/header' %>
 
 <section class="jobs">
+<div class="container">
+  <%= render 'layouts/flash' %>
+  <div class="page page-table" data-ng-controller="tableCtrl">
 
-  <div class="container">
-    <%= render 'layouts/flash' %>
-    <div class="page page-table" data-ng-controller="tableCtrl">
-
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <div class="form-inline" role="form">
-            <div class="form-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="form-inline" role="form">
+          <div class="form-group">
               <span class="fa fa-th"></span> Private Job Postings
-            </div>
-            <div class="form-group pull-right">
-              <% if @has_ref %>
-                <% if current_admin.nil? %>
-                  <%= button_to " #{@unreviewed_requests} Requests Pending Review", user_path(current_user.id),:method => :get,:class =>'btn btn-danger pull-right' %>
-                <% else %>
-                  <%= button_to "#{@unreviewed_requests} Requests Pending Review", admin_path(current_admin.id),:method => :get,:class =>'btn btn-danger pull-right' %>
-                <% end %>
-
-              <% end %>
-            </div>
-        </div>
+          </div>
+          <div class="form-group pull-right">
+            <!-- private  -->
+            <!-- <% if @has_ref %> -->
+<!--               <% if current_admin.nil? %>
+                <%= button_to " #{@unreviewed_requests} Requests Pending Review", user_path(current_user.id),:method => :get,:class =>'btn btn-danger pull-right' %>
+              <% else %>
+                <%= button_to "#{@unreviewed_requests} Requests Pending Review", admin_path(current_admin.id),:method => :get,:class =>'btn btn-danger pull-right' %>
+              <% end %> -->
+            <!-- <% end %> -->
+          </div>
       </div>
-
-        <table class="table">
-         <thead>
-          <tr>
-            <th><%= "Company Name" %></th>
-            <th><%= "Position" %></th>
-            <th><%= "City" %></th>
-            <th><%= "State" %></th>
-            <th><%= "Referral Fee" %></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <% if @jobs.count > 1 %>
-            <% @jobs.each do |job| %>
-            <tr >
-              <td>
-                <% if job.company.image_url(:thumb).nil? %>
-                  <%= job.company.name %>
-                <% else %>
-                  <%= image_tag "job.company.image_url(:thumb)", :alt => "#{job.company.name}" %>
-                <% end %>
-              </td>
-
-              <td ><%= link_to job.job_name, "/jobs/#{job.id}" %></td>
-              <td><%= job.city %></td>
-              <td><%= job.state %></td>
-              <td><%= number_to_currency(calculate_fee(job.referral_fee), precision: 0) %></td>
-            </tr>
-
-            <% end %>
-          <% else %>
-            <div> You currently do not have any private jobs. </div>
-          <% end %>
-          </tbody>
-
-        </table>
     </div>
+
+      <table class="table">
+       <thead>
+        <tr>
+          <th><%= "Company Name" %></th>
+          <th><%= "Position" %></th>
+          <th><%= "City" %></th>
+          <th><%= "State" %></th>
+          <th><%= "Referral Fee" %></th>
+        </tr>
+      </thead>
+      <% if @jobs.count > 1 %>
+      <% @jobs.each do |job| %>
+      <tbody>
+        <tr >
+          <td>
+            <% if job.company.image_url(:thumb).nil? %>
+              <%= job.company.name %>
+            <% else %>
+              <%= image_tag "job.company.image_url(:thumb)", :alt => "#{job.company.name}" %>
+            <% end %>
+          </td>
+          <td ><%= link_to job.job_name, "/jobs/#{job.id}" %></td>
+          <td><%= job.city %></td>
+          <td><%= job.state %></td>
+          <td><%= number_to_currency(calculate_fee(job.referral_fee), precision: 0) %></td>
+        </tr>
+        <% end %>
+      </tbody>
+        <% else %>
+        <tbody>
+            <tr>
+              <td> No Private Jobs Available. </td>
+            <tr>
+          </tbody>
+        <% end %>
+      </table>
   </div>
 </div>
+</div>
+
 </section>
+
 
 
 

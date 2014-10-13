@@ -25,4 +25,6 @@
   def public_choices
     [["Public", true],["Private", false]]
   end
+
+
 end

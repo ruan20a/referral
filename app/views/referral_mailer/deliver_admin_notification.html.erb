@@ -9,12 +9,12 @@
 <div>
   Follow the link to view the referral.
   <br>
-
   <!-- TODO CHANGE LINK -->
   <%=link_to 'Sign Up/Sign', url_for(controller: 'admins/sessions', action: 'new', only_path: false)%>
 </div>
-
 <br>
+  <%=render 'user_profiles/shared/user_profile'%>
+
 
 <div>
   Thank You!

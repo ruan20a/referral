@@ -16,11 +16,7 @@
                   </div>
                   <div class="details-section">
                     <strong>Description:</strong>
-                    <%= company.description %>
-                  <% if !company.image_url(:favicon).nil? %>
-                  <!-- write size -->
-                    <%= image_tag company.image_url(:favicon), :alt => "#{company.name}" %>
-                  <% end %>
+                    <%= replace_line_br(company.description).truncate(50, omission: '... (continued)') %>
                   </div>
                     <div class="details-section_end">
                     </div>

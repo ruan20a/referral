@@ -10,7 +10,7 @@
         <div class="form-inline" role="form">
           <div class="form-group">
             <form class="navbar-form navbar-right" action="#" role="search">
-              <div class="form-group">    
+              <div class="form-group">
                 <div class="input-group">
                   <input class="form-control" id="q_name_or_job_name_or_city_or_state_cont" name="q[name_or_job_name_or_city_or_state_cont]" placeholder="Search" type="search">
                 <span class="input-group-btn">
@@ -18,13 +18,13 @@
                   </button>
                 </span>
                 </div>
-                </div>           
+                </div>
           </form>
         </div>
-            
+
 
             <% end %>
-                   
+
   <div class="form-group">
 
       <select class="selectpicker">
@@ -38,23 +38,24 @@
       </div>
     </div>
 
-  
- 
 
 
  <% @jobs.each do |job| %>
       <a href=jobs/<%= job.id %> >
         <div class="row jobrow">
-        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"> 
-                 
-          
+        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+          <% if job.company.image_url(:thumb).nil? %>
+              <%= job.company.name %>
+            <% else %>
+              <%= image_tag job.company.image_url(:thumb), :alt => "#{job.company.name}" %>
+            <% end %>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
           <div class="job_title"><%=job.job_name %></div>
           <div class="location"><i class="fa fa-map-marker"></i>&nbsp<%= job.city %>, <%= job.state %></div>
 
           <div class="description hidden-xs"><%=job.company.description %></div>
-        
+
          <div class="description hidden-xs"><%= job.company.url %></div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">

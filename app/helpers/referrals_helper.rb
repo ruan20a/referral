@@ -15,6 +15,10 @@ module ReferralsHelper
     ["I'm interested in this role","I'm NOT interested in this role"]
   end
 
+  def employee_choices
+    [["No", false],["Yes", true]]
+  end
+
   def boolean
     [true, false]
   end

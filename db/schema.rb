@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141001202210) do
+ActiveRecord::Schema.define(version: 20141003034010) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,17 +36,8 @@ ActiveRecord::Schema.define(version: 20141001202210) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "job_id"
     t.integer  "profile_id"
     t.string   "company_name"
-    t.string   "invitation_token"
-    t.datetime "invitation_created_at"
-    t.datetime "invitation_sent_at"
-    t.datetime "invitation_accepted_at"
-    t.integer  "invitation_limit"
-    t.integer  "invited_by_id"
-    t.string   "invited_by_type"
-    t.integer  "invitations_count",      default: 0
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
@@ -55,13 +46,11 @@ ActiveRecord::Schema.define(version: 20141001202210) do
     t.string   "image"
     t.string   "industry"
     t.integer  "company_id"
+    t.string   "unique_token"
   end
 
   add_index "admins", ["confirmation_token"], name: "index_admins_on_confirmation_token", unique: true, using: :btree
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
-  add_index "admins", ["invitation_token"], name: "index_admins_on_invitation_token", unique: true, using: :btree
-  add_index "admins", ["invitations_count"], name: "index_admins_on_invitations_count", using: :btree
-  add_index "admins", ["invited_by_id"], name: "index_admins_on_invited_by_id", using: :btree
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
 
   create_table "admins_jobs", id: false, force: true do |t|
@@ -69,10 +58,16 @@ ActiveRecord::Schema.define(version: 20141001202210) do
     t.integer "job_id",   null: false
   end
 
+  add_index "admins_jobs", ["admin_id", "job_id"], name: "index_admins_jobs_on_admin_id_and_job_id", using: :btree
+  add_index "admins_jobs", ["job_id", "admin_id"], name: "index_admins_jobs_on_job_id_and_admin_id", using: :btree
+
   create_table "admins_referrals", id: false, force: true do |t|
     t.integer "admin_id",    null: false
     t.integer "referral_id", null: false
   end
+
+  add_index "admins_referrals", ["admin_id", "referral_id"], name: "index_admins_referrals_on_admin_id_and_referral_id", using: :btree
+  add_index "admins_referrals", ["referral_id", "admin_id"], name: "index_admins_referrals_on_referral_id_and_admin_id", using: :btree
 
   create_table "authorizations", force: true do |t|
     t.integer  "user_id"
@@ -114,11 +109,12 @@ ActiveRecord::Schema.define(version: 20141001202210) do
     t.datetime "updated_at"
   end
 
-  create_table "invitations", force: true do |t|
-    t.integer  "user_id"
-    t.string   "invited_name"
-    t.string   "invited_email"
-    t.boolean  "is_successful", default: false
+  create_table "inviter_profiles", force: true do |t|
+    t.string   "unique_token"
+    t.integer  "owner_id"
+    t.string   "owner_type"
+    t.integer  "users_generated",     default: 0
+    t.integer  "referrals_generated", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -143,6 +139,7 @@ ActiveRecord::Schema.define(version: 20141001202210) do
     t.float    "min_salary",   default: 0.0
     t.integer  "company_id"
     t.boolean  "is_public",    default: true
+    t.boolean  "is_approved",  default: false
   end
 
   create_table "private_invitations", force: true do |t|
@@ -183,54 +180,14 @@ ActiveRecord::Schema.define(version: 20141001202210) do
     t.string   "referee_name"
     t.boolean  "is_interested"
     t.boolean  "is_active",            default: true
-    t.datetime "last_status_update",   default: '2014-07-27 23:14:25'
-    t.datetime "last_interest_update", default: '2014-07-27 23:14:25'
+    t.datetime "last_status_update",   default: '2014-06-11 00:32:29'
+    t.datetime "last_interest_update", default: '2014-06-11 00:32:29'
     t.string   "referral_token"
+    t.boolean  "is_employee",          default: false
+    t.integer  "invited_by_ipf_id"
   end
 
-  create_table "rs_evaluations", force: true do |t|
-    t.string   "reputation_name"
-    t.integer  "source_id"
-    t.string   "source_type"
-    t.integer  "target_id"
-    t.string   "target_type"
-    t.float    "value",           default: 0.0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "rs_evaluations", ["reputation_name", "source_id", "source_type", "target_id", "target_type"], name: "index_rs_evaluations_on_reputation_name_and_source_and_target", unique: true, using: :btree
-  add_index "rs_evaluations", ["reputation_name"], name: "index_rs_evaluations_on_reputation_name", using: :btree
-  add_index "rs_evaluations", ["source_id", "source_type"], name: "index_rs_evaluations_on_source_id_and_source_type", using: :btree
-  add_index "rs_evaluations", ["target_id", "target_type"], name: "index_rs_evaluations_on_target_id_and_target_type", using: :btree
-
-  create_table "rs_reputation_messages", force: true do |t|
-    t.integer  "sender_id"
-    t.string   "sender_type"
-    t.integer  "receiver_id"
-    t.float    "weight",      default: 1.0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "rs_reputation_messages", ["receiver_id", "sender_id", "sender_type"], name: "index_rs_reputation_messages_on_receiver_id_and_sender", unique: true, using: :btree
-  add_index "rs_reputation_messages", ["receiver_id"], name: "index_rs_reputation_messages_on_receiver_id", using: :btree
-  add_index "rs_reputation_messages", ["sender_id", "sender_type"], name: "index_rs_reputation_messages_on_sender_id_and_sender_type", using: :btree
-
-  create_table "rs_reputations", force: true do |t|
-    t.string   "reputation_name"
-    t.float    "value",           default: 0.0
-    t.string   "aggregated_by"
-    t.integer  "target_id"
-    t.string   "target_type"
-    t.boolean  "active",          default: true
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "rs_reputations", ["reputation_name", "target_id", "target_type"], name: "index_rs_reputations_on_reputation_name_and_target", using: :btree
-  add_index "rs_reputations", ["reputation_name"], name: "index_rs_reputations_on_reputation_name", using: :btree
-  add_index "rs_reputations", ["target_id", "target_type"], name: "index_rs_reputations_on_target_id_and_target_type", using: :btree
+  add_index "referrals", ["invited_by_ipf_id"], name: "index_referrals_on_invited_by_ipf_id", using: :btree
 
   create_table "user_profiles", force: true do |t|
     t.string   "email"
@@ -247,12 +204,6 @@ ActiveRecord::Schema.define(version: 20141001202210) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-  end
-
-  create_table "user_whitelists", force: true do |t|
-    t.string   "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
@@ -275,30 +226,18 @@ ActiveRecord::Schema.define(version: 20141001202210) do
     t.string   "speciality_1"
     t.string   "speciality_2"
     t.integer  "profile_id"
-    t.integer  "referral_id"
-    t.string   "invitation_token"
-    t.datetime "invitation_created_at"
-    t.datetime "invitation_sent_at"
-    t.datetime "invitation_accepted_at"
-    t.integer  "invitation_limit"
-    t.integer  "invited_by_id"
-    t.string   "invited_by_type"
-    t.integer  "invitations_count",      default: 0
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "tagline"
-    t.string   "linked_in"
-    t.string   "inviter_email"
-    t.string   "provider"
     t.string   "uid"
+    t.string   "unique_token"
+    t.integer  "invited_by_ipf_id"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
-  add_index "users", ["invitations_count"], name: "index_users_on_invitations_count", using: :btree
-  add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
+  add_index "users", ["invited_by_ipf_id"], name: "index_users_on_invited_by_ipf_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "versions", force: true do |t|

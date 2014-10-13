@@ -2,9 +2,11 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 	skip_before_filter :authenticate_user!
 
 	def all
+		ipf_id = session[:ipf_id]
+		# binding.pry
 		p env["omniauth.auth"]
 		access_token = params[:access_token]
-		user = User.from_omniauth(env["omniauth.auth"], current_user, access_token)
+		user = User.from_omniauth(env["omniauth.auth"], current_user, access_token, ipf_id)
 		# binding.pry
 		if user.persisted?
 			# binding.pry

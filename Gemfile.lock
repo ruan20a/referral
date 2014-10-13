@@ -79,9 +79,6 @@ GEM
       railties (>= 3.2.6, < 5)
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
-    devise_invitable (1.3.6)
-      actionmailer (>= 3.2.6, < 5)
-      devise (>= 3.2.0)
     dotenv (0.11.1)
       dotenv-deployment (~> 0.0.2)
     dotenv-deployment (0.0.2)
@@ -179,9 +176,6 @@ GEM
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
-    paper_trail (3.0.3)
-      activerecord (>= 3.0, < 5.0)
-      activesupport (>= 3.0, < 5.0)
     pg (0.17.1)
     polyamorous (1.1.0)
       activerecord (>= 3.0)
@@ -303,7 +297,6 @@ DEPENDENCIES
   country_select
   debugger
   devise
-  devise_invitable
   dotenv-rails
   fog (~> 1.22.1)
   jbuilder (~> 1.2)
@@ -318,7 +311,6 @@ DEPENDENCIES
   omniauth-linkedin
   omniauth-oauth2
   pageless-rails!
-  paper_trail (~> 3.0.2)
   pg
   pry-debugger
   pry-rails
@@ -335,6 +327,7 @@ DEPENDENCIES
   sprockets_better_errors
   titleize
   turbolinks
+  tzinfo
   uglifier (>= 1.3.0)
   unicorn
   whenever

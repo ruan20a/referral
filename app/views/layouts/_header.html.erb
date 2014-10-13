@@ -12,18 +12,16 @@
 
            <!-- Collect the nav links, forms, and other content for toggling -->
            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-               <ul class="nav navbar-nav">
-                <li class="page-scroll">
-                  <% if user_signed_in? %>
-                   <li> <%= link_to 'Invite', new_invitation_path %> </li>
-                    <% end %>
+              <ul class="nav navbar-nav">
+                  <li class="page-scroll">
+                    <%= link_to 'Jobs', jobs_path %>
                    </li>
                 <li class="page-scroll">
                   <li class="page-scroll">
-                    <li><%= link_to "Jobs", jobs_path %></li>
-                    
-                     
-                    
+                    <li><%= link_to "Private Jobs", private_jobs_path %></li>
+
+
+
                   </li>
                 </li>
                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
@@ -47,14 +45,17 @@
                         <li class="dropdown-menu">
                           <% if user_signed_in? %>
                             <li> <%= link_to 'My Referrals', user_path(current_user.id)%> </li>
-                            
+                            <li> <%= link_to 'My Profile', user_profile_path(current_user.user_profile.id)%> </li>
+                            <li> <%= link_to "User Sign out", destroy_user_session_path, :method => :delete %> </li>
                           <% else admin_signed_in? %>
                             <li> <%= link_to 'Referral Dashboard', admin_path(current_admin.id) %> </li>
                             <li> <%= link_to current_admin.company.name, company_path(current_admin.company.id) %> </li>
                             <li>
-                            
+                              <li>
+                              <%= link_to "Private Settings", private_company_path(current_admin.company.id) %>
+                              </li>
+                              <li> <%= link_to "Recruiter Sign out", destroy_admin_session_path, :method => :delete %> </li>
                               <% end %>
-                           
                         </li>
                       </ul>
                     </li>

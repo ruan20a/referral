@@ -696,10 +696,21 @@ padding: 50px;
 }
 
 .jobs {width: 100%;
- 
+    height: 100%;
+    padding: 75px 0;
+    background-color: #67809F;
+    margin-bottom: -50px;
+}
+
+.center{
+    text-align: center;
+}
+
+.companies {width: 100%;
+    height: 100%;
     padding: 75px 0;
     background-color: #6C7A89;
-   
+
 }
 
 .section-heading {color: 000;
@@ -749,13 +760,13 @@ padding: 50px;
 }
 }
 
-  
+
  }
 
  .rfont {
     color: #2c3e50;
     font-size: 18px;
-    
+
  }
 
  .flex-video {
@@ -766,10 +777,10 @@ padding: 50px;
   margin-bottom: 16px;
   overflow: hidden;
 }
- 
+
 .flex-video.widescreen { padding-bottom: 57.25%; }
 .flex-video.vimeo { padding-top: 0; }
- 
+
 .flex-video iframe,
 .flex-video object,
 .flex-video embed {
@@ -1618,7 +1629,7 @@ fieldset[disabled] .btn-link:focus {
   margin: 0 1px;
 }
 
-.referral-font { 
+.referral-font {
   font-size: 44px;
   padding: 0px;
 }

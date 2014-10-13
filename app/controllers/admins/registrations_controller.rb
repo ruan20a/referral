@@ -4,15 +4,13 @@ include AdminsHelper
 
   def create
     #TODO add in main_admin creation as well
-    binding.pry
+    # binding.pry
     email = params[:admin][:email].downcase
-    binding.pry
-    unless Whitelist.exists?(:email => email, :level => 2)
-      email = params[:admin][:email]
-      flash[:alert] = "#{email} is currently not on our beta list yet. Sign up #{view_context.link_to('here', root_path)} for our beta version.".html_safe
-      binding.pry
-      redirect_to new_admin_registration_path
-    else
+    # unless Whitelist.exists?(:email => email, :level => 2)
+    #   email = params[:admin][:email]
+    #   flash[:alert] = "#{email} is currently not on our beta list yet. Sign up #{view_context.link_to('here', root_path)} for our beta version.".html_safe
+    #   redirect_to new_admin_registration_path
+    # else
       resource = build_resource(sign_up_params)
       if resource.save
         yield resource if block_given?
@@ -32,6 +30,6 @@ include AdminsHelper
         clean_up_passwords resource
         respond_with resource
       end
-    end
+    # end
   end
 end

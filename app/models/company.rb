@@ -31,7 +31,7 @@ has_many :accesses
 has_many :private_invitations
 accepts_nested_attributes_for :private_invitations
 has_many :users, :through => :accesses
-validates_presence_of :name, :description
+validates_presence_of :name, :description, :city, :state
 validates_uniqueness_of :name
 before_create :generate_access_token
 scope :private_users, lambda { |company|
