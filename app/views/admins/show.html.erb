@@ -1,22 +1,20 @@
 <%= render 'layouts/header' %>
-<div class="jobs">
- <div class="container">
-   
-       <% if !@pending_count.nil? %>
-   <div class="badge pull-right"><%= "#{@pending_count} NEW" %>
-   </div>
-       <% end %>
-     </a></li>
-   </ul>
+<section class="jobs">
 
-   <div class="page page-table">
-     <div class="panel panel-primary">
-       <div class="panel-heading">
+
+
+
+       
+               
+ <%= search_form_for @search, url: admin_path(@admin.id) do |f| %>
+<div class="container">
+  <div class="page page-table">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
         <div class="form-inline" role="form">
           <div class="form-group">
             <form class="navbar-form navbar-right" action="#" role="search">
               <div class="form-group">    
-                <%= search_form_for @search, url: admin_path(@admin.id) do |f| %>
                 <div class="input-group">
                   <input class="form-control" id="q_name_or_job_name_or_city_or_state_cont" name="q[name_or_job_name_or_city_or_state_cont]" placeholder="Search" type="search">
                 <span class="input-group-btn">
@@ -27,9 +25,7 @@
                 </div>           
           </form>
         </div>
-         </div>
-         <% end %>
-       </div>
+               <% end %>
       
            <%= render 'admins/shared/all_referrals'%>
       
