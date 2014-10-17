@@ -12,16 +12,26 @@
            <!-- Collect the nav links, forms, and other content for toggling -->
            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
               <ul class="nav navbar-nav">
+                <li class="page-scroll">
+                  <%= link_to 'Jobs', jobs_path %>
+                 </li>
+
+                <% if user_signed_in? && current_user.has_enterprise? || admin_signed_in? && current_admin.company.level > 1 %>
                   <li class="page-scroll">
-                    <%= link_to 'Jobs', jobs_path %>
-                   </li>
-                    <li><%= link_to "Private Jobs", private_jobs_path %></li>
-                     <% if admin_signed_in? %>
-                      <li><%= link_to "Create New Jobs", new_job_path %></li>
-                     <% end %>
-               </ul>
-               </ul>
-               <ul class="nav navbar-nav">
+                    <li class="page-scroll">
+                      <li><%= link_to "Private Jobs", private_jobs_path %></li>
+                    </li>
+                  </li>
+                <%end %>
+
+                <% if admin_signed_in? %>
+                <li class="page-scroll">
+                  <li class="page-scroll">
+                    <li><%= link_to "Create New Job", new_job_path %></li>
+                  </li>
+                </li>
+                <% end %>
+
                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
            <!-- Collect the nav links, forms, and other content for toggling -->
             <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
@@ -29,7 +39,7 @@
                   <% if !user_signed_in? && !admin_signed_in? %>
                     <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Login<b class="caret"></b></a>
                       <ul class="dropdown-menu">
-                       <li><%= link_to "User", new_user_session_path %></li>
+                       <li><%= link_to "User", root_path %></li>
                        <li><%= link_to "Recruiter", new_admin_session_path %></li>
                       </ul>
                     </li>
@@ -42,16 +52,16 @@
                       <ul class="dropdown-menu">
                         <li class="dropdown-menu">
                           <% if user_signed_in? %>
-                            <li> <%= link_to 'My Referrals', user_path(current_user.id)%> </li>
-                            <li> <%= link_to 'My Profile', user_profile_path(current_user.user_profile.id)%> </li>
-                            <li> <%= link_to 'Inactive Referrals', user_path(current_user.id)%> </li>
-                            <li> <%= link_to "User Sign out", destroy_user_session_path, :method => :delete  %> </li>
+                            <%= render 'layouts/shared/user_links' %>
                           <% else admin_signed_in? %>
-                            <li> <%= link_to 'Referral Dashboard', admin_path(current_admin.id) %> </li>
-                            <li> <%= link_to current_admin.company.name, enterprise_company_path(current_admin.company.id) %> </li>
-                             
+                            <% if current_admin.is_main_admin? %>
+                              <%= render 'layouts/shared/main_admin_links' %>
+                            <% elsif current_admin.is_enterprise? %>
+                              <%= render 'layouts/shared/enterprise_links' %>
+                            <% else %>
+                              <%= render 'layouts/shared/admin_links' %>
                             <% end %>
-                           
+                          <% end %>
                         </li>
                       </ul>
                     </li>
@@ -62,4 +72,4 @@
        </div>
        <!-- /.container -->
    </nav>
-  
+

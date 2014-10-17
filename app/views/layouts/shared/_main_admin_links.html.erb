@@ -1,0 +1,3 @@
+<li> <%= link_to 'Referral Dashboard', admin_path(current_admin.id) %> </li><li> <%= link_to current_admin.company.name, company_path(current_admin.company.id) %> </li>
+<li><%= link_to "Private Settings", private_company_path(current_admin.company.id) %></li>
+<li> <%= link_to "Recruiter Sign out", destroy_admin_session_path, :method => :delete %> </li>

@@ -1,0 +1,8 @@
+<li> <%= link_to 'My Referrals', user_path(current_user.id)%> </li>
+<% unless current_user.user_profile.nil? %>
+  <li> <%= link_to 'My Profile', user_profile_path(current_user.user_profile.id)%> </li>
+<% else %>
+  <li class="request"> <%= link_to 'Sync with LinkedIn', user_omniauth_authorize_path(:linkedin)%> </li>
+  </li>
+<% end %>
+<li> <%= link_to "User Sign out", destroy_user_session_path, :method => :delete %> </li>

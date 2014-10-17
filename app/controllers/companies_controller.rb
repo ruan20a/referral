@@ -15,8 +15,6 @@ class CompaniesController < ApplicationController
       format.js
       format.json { render json: @company }
     end
-
-
   end
 
   def index

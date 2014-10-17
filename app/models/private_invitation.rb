@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: private_invitations
+#
+#  id             :integer          not null, primary key
+#  first_name     :string(255)
+#  last_name      :string(255)
+#  email          :string(255)
+#  company_id     :integer
+#  is_active      :boolean          default(FALSE)
+#  num_of_invites :integer          default(1)
+#
+
 class PrivateInvitation < ActiveRecord::Base
   belongs_to :company
   before_create :send_email_notification

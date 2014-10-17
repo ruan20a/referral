@@ -17,26 +17,26 @@
 #  industry       :string(255)
 #  created_at     :datetime
 #  updated_at     :datetime
-#  url			  :string
+#  url            :string(255)
 #
 
 class Company < ActiveRecord::Base
-mount_uploader :image, ImageUploader
-has_many :admins
-has_many :jobs
+  mount_uploader :image, ImageUploader
+  has_many :admins
+  has_many :jobs
 
-has_many :users, :through => :access
+  has_many :users, :through => :access
 
-has_many :accesses
-has_many :private_invitations
-accepts_nested_attributes_for :private_invitations
-has_many :users, :through => :accesses
-validates_presence_of :name, :description, :city, :state
-validates_uniqueness_of :name
-before_create :generate_access_token
-scope :private_users, lambda { |company|
-  joins(:accesses).where('accesses.company_id', company.id)
-} #pulls up list of private users
+  has_many :accesses
+  has_many :private_invitations
+  accepts_nested_attributes_for :private_invitations
+  has_many :users, :through => :accesses
+  validates_presence_of :name, :description, :city, :state, :address_line_1
+  validates_uniqueness_of :name
+  before_create :generate_access_token
+  scope :private_users, lambda { |company|
+    joins(:accesses).where('accesses.company_id', company.id)
+  } #pulls up list of private users
 
 
   def generate_access_token

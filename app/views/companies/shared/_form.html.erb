@@ -9,16 +9,13 @@
             <div class="login-form">
               <%= simple_form_for @company do |f| %>
                 <div class="col-md-6">
+
                   <div class="form-group">
                     <%= f.text_field :name, autocomplete: "off", :placeholder => 'Name', :class => 'form-control login-field' %>
                   </div>
 
                   <div>
                     <%= f.text_field :address_line_1, autocomplete: "off", :placeholder => 'Address Line 1', :class => 'form-control login-field' %>
-                  </div>
-
-                  <div><br>
-                    <%= f.text_field :address_line_2, autocomplete: "off", :placeholder => 'Address Line 2', :class => 'form-control login-field' %>
                   </div>
 
                   <div><br>
@@ -30,7 +27,7 @@
                   </div>
 
                   <div><br>
-                    <%= f.input_field :country, as: :country,:class => 'form-control login-field' %>
+                    <%= f.input_field :country, as: :country, :class => 'form-control login-field' %>
                   </div>
 
                   <div><br>

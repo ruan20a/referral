@@ -22,23 +22,13 @@
 #  speciality_1           :string(255)
 #  speciality_2           :string(255)
 #  profile_id             :integer
-#  referral_id            :integer
-#  invitation_token       :string(255)
-#  invitation_created_at  :datetime
-#  invitation_sent_at     :datetime
-#  invitation_accepted_at :datetime
-#  invitation_limit       :integer
-#  invited_by_id          :integer
-#  invited_by_type        :string(255)
-#  invitations_count      :integer          default(0)
 #  confirmation_token     :string(255)
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
 #  tagline                :string(255)
-#  linked_in              :string(255)
-#  inviter_email          :string(255)
-#  provider               :string(255)
 #  uid                    :string(255)
+#  unique_token           :string(255)
+#  invited_by_ipf_id      :integer
 #
 
 require 'test_helper'

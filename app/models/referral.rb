@@ -27,6 +27,8 @@
 #  last_status_update   :datetime         default(2014-06-11 00:32:29 UTC)
 #  last_interest_update :datetime         default(2014-06-11 00:32:29 UTC)
 #  referral_token       :string(255)
+#  is_employee          :boolean          default(FALSE)
+#  invited_by_ipf_id    :integer
 #
 
 class Referral < ActiveRecord::Base
@@ -51,19 +53,22 @@ class Referral < ActiveRecord::Base
   scope :unreviewed, -> { where(is_interested: nil)}
   scope :sent_referrals, lambda {|user| where('referrals.ref_type = ? AND referrals.user_id = ?', "refer", user.id)}
   scope :requested_referrals, lambda {|user| where('referrals.referee_email = ? AND referrals.ref_type = ?', user.email, "ask_refer")}
+
+  #admins
+  scope :admin_referrals, lambda{|admin| joins(:job).where('jobs.admin_id = ?', admin.id)}
+  scope :admin_active_referrals, lambda{|admin| joins(:job).where('jobs.admin_id = ? AND referrals.ref_type = ? AND referrals.is_active = ? AND referrals.is_interested = ?', admin.id, "refer", true, true)}
+  scope :admin_inactive_referrals, lambda{|admin| joins(:job).where('jobs.admin_id = ? AND referrals.ref_type = ? AND referrals.is_active = ? AND referrals.is_interested = ?', admin.id, "refer", false, true)}
+
+  #share
   scope :pending, lambda {where('referrals.status = ?', "Pending")}
   scope :interview, -> {where(status: "Interview")}
   scope :interview_offer, -> {where(status: "Interview - Offer")}
-
-  #admins
-  scope :received_referrals_admin, lambda{|admin| where('referrals.ref_type = ? AND referrals.is_interested = ?', "refer", true)}
-  scope :pending_referrals_admin, lambda{|admin| where('referrals.ref_type = ? AND referrals.status = ? AND referrals.is_interested = ?', "refer","Pending", true)}
-
-
   scope :completed, -> {where(status: ["Pass", "Interview - No Offer", "Offer Declined", "Successful Placement"])}
   scope :success, -> {where(status: "Successful Placement")}
 
 
+
+#SELECT "referrals".* FROM "referrals" INNER JOIN "jobs" ON "jobs"."id" = "referrals"."job_id" WHERE (jobs.admin_id = 1)
 # TODO
   # scope :active
   # scope :inactive

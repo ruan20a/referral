@@ -19,12 +19,15 @@
                 <div class="details-section">
                   <strong>Description:</strong>
                   <%= replace_line_br(@company.description) %>
-                  <% if !@company.image_url(:favicon).nil? %>
-                  <!-- write size -->
-                  <%= image_tag @company.image_url(:favicon), :alt => "#{@company.name}" %>
-                <% end %>
+                    <% if !@company.image_url(:favicon).nil? %>
+                    <!-- write size -->
+                      <%= image_tag @company.image_url(:favicon), :alt => "#{@company.name}" %>
+                    <% end %>
                 </div>
                 <div class="details-section_end">
+                  <% if admin_signed_in? && current_admin.company.id == @company.id%>
+                    <%=link_to "Edit", edit_company_path(@company.id), class: "btn btn-primary"%>
+                  <% end %>
                 </div>
               </div>
             </div>

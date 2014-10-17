@@ -22,6 +22,7 @@
 #  min_salary   :float            default(0.0)
 #  company_id   :integer
 #  is_public    :boolean          default(TRUE)
+#  is_approved  :boolean          default(FALSE)
 #
 
 class Job < ActiveRecord::Base

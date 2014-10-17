@@ -17,6 +17,8 @@ class Whitelist < ActiveRecord::Base
   validates_presence_of :email, :uniqueness => {:case_sensitive => false}
   before_create :downcase_email
 
+
+
   private
   def downcase_email
     self.email.downcase!

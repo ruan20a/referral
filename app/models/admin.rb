@@ -15,17 +15,8 @@
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime
 #  updated_at             :datetime
-#  job_id                 :integer
 #  profile_id             :integer
 #  company_name           :string(255)
-#  invitation_token       :string(255)
-#  invitation_created_at  :datetime
-#  invitation_sent_at     :datetime
-#  invitation_accepted_at :datetime
-#  invitation_limit       :integer
-#  invited_by_id          :integer
-#  invited_by_type        :string(255)
-#  invitations_count      :integer          default(0)
 #  confirmation_token     :string(255)
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
@@ -34,6 +25,7 @@
 #  image                  :string(255)
 #  industry               :string(255)
 #  company_id             :integer
+#  unique_token           :string(255)
 #
 
 class Admin < ActiveRecord::Base
@@ -50,6 +42,17 @@ class Admin < ActiveRecord::Base
   before_create :generate_unique_token
   before_create :generate_inviter_profile
   has_one :inviter_profile, :as => :owner
+
+  scope :enterprise
+  scope :main_admin
+
+  def is_enterprise?
+    self.company.level > 1 ? true:false
+  end
+
+  def is_main_admin?
+    self.company.level > 2 ? true:false
+  end
 
   def generate_unique_token
     self.unique_token = Digest::SHA1.hexdigest([Time.now,rand].join)

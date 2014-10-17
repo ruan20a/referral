@@ -169,7 +169,7 @@
   #   redirect_to new_admin_session_path, notice: "You are not an approved admin" if @level != 3
   # end
 
-  def check_level
+  def check_level #main_admin
     # check_enterprise_access
     unless current_admin.nil?
       @level = Whitelist.find_by_email(current_admin.email).level  #modified for private method

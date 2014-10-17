@@ -24,11 +24,11 @@ before_action :check_main_admin, only: [:index]
       @referrals = @search.result.select{|x| x.job.admin == @admin}
 
       @select_referrals = @referrals.select{|x| x.ref_type == "refer" && x.is_interested == true}
-      @sorted_referrals = Referral.received_referrals_admin(@admin)
+      @sorted_referrals = @select_referrals
       # .paginate(:page => params[:page])
       #is_interested & pending status check
       @select_pending_referrals = @admin.referrals.select{|x| x.status == "Pending" && x.is_interested == true}
-      @pending_referrals = Referral.pending_referrals_admin(@admin)
+      @pending_referrals = @select_pending_referrals
       # .paginate(:page => params[:page])
 
       @pending_count = @pending_referrals.count

@@ -1,4 +1,7 @@
 class HomeController < ApplicationController
+  def index
+    @company = Company.new
+  end
 
   def private
     @access_token = params[:access_token]

@@ -22,23 +22,13 @@
 #  speciality_1           :string(255)
 #  speciality_2           :string(255)
 #  profile_id             :integer
-#  referral_id            :integer
-#  invitation_token       :string(255)
-#  invitation_created_at  :datetime
-#  invitation_sent_at     :datetime
-#  invitation_accepted_at :datetime
-#  invitation_limit       :integer
-#  invited_by_id          :integer
-#  invited_by_type        :string(255)
-#  invitations_count      :integer          default(0)
 #  confirmation_token     :string(255)
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
 #  tagline                :string(255)
-#  linked_in              :string(255)
-#  inviter_email          :string(255)
-#  provider               :string(255)
 #  uid                    :string(255)
+#  unique_token           :string(255)
+#  invited_by_ipf_id      :integer
 #
 
 class User < ActiveRecord::Base
@@ -82,9 +72,8 @@ class User < ActiveRecord::Base
     self.create_inviter_profile(:unique_token => self.unique_token)
   end
 
-  def has_enterprise
-    false
-    true if self.accesses.count > 0
+  def has_enterprise? #true to display private
+    self.accesses.count > 0 ? true : false
   end
 
  def self.new_with_session(params,session)
@@ -151,7 +140,9 @@ class User < ActiveRecord::Base
 
  def check_access_token(access_token, user_id)
   company_id = Company.find_by_access_token(access_token).id
-  Access.find_or_create_by(user_id: user_id, company_id: company_id, level: 2) unless company_id.nil?#denotes super_user enables private
+  #create accesses
+  Access.find_or_create_by(user_id: user_id, company_id: company_id, level: 1) unless company_id.nil?
+  #2 denotes super user
  end
 
 

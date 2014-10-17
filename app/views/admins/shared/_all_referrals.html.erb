@@ -4,7 +4,7 @@
        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
 
        <div class="location"><%= link_to referral.job.job_name, edit_referral_path(referral.id) %></div>
-         <div class="description hidden-xs"><%= referral.job.referral_fee %></div>
+         <div class="description hidden-xs"><%= number_to_currency(calculate_fee(referral.job.referral_fee), :precision => 0) %></div>
        </div>
        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-5">
          <div class="job_title"><%= link_to referral.referral_name, edit_referral_path(referral.id) %></div>

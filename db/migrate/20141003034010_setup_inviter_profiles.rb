@@ -10,18 +10,19 @@ class SetupInviterProfiles < ActiveRecord::Migration
       t.timestamps
     end
 
-    # change_table :users do |t|
-    #   t.remove :referral_id
-    #   t.remove :linked_in
-    #   t.remove :inviter_email
-    #   t.remove :provider
-    #   t.remove :inviter_type
-    #   t.remove :inviter_id
-    # end
+    change_table :users do |t|
+      t.remove :referral_id
+      t.remove :linked_in
+      t.remove :inviter_email
+      t.remove :provider
+      t.remove :inviter_type
+      t.remove :inviter_id
+      t.remove :profile_id
+    end
 
-    # change_table :admins do |t|
-    #   t.remove :job_id
-    # end
+    change_table :admins do |t|
+      t.remove :job_id
+    end
 
     add_column :users, :invited_by_ipf_id, :integer
     add_column :referrals, :invited_by_ipf_id, :integer

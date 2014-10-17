@@ -225,7 +225,6 @@ ActiveRecord::Schema.define(version: 20141003034010) do
     t.string   "industry_2"
     t.string   "speciality_1"
     t.string   "speciality_2"
-    t.integer  "profile_id"
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"

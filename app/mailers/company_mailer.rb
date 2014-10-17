@@ -1,5 +1,7 @@
 class CompanyMailer < ActionMailer::Base
   default from: ENV['GMAIL']
+  add_template_helper(ApplicationHelper)
+  include ActionView::Helpers::NumberHelper
 
   def deliver_company_request(user_name, user_email, recruiter_name, recruiter_email, company)
     @user_name = user_name
