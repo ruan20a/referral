@@ -19,6 +19,8 @@ gem 'simple_form'
 
 gem 'country_select'
 
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+
 gem 'countries', :require => 'iso3166'
 
 gem "ransack"
