@@ -17,12 +17,18 @@
               <div class="location"><i class="fa fa-map-marker"></i>&nbsp
                 <%= @job.city %>, <%= @job.state %>
               <ul class="list-inline pull-right">
-                <li><a title="send to Facebook" href="http://www.facebook.com/sharer.php?s=100&p[title]=YOUR_TITLE&p[summary]=YOUR_SUMMARY&p[url]=YOUR_URL&p[images][0]=YOUR_IMAGE_TO_SHARE_OBJECT"target="_blank">
-                <i class="fa fa-facebook fa-lg"></i></a>
+                <li>
+                  <% current_ipf_param %>
+                  <a class="social-share" data-url="<%=share_url%>" data-title="FB Share" data-desc="FB Share Popup" data-height="300" data-width="520" data-share="facebook"><i class="fa fa-facebook fa-lg"></i>
+                  </a
+                  >
                 </li>
-                <li><a href="http://twitter.com/home?status=[TITLE]+[URL]"><i class="fa fa-twitter fa-lg"></i></a>
+                <li>
+                  <a class="social-share" data-url="<%=share_url%>" data-title = "Check Out This New Job" data-descr="Twitter Share Popup" data-height="300" data-width="520" data-share="twitter"><i class="fa fa-twitter fa-lg"></i></a>
                 </li>
-                <li><a href="http://www.linkedin.com/shareArticle?mini=true&url=[URL]&title=[TITLE]&source=[SOURCE]"><i class="fa fa-linkedin fa-lg"></i></a></li>
+                <li>
+                  <a class="social-share" data-url="<%=share_url%>" data-title = "Check Out This New Job" data-descr="LinkedIn Share Popup" data-height="300" data-width="520" data-share="linkedin"><i class="fa fa-linkedin fa-lg"></i></a>
+                </li>
               </ul>
               <!-- <div class="description hidden-xs"><%= replace_line_br(@job.description) %></div> -->
             </div>

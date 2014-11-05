@@ -41,6 +41,7 @@ class Job < ActiveRecord::Base
   scope :unapproved, -> { where(is_approved: false) }
   after_create :initiate_approval
   before_update :check_approval, :if => :is_approved_changed?
+
   # scope :selected_users, lambda { |user|
   #   joins(:access).where('access.user = ?', email)
   # }
@@ -69,6 +70,11 @@ class Job < ActiveRecord::Base
 # }
 
   #TODO test
+
+
+  def generate_url
+  end
+
   def initiate_approval
     job = self
     JobMailer.deliver_approval_initiation(job)

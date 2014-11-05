@@ -23,7 +23,4 @@ class ApplicationController < ActionController::Base
     session[:ipf_id] = params[:ipf_id] if params[:ipf_id]
   end
   #TODO figure out how to persist pending referrals
-
-
-
 end

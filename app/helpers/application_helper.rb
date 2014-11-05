@@ -57,4 +57,38 @@ module ApplicationHelper
     name.sub!(/,\s\w*$/,"")
   end
 
+
+  def find_inviter_profile
+    if signed_in?
+      if current_admin.nil?
+        ipf_id = current_user.inviter_profile.id
+      else
+        ipf_id = current_admin.inviter_profile.id
+      end
+    end
+  end
+
+  #USE FOR PRODUCTION!!!
+  # def share_path
+  #   if signed_in?
+  #     "#{url_for(:only_path => false, :overwrite_params=>nil)}?=ipf_id=#{find_inviter_profile}"
+  #   else
+  #     url_for(:only_path => false, :overwrite_params=>nil)
+  #   end
+  # end
+
+  #USE FOR DEVELOPMENT~! DELETE WHEN DONE
+  def share_url
+    if signed_in?
+      "http://www.wekrut.com" + "#{url_for(:only_path => true, :overwrite_params=>nil, :ipf_id => "#{find_inviter_profile}")}"
+    else
+      "http://www.wekrut.com" + "#{url_for(:only_path => true, :overwrite_params=>nil)}"
+    end
+  end
+
+  def current_ipf_param
+    session[:ipf_id]
+    # url_for(:only_path => false,:overwrite_params=>{})
+  end
+
 end

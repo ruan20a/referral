@@ -35,8 +35,9 @@ class Referral < ActiveRecord::Base
   belongs_to :job
   belongs_to :user
   validates_presence_of :job_id, :ref_type
-  validates_uniqueness_of :referral_email, :scope => [:job_id, :user_id, :admin_id], :unless => lambda{ self.ref_type == "ask_refer"}
-  validates_presence_of :referral_email, :referral_name, :linked_profile_url, :unless => lambda{ self.ref_type == "ask_refer" }
+  validates :referral_email, uniqueness: {scope:[:job_id, :user_id, :admin_id]}, :unless => lambda{ self.ref_type == "ask_refer" }
+  #validates :referral_email, uniqueness: {scope: :job_id, :user_id, :admin_id}
+  validates_presence_of :referral_email, :referral_name, :unless => lambda{ self.ref_type == "ask_refer" }
   has_one :email
   after_create :create_email
   after_create :update_inviter_profile

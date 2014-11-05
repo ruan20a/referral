@@ -1,4 +1,4 @@
-class CreateAdminWhitelist < ActiveRecord::Migration
+class CreateAdminWhitelists < ActiveRecord::Migration
   def change
     create_table :admin_whitelists do |t|
       t.integer :company_id
