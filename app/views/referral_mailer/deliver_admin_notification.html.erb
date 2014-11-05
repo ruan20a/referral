@@ -1,7 +1,7 @@
 <div>Hello <%=@admin_FN%> <%=@admin_LN%>, </div>
 
 <div>
-  You received a new referral for <strong> <%= @job.job_name %> </strong> position. <%=@referral.referral_name%>  has indicated interest in this position.
+  You received a new referral for <strong> <%= @job.job_name %> </strong> position. <%=@user_profile.first_name%> <%=@user_profile.last_name%>  has indicated interest in this position.
 </div>
 
 <br>
@@ -12,10 +12,8 @@
   <!-- TODO CHANGE LINK -->
   <%=link_to 'Sign Up/Sign', url_for(controller: 'admins/sessions', action: 'new', only_path: false)%>
 </div>
-<br>
   <%=render 'user_profiles/shared/user_profile'%>
-
-
+<br>
 <div>
   Thank You!
 </div>
