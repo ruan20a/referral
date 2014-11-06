@@ -76,7 +76,7 @@ class User < ActiveRecord::Base
     self.accesses.count > 0 ? true : false
   end
 
- def self.new_with_session(params,session)
+  def self.new_with_session(params,session)
     if session["devise.user_attributes"]
       new(session["devise.user_attributes"],without_protection: true) do |user|
         user.attributes = params
@@ -102,48 +102,48 @@ class User < ActiveRecord::Base
     authorization.user.check_access_token(access_token, authorization.user_id) unless access_token.nil?
     authorization.user.create_profile(auth, authorization.user)
     authorization.user
- end
-
- def create_user(auth, user, ipf_id)
-  # binding.pry
-  user.password = auth["credentials"]["token"]
-  #Devise.friendly_token[0,10]
-  user.first_name = auth.info.first_name
-  user.last_name = auth.info.last_name
-  user.email = auth.info.email
-  user.invited_by_ipf_id = ipf_id
-  user.save
-  create_profile(auth, user)
- end
-
- def create_profile(auth, user)
-  profile = UserProfile.find_or_initialize_by(user_id: user.id)
-  profile.user_id = user.id
-  profile.first_name = auth["info"].fetch("first_name") { nil }
-  profile.last_name = auth["info"].fetch("last_name") { nil }
-  profile.email = auth["info"].fetch("email") { nil }
-  profile.location = auth["info"].fetch("location") { nil }
-  profile.headline = auth["info"].fetch("headline") { nil }
-  profile.industry = auth["info"].fetch("industry") { nil }
-  profile.image = auth["info"].fetch("image") { nil }
-  profile.public_profile_url = auth["info"]["urls"].fetch("public_profile") { nil }
-  profile.educations = auth["extra"]["raw_info"]["educations"].fetch("values") {nil}
-  profile.positions = auth["extra"]["raw_info"]["positions"].fetch("values") {nil}
-  all_skills = []
-  unless auth["extra"]["raw_info"]["skills"].blank?
-    auth["extra"]["raw_info"]["skills"]["values"].each{|value| all_skills << value["skill"].fetch("name") {nil}}
   end
 
-  profile.skills = all_skills
-  profile.save!
- end
+  def create_user(auth, user, ipf_id)
+    # binding.pry
+    user.password = auth["credentials"]["token"]
+    #Devise.friendly_token[0,10]
+    user.first_name = auth.info.first_name
+    user.last_name = auth.info.last_name
+    user.email = auth.info.email
+    user.invited_by_ipf_id = ipf_id
+    user.save
+    create_profile(auth, user)
+  end
 
- def check_access_token(access_token, user_id)
-  company_id = Company.find_by_access_token(access_token).id
-  #create accesses
-  Access.find_or_create_by(user_id: user_id, company_id: company_id, level: 1) unless company_id.nil?
-  #2 denotes super user
- end
+  def create_profile(auth, user)
+    profile = UserProfile.find_or_initialize_by(user_id: user.id)
+    profile.user_id = user.id
+    profile.first_name = auth["info"].fetch("first_name") { nil }
+    profile.last_name = auth["info"].fetch("last_name") { nil }
+    profile.email = auth["info"].fetch("email") { nil }
+    profile.location = auth["info"].fetch("location") { nil }
+    profile.headline = auth["info"].fetch("headline") { nil }
+    profile.industry = auth["info"].fetch("industry") { nil }
+    profile.image = auth["info"].fetch("image") { nil }
+    profile.public_profile_url = auth["info"]["urls"].fetch("public_profile") { nil }
+    profile.educations = auth["extra"]["raw_info"]["educations"].fetch("values") {nil}
+    profile.positions = auth["extra"]["raw_info"]["positions"].fetch("values") {nil}
+    all_skills = []
+    unless auth["extra"]["raw_info"]["skills"].blank?
+      auth["extra"]["raw_info"]["skills"]["values"].each{|value| all_skills << value["skill"].fetch("name") {nil}}
+    end
+
+    profile.skills = all_skills
+    profile.save!
+  end
+
+  def check_access_token(access_token, user_id)
+    company_id = Company.find_by_access_token(access_token).id
+    #create accesses
+    Access.find_or_create_by(user_id: user_id, company_id: company_id, level: 1) unless company_id.nil?
+    #2 denotes super user
+  end
 
 
 end

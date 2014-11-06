@@ -1,0 +1,20 @@
+<div>Hello <%=@sender.first_name%> <%=@sender.last_name>, </div>
+
+<div>
+  Your referral generated a successful placement for <%=@referral.name%> at <%=@job.company.name%> You are entitled to your referral fee of <%=@job.referral_fee%> which will be fulfilled by the company within 30 days.
+</div>
+
+<br>
+
+<div>
+    Follow the link to login and indicate your interest. Please find the job description below.
+    <%=link_to 'Log In', url_for(controller: 'home', action: 'index', only_path: false)%>
+</div>
+
+<div>
+  Thank You!
+</div>
+<br>
+<div>
+  WeKrüt Team
+</div>

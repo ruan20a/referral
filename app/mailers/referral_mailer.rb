@@ -46,6 +46,22 @@ class ReferralMailer < ActionMailer::Base
     mail(to: @admin_email,subject: "New Referral for Job #{@job.name}").deliver
   end
 
+  #SUCCESS NOTIFICATIONS
+  def deliver_inviter_success_notification(referral)
+    @referral = referral
+    set_admin(@referral)
+    @inviter = InviterProfile.find(@referral.invited_by_ipf_id).owner
+    mail(to: @inviter.email, subject: "Thank You From WeKrut - Successful Placement!").deliver
+  end
+  #SUCCESS NOTIFICATIONS
+  def deliver_referrer_success_notification(referral)
+    @referral = referral
+    set_admin(@referral)
+    set_sender(referral)
+    @job = referral.job
+    mail(to: @sender_email,subject: "Successful Placement for #{@referral.name} at #{@job.company.name}").deliver
+  end
+
 
   # def send_admin_reminder(referral)
   #   if referral.is_interested == true && referral.status == "pending"

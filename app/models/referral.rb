@@ -47,6 +47,8 @@ class Referral < ActiveRecord::Base
   #different logic for refer types lambda substitute for method logic
   # validates_presence_of :referral_email, :referral_name, :unless => lambda{ self.ref_type == "ask_refer" }
   before_save :check_notification, :if => :is_interested_changed?
+  before_save :check_successful_placement, :if => :status_changed?
+
   # before_save :check_email, :if => :referral_email_changed?
 
   #users
@@ -85,11 +87,9 @@ class Referral < ActiveRecord::Base
     referral = self
     admin = referral.job.admin
     # binding.pry
-
     if referral.is_interested == true && referral.email.admin_notification == false
       if referral.email.update_attribute(:admin_notification, true)
         ReferralMailer.deliver_admin_notification(referral)
-        referral.save
       else
         # TODO render to the right page
         render 'edit', error: "We had an issue with your referral request. Please try again."
@@ -97,11 +97,30 @@ class Referral < ActiveRecord::Base
     end
   end
 
+  #Not sure if this is necessary yet.
+  def check_successful_placement
+    referral = self
+    if referral.status == "Successful Placement"
+      if referral.email.inviter_success_notification == false && !referral.invited_by_ipf_id.nil?
+          ReferralMailer.deliver_inviter_success_notification(referral)
+          referral.email.update_attribute(:inviter_success_notification, true)
+      end
+
+      if referral.email.referrer_success_notification == false
+
+          ReferralMailer.deliver_referrer_success_notification(referral)
+          referral.email.update_attribute(:referrer_success_notification, true)
+      end
+    end
+  end
+
+
   def create_email
     referral_id = self.id
     Email.create(referral_id: referral_id)
   end
-  #TODO RETHINK LOGIC.
+
+  #TODO RETHINK LOGIC. email issues in referrals.
   def check_email(requester)
     # binding.pry
     referral = self

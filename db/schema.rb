@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141016060434) do
+ActiveRecord::Schema.define(version: 20141106153919) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,13 +108,15 @@ ActiveRecord::Schema.define(version: 20141016060434) do
 
   create_table "emails", force: true do |t|
     t.integer  "referral_id"
-    t.boolean  "admin_notification",    default: false
-    t.boolean  "first_admin_reminder",  default: false
-    t.boolean  "first_user_reminder",   default: false
-    t.boolean  "second_admin_reminder", default: false
-    t.boolean  "second_user_reminder",  default: false
+    t.boolean  "admin_notification",            default: false
+    t.boolean  "first_admin_reminder",          default: false
+    t.boolean  "first_user_reminder",           default: false
+    t.boolean  "second_admin_reminder",         default: false
+    t.boolean  "second_user_reminder",          default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "inviter_success_notification",  default: false
+    t.boolean  "referrer_success_notification", default: false
   end
 
   create_table "inviter_profiles", force: true do |t|

@@ -1,0 +1,22 @@
+<div>Hello <%=@inviter.first_name%> <%=@inviter.last_name>, </div>
+
+<div>
+  You helped generate a successful placement by sharing our link on social media. As a thank you, you will receive $50 from us within 30 days. Please visit your account to receive your credit.
+</div>
+
+<br>
+
+<div>
+    Follow the link to continue your activities and help generate more successful placements!
+    <%=link_to 'Login', url_for(controller: 'home', action: 'index', only_path: false)%>
+</div>
+
+<div>
+  Thank You!
+</div>
+<br>
+<div>
+  WeKrüt Team
+</div>
+
+
