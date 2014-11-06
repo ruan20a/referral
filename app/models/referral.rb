@@ -100,14 +100,16 @@ class Referral < ActiveRecord::Base
   #Not sure if this is necessary yet.
   def check_successful_placement
     referral = self
+    binding.pry
     if referral.status == "Successful Placement"
       if referral.email.inviter_success_notification == false && !referral.invited_by_ipf_id.nil?
+          # binding.pry
           ReferralMailer.deliver_inviter_success_notification(referral)
           referral.email.update_attribute(:inviter_success_notification, true)
       end
 
       if referral.email.referrer_success_notification == false
-
+          # binding.pry
           ReferralMailer.deliver_referrer_success_notification(referral)
           referral.email.update_attribute(:referrer_success_notification, true)
       end
